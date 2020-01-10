@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>海淀区民办教育管理平台</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+	<!--layui-->
+	<!-- <link rel="stylesheet" href="../../../assets/css/layui/modules/layer/default/layer.css"> -->
+	<link rel="stylesheet" href="../../../assets/css/layui/layui.css">
+	
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+	<style type="text/css">
+    	.costs-marl15{margin-left: 15px;}
+		div.costs-uploadfile-div{
+		    position:relative;
+		    cursor:pointer;
+		    margin-left: 2px;
+		}
+		div.costs-uploadfile-div #textfield{
+		    width:505px;
+		    height:30px;
+		    cursor:pointer;
+		}
+		div.costs-uploadfile-div #FIMG{
+		    width:505px;
+		    height:30px;    
+		    position: absolute;
+		    top: 0;
+		    left:0;
+		    filter: alpha(opacity:0);
+		    opacity: 0;
+		    cursor:pointer;
+		}
+    </style>
+
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+					
+								<div style="width: 100%;">
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">标题</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="TITLE" id="TITLE" v-model="pd.TITLE" maxlength="255" placeholder="这里输入标题" title="标题">
+		                                </div>
+		                                
+		                                <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">文档类型</span></span>
+		                                    </div>
+		                                    <select ref="TYPE" id="TYPE" v-model="TYPE"  title="文档类型" data-placeholder="文档类型" style="width:908px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;"></select>
+		                                </div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">填表日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="FULL_DATE" id="FULL_DATE" maxlength="255" placeholder="这里输入填表日期" title="填表日期">
+		                                </div>
+		                                
+		                                <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">文档上传</span></span>
+		                                    </div>
+		                                    
+		                                     <div class="costs-uploadfile-div layui-upload form-group form-control" style="padding: 0!important;border: 1;">   
+							                    <template v-if="0 == pd.length || pd.PATH == '' || pd.PATH == null">                 
+												<input type="file" id="FIMG" onchange="fileType(this)" /> 
+												<input type='text' id="textfield" class="btn btn-light btn--icon-text" value="请选择选择文件,文件格式 包括（gif png jpg jpeg doc docx txt xlsx xls pdf）" style="height: 100%;"/> 
+												</template>
+											    <template v-if="0 != pd.length && pd.PATH != '' && pd.PATH!= null"> 
+												{{pd.FILE_NAME}}<i class="feather icon-folder"></i>
+												<a title="删除" v-on:click="delImg(pd.PATH,pd.ARCHIVE_ID);" style="cursor:pointer;"><i class="feather icon-x"></i></a>
+												</template>
+											</div> 
+		                                    <!-- <input type="text" class="form-control" ref="PATH" id="PATH" v-model="pd.PATH" maxlength="255" placeholder="这里输入文件目录集合" title="文件目录集合"> -->
+		                                </div>
+		                                
+		                                <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备注</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="BZ" id="BZ" v-model="pd.BZ" maxlength="255" placeholder="这里输入备注" title="备用字段3">
+		                                </div>
+		                                
+		                                
+							            <!-- <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备用字段</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="SPARE1" id="SPARE1" v-model="pd.SPARE1" maxlength="255" placeholder="这里输入备用字段" title="备用字段">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备用字段2</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="SPARE2" id="SPARE2" v-model="pd.SPARE2" maxlength="255" placeholder="这里输入备用字段2" title="备用字段2">
+		                                </div>
+							             -->
+							             
+							             <div class="input-group" style="margin-top:10px;background-color: white" >
+							            	<span style="width: 100%;text-align: center;">
+							            		<a class="btn btn-light btn-sm" v-on:click="save">保存</a>
+							            		<a class="btn btn-light btn-sm" onclick="top.Dialog.close()">取消</a>
+							            	</span>
+							            </div>
+							       </div>
+						           <!-- [加载状态 ] start -->
+								    <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+								    <!-- [ 加载状态  ] End -->
+								</div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- select插件 -->
+<script src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script src="../../../assets/js/pages/form-select-custom.js"></script>
+
+<!--layui-->
+<script type="text/javascript" src="../../../assets/js/layui/layui.js"></script>
+<script type="text/javascript" src="../../../assets/js/layui/layer.js"></script>
+<script type="text/javascript" src="../../../assets/js/layui/lay/modules/layer.js"></script>
+
+
+
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+<script type="text/javascript" src="../../../assets/js-v/archive/archive_edit.js"></script>
+
+</body>
+</html>

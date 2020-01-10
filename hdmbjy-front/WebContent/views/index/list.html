@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>海淀区民办教育管理平台</title>
+<link href="../css/common.css" rel="stylesheet" type="text/css">
+<link href="../css/list.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="../js/page.js"></script>
+<script>
+$(function(){
+	$(".searchhistory a").each(function(index){if(index > 2){ $(this).remove();};});
+	$("div.holder").jPages({
+      containerID : "pageul",
+      perPage:15,
+      minHeight: false,
+    });//分页
+	var len = "<div class=\"split\"></div>" ;
+	$('#pageul li').each(function(index, item){
+    	var li = $(item);
+		index += 1;
+    	if( index % 5 === 0 ){
+			
+       	 	li.append(len);
+   	 	}
+	});
+});
+</script>
+</head>
+<body>
+<div class="wrap">
+    <div class="wrap_main clearfixhack">
+    <!-- 主体 开始 -->
+		<div class="indextop">
+			<div class="container">
+				海淀区民办教育管理平台
+				<a class="fr c666" href="#">联系我们</a>
+				<a class="fr c666" href="#">人才招聘</a>
+				<a class="fr c666" href="#">首页</a>
+			</div>
+		</div><!-- indextop  end  -->
+		<div class="indexhead">
+			<div class="container">
+				<img class="logo" src="../img/logo.png" />
+				<div class="searchbox">
+					<div class="searchinput"><input type="text" placeholder="请输入您要搜索的内容" /></div>
+					<div class="searchbtn"><a href="#"></a></div>
+					<div class="searchhistory">热门搜索：<a href="#">教育</a><a href="#">海淀</a><a href="#">幼儿园</a></div>
+				</div>
+			</div>
+		</div><!-- indexhead  end  -->
+    	<div class="indexmenu">
+			<div class="container">
+				<ul>
+					<li><a href="#">首页</a></li>
+					<li class="on"><a href="#">新闻动态</a></li>
+					<li><a href="#">政务公开</a></li>
+					<li><a href="#">党务公开</a></li>
+					<li><a href="#">教育风采</a></li>
+					<li><a href="#">学校名录</a></li>
+					<li><a href="#">下载中心</a></li>
+					<li><a href="#">联系我们</a></li>
+				<ul>
+			</div>
+		</div><!-- indexmenu  end  -->
+		<div class="container clearfix mb20">
+			<div class="list_L">
+				<div class="head">
+					<h4>新闻动态</h4>
+				</div>
+				<ul>
+					<li class="on"><a href="#">工作动态</a></li>
+					<li><a href="#">最新新闻</a></li>
+					<li><a href="#">实时动态</a></li>
+					<li><a href="#">每日新发现</a></li>
+				</ul>
+			</div><!-- list_L  end  -->
+			<div class="list_R">
+				<div class="cumb">当我按位置：<a href="#">首页</a>><a href="#">新闻动态</a>><a href="#">工作动态</a></div>
+				<div class="ultop clearfix"><div class="top1">名称</div><div class="top2">日期</div></div>
+				<ul id="pageul" class="listul">
+					<li><a href="#">关于推荐报送北京市海淀区优秀乡村教师的公示</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区校外培训机构年检通过第二批名单</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区2019年秋季高一年级国家课程新教材选用结果公示</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区教委关于做好民办学校2019年暑期工作的通知</a><span>2019-10-15</span></li>
+					<li><a href="#">北京市海淀区2019年春季第二次幼儿园、小学、初级中学教师资格认定公告</a><span>2019-10-15</span></li>
+					<li><a href="#">关于推荐报送北京市海淀区优秀乡村教师的公示</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区校外培训机构年检通过第二批名单</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区2019年秋季高一年级国家课程新教材选用结果公示</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区教委关于做好民办学校2019年暑期工作的通知</a><span>2019-10-15</span></li>
+					<li><a href="#">北京市海淀区2019年春季第二次幼儿园、小学、初级中学教师资格认定公告</a><span>2019-10-15</span></li>
+					<li><a href="#">关于推荐报送北京市海淀区优秀乡村教师的公示</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区校外培训机构年检通过第二批名单</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区2019年秋季高一年级国家课程新教材选用结果公示</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区教委关于做好民办学校2019年暑期工作的通知</a><span>2019-10-15</span></li>
+					<li><a href="#">北京市海淀区2019年春季第二次幼儿园、小学、初级中学教师资格认定公告</a><span>2019-10-15</span></li>
+					<li><a href="#">关于推荐报送北京市海淀区优秀乡村教师的公示</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区校外培训机构年检通过第二批名单</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区2019年秋季高一年级国家课程新教材选用结果公示</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区教委关于做好民办学校2019年暑期工作的通知</a><span>2019-10-15</span></li>
+					<li><a href="#">北京市海淀区2019年春季第二次幼儿园、小学、初级中学教师资格认定公告</a><span>2019-10-15</span></li>
+					<li><a href="#">关于推荐报送北京市海淀区优秀乡村教师的公示</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区校外培训机构年检通过第二批名单</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区2019年秋季高一年级国家课程新教材选用结果公示</a><span>2019-10-15</span></li>
+					<li><a href="#">海淀区教委关于做好民办学校2019年暑期工作的通知</a><span>2019-10-15</span></li>
+					<li><a href="#">北京市海淀区2019年春季第二次幼儿园、小学、初级中学教师资格认定公告</a><span>2019-10-15</span></li>
+				</ul>
+                <!-- 分页 -->
+                <div class="holder"></div>
+			</div><!-- list_R  end  -->
+		</div>
+    <!-- 主体  结束  -->
+    </div>
+</div>
+<!-- 底部  开始  -->
+<div class="footer">
+	<div class="main">
+		<p>版权所有：北京市海淀区教育委员会     京ICP备17037050号-2</br>
+		地址：北京市海淀区西四环北路11号　咨询热线：96181</p>
+	</div>
+</div>
+<!-- 底部  结束  -->
+</body>
+</html>

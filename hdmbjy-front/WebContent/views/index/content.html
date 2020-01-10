@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>海淀区民办教育管理平台</title>
+<link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+<link href="../../assets/index/css/common.css" rel="stylesheet" type="text/css">
+<link href="../../assets/index/css/list.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../assets/index/js/jquery.min.js"></script>
+<script type="text/javascript" src="../../assets/index/js/jquery.SuperSlide.2.1.1.js"></script>
+
+<!-- vue -->
+<script src="../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script src="../../assets/js-v/config.js"></script>
+
+<script>
+$(function(){
+	$(".searchhistory a").each(function(index){if(index > 2){ $(this).remove();};});
+});
+</script>
+</head>
+<body>
+<div class="wrap" id = "app">
+    <div class="wrap_main clearfixhack">
+    <!-- 主体 开始 -->
+		<div class="indextop">
+			<div class="container">
+				海淀区民办教育管理平台
+				<a class="fr c666" href="#">联系我们</a>
+				<a class="fr c666" href="#">人才招聘</a>
+				<a class="fr c666" href="#">首页</a>
+			</div>
+		</div><!-- indextop  end  -->
+		<div class="indexhead">
+			<div class="container">
+				<img class="logo" src="../../assets/index/img/logo.png" />
+				<!-- <div class="searchbox">
+					<div class="searchinput"><input type="text" placeholder="请输入您要搜索的内容" /></div>
+					<div class="searchbtn"><a href="#"></a></div>
+					<div class="searchhistory">热门搜索：<a href="#">教育</a><a href="#">海淀</a><a href="#">幼儿园</a></div>
+				</div> -->
+			</div>
+		</div><!-- indexhead  end  -->
+    	<div class="indexmenu">
+			<div class="container">
+				<ul>
+					<li><a href="../index/index.html">首页</a></li>
+					<template v-for="(data,index) in listCategory">
+						<li v-if="data.name == titleName" class="on"><a v-bind:href="data.url">{{data.name}}</a></li>
+						<li v-if="data.name != titleName"><a v-bind:href="data.url">{{data.name}}</a></li>
+					</template>
+				<ul>
+			</div>
+		</div><!-- indexmenu  end  -->
+		<div class="container clearfix mb20">
+			<div class="list_L">
+				<div class="head">
+					<h4>{{pdf.NAME}}</h4>
+				</div>
+				<ul>
+				<template v-for="(listpda,index) in listpda">
+					
+					<li class="on" v-if= "listpda.name == ziName"><a href="#" @click="test(listpda.id,listpda.name)">{{listpda.name}}</a></li>
+					<li><a href="#" v-if= "listpda.name != ziName" @click="test(listpda.id,listpda.name)">{{listpda.name}}</a></li>
+				</template>
+					<!-- <li class="on"><a href="#">工作动态</a></li>
+					<li><a href="#">每日新发现</a></li> -->
+				</ul>
+			</div><!-- list_L  end  -->
+			<div class="list_R" id = "cont">
+				<div class="cumb">当我按位置：<a href="#">首页</a>><a href="#">{{fName}}</a>><a href="#">{{ziName}}</a></div>
+				<div class="listbox contpagehead">
+					<h1>{{pdWenZhang.TITLE}}</h1>
+					<h2>时间：{{pdWenZhang.CREATE_DATE}}</h2>
+				</div>
+				<div class="contpagemid" id="conthtml">
+						
+				</div>
+				<div class="contpagebottom" v-if="COUNTALL > 0">
+					附件下载：
+					
+					<template v-for="(data,index) in fjList">
+					<a href="#" v-on:click="downloadAtt(data.ID,data.URL)" style="text-decoration:none;"><li  style="list-style: none;" >{{index+1}}.{{data.ORIGINAL_NAME}}</li></a>
+					</template>
+					<a href="#" v-if="COUNTALL > 0" v-on:click="downloadAll(pdWenZhang.ATTACHMENT)" style="text-decoration:none;">批量下载</a>
+					<!-- <a href="#">点击这里下载附件.txt</a> -->
+				</div>
+			</div><!-- list_R  end  -->
+			
+			 <div class="list_R" id="list" style="display:none;">
+				<div class="cumb">当我按位置：<a href="#">首页</a>><a href="#">{{fName}}</a>><a href="#">{{ziName}}</a></div>
+				<div class="ultop clearfix"><div class="top1">名称</div><div class="top2">日期</div></div>
+				<ul id="pageul" class="listul">
+					<template v-for="(dataWenZhang,index) in listWenZhang">
+						<li><a href="#" @click="wenzhang(dataWenZhang.ID)">{{dataWenZhang.TITLE}}</a><span style="width: 144px">{{dataWenZhang.CREATE_DATE}}</span></li>
+					</template>
+				</ul>
+             
+                <div class="holder"></div>
+			</div>
+			
+			
+		</div>
+    <!-- 主体  结束  -->
+    </div>
+</div>
+<!-- 底部  开始  -->
+<div class="footer">
+	<div class="main">
+		<p>版权所有：北京市海淀区教育委员会     京ICP备17037050号-2</br>
+		地址：北京市海淀区西四环北路11号　咨询热线：96181</p>
+	</div>
+</div>
+<!-- 底部  结束  -->
+</body>
+<script type="text/javascript" src="../../assets/js/pre-loader.js"></script>
+<script src="../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<script type="text/javascript" src="../../assets/index/js/content.js"></script>
+</html>

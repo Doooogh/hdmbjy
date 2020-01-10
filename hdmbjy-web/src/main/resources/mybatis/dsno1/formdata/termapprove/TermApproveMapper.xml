@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.formdata.termapprove.TermApproveMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		AF_TERMAPPROVE
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.NUMBER,	
+		f.SCHOOL_ALLNAME,	
+		f.LICENSE,	
+		f.PRINCIPAL,	
+		f.PRINCIPAL_ID_NUMBER,	
+		f.PRINCIPAL_ADDRESS,	
+		f.PRINCIPAL_PHONE,	
+		f.LEGAL_PERSON,	
+		f.LEGAL_PERSON_ID_NUMBER,
+		f.LEGAL_PERSON_ADDRESS,
+		f.LEGAL_PERSON_PHONE,
+		f.ORGANIZER,	
+		f.ORGANIZER_ID_NUMBER,	
+		f.ORGANIZER_ADDRESS,	
+		f.ORGANIZER_PHONE,	
+		f.ORGANIZER_C_NAME,	
+		f.ORGANIZER_C_PHONE,	
+		f.ORGANIZER_C_ADDRESS,	
+		f.ORGANIZER_C_ADDRESS_PHONE,	
+		f.ORGANIZER_C_ADDRESS_POST,	
+		f.TERM_REASON,	
+		f.HAND_RESULT,	
+		f.ORGANIZER_OPINION,	
+		f.ORGANIZER_OPINION_DATE,	
+		f.DEPT_OPINION,	
+		f.DEPT_OPINION_DATE,	
+		f.SENDER,	
+		f.SEND_DATE,	
+		f.RECEIVER,	
+		f.RECEIVE_DATE,	
+		f.VERIFIER,	
+		f.VERIFIER_DATE,	
+		f.REHEARING_PERSON,	
+		f.REHEARING_PERSON_DATE,	
+		f.BEIZHU,	
+		f.TERMAPPROVE_ID
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		NUMBER,	
+		SCHOOL_ALLNAME,	
+		LICENSE,	
+		PRINCIPAL,	
+		PRINCIPAL_ID_NUMBER,	
+		PRINCIPAL_ADDRESS,	
+		PRINCIPAL_PHONE,	
+		LEGAL_PERSON,	
+		LEGAL_PERSON_ID_NUMBER,
+		LEGAL_PERSON_ADDRESS,
+		LEGAL_PERSON_PHONE,
+		ORGANIZER,	
+		ORGANIZER_ID_NUMBER,	
+		ORGANIZER_ADDRESS,	
+		ORGANIZER_PHONE,	
+		ORGANIZER_C_NAME,	
+		ORGANIZER_C_PHONE,	
+		ORGANIZER_C_ADDRESS,	
+		ORGANIZER_C_ADDRESS_PHONE,	
+		ORGANIZER_C_ADDRESS_POST,	
+		TERM_REASON,	
+		HAND_RESULT,	
+		ORGANIZER_OPINION,	
+		ORGANIZER_OPINION_DATE,	
+		DEPT_OPINION,	
+		DEPT_OPINION_DATE,	
+		SENDER,	
+		SEND_DATE,	
+		RECEIVER,	
+		RECEIVE_DATE,	
+		VERIFIER,	
+		VERIFIER_DATE,	
+		REHEARING_PERSON,	
+		REHEARING_PERSON_DATE,	
+		BEIZHU,	
+		TERMAPPROVE_ID
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{NUMBER},	
+		#{SCHOOL_ALLNAME},	
+		#{LICENSE},	
+		#{PRINCIPAL},	
+		#{PRINCIPAL_ID_NUMBER},	
+		#{PRINCIPAL_ADDRESS},	
+		#{PRINCIPAL_PHONE},	
+		#{LEGAL_PERSON},	
+		#{LEGAL_PERSON_ID_NUMBER},	
+		#{LEGAL_PERSON_ADDRESS},	
+		#{LEGAL_PERSON_PHONE},	
+		#{ORGANIZER},	
+		#{ORGANIZER_ID_NUMBER},	
+		#{ORGANIZER_ADDRESS},	
+		#{ORGANIZER_PHONE},	
+		#{ORGANIZER_C_NAME},	
+		#{ORGANIZER_C_PHONE},	
+		#{ORGANIZER_C_ADDRESS},	
+		#{ORGANIZER_C_ADDRESS_PHONE},	
+		#{ORGANIZER_C_ADDRESS_POST},	
+		#{TERM_REASON},	
+		#{HAND_RESULT},	
+		#{ORGANIZER_OPINION},	
+		#{ORGANIZER_OPINION_DATE},	
+		#{DEPT_OPINION},	
+		#{DEPT_OPINION_DATE},	
+		#{SENDER},	
+		#{SEND_DATE},	
+		#{RECEIVER},	
+		#{RECEIVE_DATE},	
+		#{VERIFIER},	
+		#{VERIFIER_DATE},	
+		#{REHEARING_PERSON},	
+		#{REHEARING_PERSON_DATE},	
+		#{BEIZHU},	
+		#{TERMAPPROVE_ID}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field2"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			TERMAPPROVE_ID = #{TERMAPPROVE_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			NUMBER = #{NUMBER},
+			SCHOOL_ALLNAME = #{SCHOOL_ALLNAME},
+			LICENSE = #{LICENSE},
+			PRINCIPAL = #{PRINCIPAL},
+			PRINCIPAL_ID_NUMBER = #{PRINCIPAL_ID_NUMBER},
+			PRINCIPAL_ADDRESS = #{PRINCIPAL_ADDRESS},
+			PRINCIPAL_PHONE = #{PRINCIPAL_PHONE},
+			LEGAL_PERSON = #{LEGAL_PERSON},
+			LEGAL_PERSON_ID_NUMBER = #{LEGAL_PERSON_ID_NUMBER},
+			LEGAL_PERSON_ADDRESS = #{LEGAL_PERSON_ADDRESS},
+			LEGAL_PERSON_PHONE = #{LEGAL_PERSON_PHONE},
+			ORGANIZER = #{ORGANIZER},
+			ORGANIZER_ID_NUMBER = #{ORGANIZER_ID_NUMBER},
+			ORGANIZER_ADDRESS = #{ORGANIZER_ADDRESS},
+			ORGANIZER_PHONE = #{ORGANIZER_PHONE},
+			ORGANIZER_C_NAME = #{ORGANIZER_C_NAME},
+			ORGANIZER_C_PHONE = #{ORGANIZER_C_PHONE},
+			ORGANIZER_C_ADDRESS = #{ORGANIZER_C_ADDRESS},
+			ORGANIZER_C_ADDRESS_PHONE = #{ORGANIZER_C_ADDRESS_PHONE},
+			ORGANIZER_C_ADDRESS_POST = #{ORGANIZER_C_ADDRESS_POST},
+			TERM_REASON = #{TERM_REASON},
+			HAND_RESULT = #{HAND_RESULT},
+			ORGANIZER_OPINION = #{ORGANIZER_OPINION},
+			ORGANIZER_OPINION_DATE = #{ORGANIZER_OPINION_DATE},
+			DEPT_OPINION = #{DEPT_OPINION},
+			DEPT_OPINION_DATE = #{DEPT_OPINION_DATE},
+			SENDER = #{SENDER},
+			SEND_DATE = #{SEND_DATE},
+			RECEIVER = #{RECEIVER},
+			RECEIVE_DATE = #{RECEIVE_DATE},
+			VERIFIER = #{VERIFIER},
+			VERIFIER_DATE = #{VERIFIER_DATE},
+			REHEARING_PERSON = #{REHEARING_PERSON},
+			REHEARING_PERSON_DATE = #{REHEARING_PERSON_DATE},
+			BEIZHU = #{BEIZHU},
+			TERMAPPROVE_ID = TERMAPPROVE_ID
+		where 
+			TERMAPPROVE_ID = #{TERMAPPROVE_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.TERMAPPROVE_ID = #{TERMAPPROVE_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 1=1
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				-->
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			TERMAPPROVE_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

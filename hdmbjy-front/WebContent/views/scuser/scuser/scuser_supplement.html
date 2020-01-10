@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+    <!-- layui css -->
+    <link rel="stylesheet" href="../../../assets/css/layui/layui.css">
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+					
+								<div style="width: 100%;">
+									<div id="showform">
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">姓名</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="NAME" id="NAME" v-model="pd.NAME" maxlength="64" placeholder="这里输入姓名" title="姓名">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">性别</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="SEX" id="SEX" v-model="pd.SEX" maxlength="8" placeholder="这里输入性别" title="性别">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">年龄</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="AGE" id="AGE" v-model="pd.AGE" maxlength="8" placeholder="这里输入年龄" title="年龄">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">手机号</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="PHONE" id="PHONE" v-model="pd.PHONE" maxlength="11" placeholder="这里输入手机号" title="手机号">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">email</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="EMAIL" id="EMAIL" v-model="pd.EMAIL" maxlength="128" placeholder="这里输入email" title="email">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">机构</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ORGANIZATION_ID" id="ORGANIZATION_ID" v-model="pd.ORGANIZATION_ID" maxlength="64" placeholder="这里输入机构" title="机构">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">状态</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="STATUS" id="STATUS" v-model="pd.STATUS" maxlength="8" placeholder="这里输入状态" title="状态">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">岗位</span></span>
+		                                    </div>
+		                                    <!-- <input type="text" class="form-control" ref="POST" id="POST" v-model="pd.POST" maxlength="64" placeholder="这里输入岗位" title="岗位"> -->
+											<select class="form-control" v-model="POST" id="POST" ref="POST" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+											  <!-- <option value="">岗位</option> -->
+											</select>
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">是否在编 </span></span>
+		                                    </div>
+		                                    <!-- <input type="text" class="form-control" ref="ISACTIVE" id="ISACTIVE" v-model="pd.ISACTIVE" maxlength="8" placeholder="这里输入是否在编  1 在编  0 未在编" title="是否在编  1 在编  0 未在编"> -->
+											<select class="form-control" v-model="ISACTIVE" id="ISACTIVE" ref="ISACTIVE" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+											  <option value="" >请选择是否在编</option>
+											  <option value="1">是</option>
+											  <option value="0">否</option>
+											</select>
+		                                </div>
+										
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">附件</span></span>
+										    </div>
+										    <!--<input type="text" class="form-control" ref="DESCRIPTION" id="ATTACHMENT" v-model="pd.ATTACHMENT" maxlength="255" placeholder="这里选择附件" title="附件">-->
+										    <div class="layui-upload form-group form-control" style="min-height: 150px!important;overflow:auto!important;"  ref="ATTACHMENT_IDS" id="ATTACHMENT_IDS">
+										        <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" id="testList" style="margin-right: 20px">选择多文件</button>
+										        <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" id="sub"  >开始上传</button>
+										        <div class="layui-upload-list" style="margin-bottom: 20px">
+										            <table class="layui-table">
+										                <thead>
+										                <tr><th>文件名</th>
+										                    <th>大小</th>
+										                    <th>状态</th>
+										                    <th>操作</th>
+										                </tr></thead>
+										                <tbody id="demoList"></tbody>
+										            </table>
+										        </div>
+										    </div>
+										</div>
+							          <!--  <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">合同</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="CONTRACT" id="CONTRACT" v-model="pd.CONTRACT" maxlength="64" placeholder="这里输入合同" title="合同">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">档案</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="RECORD" id="RECORD" v-model="pd.RECORD" maxlength="64" placeholder="这里输入档案" title="档案">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">简历</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="RESUME" id="RESUME" v-model="pd.RESUME" maxlength="64" placeholder="这里输入简历" title="简历">
+		                                </div> -->
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">学历</span></span>
+		                                    </div>
+		                                    <!-- <input type="text" class="form-control" ref="EDUCATION" id="EDUCATION" v-model="pd.EDUCATION" maxlength="64" placeholder="这里输入学历  字典表中" title="学历  字典表中"> -->
+											<select class="form-control" v-model="EDUCATION_TYPE" id="EDUCATION_TYPE" ref="EDUCATION_TYPE" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+											  <!-- <option value="">学历类型</option> -->
+											</select>
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">职称</span></span>
+		                                    </div>
+		                                    <!-- <input type="text" class="form-control" ref="TITLE_TYPE" id="TITLE_TYPE" v-model="TITLE_TYPE" maxlength="64" placeholder="这里输入职称" title="职称"> -->
+											<select class="form-control" v-model="TITLE_TYPE" id="TITLE_TYPE" ref="TITLE_TYPE" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+											  <!-- <option value="">职称类型</option> -->
+											</select>
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">工龄</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="SENIORITY" id="SENIORITY" v-model="pd.SENIORITY" maxlength="16" placeholder="这里输入工龄 自动计算" title="工龄 自动计算">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">入职时间</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control date" ref="ENTRY_TIME" id="ENTRY_TIME" maxlength="32" placeholder="这里输入入职时间" title="入职时间">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">类型 字典表</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="TYPE" id="TYPE" v-model="pd.TYPE" maxlength="16" placeholder="这里输入类型 字典表" title="类型 字典表">
+		                                </div>
+							       
+							            <div class="input-group" style="margin-top:10px;background-color: white" >
+							            	<span style="width: 100%;text-align: center;">
+							            		<a class="btn btn-light btn-sm" v-on:click="save">保存</a>
+							            		<a class="btn btn-light btn-sm" onclick="top.Dialog.close()">取消</a>
+							            	</span>
+							            </div>
+							       </div>
+						           <!-- [加载状态 ] start -->
+								    <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+								    <!-- [ 加载状态  ] End -->
+								</div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- select插件 -->
+<script src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script src="../../../assets/js/pages/form-select-custom.js"></script>
+
+
+<!--layui-->
+<script type="text/javascript" src="../../../assets/js/layui/layui.js"></script>
+<script type="text/javascript" src="../../../assets/js/layui/layer.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+
+<script type="text/javascript" src="../../../assets/js-v/scuser/scuser_supplement.js"></script>
+
+</body>
+</html>

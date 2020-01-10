@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>附件1民办幼儿园年检自查表</title>
+<link href="css/pagetable.css" rel="stylesheet" type="text/css">
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-3.3.1.min.js"></script> -->
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<style type="text/css">
+#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+</style>
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+	$(".tableT p").blur(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	});
+	
+});
+</script>
+</head>
+<body>
+<div class="pagetable" id="app">
+	<input type="hidden" :value="YEXMYCHECK_ID" :id="FORM_ID"/>
+	<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+	<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+  <h1> 海淀区民办幼儿园年检自查表</h1>
+	<table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th width="5%">考核内容</th>
+    <th width="80%">要素</th>
+    <th width="5%">分值</th>
+    <th width="5%">得分</th>
+    <th width="5%">总分</th>
+  </tr>
+  <tr class="fname">
+    <td class="alignc" rowspan="8">依法办园（10分）</td>
+    <td class="ftitle">1、行政许可是想及备案规范</td>
+    <td class="alignc">1</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    <td rowspan="8"><p  :contenteditable="isPreview?false:true"  ref="ONE_SCORE" id="ONE_SCORE" v-text="pd.ONE_SCORE"></p></td>
+  </tr>
+  <tr class="fname">
+    <td class="ftitle">2、依照有关的法律、行政法规进行登记</td>
+    <td class="alignc">1</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">3、民办幼儿园的理事会、董事会或者其他形式决策机构按《中华人民共和国民办教育促进法》规定履职到位并定期召开会议，记录清晰</td>
+    <td class="alignc">1</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">4、收退费管理规范</td>
+    <td class="alignc">1</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">5、依法聘任具有合法任职资格的教职工从事各项工作</td>
+    <td class="alignc">2</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">6、与教职工签订合法劳动、劳务合同</td>
+    <td class="alignc">1</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">7、不拖欠教师工资，依法为教职工缴纳"五险一金" </td>
+    <td class="alignc">2</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">8、保障教职工参与民主管理和监督</td>
+    <td class="alignc">1</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="alignc" rowspan="5">财务管理（10分）</td>
+    <td class="ftitle">9、幼儿园收费实行成本核算制度，收费项目合理</td>
+    <td class="alignc">1.5</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    <td rowspan="5"><p  :contenteditable="isPreview?false:true"  ref="TWO_SCORE" id="TWO_SCORE" v-text="pd.TWO_SCORE"></p></td>
+  </tr>
+  <tr class="fname">
+    <td class="ftitle">10、幼儿园伙食费专款专用，全年伙食费盈亏不超过2%，管理规范</td>
+    <td class="alignc">1</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">11、依法设置会计机构、配备会计人员。会计人员持证上岗</td>
+    <td class="alignc">1</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">12、内部控制制度健全，严格执行国家统一的会计制度。按相关会计规定，如实、恰当的反映幼儿园的经营、往来状况</td>
+    <td class="alignc">1.5</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">13、幼儿园的经营正常，无资不抵债的现象。开办资金及时到位，幼儿园的资产按时、足额的过户到幼儿园名下。无抽逃资金、挪用办园经费或侵占民办幼儿园各种资产的行为</td>
+    <td class="alignc">5</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="alignc" rowspan="10">行政管理与办园条件（30分）</td>
+    <td class="ftitle">14、组织机构健全，充分发挥管理职能作用</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true"  ></p></td>
+    <td rowspan="10"><p  :contenteditable="isPreview?false:true"  ref="THREE_SCORE" id="THREE_SCORE" v-text="pd.THREE_SCORE"></p></td>
+  </tr>
+  <tr class="fname">
+    <td class="ftitle">15、制度健全，能得到有效落实</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">16、办园方向正确，办园目标明确，切合本园实际</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">17、各项工作记录清晰，文书档案齐全，管理规范</td>
+    <td class="alignc">2</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">18、重视教职工队伍建设，教职工队伍相对稳定</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">19、园长检查指导工作全面、深入并有实效</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">20、安全管理工作无隐患</td>
+    <td class="alignc">2</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">21、办园特色较为突出</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">22、幼儿生活、学习设备齐全，符合安全、卫生要求，符合幼儿年龄特点及需要</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">23、玩教具种类丰富、数量充足，能满足教学、游戏需要，幼儿及成人图书资料种类齐全，丰富，能得到充分利用</td>
+    <td class="alignc">5</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="alignc" rowspan="9">教学管理（25分）</td>
+    <td class="ftitle">24、根据本班幼儿实际制定书面教育计划，能灵活实施教育</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true"  ></p></td>
+    <td rowspan="9"><p  :contenteditable="isPreview?false:true"  ref="FOUR_SCORE" id="FOUR_SCORE" v-text="pd.FOUR_SCORE"></p></td>
+  </tr>
+  <tr class="fname">
+    <td class="ftitle">25、善于观察幼儿，根据幼儿不同发展水平组织教育活动，有观察记录</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">26、保教人员在幼儿一日生活中能使用普通话</td>
+    <td class="alignc">1</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">27、为幼儿创设有利于其发展的教育环境</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">28、坚持保教结合原则，合理组织幼儿一日生活</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">29、以游戏为基本活动</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">30、引导幼儿主动参与各项活动，能关注特殊幼儿的需要</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">31、有集体教研活动时间，根据本园教学实际开展研究，教师参与教研活动</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">32、重视并有效开展家园共育</td>
+    <td class="alignc">3</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="alignc" rowspan="6">卫生保健（25分）</td>
+    <td class="ftitle">33、园领导重视卫生保健工作；园所持有"北京市托儿所、幼儿园卫生保健合格证"；卫生保健人员应当经培训、考核合格上岗</td>
+    <td class="alignc">4</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    <td rowspan="6"><p  :contenteditable="isPreview?false:true"  ref="FIVE_SCORE" id="FIVE_SCORE" v-text="pd.FIVE_SCORE"></p></td>
+  </tr>
+  <tr class="fname">
+    <td class="ftitle">34、认真落实儿童入园体检查验、定期健康体检及儿童全日健康观察工作。儿童健康档案、保健工作记录齐全</td>
+    <td class="alignc">4</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">35、卫生消毒设施齐全，工作规范；水杯、毛巾、餐具等消毒符合卫生要求</td>
+    <td class="alignc">4</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">36、做好疾病的预防工作，加强日常生活护理。积极开展儿童户外活动，保证体格锻炼时间</td>
+    <td class="alignc">4</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">37、儿童膳食管理规范，提供合理平衡膳食；持有"卫生许可证"，严格执行饮食卫生相关要求</td>
+    <td class="alignc">4</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr class="fname">
+    <td class="ftitle">38、儿童健康状况良好，传染病无暴发，杜绝儿童严重伤害事故发生</td>
+    <td class="alignc">5</td>
+    <td><p class="alignc fvalue"  :contenteditable="isPreview?false:true" ></p></td>
+    </tr>
+  <tr>
+    <td colspan="5">法定代表人意见：<p class="mh200"  :contenteditable="isPreview?false:true"  ref="OPINION" id="OPINION" v-text="pd.OPINION"></p>签字：</br><p class="alignc" style="width:50px;display:inline-block;"  :contenteditable="isPreview?false:true" ></p>年<p class="alignc" style="width:50px;display:inline-block;"  :contenteditable="isPreview?false:true" ></p>月<p class="alignc" style="width:50px;display:inline-block;"  :contenteditable="isPreview?false:true" ></p>日</td>
+    </tr>
+</table>
+
+<ul>
+	<li style="width:80%;">填表人：<p ref="CREATE_BY" id="CREATE_BY" v-text="pd.CREATE_BY" ></p></li>
+	<li style="width:20%;" >日期:<p ref="FULLDATA_DATE" id="FULLDATA_DATE" v-text="pd.FULLDATA_DATE" ></li>
+</ul>
+<div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+		<span style="width: 100%;text-align: center;">
+			<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+			<button  class="btn btn-default btn-sm" type="button"  @click="save()">提交</button >
+			<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+		</span>
+	</div>
+</div>
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="js/yexmycheck.js">
+</body>
+</html>

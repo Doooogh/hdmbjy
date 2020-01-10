@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>海淀民办教育</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+    
+    <!--引入弹窗组件-->
+    <link type="text/css" rel="stylesheet" href="fhdrag/style.css" />
+	<!-- vue -->
+	<script src="../assets/js/vue.js"></script>
+</head>
+<body>
+
+	<div style="width:100%;" id="app">
+	
+		<!-- 调用流程设计器插件 -->
+		<iframe name="mainFrame" id="mainFrame" frameborder="0" v-bind:src="'modeler.html?modelId='+modelId+'&curl='+curl" style="margin:0 auto;width:100%;height:681px;"></iframe>
+		
+	</div>
+
+<script type="text/javascript" src="../assets/js/jquery-1.7.2.js"></script>
+
+<!--引入弹窗组件start-->
+<script type="text/javascript" src="fhdrag/drag.js"></script>
+<script type="text/javascript" src="fhdrag/dialog.js"></script>
+<!--引入弹窗组件end-->
+
+<script type="text/javascript">
+
+var vm = new Vue({
+	el: '#app',
+	
+	data:{
+		curl:'',		//传过来的地址
+		modelId: '',	//流程ID
+    },
+    
+    methods: {
+    	//初始执行
+        init() {
+    		var curl = this.getUrlKey('curl');		//链接参数
+    		var modelId = this.getUrlKey('modelId');//链接参数
+        	if(null != modelId){
+        		this.modelId = modelId;
+        		this.curl = curl;
+        	}
+        	this.cmainFrame();
+        },
+        
+      	//浏览器窗口大小变化时调用
+        cmainFrame: function(){
+            var hmain = document.getElementById("mainFrame");
+            var bheight = document.documentElement.clientHeight;
+            hmain.style.width = '100%';
+            hmain.style.height = (bheight-20) + 'px';
+        },
+        
+      	//根据url参数名称获取参数值
+        getUrlKey: function (name) {
+            return decodeURIComponent(
+                (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
+        }
+        
+    },
+    
+	mounted(){
+        this.init();
+    }
+})
+
+//窗口大小变化事件
+window.onresize=function(){  
+	vm.cmainFrame();
+};
+
+</script>	
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+					
+								<div style="width: 100%;">
+									<div id="showform">
+										<h3 style="margin-bottom: 20px;">请认真确认信息！如信息无误可进行预约！</h3>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 140px;"><span style="width: 100%;">姓名</span></span>
+										    </div>
+										    <input type="text" class="form-control" id="NAME" v-model="user.NAME" maxlength="64"  title="预约人姓名" disabled>
+										</div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 140px;"><span style="width: 100%;">电话</span></span>
+										    </div>
+										    <input type="text" class="form-control" id="PHONE" v-model="user.PHONE" maxlength="64"  title="预约人电话" disabled>
+										</div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 140px;"><span style="width: 100%;">申请机构名</span></span>
+										    </div>
+										    <input type="text" class="form-control" id="ORGANIZATION_NAME" v-model="user.ORGANIZATION_NAME" maxlength="64"  title="申请机构名" disabled>
+										</div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+											<div class="input-group-prepend">
+											    <span class="input-group-text" style="width: 140px;"><span style="width: 100%;">预约类型</span></span>
+											</div>
+											<input type="text" class="form-control" v-model="BOOKING_TYPE_NAME" disabled="disabled">
+											<!-- <select class="form-control" v-model="BOOKING_TYPE" id="BOOKING_TYPE" ref="BOOKING_TYPE"  @change="checkUser()"   style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+											  <option value="">预约类型</option>
+											</select> -->
+											
+										</div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 140px;"><span style="width: 100%;">申请预约名</span></span>
+										    </div>
+										    <input type="text" class="form-control"   maxlength="64"  id="BOOKING_ID" ref="BOOKING_ID" title="申请预约名" v-model="BOOKING.TITLE"  v-on:click="getBookings()" >
+											<input type="hidden" class="form-control" v-model="BOOKING_ID" maxlength="64"  title="申请预约名" disabled>
+										</div>
+										<!-- 当选择了一个预约单后才显示详细信息-->
+										<div v-show="showInfo">
+											<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+											    <div class="input-group-prepend">
+											        <span class="input-group-text" style="width: 140px;"><span style="width: 100%;">预约时间范围</span></span>
+											    </div>
+											    <textarea  class="form-control" id="CHOOSE_RANGE" v-model="BOOKING.CHOOSE_RANGE" maxlength="64"  title="预约时间范围" disabled>
+												</textarea>
+											</div>
+											<!-- <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+											    <div class="input-group-prepend">
+											        <span class="input-group-text" style="width: 140px;"><span style="width: 100%;">申请预约结束时间</span></span>
+											    </div>
+											    <input type="text" class="form-control" id="END_TIME" v-model="BOOKING.END_TIME" maxlength="64"  title="申请预约结束时间" disabled>
+											</div> -->
+											<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+											    <div class="input-group-prepend">
+											        <span class="input-group-text" style="width: 140px;"><span style="width: 100%;">申请预约总名额</span></span>
+											    </div>
+											    <input type="text" class="form-control" id="ALL_NUM" v-model="BOOKING.ALL_NUM" maxlength="64"  title="申请预约总名额" disabled>
+											</div>
+											<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+											    <div class="input-group-prepend">
+											        <span class="input-group-text" style="width: 140px;"><span style="width: 100%;">申请预约剩余名额</span></span>
+											    </div>
+											    <input type="text" class="form-control" id="REMAIN_NUM" v-model="BOOKING.REMAIN_NUM" maxlength="64"  title="申请预约剩余名额" disabled>
+											</div>
+										</div>
+							            <div class="input-group" style="margin-top:10px;background-color: white" >
+							            	<span style="width: 100%;text-align: center;">
+							            		<a class="btn btn-light btn-sm" v-on:click="save">确认预约</a>
+							            		<a class="btn btn-light btn-sm" onclick="top.Dialog.close()">取消</a>
+							            	</span>
+							            </div>
+							       </div>
+						           <!-- [加载状态 ] start -->
+								    <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+								    <!-- [ 加载状态  ] End -->
+								</div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- select插件 -->
+<script src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script src="../../../assets/js/pages/form-select-custom.js"></script>
+
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页js -->
+<script src="../../../assets/js-v/bookinguser/bookinguser_edit.js"></script>
+
+</body>
+</html>

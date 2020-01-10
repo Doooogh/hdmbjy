@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+					
+								<div style="width: 100%;">
+									<div id="showform" style="padding-top:0px;">
+							            <div class="input-group input-group-sm mb-3">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备份对象</span></span>
+		                                    </div>
+		                                    <div style="width:590px;margin-left: 3px;">
+			                                    <select class="js-example-placeholder-multiple col-sm-12" id="TABLENAME" data-placeholder="请选择">
+													<option value="all">整库</option>
+													<template v-if="dbtype != 'sqlserver'">
+														<template v-for="varTab in varList">
+															<template v-if="varTab == pd.TABLENAME">
+															<option v-bind:value="varTab" selected>{{varTab}}</option>
+															</template>
+															<template v-else>
+															<option v-bind:value="varTab">{{varTab}}</option>
+															</template>
+														</template>
+													</template>
+												</select>
+											</div>
+		                                </div>
+							            
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">时间规则</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="FHTIME" id="FHTIME" v-model="pd.FHTIME" maxlength="32" placeholder="这里输入时间规则" title="时间规则">
+		                                </div>
+		                                
+		                                <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备注说明</span></span>
+		                                    </div>
+		                                    <input class="form-control" type="text" ref="BZ" id="BZ" v-model="pd.BZ"  maxlength="50" placeholder="这里输入备注说明" title="备注说明" >
+		                                </div>
+									
+										<table class="table table-hover" style="margin-top:3px;">
+											<tr>
+												<td style="text-align: right;" id="setFHTIME">设定：</td>
+												<td>
+													<select onchange="setTimegz(this.value,'month')">
+														<option value="*">每</option>
+														<option value="1">一</option>
+														<option value="2">二</option>
+														<option value="3">三</option>
+														<option value="4">四</option>
+														<option value="5">五</option>
+														<option value="6">六</option>
+														<option value="7">七</option>
+														<option value="8">八</option>
+														<option value="9">九</option>
+														<option value="10">十</option>
+														<option value="11">十一</option>
+														<option value="12">十二</option>
+													</select>
+													月
+												</td>
+												<td>
+													<select onchange="setTimegz(this.value,'week')" id="weekId">
+														<option value="*">每</option>
+														<option value="MON">一</option>
+														<option value="TUES">二</option>
+														<option value="WED">三</option>
+														<option value="THUR">四</option>
+														<option value="FTI">五</option>
+														<option value="SAT">六</option>
+														<option value="SUN">七</option>
+													</select>
+													周
+												</td>
+												<td>
+													<select onchange="setTimegz(this.value,'day')" id="dayId">
+														<option value="*">每</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+														<option value="6">6</option>
+														<option value="7">7</option>
+														<option value="8">8</option>
+														<option value="9">9</option>
+														<option value="10">10</option>
+														<option value="11">11</option>
+														<option value="12">12</option>
+														<option value="13">13</option>
+														<option value="14">14</option>
+														<option value="15">15</option>
+														<option value="16">16</option>
+														<option value="17">17</option>
+														<option value="18">18</option>
+														<option value="19">19</option>
+														<option value="20">20</option>
+														<option value="21">21</option>
+														<option value="22">22</option>
+														<option value="23">23</option>
+														<option value="24">24</option>
+														<option value="25">25</option>
+														<option value="26">26</option>
+														<option value="27">27</option>
+														<option value="28">28</option>
+													</select>
+													日
+												</td>
+												<td>
+													<select onchange="setTimegz(this.value,'hour')">
+														<option value="*">每</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+														<option value="6">6</option>
+														<option value="7">7</option>
+														<option value="8">8</option>
+														<option value="9">9</option>
+														<option value="10">10</option>
+														<option value="11">11</option>
+														<option value="12">12</option>
+														<option value="13">13</option>
+														<option value="14">14</option>
+														<option value="15">15</option>
+														<option value="16">16</option>
+														<option value="17">17</option>
+														<option value="18">18</option>
+														<option value="19">19</option>
+														<option value="20">20</option>
+														<option value="21">21</option>
+														<option value="22">22</option>
+														<option value="23">23</option>
+													</select>
+													时
+												</td>
+											</tr>
+										</table>
+										<div style="text-align: center;background-color: #F4F7FA;"><b>规则说明</b></div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: 10px;">
+		                                    <input type="text" class="form-control" id="TIMEEXPLAIN" v-model="pd.TIMEEXPLAIN" maxlength="100" placeholder="这里是规则说明" title="规则说明" readonly="readonly"/>
+		                                </div>
+							            <div class="input-group" style="margin-top:16px;background-color: white;" >
+							            	<span style="width: 100%;text-align: center;">
+							            		<a class="btn btn-light btn-sm" v-on:click="save">保存</a>
+							            		<a class="btn btn-light btn-sm" onclick="top.Dialog.close();">取消</a>
+							            	</span>
+							            </div>
+						            </div>
+						           <!-- [加载状态 ] start -->
+								   <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                   </div>
+								   <!-- [ 加载状态  ] End -->
+								</div>
+													
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- select插件 -->
+<script type="text/javascript" src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="../../../assets/js/pages/form-select-custom.js"></script>
+
+<!-- 表单验证提示 -->
+<script type="text/javascript" src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页面js -->
+<script type="text/javascript" src="../../../assets/js-v/fhdb/backup_edit.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>海淀区民办教育管理平台</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+					
+								<div style="width: 100%;">
+									<div id="showform">
+														            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">学校全称</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="MBREGISTER_ID" id="MBREGISTER_ID" v-model="pd.MBREGISTER_ID" maxlength="64" placeholder="这里输入学校全称" title="学校全称">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">学校全称</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="SC_ALLNAME" id="SC_ALLNAME" v-model="pd.SC_ALLNAME" maxlength="255" placeholder="这里输入学校全称" title="学校全称">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">校长及电话</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="PRINCIPAL_AND_PHONE" id="PRINCIPAL_AND_PHONE" v-model="pd.PRINCIPAL_AND_PHONE" maxlength="16" placeholder="这里输入校长及电话" title="校长及电话">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">联系人及电话</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="LINKMAN_AND_PHONE" id="LINKMAN_AND_PHONE" v-model="pd.LINKMAN_AND_PHONE" maxlength="16" placeholder="这里输入联系人及电话" title="联系人及电话">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">校长</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="PRINCIPAL" id="PRINCIPAL" v-model="pd.PRINCIPAL" maxlength="255" placeholder="这里输入校长" title="校长">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">董事长</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="CHAIRMAN" id="CHAIRMAN" v-model="pd.CHAIRMAN" maxlength="255" placeholder="这里输入董事长" title="董事长">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">法定代表人</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="LEGAL_PERSON" id="LEGAL_PERSON" v-model="pd.LEGAL_PERSON" maxlength="255" placeholder="这里输入法定代表人" title="法定代表人">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">决策机构成员</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="DECISION_MAKING_MEMBER" id="DECISION_MAKING_MEMBER" v-model="pd.DECISION_MAKING_MEMBER" maxlength="255" placeholder="这里输入决策机构成员" title="决策机构成员">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">招生简章和广告</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="BROCHURE_AND_ADVERTISEMENT" id="BROCHURE_AND_ADVERTISEMENT" v-model="pd.BROCHURE_AND_ADVERTISEMENT" maxlength="255" placeholder="这里输入招生简章和广告" title="招生简章和广告">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">年度审计报告</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ANNUAL_AUDIT_REPORT" id="ANNUAL_AUDIT_REPORT" v-model="pd.ANNUAL_AUDIT_REPORT" maxlength="255" placeholder="这里输入年度审计报告" title="年度审计报告">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">举办者更名</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="CHANGE_OF_ORGANIZER" id="CHANGE_OF_ORGANIZER" v-model="pd.CHANGE_OF_ORGANIZER" maxlength="255" placeholder="这里输入举办者更名" title="举办者更名">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">收退费办法</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="REFUND_METHOD" id="REFUND_METHOD" v-model="pd.REFUND_METHOD" maxlength="255" placeholder="这里输入收退费办法" title="收退费办法">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">章程</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="CONSTITUTION" id="CONSTITUTION" v-model="pd.CONSTITUTION" maxlength="255" placeholder="这里输入章程" title="章程">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备案前</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="RECORD_BEFORE" id="RECORD_BEFORE" v-model="pd.RECORD_BEFORE" maxlength="255" placeholder="这里输入备案前" title="备案前">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备案后</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="RECORD_AFTER" id="RECORD_AFTER" v-model="pd.RECORD_AFTER" maxlength="255" placeholder="这里输入备案后" title="备案后">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">举办者意见</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ORGANIZER_OPINION" id="ORGANIZER_OPINION" v-model="pd.ORGANIZER_OPINION" maxlength="255" placeholder="这里输入举办者意见" title="举办者意见">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">举办者日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ORGANIZER_DATE" id="ORGANIZER_DATE" v-model="pd.ORGANIZER_DATE" maxlength="128" placeholder="这里输入举办者日期" title="举办者日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">教育业务主管部门意见</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="COMPETENT_ADVICE" id="COMPETENT_ADVICE" v-model="pd.COMPETENT_ADVICE" maxlength="255" placeholder="这里输入教育业务主管部门意见" title="教育业务主管部门意见">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">业务部门领导签字日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="COMPETENT_DATE" id="COMPETENT_DATE" v-model="pd.COMPETENT_DATE" maxlength="128" placeholder="这里输入业务部门领导签字日期" title="业务部门领导签字日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">交件人及电话</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="DELIVERY_AND_PHONE" id="DELIVERY_AND_PHONE" v-model="pd.DELIVERY_AND_PHONE" maxlength="255" placeholder="这里输入交件人及电话" title="交件人及电话">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">交件日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="DELIVERY_DATE" id="DELIVERY_DATE" v-model="pd.DELIVERY_DATE" maxlength="128" placeholder="这里输入交件日期" title="交件日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">受理人</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ACCEPTOR" id="ACCEPTOR" v-model="pd.ACCEPTOR" maxlength="255" placeholder="这里输入受理人" title="受理人">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">受理日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ACCEPTING_DATE" id="ACCEPTING_DATE" v-model="pd.ACCEPTING_DATE" maxlength="128" placeholder="这里输入受理日期" title="受理日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">审核人</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="VERIFIER" id="VERIFIER" v-model="pd.VERIFIER" maxlength="255" placeholder="这里输入审核人" title="审核人">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">审核日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="VERIFIER_DATE" id="VERIFIER_DATE" v-model="pd.VERIFIER_DATE" maxlength="128" placeholder="这里输入审核日期" title="审核日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">通知办结日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="COMPLETION_DATE" id="COMPLETION_DATE" v-model="pd.COMPLETION_DATE" maxlength="255" placeholder="这里输入通知办结日期" title="通知办结日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">送达地点</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="DELIVERED" id="DELIVERED" v-model="pd.DELIVERED" maxlength="255" placeholder="这里输入送达地点" title="送达地点">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">送达人及日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="PROCESS_AND_DATE" id="PROCESS_AND_DATE" v-model="pd.PROCESS_AND_DATE" maxlength="128" placeholder="这里输入送达人及日期" title="送达人及日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">收件人及日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ADDRESSEE_AND_DATE" id="ADDRESSEE_AND_DATE" v-model="pd.ADDRESSEE_AND_DATE" maxlength="128" placeholder="这里输入收件人及日期" title="收件人及日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备注30</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="FIELD1" id="FIELD1" v-model="pd.FIELD1" maxlength="255" placeholder="这里输入备注30" title="备注30">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备注31</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="FIELD2" id="FIELD2" v-model="pd.FIELD2" maxlength="255" placeholder="这里输入备注31" title="备注31">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备注32</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="FIELD3" id="FIELD3" v-model="pd.FIELD3" maxlength="255" placeholder="这里输入备注32" title="备注32">
+		                                </div>
+							            <div class="input-group" style="margin-top:10px;background-color: white" >
+							            	<span style="width: 100%;text-align: center;">
+							            		<a class="btn btn-light btn-sm" v-on:click="save">保存</a>
+							            		<a class="btn btn-light btn-sm" onclick="top.Dialog.close()">取消</a>
+							            	</span>
+							            </div>
+							       </div>
+						           <!-- [加载状态 ] start -->
+								    <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+								    <!-- [ 加载状态  ] End -->
+								</div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- select插件 -->
+<script src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script src="../../../assets/js/pages/form-select-custom.js"></script>
+
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+
+<script type="text/javascript">
+
+var vm = new Vue({
+	el: '#app',
+	
+	data:{
+		MBREGISTER_ID: '',	//主键ID
+		pd: [],						//存放字段参数
+		msg:'add'
+    },
+	
+	methods: {
+		
+        //初始执行
+        init() {
+        	var FID = this.getUrlKey('FID');	//当接收过来的FID不为null时,表示此页面是修改进来的
+        	if(null != FID){
+        		this.msg = 'edit';
+        		this.MBREGISTER_ID = FID;
+        		this.getData();
+        	}
+        	setTimeout(function(){
+        		vm.getDict();
+            },200);
+        },
+        
+        //去保存
+    	save: function (){
+    		
+			if(this.pd.MBREGISTER_ID == '' || this.pd.MBREGISTER_ID == undefined){
+				$("#MBREGISTER_ID").tips({
+					side:3,
+		            msg:'请输入学校全称',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.MBREGISTER_ID = '';
+				this.$refs.MBREGISTER_ID.focus();
+			return false;
+			}
+			if(this.pd.SC_ALLNAME == '' || this.pd.SC_ALLNAME == undefined){
+				$("#SC_ALLNAME").tips({
+					side:3,
+		            msg:'请输入学校全称',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.SC_ALLNAME = '';
+				this.$refs.SC_ALLNAME.focus();
+			return false;
+			}
+			if(this.pd.PRINCIPAL_AND_PHONE == '' || this.pd.PRINCIPAL_AND_PHONE == undefined){
+				$("#PRINCIPAL_AND_PHONE").tips({
+					side:3,
+		            msg:'请输入校长及电话',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.PRINCIPAL_AND_PHONE = '';
+				this.$refs.PRINCIPAL_AND_PHONE.focus();
+			return false;
+			}
+			if(this.pd.LINKMAN_AND_PHONE == '' || this.pd.LINKMAN_AND_PHONE == undefined){
+				$("#LINKMAN_AND_PHONE").tips({
+					side:3,
+		            msg:'请输入联系人及电话',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.LINKMAN_AND_PHONE = '';
+				this.$refs.LINKMAN_AND_PHONE.focus();
+			return false;
+			}
+			if(this.pd.PRINCIPAL == '' || this.pd.PRINCIPAL == undefined){
+				$("#PRINCIPAL").tips({
+					side:3,
+		            msg:'请输入校长',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.PRINCIPAL = '';
+				this.$refs.PRINCIPAL.focus();
+			return false;
+			}
+			if(this.pd.CHAIRMAN == '' || this.pd.CHAIRMAN == undefined){
+				$("#CHAIRMAN").tips({
+					side:3,
+		            msg:'请输入董事长',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.CHAIRMAN = '';
+				this.$refs.CHAIRMAN.focus();
+			return false;
+			}
+			if(this.pd.LEGAL_PERSON == '' || this.pd.LEGAL_PERSON == undefined){
+				$("#LEGAL_PERSON").tips({
+					side:3,
+		            msg:'请输入法定代表人',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.LEGAL_PERSON = '';
+				this.$refs.LEGAL_PERSON.focus();
+			return false;
+			}
+			if(this.pd.DECISION_MAKING_MEMBER == '' || this.pd.DECISION_MAKING_MEMBER == undefined){
+				$("#DECISION_MAKING_MEMBER").tips({
+					side:3,
+		            msg:'请输入决策机构成员',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.DECISION_MAKING_MEMBER = '';
+				this.$refs.DECISION_MAKING_MEMBER.focus();
+			return false;
+			}
+			if(this.pd.BROCHURE_AND_ADVERTISEMENT == '' || this.pd.BROCHURE_AND_ADVERTISEMENT == undefined){
+				$("#BROCHURE_AND_ADVERTISEMENT").tips({
+					side:3,
+		            msg:'请输入招生简章和广告',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.BROCHURE_AND_ADVERTISEMENT = '';
+				this.$refs.BROCHURE_AND_ADVERTISEMENT.focus();
+			return false;
+			}
+			if(this.pd.ANNUAL_AUDIT_REPORT == '' || this.pd.ANNUAL_AUDIT_REPORT == undefined){
+				$("#ANNUAL_AUDIT_REPORT").tips({
+					side:3,
+		            msg:'请输入年度审计报告',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.ANNUAL_AUDIT_REPORT = '';
+				this.$refs.ANNUAL_AUDIT_REPORT.focus();
+			return false;
+			}
+			if(this.pd.CHANGE_OF_ORGANIZER == '' || this.pd.CHANGE_OF_ORGANIZER == undefined){
+				$("#CHANGE_OF_ORGANIZER").tips({
+					side:3,
+		            msg:'请输入举办者更名',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.CHANGE_OF_ORGANIZER = '';
+				this.$refs.CHANGE_OF_ORGANIZER.focus();
+			return false;
+			}
+			if(this.pd.REFUND_METHOD == '' || this.pd.REFUND_METHOD == undefined){
+				$("#REFUND_METHOD").tips({
+					side:3,
+		            msg:'请输入收退费办法',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.REFUND_METHOD = '';
+				this.$refs.REFUND_METHOD.focus();
+			return false;
+			}
+			if(this.pd.CONSTITUTION == '' || this.pd.CONSTITUTION == undefined){
+				$("#CONSTITUTION").tips({
+					side:3,
+		            msg:'请输入章程',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.CONSTITUTION = '';
+				this.$refs.CONSTITUTION.focus();
+			return false;
+			}
+			if(this.pd.RECORD_BEFORE == '' || this.pd.RECORD_BEFORE == undefined){
+				$("#RECORD_BEFORE").tips({
+					side:3,
+		            msg:'请输入备案前',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.RECORD_BEFORE = '';
+				this.$refs.RECORD_BEFORE.focus();
+			return false;
+			}
+			if(this.pd.RECORD_AFTER == '' || this.pd.RECORD_AFTER == undefined){
+				$("#RECORD_AFTER").tips({
+					side:3,
+		            msg:'请输入备案后',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.RECORD_AFTER = '';
+				this.$refs.RECORD_AFTER.focus();
+			return false;
+			}
+			if(this.pd.ORGANIZER_OPINION == '' || this.pd.ORGANIZER_OPINION == undefined){
+				$("#ORGANIZER_OPINION").tips({
+					side:3,
+		            msg:'请输入举办者意见',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.ORGANIZER_OPINION = '';
+				this.$refs.ORGANIZER_OPINION.focus();
+			return false;
+			}
+			if(this.pd.ORGANIZER_DATE == '' || this.pd.ORGANIZER_DATE == undefined){
+				$("#ORGANIZER_DATE").tips({
+					side:3,
+		            msg:'请输入举办者日期',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.ORGANIZER_DATE = '';
+				this.$refs.ORGANIZER_DATE.focus();
+			return false;
+			}
+			if(this.pd.COMPETENT_ADVICE == '' || this.pd.COMPETENT_ADVICE == undefined){
+				$("#COMPETENT_ADVICE").tips({
+					side:3,
+		            msg:'请输入教育业务主管部门意见',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.COMPETENT_ADVICE = '';
+				this.$refs.COMPETENT_ADVICE.focus();
+			return false;
+			}
+			if(this.pd.COMPETENT_DATE == '' || this.pd.COMPETENT_DATE == undefined){
+				$("#COMPETENT_DATE").tips({
+					side:3,
+		            msg:'请输入业务部门领导签字日期',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.COMPETENT_DATE = '';
+				this.$refs.COMPETENT_DATE.focus();
+			return false;
+			}
+			if(this.pd.DELIVERY_AND_PHONE == '' || this.pd.DELIVERY_AND_PHONE == undefined){
+				$("#DELIVERY_AND_PHONE").tips({
+					side:3,
+		            msg:'请输入交件人及电话',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.DELIVERY_AND_PHONE = '';
+				this.$refs.DELIVERY_AND_PHONE.focus();
+			return false;
+			}
+			if(this.pd.DELIVERY_DATE == '' || this.pd.DELIVERY_DATE == undefined){
+				$("#DELIVERY_DATE").tips({
+					side:3,
+		            msg:'请输入交件日期',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.DELIVERY_DATE = '';
+				this.$refs.DELIVERY_DATE.focus();
+			return false;
+			}
+			if(this.pd.ACCEPTOR == '' || this.pd.ACCEPTOR == undefined){
+				$("#ACCEPTOR").tips({
+					side:3,
+		            msg:'请输入受理人',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.ACCEPTOR = '';
+				this.$refs.ACCEPTOR.focus();
+			return false;
+			}
+			if(this.pd.ACCEPTING_DATE == '' || this.pd.ACCEPTING_DATE == undefined){
+				$("#ACCEPTING_DATE").tips({
+					side:3,
+		            msg:'请输入受理日期',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.ACCEPTING_DATE = '';
+				this.$refs.ACCEPTING_DATE.focus();
+			return false;
+			}
+			if(this.pd.VERIFIER == '' || this.pd.VERIFIER == undefined){
+				$("#VERIFIER").tips({
+					side:3,
+		            msg:'请输入审核人',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.VERIFIER = '';
+				this.$refs.VERIFIER.focus();
+			return false;
+			}
+			if(this.pd.VERIFIER_DATE == '' || this.pd.VERIFIER_DATE == undefined){
+				$("#VERIFIER_DATE").tips({
+					side:3,
+		            msg:'请输入审核日期',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.VERIFIER_DATE = '';
+				this.$refs.VERIFIER_DATE.focus();
+			return false;
+			}
+			if(this.pd.COMPLETION_DATE == '' || this.pd.COMPLETION_DATE == undefined){
+				$("#COMPLETION_DATE").tips({
+					side:3,
+		            msg:'请输入通知办结日期',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.COMPLETION_DATE = '';
+				this.$refs.COMPLETION_DATE.focus();
+			return false;
+			}
+			if(this.pd.DELIVERED == '' || this.pd.DELIVERED == undefined){
+				$("#DELIVERED").tips({
+					side:3,
+		            msg:'请输入送达地点',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.DELIVERED = '';
+				this.$refs.DELIVERED.focus();
+			return false;
+			}
+			if(this.pd.PROCESS_AND_DATE == '' || this.pd.PROCESS_AND_DATE == undefined){
+				$("#PROCESS_AND_DATE").tips({
+					side:3,
+		            msg:'请输入送达人及日期',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.PROCESS_AND_DATE = '';
+				this.$refs.PROCESS_AND_DATE.focus();
+			return false;
+			}
+			if(this.pd.ADDRESSEE_AND_DATE == '' || this.pd.ADDRESSEE_AND_DATE == undefined){
+				$("#ADDRESSEE_AND_DATE").tips({
+					side:3,
+		            msg:'请输入收件人及日期',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.ADDRESSEE_AND_DATE = '';
+				this.$refs.ADDRESSEE_AND_DATE.focus();
+			return false;
+			}
+			if(this.pd.FIELD1 == '' || this.pd.FIELD1 == undefined){
+				$("#FIELD1").tips({
+					side:3,
+		            msg:'请输入备注30',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.FIELD1 = '';
+				this.$refs.FIELD1.focus();
+			return false;
+			}
+			if(this.pd.FIELD2 == '' || this.pd.FIELD2 == undefined){
+				$("#FIELD2").tips({
+					side:3,
+		            msg:'请输入备注31',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.FIELD2 = '';
+				this.$refs.FIELD2.focus();
+			return false;
+			}
+			if(this.pd.FIELD3 == '' || this.pd.FIELD3 == undefined){
+				$("#FIELD3").tips({
+					side:3,
+		            msg:'请输入备注32',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.FIELD3 = '';
+				this.$refs.FIELD3.focus();
+			return false;
+			}
+    		
+    		$("#showform").hide();
+    		$("#jiazai").show();
+    		
+            //发送 post 请求提交保存
+            $.ajax({
+	            	xhrFields: {
+	                    withCredentials: true
+	                },
+					type: "POST",
+					url: httpurl+'mbregister/'+this.msg,
+			    	data: {MBREGISTER_ID:this.MBREGISTER_ID,
+				    MBREGISTER_ID:this.pd.MBREGISTER_ID,
+				    SC_ALLNAME:this.pd.SC_ALLNAME,
+				    PRINCIPAL_AND_PHONE:this.pd.PRINCIPAL_AND_PHONE,
+				    LINKMAN_AND_PHONE:this.pd.LINKMAN_AND_PHONE,
+				    PRINCIPAL:this.pd.PRINCIPAL,
+				    CHAIRMAN:this.pd.CHAIRMAN,
+				    LEGAL_PERSON:this.pd.LEGAL_PERSON,
+				    DECISION_MAKING_MEMBER:this.pd.DECISION_MAKING_MEMBER,
+				    BROCHURE_AND_ADVERTISEMENT:this.pd.BROCHURE_AND_ADVERTISEMENT,
+				    ANNUAL_AUDIT_REPORT:this.pd.ANNUAL_AUDIT_REPORT,
+				    CHANGE_OF_ORGANIZER:this.pd.CHANGE_OF_ORGANIZER,
+				    REFUND_METHOD:this.pd.REFUND_METHOD,
+				    CONSTITUTION:this.pd.CONSTITUTION,
+				    RECORD_BEFORE:this.pd.RECORD_BEFORE,
+				    RECORD_AFTER:this.pd.RECORD_AFTER,
+				    ORGANIZER_OPINION:this.pd.ORGANIZER_OPINION,
+				    ORGANIZER_DATE:this.pd.ORGANIZER_DATE,
+				    COMPETENT_ADVICE:this.pd.COMPETENT_ADVICE,
+				    COMPETENT_DATE:this.pd.COMPETENT_DATE,
+				    DELIVERY_AND_PHONE:this.pd.DELIVERY_AND_PHONE,
+				    DELIVERY_DATE:this.pd.DELIVERY_DATE,
+				    ACCEPTOR:this.pd.ACCEPTOR,
+				    ACCEPTING_DATE:this.pd.ACCEPTING_DATE,
+				    VERIFIER:this.pd.VERIFIER,
+				    VERIFIER_DATE:this.pd.VERIFIER_DATE,
+				    COMPLETION_DATE:this.pd.COMPLETION_DATE,
+				    DELIVERED:this.pd.DELIVERED,
+				    PROCESS_AND_DATE:this.pd.PROCESS_AND_DATE,
+				    ADDRESSEE_AND_DATE:this.pd.ADDRESSEE_AND_DATE,
+				    FIELD1:this.pd.FIELD1,
+				    FIELD2:this.pd.FIELD2,
+				    FIELD3:this.pd.FIELD3,
+			    	tm:new Date().getTime()},
+					dataType:"json",
+					success: function(data){
+                        if("success" == data.result){
+                        	swal("", "保存成功", "success");
+                        	setTimeout(function(){
+                        		top.Dialog.close();//关闭弹窗
+                            },1000);
+                        }else if ("exception" == data.result){
+                        	showException("海淀区民办学校备案登记表",data.exception);//显示异常
+                        	$("#showform").show();
+                    		$("#jiazai").hide();
+                        }
+                    }
+				}).done().fail(function(){
+                   swal("登录失效!", "请求服务器无响应，稍后再试", "warning");
+                   $("#showform").show();
+           		   $("#jiazai").hide();
+                });
+    	},
+    	
+    	//根据主键ID获取数据
+    	getData: function(){
+    		//发送 post 请求
+            $.ajax({
+            	xhrFields: {
+                    withCredentials: true
+                },
+				type: "POST",
+				url: httpurl+'mbregister/goEdit',
+		    	data: {MBREGISTER_ID:this.MBREGISTER_ID,tm:new Date().getTime()},
+				dataType:"json",
+				success: function(data){
+                     if("success" == data.result){
+                     	vm.pd = data.pd;							//参数map
+                     }else if ("exception" == data.result){
+                     	showException("海淀区民办学校备案登记表",data.exception);	//显示异常
+                     	$("#showform").show();
+                 		$("#jiazai").hide();
+                     }
+                  }
+			}).done().fail(function(){
+                  swal("登录失效!", "请求服务器无响应，稍后再试", "warning");
+                  $("#showform").show();
+          		  $("#jiazai").hide();
+               });
+    	},
+    	
+    	//获取数据字典数据
+		getDict: function (){
+		},
+    	
+    	//根据url参数名称获取参数值
+        getUrlKey: function (name) {
+            return decodeURIComponent(
+                (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
+        }
+        
+	},
+	
+	mounted(){
+        this.init();
+    }
+})
+				
+</script>
+
+</body>
+</html>

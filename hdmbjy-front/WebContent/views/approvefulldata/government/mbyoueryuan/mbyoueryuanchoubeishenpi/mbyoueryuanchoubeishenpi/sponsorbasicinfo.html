@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>民 办 学 校 举 办 单 位 基 本 情 况 表(1)</title>
+<link href="css/pagetable.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../../../../../assets/js/jquery-3.3.1.min.js"></script>
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<link href="pagetable.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+</style>
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+	$(".tableT p").blur(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	});
+	
+});
+</script>
+</head>
+<body>
+<div class="pagetable" id="app">
+	<h1>民 办 学 校 举 办 单 位 基 本 情 况 表(1)</h1>
+	<input type="hidden" :value="SPONSORBASICINFO_ID" :id="FORM_ID"/>
+	<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+	<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+	<table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+		<th width="8%">举办单位名称</th>
+		<td width="42%"><p ref="SPONSOR_NAME" id="SPONSOR_NAME" v-text="pd.SPONSOR_NAME" :contenteditable="isPreview?false:true"></p></td>
+		<th width="8%">电话传真</th>
+		<td width="42%"><p ref="SPONSOR_TELEFACSIMILE" id="SPONSOR_TELEFACSIMILE" v-text="pd.SPONSOR_TELEFACSIMILE" :contenteditable="isPreview?false:true"></p></td>
+	  </tr>
+	  <tr>
+		<th>举办单位地址</th>
+		<td><p ref="NAME_ADDRESS" id="NAME_ADDRESS" v-text="pd.NAME_ADDRESS" :contenteditable="isPreview?false:true"></p></td>
+		<th>邮政编码</th>
+		<td><p ref="POSTCODE" id="POSTCODE" v-text="pd.POSTCODE" :contenteditable="isPreview?false:true"></p></td>
+	  </tr>
+	  <tr>
+		<th>举办单位法定代表人</th>
+		<td><p ref="LEGAL_PERSON" id="LEGAL_PERSON" v-text="pd.LEGAL_PERSON" :contenteditable="isPreview?false:true"></p></td>
+		<th>举办单位法人类型</th>
+		<td><p  ref="LEGAL_PERSON_TYPE" id="LEGAL_PERSON_TYPE" v-text="pd.LEGAL_PERSON_TYPE" :contenteditable="isPreview?false:true"></p></td>
+	  </tr>
+	  <tr>
+		<th>举办单位注册资金</th>
+		<td><p style="width:calc(100% - 60px);display:inline-block;"   ref="REGISTERED_FUND" id="REGISTERED_FUND" v-text="pd.REGISTERED_FUND" :contenteditable="isPreview?false:true"></p>（万元）</td>
+		<th>举办单位现有总资金</th>
+		<td><p style="width:calc(100% - 60px);display:inline-block;" ref="EXISTING_FUNDS" id="EXISTING_FUNDS" v-text="pd.EXISTING_FUNDS"  :contenteditable="isPreview?false:true"></p>（万元）</td>
+	  </tr>
+	  <tr>
+		<th>举办单位开户银行</th>
+		<td><p  id="DEPOSIT_BANK" v-text="pd.DEPOSIT_BANK" :contenteditable="isPreview?false:true" ref="DEPOSIT_BANK" id="DEPOSIT_BANK" v-text="pd.DEPOSIT_BANK"></p></td>
+		<th>举办单位银行账号</th>
+		<td><p ref="BANK_ACCOUNT" id="BANK_ACCOUNT" v-text="pd.BANK_ACCOUNT"  :contenteditable="isPreview?false:true"></p></td>
+	  </tr>
+	  <tr>
+		<th>举办者提供办学资金</th>
+		<td><p style="width:calc(100% - 60px);display:inline-block;"  ref="FUNDS_FOR_SCHOOL" id="FUNDS_FOR_SCHOOL" v-text="pd.FUNDS_FOR_SCHOOL" :contenteditable="isPreview?false:true"></p>（万元）</td>
+		<th>举办者提供办学校址</th>
+		<td><p style="width:calc(100% - 60px);display:inline-block;" ref="RUN_SCHOOL_ADDRESS" id="RUN_SCHOOL_ADDRESS" v-text="pd.RUN_SCHOOL_ADDRESS"  :contenteditable="isPreview?false:true"></p>（万元）</td>
+	  </tr>
+	  <tr>
+		<th>举办单位提供办学设备</th>
+		<td colspan="3"><p class="mh200"   ref="EQUIPMENT" id="EQUIPMENT" v-text="pd.EQUIPMENT"   :contenteditable="isPreview?false:true"></p></td>
+		</tr>
+	  <tr>
+		<th>举办单位意见</th>
+		<td colspan="3" ref="OPINION_DATE" id="OPINION_DATE" >
+			<p class="mh200"  ref="OPINION" id="OPINION" v-text="pd.OPINION" :contenteditable="isPreview?false:true"></p>法定代表人签字：</br>单位（公章）：</br>
+			<p ref="YEAR1" id="YEAR1" v-text="pd.YEAR1" class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ></p>年
+			<p ref="MONTH1" id="MONTH1" v-text="pd.MONTH1" class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true"></p>月
+			<p ref="DAY1" id="DAY1" v-text="pd.DAY1" class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true"></p>日
+		</td>
+		</tr>
+	  <tr>
+		<th>举办单位上级部门意见</th>
+		<td colspan="3" ref="SUPERIOR_OPINION_DATE" id="SUPERIOR_OPINION_DATE"><p class="mh200"  ref="SUPERIOR_OPINION" id="SUPERIOR_OPINION" v-text="pd.SUPERIOR_OPINION"  :contenteditable="isPreview?false:true"></p>法定代表人签字：：</br>盖章：</br>
+		<p ref="YEAR2" id="YEAR2" v-text="pd.YEAR2" class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true"></p>年
+		<p ref="MONTH2" id="MONTH2" v-text="pd.MONTH2" class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true"></p>月
+		<p ref="DAY2" id="DAY2" v-text="pd.DAY2" class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true"></p>日</td>
+		</tr>
+    </table>
+	<div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+			<span style="width: 100%;text-align: center;">
+						<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+						<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+						<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+			</span>
+	</div>
+</div>
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="js/sponsorbasicinfo.js"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>教学点审批备案表</title>
+<link href="../../css/pagetable.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+	$(".tableT p").blur(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	});
+	
+});
+</script>
+</head>
+<body>
+<div class="pagetable" id="app">
+    <input type="hidden" :value="MBPXJGJXDBASPDJB_ID" :id="FORM_ID"/>
+    <input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+    <input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+	<h1>海淀区民办教育培训机构教学点备案审批登记表［   <p class="inlinep" :contenteditable="isPreview?false:true" ref="DJB_NUMBER" id="DJB_NUMBER" v-text="pd.DJB_NUMBER"></p>   ］ 号</h1>
+  <ul>
+    <li>培训机构(公章)：</li>
+    <li style="width:50%;text-align:right"  ref="RUNNING_LICENSE" id="RUNNING_LICENSE" >办学许可证号：教民1101087<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="BXXKZH_FIRST" id="BXXKZH_FIRST" v-text="pd.BXXKZH_FIRST"></p>9<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="BXXKZH_SECOND" id="BXXKZH_SECOND" v-text="pd.BXXKZH_SECOND"></p>号</li>
+  </ul>
+  <table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <th width="10%">校名</th>
+        <td width="40%"><p :contenteditable="isPreview?false:true" ref="SCHOOL_NAME" id="SCHOOL_NAME" v-text="pd.SCHOOL_NAME"></p></td>
+        <th width="10%">校长及电话</th>
+        <td width="40%"><p :contenteditable="isPreview?false:true" ref="SCHOOLMASTER_AND_PHONE" id="SCHOOLMASTER_AND_PHONE" v-text="pd.SCHOOLMASTER_AND_PHONE"></p></td>
+      </tr>
+      <tr>
+        <th>注册校址</th>
+        <td><p :contenteditable="isPreview?false:true" ref="REGISTER_ADDRESS" id="REGISTER_ADDRESS" v-text="pd.REGISTER_ADDRESS"></p></td>
+        <th>注册校本部电话</th>
+        <td><p :contenteditable="isPreview?false:true" ref="REGISTER_XBB_PHONE" id="REGISTER_XBB_PHONE" v-text="pd.REGISTER_XBB_PHONE"></p></td>
+      </tr>
+    </table>
+  <h1>教  学  点  情  况</h1>
+    <table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <th width="10%">教学点地址</th>
+        <td colspan="6"><p :contenteditable="isPreview?false:true" ref="JXD_ADDRESS" id="JXD_ADDRESS" v-text="pd.JXD_ADDRESS"></p></td>
+        <th>联系电话</th>
+        <td colspan="3"><p :contenteditable="isPreview?false:true" ref="PHONE" id="PHONE" v-text="pd.PHONE"></p></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</th>
+        <th width="9%">姓名</th>
+        <th width="9%">性别</th>
+        <th width="9%">年龄</th>
+        <th width="9%">文化程度</th>
+        <th width="9%">职称</th>
+        <th width="9%">原工作单位</th>
+        <th width="9%">户口所在地</th>
+        <th width="9%">身份证号码</th>
+        <th width="9%">是否在职</th>
+        <th width="9%">身体状况</th>
+      </tr>
+      <tr>
+        <th rowspan="2">负责人情况</th>
+        <td><p :contenteditable="isPreview?false:true" ref="NAME1" id="NAME1" v-text="pd.NAME1"></p></td>
+        <td><p :contenteditable="isPreview?false:true" ref="GENDER1" id="GENDER1" v-text="pd.GENDER1"></p></td>
+        <td><p :contenteditable="isPreview?false:true" ref="AGE1" id="AGE1" v-text="pd.AGE1"></p></td>
+        <td><p :contenteditable="isPreview?false:true" ref="EDUCATION1" id="EDUCATION1" v-text="pd.EDUCATION1"></p></td>
+        <td><p :contenteditable="isPreview?false:true" ref="ZHICHENG1" id="ZHICHENG1" v-text="pd.ZHICHENG1"></p></td>
+        <td><p :contenteditable="isPreview?false:true" ref="YGZDW1" id="YGZDW1" v-text="pd.YGZDW1"></p></td>
+        <td><p :contenteditable="isPreview?false:true" ref="HKSZD1" id="HKSZD1" v-text="pd.HKSZD1"></p></td>
+        <td><p :contenteditable="isPreview?false:true" ref="ID_CARD1" id="ID_CARD1" v-text="pd.ID_CARD1"></p></td>
+        <td><p :contenteditable="isPreview?false:true" ref="SFZZ1" id="SFZZ1" v-text="pd.SFZZ1"></p></td>
+        <td><p :contenteditable="isPreview?false:true" ref="STZK1" id="STZK1" v-text="pd.STZK1"></p></td>
+      </tr>
+      <tr>
+          <td><p :contenteditable="isPreview?false:true" ref="NAME2" id="NAME2" v-text="pd.NAME2"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="GENDER2" id="GENDER2" v-text="pd.GENDER2"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="AGE2" id="AGE2" v-text="pd.AGE2"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="EDUCATION2" id="EDUCATION2" v-text="pd.EDUCATION2"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="ZHICHENG2" id="ZHICHENG2" v-text="pd.ZHICHENG2"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="YGZDW2" id="YGZDW2" v-text="pd.YGZDW2"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="HKSZD2" id="HKSZD2" v-text="pd.HKSZD2"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="ID_CARD2" id="ID_CARD2" v-text="pd.ID_CARD2"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="SFZZ2" id="SFZZ2" v-text="pd.SFZZ2"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="STZK2" id="STZK2" v-text="pd.STZK2"></p></td>
+      </tr>
+      <tr>
+        <th rowspan="2">工作人员情况</th>
+          <td><p :contenteditable="isPreview?false:true" ref="NAME3" id="NAME3" v-text="pd.NAME3"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="GENDER3" id="GENDER3" v-text="pd.GENDER3"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="AGE3" id="AGE3" v-text="pd.AGE3"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="EDUCATION3" id="EDUCATION3" v-text="pd.EDUCATION3"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="ZHICHENG3" id="ZHICHENG3" v-text="pd.ZHICHENG3"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="YGZDW3" id="YGZDW3" v-text="pd.YGZDW3"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="HKSZD3" id="HKSZD3" v-text="pd.HKSZD3"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="ID_CARD3" id="ID_CARD3" v-text="pd.ID_CARD3"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="SFZZ3" id="SFZZ3" v-text="pd.SFZZ3"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="STZK3" id="STZK3" v-text="pd.STZK3"></p></td>
+      </tr>
+      <tr>
+          <td><p :contenteditable="isPreview?false:true" ref="NAME4" id="NAME4" v-text="pd.NAME4"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="GENDER4" id="GENDER4" v-text="pd.GENDER4"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="AGE4" id="AGE4" v-text="pd.AGE4"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="EDUCATION4" id="EDUCATION4" v-text="pd.EDUCATION4"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="ZHICHENG4" id="ZHICHENG4" v-text="pd.ZHICHENG4"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="YGZDW4" id="YGZDW4" v-text="pd.YGZDW4"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="HKSZD4" id="HKSZD4" v-text="pd.HKSZD4"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="ID_CARD4" id="ID_CARD4" v-text="pd.ID_CARD4"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="SFZZ4" id="SFZZ4" v-text="pd.SFZZ4"></p></td>
+          <td><p :contenteditable="isPreview?false:true" ref="STZK4" id="STZK4" v-text="pd.STZK4"></p></td>
+      </tr>
+      <tr>
+        <td colspan="11">教学点面积<p class="inlinep" :contenteditable="isPreview?false:true" ref="JXDMJ" id="JXDMJ" v-text="pd.JXDMJ"></p>平方米。其中：教室<p class="inlinep" :contenteditable="isPreview?false:true" ref="JS_NUMBER" id="JS_NUMBER" v-text="pd.JS_NUMBER"></p>间，<p class="inlinep" :contenteditable="isPreview?false:true" ref="JS_AREA" id="JS_AREA" v-text="pd.JS_AREA"></p>平方米；办公室<p class="inlinep" :contenteditable="isPreview?false:true" ref="BGS_NUMBER" id="BGS_NUMBER" v-text="pd.BGS_NUMBER"></p>间，<p class="inlinep" :contenteditable="isPreview?false:true" ref="BGS_AREA" id="BGS_AREA" v-text="pd.BGS_AREA"></p>平方米。</td>
+      </tr>
+      <tr>
+        <th>教学设备</th>
+        <td colspan="10"><p :contenteditable="isPreview?false:true" ref="JXSB" id="JXSB" v-text="pd.JXSB"></p></td>
+      </tr>
+      <tr>
+        <th>外区设教学点所在区县教育行政部门意见</th>
+        <td colspan="4" ref="WQS_BMYJ_DATE" id="WQS_BMYJ_DATE">
+            <p class="mh200" :contenteditable="isPreview?false:true"  ref="WQS_BMYJ" id="WQS_BMYJ" v-text="pd.WQS_BMYJ"></p>
+            <p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="YEAR1" id="YEAR1" v-text="pd.YEAR1"></p>年
+            <p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="MONTH1" id="MONTH1" v-text="pd.MONTH1"></p>月
+            <p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="DAY1" id="DAY1" v-text="pd.DAY1"></p>日
+        </td>
+        <th>发证机关审批意见</th>
+        <td colspan="5" ref="FZJGSPYJ_DATE" id="FZJGSPYJ_DATE">
+            <p class="mh200" :contenteditable="isPreview?false:true"  ref="FZJGSPYJ" id="FZJGSPYJ" v-text="pd.FZJGSPYJ"></p>审定人签字：</br>
+            <p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="YEAR2" id="YEAR2" v-text="pd.YEAR2"></p>年
+            <p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="MONTH2" id="MONTH2" v-text="pd.MONTH2"></p>月
+            <p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="DAY2" id="DAY2" v-text="pd.DAY2"></p>日
+        </td>
+      </tr>
+      <tr>
+        <th>交件人</th>
+        <td colspan="2"><p :contenteditable="isPreview?false:true" ref="JJR" id="JJR" v-text="pd.JJR"></p></td>
+        <th>受理人</th>
+        <td><p :contenteditable="isPreview?false:true" ref="SLR" id="SLR" v-text="pd.SLR"></p></td>
+        <th>审核人</th>
+        <td colspan="2"><p :contenteditable="isPreview?false:true" ref="SHR" id="SHR" v-text="pd.SHR"></p></td>
+        <th>复审人</th>
+        <td colspan="2"><p :contenteditable="isPreview?false:true" ref="FSR" id="FSR" v-text="pd.FSR"></p></td>
+      </tr>
+      <tr>
+        <th>交件日期</th>
+        <td colspan="2"><p :contenteditable="isPreview?false:true" ref="JJRQ" id="JJRQ" v-text="pd.JJRQ"></p></td>
+        <th>受理日期</th>
+        <td><p :contenteditable="isPreview?false:true" ref="SLRQ" id="SLRQ" v-text="pd.SLRQ"></p></td>
+        <th>审核日期</th>
+        <td colspan="2"><p :contenteditable="isPreview?false:true" ref="SHRQ" id="SHRQ" v-text="pd.SHRQ"></p></td>
+        <th>复审日期</th>
+        <td colspan="2"><p :contenteditable="isPreview?false:true" ref="FSRQ" id="FSRQ" v-text="pd.FSRQ"></p></td>
+      </tr>
+      <tr>
+        <th>备注</th>
+        <td colspan="10"><p :contenteditable="isPreview?false:true" ref="REMARKS" id="REMARKS" v-text="pd.REMARKS"></p></td>
+      </tr>
+    </table>
+
+	<div class="bz">
+	说明：</br>教学点备案需提供如下材料</br>
+1.此表本区设点一式一份,外区设点一式二份；</br>2.学校董事会决议原件；</br> 3.租借校舍协议书原件(需500平方米,租期3年以上)；</br>4.房产证明复印件(加盖产权单位公章)；</br>5.消防验收意见合格书复印件（加盖产权单位公章）；</br>6.消防、治安证明原件；</br>7.办学许可证正本原件.
+	</div>
+    <div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+			<span style="width: 100%;text-align: center;">
+						<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+						<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+						<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+			</span>
+    </div>
+</div>
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="../../js/mbpxjgjxdbaspdjb.js"></script>
+</body>
+</html>

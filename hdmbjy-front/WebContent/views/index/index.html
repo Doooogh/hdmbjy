@@ -1,0 +1,283 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>海淀区民办教育管理平台</title>
+ <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+<link href="../../assets/index/css/common.css" rel="stylesheet" type="text/css">
+<link href="../../assets/index/css/index.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../assets/index/js/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="../../assets/index/js/jquery.SuperSlide.2.1.1.js"></script>
+ -->
+<!-- vue -->
+<script src="../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script src="../../assets/js-v/config.js"></script>
+
+<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=zUienaLUDnqDWVVd7Zm6eQl3Z33nHvbq"></script>
+
+</head>
+<body>
+<div class="wrap" id="app">
+    <div class="wrap_main clearfixhack">
+    <!-- 主体 开始 -->
+		<div class="indextop">
+			<div class="container">
+				海淀区民办教育管理平台
+				<!-- <a class="fr c666" href="#">联系我们</a>
+				<a class="fr c666" href="#">人才招聘</a>-->
+				<!-- <a class="fr c666" href="../sys/index/index.html">返回后台</a> --> 
+			</div>
+		</div><!-- indextop  end  -->
+		<div class="indexhead">
+			<div class="container">
+				<img class="logo" src="../../assets/index/img/logo.png" />
+				<!-- <div class="searchbox">
+					<div class="searchinput"><input type="text" placeholder="请输入您要搜索的内容" /></div>
+					<div class="searchbtn"><a href="#"></a></div>
+					<div class="searchhistory">热门搜索：<a href="#">教育</a><a href="#">海淀</a><a href="#">幼儿园</a></div>
+				</div> -->
+			</div>
+		</div><!-- indexhead  end  -->
+    	<div class="indexmenu">
+			<div class="container">
+				<ul>
+					<li><a href="../index/index.html" class="on">首页</a></li>
+					<!--  -->
+					<template v-for="(data,index) in listCategory">
+						<li><a v-bind:href="data.url">{{data.name}}</a></li>
+					</template>
+					
+					<!-- <li><a href="#">政务公开</a></li>
+					<li><a href="#">党务公开</a></li>
+					<li><a href="#">教育风采</a></li>
+					<li><a href="#">学校名录</a></li>
+					<li><a href="#">下载中心</a></li>
+					<li><a href="#">联系我们</a></li> -->
+					
+				<ul>
+			</div>
+		</div><!-- indexmenu  end  -->
+		<div class="container clearfix mb20">
+			<div class="indexbanner">
+				<div id="slideBox" class="slideBox">
+					<div class="bd">
+						<ul>
+						    <template v-for="(dataimg,index) in listRotaryimg">
+								<li><a href="javascript:volid(0);"><img height="250px" class="img" v-bind:src="nginxurl+dataimg.IMG_PATH"></a></li>
+							</template> 
+						</ul>
+					</div>
+				</div>
+			</div><!-- indexbanner  end  -->
+			<div class="item_1 item_rmtj">
+				<div class="head"><img class="backimg" src="../../assets/index/img/item1head.png" /><img class="iconimg" src="../../assets/index/img/icon1.png" /><span>热门推荐</span><a class="more" href="../index/xinwenList.html?name=新闻动态">【更多】</a></div>
+				<div class="mid">
+					<ul class="clearfix ul_rmtj">
+						<template v-for="(dataArticles,index) in listArticles">
+							<li>
+								<img class="img" v-bind:src="nginxurl+dataArticles.COVER_IMAGE" />
+								<h1>{{dataArticles.TITLE}}</h1>
+								<div class="cont">
+									<p>{{dataArticles.DESCRIPTION}}</p>
+									<span>{{dataArticles.CREATE_DATE}}</span>
+									<a :href="'../index/content.html?id='+dataArticles.ID+''">点击查看</a>
+								</div>
+							</li>
+						</template>
+						<!-- <li>
+							<img class="img" src="../../assets/index/img/img1.jpg" />
+							<h1>【党政】学习宣传贯彻党的十九大精神部署会</h1>
+							<div class="cont">
+								<p>12月25日海淀区社会力量办学单位党总支组织召开民办教育系统学习宣传贯彻党的十九大精神部署会，贯彻单个阿萨德花覅按了啥地方哈斯DNFask地方加上了肯德基法拉盛肯定放假拉速度快</p>
+								<span>2019-10-14</span>
+								<a href="#">点击查看</a>
+							</div>
+						</li>
+						
+						<li>
+							<img class="img" src="../../assets/index/img/img2.jpg" />
+							<h1>【党政】学习宣传贯彻党的十九大精神部署会</h1>
+							<div class="cont">
+								<p>12月25日海淀区社会力量办学单位党总支组织召开民办教育系统学习宣传贯彻党的十九大精神部署会，贯彻单个阿萨德花覅按了啥地方哈斯DNFask地方加上了肯德基法拉盛肯定放假拉速度快</p>
+								<span>2019-10-14</span>
+								<a href="#">点击查看</a>
+							</div>
+						</li>
+						
+						<li>
+							<img class="img" src="../../assets/index/img/img3.jpg" />
+							<h1>【党政】学习宣传贯彻党的十九大精神部署会</h1>
+							<div class="cont">
+								<p>12月25日海淀区社会力量办学单位党总支组织召开民办教育系统学习宣传贯彻党的十九大精神部署会，贯彻单个阿萨德花覅按了啥地方哈斯DNFask地方加上了肯德基法拉盛肯定放假拉速度快</p>
+								<span>2019-10-14</span>
+								<a href="#">点击查看</a>
+							</div>
+						</li> -->
+						
+					</ul>
+				</div>
+			</div><!-- 热门推荐  end  -->
+			<div class="item_2 item_news fl">
+				<div class="head"><span>新闻动态</span><a class="more" href="../index/xinwenList.html?name=新闻动态">【更多】</a></div>
+				<div class="mid mt15">
+					<ul class="item_2ul ul_xwdt">
+						<template v-for="(dataXinWen,index) in listXinWen">
+							<li class="clearfix"><a class="title" :href="'../index/content.html?id='+dataXinWen.ID+''">{{dataXinWen.TITLE}}</a><span class="time">{{dataXinWen.CREATE_DATE}}</span></li>
+						</template>
+						
+						
+						<!-- <li class="clearfix"><a class="title" href="#">召开2019年民办学校行业集体协商会议</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">献礼祖国七十华诞，传承红色精神，共筑少年强国梦</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">朝阳区社管所团委组社管所团委组织开织开展“青春心向党 建功新时代”特别主题团日活动</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">学习宣传贯彻党的十九大精神部署会</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">召开2019年民办学校行业集体协商会议</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">献礼祖国七十华诞，传承红色精神，共筑少年强国梦</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">朝阳区社管所团委组织开展“青春心向党 建功新时代”特别主题团日活动</a><span class="time">2019-10-14</span></li> -->
+					</ul>
+				</div>
+			</div><!-- 新闻动态  end  -->
+			<div class="item_2 item_news fr slideTxtBox">
+				<div class="hd">
+					<a class="more" href="../index/xinwenList.html?name=日常监管">【更多】</a>
+					<ul><li class="on">工作管理</li><li class="">公示公告</li></ul>
+				</div>
+				<div class="bd mt15">
+					<ul class="item_2ul ul_gzgl">
+						<template v-for="(dataGzgl,index) in listGzgl">
+							<li class="clearfix"><a class="title" :href="'../index/content.html?id='+dataGzgl.ID+''">{{dataGzgl.TITLE}}</a><span class="time">{{dataGzgl.CREATION_DATE}}</span></li>
+						</template>
+						
+						<!-- <li class="clearfix"><a class="title" href="#">召开2019年民办学校行业集体协商会议1</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">献礼祖国七十华诞，传承红色精神，共筑少年强国梦1</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">朝阳区社管所团委组社管所团委组织开织开展“青春心向党 建功新时代”特别主题团日活动1</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">学习宣传贯彻党的十九大精神部署会1</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">召开2019年民办学校行业集体协商会议1</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">献礼祖国七十华诞，传承红色精神，共筑少年强国梦1</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">朝阳区社管所团委组织开展“青春心向党 建功新时代”特别主题团日活动1</a><span class="time">2019-10-14</span></li>
+					 -->
+					</ul>
+					<ul class="item_2ul ul_gsgg">
+						<template v-for="(dataGzgg,index) in listGzgg">
+							<li class="clearfix"><a class="title" :href="'../index/content.html?id='+dataGzgg.ID+''">{{dataGzgg.TITLE}}</a><span class="time">{{dataGzgg.CREATION_DATE}}</span></li>
+						</template>
+						<!-- <li class="clearfix"><a class="title" href="#">召开2019年民办学校行业集体协商会议2</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">献礼祖国七十华诞，传承红色精神，共筑少年强国梦2</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">朝阳区社管所团委组社管所团委组织开织开展“青春心向党 建功新时代”特别主题团日活动2</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">学习宣传贯彻党的十九大精神部署会2</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">召开2019年民办学校行业集体协商会议2</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">献礼祖国七十华诞，传承红色精神，共筑少年强国梦2</a><span class="time">2019-10-14</span></li>
+						<li class="clearfix"><a class="title" href="#">朝阳区社管所团委组织开展“青春心向党 建功新时代”特别主题团日活动2</a><span class="time">2019-10-14</span></li>
+					 -->
+					</ul>
+				</div>
+			</div><!-- 工作管理  end  -->
+			<div class="clearfix"></div>
+			<div class="item_1 item_dzdt fl">
+				<div class="head"><img class="backimg" src="../../assets/index/img/item1head.png" /><img class="iconimg" src="../../assets/index/img/icon1.png" /><span>电子地图</span><a class="more" href="../index/map.html">【更多】</a></div>
+				<div class="mid mt20" id= "allmap">
+				
+					<!-- <img src="../../assets/index/img/mapimg.jpg" /> -->
+					
+				</div>
+			</div><!-- 电子地图  end  -->
+			<div class="item_2 item_dwgk fr">
+				<div class="head"><span>党务公开</span><a class="more" href="../index/xinwenList.html?name=党务公开">【更多】</a></div>
+				<div class="mid mt20">
+					<ul class="item_2ul2 ul_dwgk">
+						<template v-for="(dataDwgk,index) in listDwgk">
+							<li class="clearfix"><img class="img" v-bind:src="nginxurl+dataDwgk.COVER_IMAGE"/><div class="cont"><a class="title" :href="'../index/content.html?id='+dataDwgk.ID+''" :title="dataDwgk.TITLE">
+							<template v-if="(dataDwgk.TITLE).length<=25">
+							 {{dataDwgk.TITLE.substring(0,20)}}
+							</template>
+							<template v-if="(dataDwgk.TITLE).length>25">
+							 {{dataDwgk.TITLE.substring(0,20)}}...
+							</template>
+							</a><p>{{dataDwgk.DESCRIPTION}}</p><span class="time">{{dataDwgk.CREATE_DATE}}</span></div></li>
+						</template>
+						
+					
+					
+						<!-- <li class="clearfix"><img class="img" src="../../assets/index/img/img2.jpg" /><div class="cont"><a class="title" href="#">【党务】学习宣传贯彻党的十九大精神部署会</a><p>12月25日海淀区社会力量办学单位党总支组织召开民办教育系统学习宣传贯彻党的十九大精神部署会，贯彻党的十九大精神部署会，12月25日海淀区社会力量办学单位党总支组织召开民办教育系统学习宣传贯彻党的十九大</p><span class="time">2019-10-14</span></div></li>
+					 -->
+					</ul>
+				</div>
+			</div><!-- 党务公开  end  -->
+			<div class="item_2 item_bmfw fr">
+				<div class="head"><span>便民服务</span><!-- <a class="more" href="#">【更多】</a> --></div>
+				<div class="mid mt20">
+					<ul class="item_2ul3 ul_bmfw">
+						<li><a href="../index/complaint.html"><img class="img" src="../../assets/index/img/bmfw_img1.jpg" /></a></li>
+						<!-- <li><a href="#"><img class="img" src="../../assets/index/img/bmfw_img1.jpg" /></a></li>
+						<li><a href="#"><img class="img" src="../../assets/index/img/bmfw_img1.jpg" /></a></li>
+						 -->
+					</ul>
+				</div>
+			</div><!-- 便民服务  end  -->
+			<div class="clearfix"></div>
+			<div class="item_1 ">
+				<div class="head"><img class="backimg" src="../../assets/index/img/item1head.png" /><img class="iconimg" src="../../assets/index/img/icon1.png" /><span>专题专栏</span><a class="more" href="../index/xinwenList.html?name=新闻动态">【更多】</a></div>
+				<div class="picScroll-left">
+						<a class="next"></a>
+						<a class="prev"></a>
+					<div class="bd">
+						<div class="tempWrap"><ul class="picList">
+							<template v-for="(dataZtzl,index) in listZtzl">
+								<li><a :href="'../index/content.html?id='+dataZtzl.ID+''">
+									<img v-bind:src="nginxurl+dataZtzl.COVER_IMAGE" />
+									<p>{{dataZtzl.title}}</p></a>
+								</li>
+							</template>
+							<!-- <li><a href="#">
+								<img src="../../assets/index/img/img2.jpg" />
+								<p>党的十九大精神部署会</p></a>
+							</li>
+							<li><a href="#">
+								<img src="../../assets/index/img/img3.jpg" />
+								<p>党的十九大精神部署会</p></a>
+							</li>
+							<li><a href="#">
+								<img src="../../assets/index/img/img1.jpg" />
+								<p>党的十九大精神部署会</p></a>
+							</li>
+							<li><a href="#">
+								<img src="../../assets/index/img/img2.jpg" />
+								<p>党的十九大精神部署会</p></a>
+							</li>
+							<li><a href="#">
+								<img src="../../assets/index/img/img3.jpg" />
+								<p>党的十九大精神部署会</p></a>
+							</li>
+							<li><a href="#">
+								<img src="../../assets/index/img/img1.jpg" />
+								<p>党的十九大精神部署会</p></a>
+							</li>
+							<li><a href="#">
+								<img src="../../assets/index/img/img2.jpg" />
+								<p>党的十九大精神部署会</p></a>
+							</li> -->
+						</ul></div>
+					</div>
+				</div>
+			</div><!-- 专题专栏  end  -->
+		</div>
+    <!-- 主体  结束  -->
+    </div>
+</div>
+<!-- 底部  开始  -->
+<div class="footer">
+	<div class="main">
+		<p>版权所有：北京市海淀区教育委员会     京ICP备17037050号-2</br>
+		地址：北京市海淀区西四环北路11号　咨询热线：96181</p>
+	</div>
+</div>
+<!-- 底部  结束  -->
+</body>
+<script type="text/javascript" src="../../assets/index/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="../../assets/js/pre-loader.js"></script>
+<script src="../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<script type="text/javascript" src="../../assets/index/js/index.js"></script>
+<!-- <script type="text/javascript" src="../../assets/index/js/map_list.js"></script>
+ -->
+</html>

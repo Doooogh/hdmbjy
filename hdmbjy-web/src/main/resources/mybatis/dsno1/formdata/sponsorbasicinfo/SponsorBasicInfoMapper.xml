@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.formdata.sponsorbasicinfo.SponsorBasicInfoMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		CMS_SPONSORBASICINFO
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.SPONSORBASICINFO_ID,	
+		f.SPONSOR_NAME,	
+		f.SPONSOR_TELEFACSIMILE,	
+		f.NAME_ADDRESS,	
+		f.POSTCODE,	
+		f.LEGAL_PERSON,	
+		f.LEGAL_PERSON_TYPE,	
+		f.REGISTERED_FUND,	
+		f.EXISTING_FUNDS,	
+		f.DEPOSIT_BANK,	
+		f.BANK_ACCOUNT,	
+		f.FUNDS_FOR_SCHOOL,	
+		f.RUN_SCHOOL_ADDRESS,	
+		f.EQUIPMENT,	
+		f.OPINION,	
+		f.OPINION_DATE,	
+		f.SUPERIOR_OPINION,	
+		f.SUPERIOR_OPINION_DATE,
+		f.PROVIDE_OTHER_SERVICES
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		SPONSORBASICINFO_ID,	
+		SPONSOR_NAME,	
+		SPONSOR_TELEFACSIMILE,	
+		NAME_ADDRESS,	
+		POSTCODE,	
+		LEGAL_PERSON,	
+		LEGAL_PERSON_TYPE,	
+		REGISTERED_FUND,	
+		EXISTING_FUNDS,	
+		DEPOSIT_BANK,	
+		BANK_ACCOUNT,	
+		FUNDS_FOR_SCHOOL,	
+		RUN_SCHOOL_ADDRESS,	
+		EQUIPMENT,	
+		OPINION,	
+		OPINION_DATE,	
+		SUPERIOR_OPINION,	
+		SUPERIOR_OPINION_DATE,
+		PROVIDE_OTHER_SERVICES
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{SPONSORBASICINFO_ID},	
+		#{SPONSOR_NAME},	
+		#{SPONSOR_TELEFACSIMILE},	
+		#{NAME_ADDRESS},	
+		#{POSTCODE},	
+		#{LEGAL_PERSON},	
+		#{LEGAL_PERSON_TYPE},	
+		#{REGISTERED_FUND},	
+		#{EXISTING_FUNDS},	
+		#{DEPOSIT_BANK},	
+		#{BANK_ACCOUNT},	
+		#{FUNDS_FOR_SCHOOL},	
+		#{RUN_SCHOOL_ADDRESS},	
+		#{EQUIPMENT},	
+		#{OPINION},	
+		#{OPINION_DATE},	
+		#{SUPERIOR_OPINION},	
+		#{SUPERIOR_OPINION_DATE},
+		#{PROVIDE_OTHER_SERVICES}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field2"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			SPONSORBASICINFO_ID = #{SPONSORBASICINFO_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			SPONSOR_NAME = #{SPONSOR_NAME},
+			SPONSOR_TELEFACSIMILE = #{SPONSOR_TELEFACSIMILE},
+			NAME_ADDRESS = #{NAME_ADDRESS},
+			POSTCODE = #{POSTCODE},
+			LEGAL_PERSON = #{LEGAL_PERSON},
+			LEGAL_PERSON_TYPE = #{LEGAL_PERSON_TYPE},
+			REGISTERED_FUND = #{REGISTERED_FUND},
+			EXISTING_FUNDS = #{EXISTING_FUNDS},
+			DEPOSIT_BANK = #{DEPOSIT_BANK},
+			BANK_ACCOUNT = #{BANK_ACCOUNT},
+			FUNDS_FOR_SCHOOL = #{FUNDS_FOR_SCHOOL},
+			RUN_SCHOOL_ADDRESS = #{RUN_SCHOOL_ADDRESS},
+			EQUIPMENT = #{EQUIPMENT},
+			OPINION = #{OPINION},
+			OPINION_DATE = #{OPINION_DATE},
+			SUPERIOR_OPINION = #{SUPERIOR_OPINION},
+			SUPERIOR_OPINION_DATE = #{SUPERIOR_OPINION_DATE},
+			PROVIDE_OTHER_SERVICES=#{PROVIDE_OTHER_SERVICES}
+		where 
+			SPONSORBASICINFO_ID = #{SPONSORBASICINFO_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.SPONSORBASICINFO_ID = #{SPONSORBASICINFO_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 1=1
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				-->
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			SPONSORBASICINFO_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

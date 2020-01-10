@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.examination.ExaminationMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		CMS_EXAMINATION
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.EXAMINATION_ID,	
+		f.DEPARTMENT_NAME,	
+		f.USERNAME,	
+		f.ATTACHMENT_IDS,	
+		f.OFFLINE_RES_TIME,	
+		f.OFFLINE_RES,	
+		f.PRE_APPROVE,	
+		f.PRE_APPROVE_TIME,	
+		f.SUGGLY_DATA,	
+		f.SUGGLY_DATA_TIME,	
+		f.CREATE_TIME,	
+		f.USER_ID,	
+		f.PRE_APPROVE_USER,	
+		f.SUGGLY_DATA_USER,	
+		f.PROC_INST_ID,	
+		f.STATUS,
+		f.DRAFTS,
+		f.APPROVE_TYPE,
+		f.APPROVE_ID,
+		f.APPROVE_TYPE_NAME
+	</sql>
+	<!-- 字段 -->
+	<sql id="FieldLeft">
+		e.EXAMINATION_ID,
+		e.DEPARTMENT_NAME,
+		e.USERNAME,
+		e.ATTACHMENT_IDS,
+		e.OFFLINE_RES_TIME,
+		e.OFFLINE_RES,
+		e.PRE_APPROVE,
+		e.PRE_APPROVE_TIME,
+		e.SUGGLY_DATA,
+		e.SUGGLY_DATA_TIME,
+		e.CREATE_TIME,
+		e.USER_ID,
+		e.PRE_APPROVE_USER,
+		e.SUGGLY_DATA_USER,
+		e.PROC_INST_ID,
+		e.STATUS,
+		e.DRAFTS,
+		e.APPROVE_TYPE,
+		e.APPROVE_ID,
+		e.APPROVE_TYPE_NAME
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		EXAMINATION_ID,	
+		DEPARTMENT_NAME,	
+		USERNAME,	
+		ATTACHMENT_IDS,	
+		OFFLINE_RES_TIME,	
+		OFFLINE_RES,	
+		PRE_APPROVE,	
+		PRE_APPROVE_TIME,	
+		SUGGLY_DATA,	
+		SUGGLY_DATA_TIME,	
+		CREATE_TIME,	
+		USER_ID,	
+		PRE_APPROVE_USER,	
+		SUGGLY_DATA_USER,	
+		PROC_INST_ID,	
+		STATUS,
+		DRAFTS,
+		APPROVE_TYPE,
+		APPROVE_ID,
+		APPROVE_TYPE_NAME
+	</sql>
+
+	<sql id="Field3">
+		EXAMINATION_ID,
+		DEPARTMENT_NAME,
+		USERNAME,
+		ATTACHMENT_IDS,
+		USER_ID,
+		PROC_INST_ID,
+		CREATE_TIME,
+		`STATUS`,
+		PRE_APPROVE,
+		SUGGLY_DATA,
+		OFFLINE_RES,
+		PRE_APPROVE_USER,
+		SUGGLY_DATA_USER,
+		APPROVE_TYPE,
+		DRAFTS,
+		APPROVE_ID,
+		APPROVE_TYPE_NAME
+
+	</sql>
+
+	<sql id="Field3Value">
+		#{EXAMINATION_ID},
+		#{DEPARTMENT_NAME},
+		#{USERNAME},
+		#{ATTACHMENT_IDS},
+		#{USER_ID},
+		#{PROC_INST_ID},
+		#{CREATE_TIME},
+		#{STATUS},
+		'0',
+		'0',
+		'0',
+		'0',
+		'0',
+		null,
+		#{DRAFTS},
+		#{APPROVE_ID},
+		#{APPROVE_TYPE_NAME}
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{EXAMINATION_ID},	
+		#{DEPARTMENT_NAME},	
+		#{USERNAME},	
+		#{ATTACHMENT_IDS},	
+		#{OFFLINE_RES_TIME},	
+		#{OFFLINE_RES},	
+		#{PRE_APPROVE},	
+		#{PRE_APPROVE_TIME},	
+		#{SUGGLY_DATA},	
+		#{SUGGLY_DATA_TIME},	
+		#{CREATE_TIME},	
+		#{USER_ID},	
+		#{PRE_APPROVE_USER},	
+		#{SUGGLY_DATA_USER},	
+		#{PROC_INST_ID},	
+		#{STATUS},
+		#{APPROVE_TYPE},
+		#{DRAFTS},
+		#{APPROVE_ID},
+		#{APPROVE_TYPE_NAME}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field3"></include>
+		) values (
+	<include refid="Field3Value"></include>
+		)
+	</insert>
+
+
+	<!-- 新增-->
+	<insert id="autoSave" parameterType="pd">
+		insert into
+		<include refid="tableName"></include>
+		(
+		EXAMINATION_ID,
+		PRE_APPROVE,
+		SUGGLY_DATA,
+		OFFLINE_RES,
+		PRE_APPROVE_USER,
+		SUGGLY_DATA_USER,
+		DRAFTS,
+		APPROVE_TYPE,
+		APPROVE_ID,
+		APPROVE_TYPE_NAME
+		) values (
+		#{EXAMINATION_ID},
+		'0',
+		'0',
+		'0',
+		'0',
+		'0',
+		'2',
+		null,
+		null,
+		''
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where
+			EXAMINATION_ID = #{EXAMINATION_ID}
+	</delete>
+
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		<set>
+			<if test="DEPARTMENT_NAME!=null and DEPARTMENT_NAME!=null">
+				DEPARTMENT_NAME = #{DEPARTMENT_NAME},
+			</if>
+			<if test="USERNAME!=null and USERNAME!=null">
+				USERNAME = #{USERNAME},
+			</if>
+			<if test="USER_ID!=null and USER_ID!=null">
+				USER_ID = #{USER_ID},
+			</if>
+			<if test="ATTACHMENT_IDS!=null and ATTACHMENT_IDS!=null">
+				ATTACHMENT_IDS = #{ATTACHMENT_IDS},
+			</if>
+			<if test="OFFLINE_RES_TIME!=null and OFFLINE_RES_TIME!=null">
+				OFFLINE_RES_TIME = #{OFFLINE_RES_TIME},
+			</if>
+			<if test="OFFLINE_RES!=null and OFFLINE_RES!=null">
+				OFFLINE_RES = #{OFFLINE_RES},
+			</if>
+			<if test="PRE_APPROVE!=null and PRE_APPROVE!=null">
+				PRE_APPROVE = #{PRE_APPROVE},
+			</if>
+			<if test="PRE_APPROVE_TIME!=null and PRE_APPROVE_TIME!=null">
+				PRE_APPROVE_TIME = #{PRE_APPROVE_TIME},
+			</if>
+			<if test="PRE_APPROVE_USER!=null and PRE_APPROVE_USER!=null">
+				PRE_APPROVE_USER = #{PRE_APPROVE_USER},
+			</if>
+			<if test="SUGGLY_DATA!=null and SUGGLY_DATA!=null">
+				SUGGLY_DATA = #{SUGGLY_DATA},
+			</if>
+			<if test="SUGGLY_DATA_USER!=null and SUGGLY_DATA_USER!=null">
+				SUGGLY_DATA_USER = #{SUGGLY_DATA_USER},
+			</if>
+			<if test="SUGGLY_DATA_TIME!=null and SUGGLY_DATA_TIME!=null">
+				SUGGLY_DATA_TIME = #{SUGGLY_DATA_TIME},
+			</if>
+			<if test="PROC_INST_ID!=null and PROC_INST_ID!=null">
+				PROC_INST_ID = #{PROC_INST_ID},
+			</if>
+			<if test="STATUS!=null and STATUS!=null">
+				STATUS = #{STATUS},
+			</if>
+			<if test="APPROVE_ID!=null and APPROVE_ID!=null">
+				APPROVE_ID = #{APPROVE_ID},
+			</if>
+			<if test="DRAFTS!=null and DRAFTS!=null">
+				DRAFTS = #{DRAFTS},
+			</if>
+			<if test="APPROVE_TYPE!=null and APPROVE_TYPE!=null">
+				APPROVE_TYPE = #{APPROVE_TYPE},
+			</if>
+			<if test="APPROVE_TYPE_NAME!=null and APPROVE_TYPE_NAME!=null">
+				APPROVE_TYPE_NAME = #{APPROVE_TYPE_NAME},
+			</if>
+		</set>
+		where
+			EXAMINATION_ID = #{EXAMINATION_ID}
+	</update>
+
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.EXAMINATION_ID = #{EXAMINATION_ID}
+		<if test="del!='' and del!=null">
+			and f.DRAFTS='2'
+		</if>
+
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		  <include refid="FieldLeft"></include>
+		,u.NAME as UNAME
+		from
+		(
+		select
+		<include refid="Field"></include>
+		from<include refid="tableName"></include>
+		f
+		where 1=1
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--
+				根据需求自己加检索条件-->
+					f.DEPARTMENT_NAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					<!--  or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')  -->
+				
+				)
+		</if>
+		<if test="pd.USER_ID!=null and pd.USER_ID!=''">
+			and (
+			f.USER_ID=#{pd.USER_ID}
+			)
+		</if>
+		and f.DRAFTS!='2'
+		<if test="pd.DRAFTS!='' and pd.DRAFTS!=null">
+			and f.DRAFTS=#{pd.DRAFTS}
+		</if>
+		)e left join sys_user u on e.USER_ID=u.USER_ID
+		order by e.STATUS
+
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			EXAMINATION_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+
+	<select id="findByUserId" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include> f
+		where f.USER_ID=#{USER_ID}
+		<if test="SUGGLY_DATA_USER!=null and SUGGLY_DATA_USER!=''">
+			and f.SUGGLY_DATA_USER=#{SUGGLY_DATA_USER}
+		</if>
+		<if test="OFFLINE_RES!=null and OFFLINE_RES!=''">
+			and (f.OFFLINE_RES='0' or f.OFFLINE_RES='2')
+		</if>
+		<if test="APPROVE_ID!=null and APPROVE_ID!=''">
+			and f.EXAMINATION_ID=#{APPROVE_ID}
+		</if>
+		and f.STATUS=1
+	</select>
+
+
+	<!-- fh313596790qq(青苔) -->
+</mapper>

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <!--<script type="text/javascript" charset="utf-8">window.UEDITOR_HOME_URL = "";</script>-->
+    <script type="text/javascript" charset="utf-8" src="../../assets/js/jquery-1.7.2.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor.config_article.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../assets/js/vue.js"></script>
+
+
+
+    <style type="text/css">
+        div{
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+<div id="test">
+    <script id="article" type="text/plain"></script>
+</div>
+
+<script type="text/javascript">
+    var remarks;
+    var remarkstext;
+    window.content="";
+    var CATEGORY_ID;
+    var serverurl = '';
+    var ACTICLE_ID;
+    var remarks="";
+    var httpurl = 'http://139.129.234.40:7081/hdmbjy/';//hdmbjy/
+
+$(function () {
+
+    var C_ID=getUrlKey("CATEGORY_ID");
+    var A_ID=getUrlKey("ID");
+    if(C_ID!=null||C_ID==''){
+        CATEGORY_ID=C_ID;
+    }
+    if(A_ID!=null||A_ID==''){
+        ACTICLE_ID=A_ID;
+    }
+    //实例化编辑器
+    var ue = UE.getEditor('article');
+    if(ACTICLE_ID!=""&&ACTICLE_ID!=undefined){
+        setContent1();
+        ue.ready(function() {
+            ue.setContent(remarks);
+            //ue.setContentTxt(remarkstext);
+        });
+    }
+
+    UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+    UE.Editor.prototype.getActionUrl = function(action) {
+        if (action == 'uploadimage' || action == 'uploadscrawl' || action == 'uploadimage') {
+            return httpurl+'article/imgUpdate'; //在这里返回我们实际的上传图片地址
+        } else {
+            return this._bkGetActionUrl.call(this, action);
+        }
+    };
+
+
+    function setContent1() {
+        //发送 post 请求  url: 'http://139.129.234.40:7081/hdmbjy/article/getById',
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "POST",
+            url: httpurl+'article/getById',
+            data: {
+                ID:ACTICLE_ID,
+                tm:new Date().getTime()},
+            dataType:"json",
+            success: function(data){
+                if("success" == data.result){
+                    remarks=data.pd.REMARKS;
+                }else if ("exception" == data.result){
+                    alert("服务器错误");
+                }
+            }
+        }).done().fail(function(){
+            swal("登录失效!", "请求服务器无响应，稍后再试", "warning");
+        });
+    }
+
+    function getUrlKey(name) {
+        return decodeURIComponent(
+            (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
+    }
+
+    //ueditor纯文本
+    function getContentTxt() {
+        var arr = [];
+        arr.push(UE.getEditor('article').getContentTxt());
+        return arr.join("");
+    }
+    
+    function setContentTxt(content) {
+        ue.execCommand('cleardoc');
+        ue.setContentTxt(content);
+    }
+    
+    function setContent(content) {
+        ue.execCommand('cleardoc');
+        ue.setContent(content);
+    }
+
+
+    //根据url参数名称获取参数值
+    function getUrlKey(name) {
+        return decodeURIComponent(
+            (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
+    }
+});
+
+    //ueditor有标签文本
+    function getContent() {
+        var arr = [];
+        arr.push(UE.getEditor('article').getContent());
+        return arr.join("");
+    }
+
+</script>
+</body>
+</html>

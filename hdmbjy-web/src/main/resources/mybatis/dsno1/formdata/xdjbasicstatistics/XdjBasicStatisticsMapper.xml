@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.formdata.xdjbasicstatistics.XdjBasicStatisticsMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		AF_MBPXXDJBASICSTATISTICS
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.TITLE_NAME,	
+		f.NAME,	
+		f.SEX,	
+		f.AGE,	
+		f.EDUCATION,	
+		f.IDCARD,	
+		f.POSITIONAL_TITLE,	
+		f.POLITIC_COUNTENANCE,	
+		f.PXJG_JOB,	
+		f.FULL_PART_JOB,	
+		f.TEACH_YEAR,	
+		f.TEACH_PROFESSION,	
+		f.HEALTH,	
+		f.IS_RETIRE,	
+		f.ORIGINAL_WORK,	
+		f.WORK_PHONE,	
+		f.MOBILE_PHONE,	
+		f.NOW_HOUSEADDRESS,	
+		f.POSTAL_CODE,	
+		f.HOUSE_PHONE,	
+		f.WORK_RESUME,	
+		f.MY_OPINION,	
+		f.MO_DATE,	
+		f.PERSON_DEPT_OPINION,	
+		f.PDP_DATE,	
+		f.PASSPORT_PHOTO,	
+		f.XDJBASICSTATISTICS_ID
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		TITLE_NAME,	
+		NAME,	
+		SEX,	
+		AGE,	
+		EDUCATION,	
+		IDCARD,	
+		POSITIONAL_TITLE,	
+		POLITIC_COUNTENANCE,	
+		PXJG_JOB,	
+		FULL_PART_JOB,	
+		TEACH_YEAR,	
+		TEACH_PROFESSION,	
+		HEALTH,	
+		IS_RETIRE,	
+		ORIGINAL_WORK,	
+		WORK_PHONE,	
+		MOBILE_PHONE,	
+		NOW_HOUSEADDRESS,	
+		POSTAL_CODE,	
+		HOUSE_PHONE,	
+		WORK_RESUME,	
+		MY_OPINION,	
+		MO_DATE,	
+		PERSON_DEPT_OPINION,	
+		PDP_DATE,	
+		PASSPORT_PHOTO,	
+		XDJBASICSTATISTICS_ID
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{TITLE_NAME},	
+		#{NAME},	
+		#{SEX},	
+		#{AGE},	
+		#{EDUCATION},	
+		#{IDCARD},	
+		#{POSITIONAL_TITLE},	
+		#{POLITIC_COUNTENANCE},	
+		#{PXJG_JOB},	
+		#{FULL_PART_JOB},	
+		#{TEACH_YEAR},	
+		#{TEACH_PROFESSION},	
+		#{HEALTH},	
+		#{IS_RETIRE},	
+		#{ORIGINAL_WORK},	
+		#{WORK_PHONE},	
+		#{MOBILE_PHONE},	
+		#{NOW_HOUSEADDRESS},	
+		#{POSTAL_CODE},	
+		#{HOUSE_PHONE},	
+		#{WORK_RESUME},	
+		#{MY_OPINION},	
+		#{MO_DATE},	
+		#{PERSON_DEPT_OPINION},	
+		#{PDP_DATE},	
+		#{PASSPORT_PHOTO},	
+		#{XDJBASICSTATISTICS_ID}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field2"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			XDJBASICSTATISTICS_ID = #{XDJBASICSTATISTICS_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			TITLE_NAME = #{TITLE_NAME},
+			NAME = #{NAME},
+			SEX = #{SEX},
+			AGE = #{AGE},
+			EDUCATION = #{EDUCATION},
+			IDCARD = #{IDCARD},
+			POSITIONAL_TITLE = #{POSITIONAL_TITLE},
+			POLITIC_COUNTENANCE = #{POLITIC_COUNTENANCE},
+			PXJG_JOB = #{PXJG_JOB},
+			FULL_PART_JOB = #{FULL_PART_JOB},
+			TEACH_YEAR = #{TEACH_YEAR},
+			TEACH_PROFESSION = #{TEACH_PROFESSION},
+			HEALTH = #{HEALTH},
+			IS_RETIRE = #{IS_RETIRE},
+			ORIGINAL_WORK = #{ORIGINAL_WORK},
+			WORK_PHONE = #{WORK_PHONE},
+			MOBILE_PHONE = #{MOBILE_PHONE},
+			NOW_HOUSEADDRESS = #{NOW_HOUSEADDRESS},
+			POSTAL_CODE = #{POSTAL_CODE},
+			HOUSE_PHONE = #{HOUSE_PHONE},
+			WORK_RESUME = #{WORK_RESUME},
+			MY_OPINION = #{MY_OPINION},
+			MO_DATE = #{MO_DATE},
+			PERSON_DEPT_OPINION = #{PERSON_DEPT_OPINION},
+			PDP_DATE = #{PDP_DATE},
+			PASSPORT_PHOTO = #{PASSPORT_PHOTO},
+			XDJBASICSTATISTICS_ID = XDJBASICSTATISTICS_ID
+		where 
+			XDJBASICSTATISTICS_ID = #{XDJBASICSTATISTICS_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.XDJBASICSTATISTICS_ID = #{XDJBASICSTATISTICS_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 1=1
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				-->
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			XDJBASICSTATISTICS_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

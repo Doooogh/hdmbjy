@@ -1,0 +1,351 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>附件1民办中小学年检自查表</title>
+<link href="css/pagetable.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../../../../../assets/js/jquery-3.3.1.min.js"></script>
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+
+<style type="text/css">
+#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+</style>
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+	$(".tableT p").blur(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	});
+	
+});
+</script>
+</head>
+<body>
+<div class="pagetable" id="app">
+
+    <input type="hidden" :value="SELFEXAMINATION_ID" :id="FORM_ID"/>
+	<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+	<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+  <h1>海淀区民办中小学年检自查表</h1>
+  <ul>
+	<li>学校名称（盖章）：</li>
+	<li></li>
+	<li></li>
+  </ul>
+  <table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th width="10%" rowspan="2">年检内容</th>
+    <th width="70%" rowspan="2">检查标准</th>
+    <th colspan="2">得分</th>
+    <th width="5%" rowspan="2">扣分项目</th>
+    <th width="5%" rowspan="2">整改计划</th>
+  </tr>
+  <tr>
+    <th width="5%">自评</th>
+    <th width="5%">总分</th>
+    </tr>
+  <tr>
+    <td class="alignc" rowspan="6"><p >遵守法律、法规和国家政策的情况（11分）</p></td>
+    <td><p >坚持依法治校，依法建立学校章程，有明确的办学宗旨（1分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="POLICY_A1" id="POLICY_A1" v-text="pd.POLICY_A1"></p></td>
+    <td class="alignc" rowspan="6"><p :contenteditable="isPreview?false:true" ref="POLICY_B" id="POLICY_B" v-text="pd.POLICY_B"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="POLICY_C1" id="POLICY_C1" v-text="pd.POLICY_C1"></p></td>
+    <td class="alignc" rowspan="6"><p :contenteditable="isPreview?false:true" ref="POLICY_D" id="POLICY_D" v-text="pd.POLICY_D"></p></td>
+  </tr>
+  <tr>
+    <td><p >严格按审批机关批准的招生层次进行招生（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="POLICY_A2" id="POLICY_A2" v-text="pd.POLICY_A2"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="POLICY_C2" id="POLICY_C2" v-text="pd.POLICY_C2"></p></td>
+    </tr>
+  <tr>
+    <td><p >按照有关法律法规做到&#8220;五独立&#8221;（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="POLICY_A3" id="POLICY_A3" v-text="pd.POLICY_A3"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="POLICY_C3" id="POLICY_C3" v-text="pd.POLICY_C3"></p></td>
+    </tr>
+  <tr>
+    <td><p >认真贯彻执行各项法律法规（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="POLICY_A4" id="POLICY_A4" v-text="pd.POLICY_A4"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="POLICY_C4" id="POLICY_C4" v-text="pd.POLICY_C4"></p></td>
+    </tr>
+  <tr>
+    <td><p >执行主管部门制定的相关政策、积极配合主管部门的工作，对主管部门下达的整改意见按时完成整改（3分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="POLICY_A5" id="POLICY_A5" v-text="pd.POLICY_A5"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="POLICY_C5" id="POLICY_C5" v-text="pd.POLICY_C5"></p></td>
+    </tr>
+  <tr>
+    <td><p >按规定实行学籍管理（1分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="POLICY_A6" id="POLICY_A6" v-text="pd.POLICY_A6"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="POLICY_C6" id="POLICY_C6" v-text="pd.POLICY_C6"></p></td>
+    </tr>
+ 
+ <tr>
+    <td class="alignc" rowspan="4"><p >党团组织建设、和谐校园建设、安全稳定工作情况（6分）</p></td>
+    <td><p >按规定建立健全学校党团、工会等组织机构（1分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BUILD_A1" id="BUILD_A1" v-text="pd.BUILD_A1"></p></td>
+    <td class="alignc" rowspan="4"><p :contenteditable="isPreview?false:true" ref="BUILD_B" id="BUILD_B" v-text="pd.BUILD_B"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BUILD_C1" id="BUILD_C1" v-text="pd.BUILD_C1"></p></td>
+    <td class="alignc" rowspan="4"><p :contenteditable="isPreview?false:true" ref="BUILD_D" id="BUILD_D" v-text="pd.BUILD_D"></p></td>
+  </tr>
+  <tr>
+    <td><p >注重文明校园、和谐校园建设，举办者之间无纠纷，董事会与校长、教职工之间团结协作，师生关系融洽（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BUILD_A2" id="BUILD_A2" v-text="pd.BUILD_A2"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BUILD_C2" id="BUILD_C2" v-text="pd.BUILD_C2"></p></td>
+    </tr>
+  <tr>
+    <td><p >安全管理制度健全（安全工作管理责任、检查、考核制度、校车管理制度、消防安全责任制度、食品卫生管理制度）、安全措施切实有效、安全教育形式多样、责任追究到岗到人，。（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BUILD_A3" id="BUILD_A3" v-text="pd.BUILD_A3"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BUILD_C3" id="BUILD_C3" v-text="pd.BUILD_C3"></p></td>
+  </tr>
+  <tr>
+    <td><p >教育环境、效果良好，无违法犯罪记录,无安全责任事故发生（1分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BUILD_A4" id="BUILD_A4" v-text="pd.BUILD_A4"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BUILD_C4" id="BUILD_C4" v-text="pd.BUILD_C4"></p></td>
+  </tr>
+    
+  <tr>
+    <td class="alignc" rowspan="3"><p >办学场地、校舍、教育教学设施等办学条件基本情况（10分）</p></td>
+    <td><p >办学场地、校舍、教育教学设施等办学条件能满足教育教学的需要（4分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BASIC_A1" id="BASIC_A1" v-text="pd.BASIC_A1"></p></td>
+    <td class="alignc" rowspan="3"><p :contenteditable="isPreview?false:true" ref="BASIC_B" id="BASIC_B" v-text="pd.BASIC_B"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BASIC_C1" id="BASIC_C1" v-text="pd.BASIC_C1"></p></td>
+    <td class="alignc" rowspan="3"><p :contenteditable="isPreview?false:true" ref="BASIC_D" id="BASIC_D" v-text="pd.BASIC_D"></p></td>
+  </tr>
+  <tr>
+    <td><p >校舍具有建筑检测合格证书、消防验收合格证书（3分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BASIC_A2" id="BASIC_A2" v-text="pd.BASIC_A2"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BASIC_C2" id="BASIC_C2" v-text="pd.BASIC_C2"></p></td>
+    </tr>
+  <tr>
+    <td><p >按教育部门核定的规模招生、班额符合有关规定（3分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BASIC_A3" id="BASIC_A3" v-text="pd.BASIC_A3"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="BASIC_C3" id="BASIC_C3" v-text="pd.BASIC_C3"></p></td>
+    </tr>
+  
+  <tr>
+    <td class="alignc" rowspan="3"><p >按照章程开展教育教学活动情况（6分）</p></td>
+    <td><p >按照章程，根据教学计划，正常开展教育教学活动（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="RULES_A1" id="RULES_A1" v-text="pd.RULES_A1"></p></td>
+    <td class="alignc" rowspan="3"><p :contenteditable="isPreview?false:true" ref="RULES_B" id="RULES_B" v-text="pd.RULES_B"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="RULES_C1" id="RULES_C1" v-text="pd.RULES_C1"></p></td>
+    <td class="alignc" rowspan="3"><p :contenteditable="isPreview?false:true" ref="RULES_D" id="RULES_D" v-text="pd.RULES_D"></p></td>
+  </tr>
+  <tr>
+    <td><p >按照课程计划开齐课程开足课时（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="RULES_A2" id="RULES_A2" v-text="pd.RULES_A2"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="RULES_C2"  id="RULES_C2" v-text="pd.RULES_C2"></p></td>
+    </tr>
+  <tr>
+    <td><p >使用经教育部门审定或推荐的教材（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="RULES_A3" id="RULES_A3" v-text="pd.RULES_A3"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="RULES_C3"  id="RULE3_C3" v-text="pd.RULES_C3"></p></td>
+    </tr>
+  
+  <tr>
+    <td class="alignc" rowspan="6"><p >依法办理各种证件情况（12分）</p></td>
+    <td><p >《办学许可证》（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PAPERS_A1" id="PAPERS_A1" v-text="pd.PAPERS_A1"></p></td>
+    <td class="alignc" rowspan="6"><p :contenteditable="isPreview?false:true" ref="PAPERS_B" id="PAPERS_B" v-text="pd.PAPERS_B"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PAPERS_C1" id="PAPERS_C1" v-text="pd.PAPERS_C1"></p></td>
+    <td class="alignc" rowspan="6"><p :contenteditable="isPreview?false:true" ref="PAPERS_D" id="PAPERS_D" v-text="pd.PAPERS_D"></p></td>
+  </tr>
+  <tr>
+    <td><p >《税务登记证》、《社会保险登记证》（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PAPERS_A2" id="PAPERS_A2" v-text="pd.PAPERS_A2"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PAPERS_C2" id="PAPERS_C2" v-text="pd.PAPERS_C2"></p></td>
+    </tr>
+  <tr>
+    <td><p >《民办非企业单位登记证》或《事业单位法人登记证书》（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PAPERS_A3" id="PAPERS_A3" v-text="pd.PAPERS_A3"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PAPERS_C3" id="PAPERS_C3" v-text="pd.PAPERS_C3"></p></td>
+    </tr>
+  <tr>
+    <td><p >《组织机构代码证》（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PAPERS_A4" id="PAPERS_A4" v-text="pd.PAPERS_A4"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PAPERS_C4" id="PAPERS_C4" v-text="pd.PAPERS_C4"></p></td>
+    </tr>
+  <tr>
+    <td><p >有食堂的要有&#8220;卫生许可证&#8221;、幼儿园有《卫生保健合格证》（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PAPERS_A5" id="PAPERS_A5" v-text="pd.PAPERS_A5"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PAPERS_C5" id="PAPERS_C5" v-text="pd.PAPERS_C5"></p></td>
+    </tr>
+  <tr>
+    <td><p >有校车的要有&#8220;校车许可证&#8221;（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PAPERS_A6" id="PAPERS_A6" v-text="pd.PAPERS_A6"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PAPERS_C6" id="PAPERS_C6" v-text="pd.PAPERS_C6"></p></td>
+  </tr>
+  
+  <tr>
+    <td class="alignc" rowspan="4"><p >依法进行审批、核准、备案、公告等事项的手续履行情况（11分）</p></td>
+    
+    <td><p >依法履行办学机构的审批（分立、合并、终止、收费，名称、层次、类别、举办者变更等）手续（3分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROCESS_A1" id="PROCESS_A1" v-text="pd.PROCESS_A1"></p></td>
+    <td class="alignc" rowspan="4"><p :contenteditable="isPreview?false:true" ref="PROCESS_B" id="PROCESS_B" v-text="pd.PROCESS_B"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROCESS_C1" id="PROCESS_C1" v-text="pd.PROCESS_C1"></p></td>
+    <td class="alignc" rowspan="4"><p :contenteditable="isPreview?false:true" ref="PROCESS_D" id="PROCESS_D" v-text="pd.PROCESS_D"></p></td>
+  </tr>
+  <tr>
+    <td><p >依法履行校长任职资格、法定代表人资格、学校章程的核准手续（3分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROCESS_A2" id="PROCESS_A2" v-text="pd.PROCESS_A2"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROCESS_C2" id="PROCESS_C2" v-text="pd.PROCESS_C2"></p></td>
+    </tr>
+  <tr>
+    <td><p >依法履行对董事会成员、学籍管理和教学管理制度、招生简章和广告等事项的备案手续（3分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROCESS_A3" id="PROCESS_A3" v-text="pd.PROCESS_A3"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROCESS_C3" id="PROCESS_C3" v-text="pd.PROCESS_C3"></p></td>
+    </tr>
+  <tr>
+    <td><p >依法公告学校的财务审计报告（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROCESS_A4" id="PROCESS_A4" v-text="pd.PROCESS_A4"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROCESS_C4" id="PROCESS_C4" v-text="pd.PROCESS_C4"></p></td>
+    </tr>
+  <tr>
+    <td class="alignc" rowspan="6"><p >内部管理机构设置及人员配备情况（10分）</p></td>
+    <td><p >依法成立学校决策机构，决策机构成员符合法定要求（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROVIDE_A1" id="PROVIDE_A1" v-text="pd.PROVIDE_A1"></p></td>
+    <td class="alignc" rowspan="6"><p :contenteditable="isPreview?false:true" ref="PROVIDE_B" id="PROVIDE_B" v-text="pd.PROVIDE_B"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROVIDE_C1" id="PROVIDE_C1" v-text="pd.PROVIDE_C1"></p></td>
+    <td class="alignc" rowspan="6"><p :contenteditable="isPreview?false:true" ref="PROVIDE_D" id="PROVIDE_D" v-text="pd.PROVIDE_D"></p></td>
+  </tr>
+  <tr>
+    <td><p >学校内设教导处、政教处、办公室、安全办等,行政办公机构建全（1分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROVIDE_A2" id="PROVIDE_A2" v-text="pd.PROVIDE_A2"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROVIDE_C2" id="PROVIDE_C2" v-text="pd.PROVIDE_C2"></p></td>
+    </tr>
+  <tr>
+    <td><p >学校内部管理机构配齐领导（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROVIDE_A3" id="PROVIDE_A3" v-text="pd.PROVIDE_A3"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROVIDE_C3" id="PROVIDE_C3" v-text="pd.PROVIDE_C3"></p></td>
+    </tr>
+  <tr>
+    <td><p >校车司机持有校车驾驶人证（1分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROVIDE_A4" id="PROVIDE_A4" v-text="pd.PROVIDE_A4"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROVIDE_C4" id="PROVIDE_C4" v-text="pd.PROVIDE_C4"></p></td>
+    </tr>
+  <tr>
+    <td><p >财务人员具有会计人员从业资格证，并符合回避规定（3分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROVIDE_A5" id="PROVIDE_A5" v-text="pd.PROVIDE_A5"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROVIDE_C5" id="PROVIDE_C5" v-text="pd.PROVIDE_C5"></p></td>
+    </tr>
+  <tr>
+    <td><p >学校聘任的其他人员，有任职资格要求的，必须具备任职资格条件（1分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROVIDE_A6" id="PROVIDE_A6" v-text="pd.PROVIDE_A6"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROVIDE_C6" id="PROVIDE_C6" v-text="pd.PROVIDE_C6"></p></td>
+    </tr>
+  <tr>
+    <td class="alignc" rowspan="4"><p >教师队伍建设和人员聘用情况（10分）</p></td>
+    <td><p >专任教师配备师生比和校医配备符合设置标准的要求（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="ENGAGE_A1" id="ENGAGE_A1" v-text="pd.ENGAGE_A1"></p></td>
+    <td class="alignc" rowspan="4"><p :contenteditable="isPreview?false:true" ref="ENGAGE_B" id="ENGAGE_B" v-text="pd.ENGAGE_B"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="ENGAGE_C1" id="ENGAGE_C1" v-text="pd.ENGAGE_C1"></p></td>
+    <td class="alignc" rowspan="4"><p :contenteditable="isPreview?false:true" ref="ENGAGE_D" id="ENGAGE_D" v-text="pd.ENGAGE_D"></p></td>
+  </tr>
+  <tr>
+    <td><p >按教育主管部门的要求与教师签订了聘用合同并报主管部门备案（3分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="ENGAGE_A2" id="ENGAGE_A2" v-text="pd.ENGAGE_A2"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="ENGAGE_C2" id="ENGAGE_C2" v-text="pd.ENGAGE_C2"></p></td>
+    </tr>
+  <tr>
+    <td><p >依法为教职工缴纳&#8220;五险一金&#8221;，月工资不低于政府规定的最低工资标准（3分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="ENGAGE_A3" id="ENGAGE_A3" v-text="pd.ENGAGE_A3"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="ENGAGE_C3" id="ENGAGE_C3" v-text="pd.ENGAGE_C3"></p></td>
+    </tr>
+  <tr>
+    <td><p >组织教师参加继续教育培训（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="ENGAGE_A4" id="ENGAGE_A4" v-text="pd.ENGAGE_A4"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="ENGAGE_C4" id="ENGAGE_C4" v-text="pd.ENGAGE_C4"></p></td>
+    </tr>
+  <tr>
+    <td class="alignc" rowspan="7"><p >收费公示、经费监管、财务状况、资金来源和使用情况（14分）</p></td>
+    <td><p >学校收费的标准、项目经物价部门批准；并将收费标准、项目在校园内进行公示（1分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_A1" id="EMPLOY_A1" v-text="pd.EMPLOY_A1"></p></td>
+    <td class="alignc" rowspan="7"><p :contenteditable="isPreview?false:true" ref="EMPLOY_B" id="EMPLOY_B" v-text="pd.EMPLOY_B"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_C1" id="EMPLOY_C1" v-text="pd.EMPLOY_C1"></p></td>
+    <td class="alignc" rowspan="7"><p :contenteditable="isPreview?false:true" ref="EMPLOY_D" id="EMPLOY_D" v-text="pd.EMPLOY_D"></p></td>
+  </tr>
+  <tr>
+    <td><p >学生的收、退费按有关规定执行（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_A2" id="EMPLOY_A2" v-text="pd.EMPLOY_A2"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_C2" id="EMPLOY_C2" v-text="pd.EMPLOY_C2"></p></td>
+    </tr>
+  <tr>
+    <td><p >遵守税务法律法规，收费使用有关部门规定的统一票据，依法纳税（1分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_A3" id="EMPLOY_A3" v-text="pd.EMPLOY_A3"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_C3" id="EMPLOY_C3" v-text="pd.EMPLOY_C3"></p></td>
+    </tr>
+  <tr>
+    <td><p >出资人没有出现抽逃资金或者挪用办学经费现象（3分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_A4" id="EMPLOY_A4" v-text="pd.EMPLOY_A4"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_C4" id="EMPLOY_C4" v-text="pd.EMPLOY_C4"></p></td>
+    </tr>
+  <tr>
+    <td><p >财务管理符合法律法规，按规定进行会计核算、编制财务会计报告（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_A5" id="EMPLOY_A5" v-text="pd.EMPLOY_A5"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_C5" id="EMPLOY_C5" v-text="pd.EMPLOY_C5"></p></td>
+    </tr>
+  <tr>
+    <td><p >财务状况良好，没有资不抵债现象（3分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_A6" id="EMPLOY_A6" v-text="pd.EMPLOY_A6"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_C6" id="EMPLOY_C6" v-text="pd.EMPLOY_C6"></p></td>
+    </tr>
+  <tr>
+    <td><p >无乱收费行为（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_A7" id="EMPLOY_A7" v-text="pd.EMPLOY_A7"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="EMPLOY_C7" id="EMPLOY_C7" v-text="pd.EMPLOY_C7"></p></td>
+    </tr>
+  <tr>
+    <td class="alignc" rowspan="3"><p >法人财产权的落实和资产管理情况（10分）</p></td>
+    <td><p >学校资产产权明确、合法（2分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROPERTY_A1" id="PROPERTY_A1" v-text="pd.PROPERTY_A1"></p></td>
+    <td class="alignc" rowspan="3"><p :contenteditable="isPreview?false:true" ref="PROPERTY_B" id="PROPERTY_B" v-text="pd.PROPERTY_B"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROPERTY_C1" id="PROPERTY_C1" v-text="pd.PROPERTY_C1"></p></td>
+    <td class="alignc" rowspan="3"><p :contenteditable="isPreview?false:true" ref="PROPERTY_D" id="PROPERTY_D" v-text="pd.PROPERTY_D"></p></td>
+  </tr>
+  <tr>
+    <td><p >学校依法对资产进行管理，收支全部纳入学校财务管理，没有截留、挪用、长期大额借款或侵占的现象（5分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROPERTY_A2" id="PROPERTY_A2" v-text="pd.PROPERTY_A2"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROPERTY_C2" id="PROPERTY_C2" v-text="pd.PROPERTY_C2"></p></td>
+    </tr>
+  <tr>
+    <td><p >依法建立财务、会计制度和资产管理制度，并按照审批机关的要求进行财务审计，按时提交财务审计报告（3分）</p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROPERTY_A3" id="PROPERTY_A3" v-text="pd.PROPERTY_A3"></p></td>
+    <td class="alignc"><p :contenteditable="isPreview?false:true" ref="PROPERTY_C3" id="PROPERTY_C3" v-text="pd.PROPERTY_C3"></p></td>
+    </tr>
+  <tr>
+    <td class="alignc"><p >法定代表人意见 </p></td>
+    <td><p :contenteditable="isPreview?false:true" ref="DEPUTY" id="DEPUTY" v-text="pd.DEPUTY"></p></td>
+    <td class="alignc" colspan="2">签字</td>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="SIGNATURE" id="SIGNATURE" v-text="pd.SIGNATURE"></p></td>
+    </tr>
+</table>
+
+<ul>
+	<li style="width:80%;">填表人：<span :contenteditable="isPreview?false:true" ref="USER" id="USER" v-text="pd.USER"></span></li>
+	<li style="width:20%;">日期：<span :contenteditable="isPreview?false:true" ref="DATE" id="DATE" v-text="pd.DATE"></span></li>
+</ul>
+   <div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+		<span style="width: 100%;text-align: center;">
+			<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+			<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+			<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+		</span>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="js/selfexamination.js"></script>
+</html>

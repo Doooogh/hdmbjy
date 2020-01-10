@@ -1,0 +1,44 @@
+@charset "utf-8";/* CSS Document */
+body, div, iframe,h1, h2, h3, h4, h5, h6, p,  a,  em, img, ismall, dl, dt, dd, ol, ul, li,fieldset, form,label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video, input, label,button{margin: 0px;padding: 0px;border: 0px;}
+html,body{width:100%;height:100%;min-height:100%;}
+body {font-size: 14px;text-align: left;font-family: "微软雅黑",Regular;}
+ul,ol{list-style:none;}
+a{text-decoration:none;}
+a:hover{text-decoration:none;}
+img{max-width: 100%;height: auto;width: auto\9; /* ie8 */
+	-ms-interpolation-mode:bicubic;}
+textarea{resize:vertical;}
+label,button{cursor:pointer;}
+.mt20{margin-top:20px;}
+.alignc{text-align:center;}
+.disb{display:block;width:100%;height:100%;}
+.cf6f9ff{background-color:#f6f9ff;}
+.mh200{min-height:200px;}
+.clearfix:after{content:'\20';display:block;height:0;clear:both;}
+.clearfix{zoom:1;}
+.pagetable{position:relative;}
+.pagetable table{border-collapse:collapse;border-spacing:0;}
+.pagetable{color:#4d4d4d;background-color:#fff;padding:10px;}
+.pagetable table td{border:1px solid #666;padding:8px 4px;line-height:20px;}
+.pagetable table th{border:1px solid #666;padding:8px 4px;line-height:20px;text-align:center;}
+.pagetable ul li{width:33%;float:left;padding:5px 0;}
+.pagetable h1{font-size:24px;text-align:center;line-height:30px;padding:15px 0;font-weight:400;}
+.pagetable .textl{text-align:left!important;}
+.pagetable .btntj{float:right;margin-left:10px;}
+.pagetable .btnsc{float:right;margin-left:10px;}
+.pagetable .borderB td{border-top:0;}
+.pagetable input{width:auto;}
+.pagetable p{outline:none;word-break: break-word;min-height:20px;}
+.pagetable span{outline:none;}
+.pagetable .trselect td{background-color:#f6f9ff;}
+.inlinep{display:inline-block;padding:0 20px;}
+.pagetable .img {text-align:center;}
+.tableul1 li{width:50%!important;float:left;}
+
+
+@media screen and (max-width: 1220px) {
+}
+
+
+
+

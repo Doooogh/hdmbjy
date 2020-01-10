@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="../../../assets/fonts/material/css/materialdesignicons.min.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body>
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+
+							    <!-- [ Hover-table ] start -->
+                                <div class="col-xl-12">
+                                    <div class="card">
+							
+									<!-- 检索  -->
+									<div style="padding-left: 15px;padding-top: 10px;">
+									<table style="margin-top:5px;">
+										<tr>
+											<td>
+						                        <div class="input-group input-group-sm mb-3">
+                                                   	<input class="form-control" id="keywords" type="text" v-model="pd.keywords" placeholder="这里输入关键词" />
+                                                </div>
+											</td>
+											<td style="padding-left:2px;">
+						                        <div class="input-group input-group-sm mb-3">
+						                        	<input type="text" class="form-control date" id="lastStart" readonly="readonly" placeholder="开始日期" title="开始日期" style="width:93px;">
+						                        </div>
+											</td>
+											<td style="padding-left:2px;">
+						                        <div class="input-group input-group-sm mb-3">
+						                        	<input type="text" class="form-control date" id="lastEnd" readonly="readonly" placeholder="结束日期" title="结束日期" style="width:93px;">
+						                        </div>
+											</td>
+											<td style="vertical-align:top;padding-left:5px;">
+												<select id="STATUS" v-model="STATUS" style="height: 30px;width:86px;padding-left:12px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+													<option value="">全部状态</option>
+													<option value="1">正在运行</option>
+													<option value="2">已经停止</option>
+												</select>
+											</td>
+											<td style="vertical-align:top;padding-left:5px;">
+												<a class="btn btn-light btn-sm" v-on:click="getList" style="width: 23px;height:30px;margin-top:0px;" title="检索">
+													<i style="margin-top:-3px;margin-left: -6px;"  class="feather icon-search"></i>
+												</a>
+											</td>
+											<td v-show="loading">
+												<!-- [加载状态 ] start -->
+										    	<div class="d-flex justify-content-center" style="margin-top:-10px;">
+		                                            <div class="spinner-grow spinner-grow-sm" role="status">
+		                                                <span class="sr-only">Loading...</span>
+		                                            </div>
+		                                        </div>
+										    	<!-- [ 加载状态  ] End -->
+											</td>
+										</tr>
+									</table>
+									</div>
+									<!-- 检索  -->
+								
+									<div class="card-block table-border-style" style="margin-top: -15px">
+                                    	<div class="table-responsive">
+                                         	<table class="table table-hover">	
+												<thead>
+													<tr>
+														<th style="width: 50px;" id="cts">
+								                            <div class="checkbox d-inline">
+	                                                            <input type="checkbox" name="fhcheckbox" id="zcheckbox">
+	                                                            <label  style="max-height: 12px;" for="zcheckbox" class="cr"></label>
+	                                                        </div>
+														</th>
+														<th style="width:50px;">NO</th>
+														<th >任务名称</th>
+														<th>创建时间</th>
+														<th>备份对象</th>
+														<th>规则说明</th>
+														<th>状态</th>
+														<th>备注</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+													<!-- 开始循环 -->	
+													<template v-for="(data,index) in varList">
+														<tr>
+															<td>
+	                                                        	<div class="checkbox d-inline">
+	                                                            	<input type="checkbox" v-bind:id="'zcheckbox'+index" name='ids' v-bind:value="data.TIMINGBACKUP_ID">
+	                                                            	<label  style="max-height: 12px;" v-bind:for="'zcheckbox'+index" class="cr"></label>
+	                                                        	</div>
+															</td>
+															<td scope="row">{{page.showCount*(page.currentPage-1)+index+1}}</td>
+															<td>{{data.JOBNAME}}</td>
+															<td>{{data.CREATE_TIME}}</td>
+															<td>{{data.TABLENAME == 'all' ? '整库' : data.TABLENAME}}</td>
+															<td>{{data.TIMEEXPLAIN}}</td>
+															<td v-bind:id="'STATUS'+(index+1)">
+																<template v-if="data.STATUS == '1'">
+																	正在运行<div class="spinner-grow spinner-grow-sm" style="padding-top:-2px;" role="status"><span class="sr-only">..</span></div>
+																</template>
+																<template v-else>
+																	已经停止
+																</template>
+															</td>
+															<td>{{data.BZ}}</td>
+															<td>
+																<span v-show="edit">
+																	<a v-bind:id="'offing1'+(index+1)" v-show="data.STATUS == '2'" title="启动" v-on:click="onoff(data.TIMINGBACKUP_ID,'1','offing1'+(index+1),index+1)" style="cursor:pointer;">
+																		<i class="feather icon-play"></i>
+																	</a>
+																	<a v-bind:id="'oning1'+(index+1)" v-show="data.STATUS == '1'" title="关闭" v-on:click="onoff(data.TIMINGBACKUP_ID,'2','oning1'+(index+1),index+1)" style="cursor:pointer;">
+																		<i class="feather icon-pause"></i>
+																	</a>
+																	<a title="编辑" v-on:click="goEdit(data.TIMINGBACKUP_ID,index+1)" style="cursor:pointer;"><i class="feather icon-edit-2"></i></a>
+																</span>
+																<a v-show="del" title="删除" v-on:click="goDel(data.TIMINGBACKUP_ID)" style="cursor:pointer;"><i class="feather icon-x"></i></a>
+															</td>
+														</tr>
+													</template>
+													<tr v-show="varList.length==0">
+														<td colspan="10">没有相关数据</td>
+													</tr>
+												</tbody>
+											</table>
+											<table style="width:100%;margin-top:15px;">
+												<tr>
+													<td style="vertical-align:top;">
+														<a v-show="add" class="btn btn-light btn-sm" v-on:click="goAdd">新增</a>
+														<a v-show="del" class="btn btn-light btn-sm" v-on:click="makeAll" title="批量删除" >删除</a>
+													</td>
+													<td style="vertical-align:top;"><div style="float: right;padding-top: 0px;margin-top: 0px;" v-html="page.pageStr"></div></td>
+												</tr>
+											</table>
+											
+										</div>
+									</div>
+					
+                                    </div>
+                                </div>
+                                <!-- [ Hover-table ] end -->
+
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script type="text/javascript" src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script type="text/javascript" src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- 表单验证提示 -->
+<script type="text/javascript" src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页面js -->
+<script type="text/javascript" src="../../../assets/js-v/fhdb/backup_list.js"></script>
+
+</body>
+</html>

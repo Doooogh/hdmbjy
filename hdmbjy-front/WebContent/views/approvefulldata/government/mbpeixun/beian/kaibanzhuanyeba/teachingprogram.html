@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>教学计划</title>
+<link href="../../css/pagetable.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script>
+$(function(){
+	var index=4;
+	if(vm.toType=='edit'){
+		console.log(vm.toType);
+		index=Object.keys(vm.plans).length+1
+	}
+	$(".btntj").live("click",function(){
+	var newT = "<tr class=\"t_plan\"><td><p contenteditable=\"false\" class=\"ORDER\">"+ (index) +"</p></td><td><p contenteditable=\"true\" class=\"MAJOR\"></p></td><td><p contenteditable=\"true\" class=\"STUDY_PERIOD\"></p></td><td><p contenteditable=\"true\" class=\"ALL_CLASS_HOUR\"></p></td><td><p contenteditable=\"true\" class=\"TEXTBOOK\"></p></td><td><p contenteditable=\"true\" class=\"CLASS_SET\"></p></td><td><p contenteditable=\"true\" class=\"WAY_TARGET\"></p></td></tr>";
+		$(".tableT").append(newT);
+		index=index+1;
+		
+	});
+	$("td").live("click",function(){
+		$(this).parent().parent().find(".trselect").removeClass("trselect");
+		$(this).parent().addClass("trselect");
+	});
+	$(".btnsc").live("click",function(){
+		$(".trselect").remove();
+	});
+});
+</script>
+</head>
+<body>
+<div class="pagetable" id="app">
+	 	<input type="hidden" :value="TEACHINGPROGRAM_ID" :id="FORM_ID"/>
+		<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+		<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+<h1>教学计划</h1>
+<ul>
+	<li>学校（盖章）</li>
+	<li>地址：<span :contenteditable="isPreview?false:true" v-text="pd.ADDRESS" id="ADDRESS" ref="ADDRESS"></span></li>
+	<li>填表日期：<span :contenteditable="isPreview?false:true" >{{pd.FULL_DATE}}</span><a class="btntj" v-if="!isPreview" href="javascript:void(0)">增加列表</a><a class="btnsc" v-if="!isPreview" href="javascript:void(0)">删除列表</a></li>
+</ul>
+<table class="tableT alignc" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th width="3%">序号</th>
+    <th width="7%">开办专业</th>
+    <th width="5%">总课时</th>
+    <th width="5%">学习期限</th>
+    <th width="15%">使用教材</th>
+    <th width="15%">课程设置</th>
+    <th width="50%">考核方式、教学目标</th>
+    </tr>
+  <tr class="trselect t_plan">
+	 <td><p :contenteditable="isPreview?false:false" class="ORDER" v-text="toType==='edit'&&plans[0]!=undefined?'1':'1'">1</p></td>
+     <td><p :contenteditable="isPreview?false:true" class="MAJOR" v-text="toType==='edit'&&plans[0]!=undefined?plans[0].MAJOR:''"></p></td>
+     <td><p :contenteditable="isPreview?false:true" class="STUDY_PERIOD" v-text="toType==='edit'&&plans[0]!=undefined?plans[0].STUDY_PERIOD:''"></p></td>
+     <td><p :contenteditable="isPreview?false:true" class="ALL_CLASS_HOUR" v-text="toType==='edit'&&plans[0]!=undefined?plans[0].ALL_CLASS_HOUR:''"></p></td>
+     <td><p :contenteditable="isPreview?false:true" class="TEXTBOOK" v-text="toType=='edit'&&plans[0]!=undefined?plans[0].TEXTBOOK:''"></p></td>
+     <td><p :contenteditable="isPreview?false:true" class="CLASS_SET" v-text="toType=='edit'&&plans[0]!=undefined?plans[0].CLASS_SET:''"></p></td>
+     <td><p :contenteditable="isPreview?false:true" class="WAY_TARGET" v-text="toType=='edit'&&plans[0]!=undefined?plans[0].WAY_TARGET:''"></p></td>
+	 
+  </tr>
+  <tr class="t_plan">
+	  <td><p :contenteditable="isPreview?false:false" class="ORDER" v-text="toType==='edit'&&plans[1]!=undefined?'2':'2'">2</p></td>
+	  <td><p :contenteditable="isPreview?false:true" class="MAJOR" v-text="toType==='edit'&&plans[1]!=undefined?plans[1].MAJOR:''"></p></td>
+	  <td><p :contenteditable="isPreview?false:true" class="STUDY_PERIOD" v-text="toType==='edit'&&plans[1]!=undefined?plans[1].STUDY_PERIOD:''"></p></td>
+	  <td><p :contenteditable="isPreview?false:true" class="ALL_CLASS_HOUR" v-text="toType==='edit'&&plans[1]!=undefined?plans[1].ALL_CLASS_HOUR:''"></p></td>
+	  <td><p :contenteditable="isPreview?false:true" class="TEXTBOOK" v-text="toType=='edit'&&plans[1]!=undefined?plans[1].TEXTBOOK:''"></p></td>
+	  <td><p :contenteditable="isPreview?false:true" class="CLASS_SET" v-text="toType=='edit'&&plans[1]!=undefined?plans[1].CLASS_SET:''"></p></td>
+	  <td><p :contenteditable="isPreview?false:true" class="WAY_TARGET" v-text="toType=='edit'&&plans[1]!=undefined?plans[1].WAY_TARGET:''"></p></td>
+	  
+  </tr>
+  <tr class="t_plan">
+	  <td><p :contenteditable="isPreview?false:false" class="ORDER" v-text="toType==='edit'&&plans[2]!=undefined?'3':'3 '">3</p></td>
+	  <td><p :contenteditable="isPreview?false:true" class="MAJOR" v-text="toType==='edit'&&plans[2]!=undefined?plans[2].MAJOR:''"></p></td>
+	  <td><p :contenteditable="isPreview?false:true" class="STUDY_PERIOD" v-text="toType==='edit'&&plans[2]!=undefined?plans[2].STUDY_PERIOD:''"></p></td>
+	  <td><p :contenteditable="isPreview?false:true" class="ALL_CLASS_HOUR" v-text="toType==='edit'&&plans[2]!=undefined?plans[2].ALL_CLASS_HOUR:''"></p></td>
+	  <td><p :contenteditable="isPreview?false:true" class="TEXTBOOK" v-text="toType=='edit'&&plans[2]!=undefined?plans[2].TEXTBOOK:''"></p></td>
+	  <td><p :contenteditable="isPreview?false:true" class="CLASS_SET" v-text="toType=='edit'&&plans[2]!=undefined?plans[2].CLASS_SET:''"></p></td>
+	  <td><p :contenteditable="isPreview?false:true" class="WAY_TARGET" v-text="toType=='edit'&&plans[2]!=undefined?plans[2].WAY_TARGET:''"></p></td>
+	  
+  </tr>
+  <tr v-for="(plan,index) in plans" v-if="index>=3&&toType==='edit'" class="t_plan">
+  	<td><p :contenteditable="isPreview?false:false" class="ORDER" v-text="toType=='edit'&&plans[index]!=null&&plans[index]!=undefined?index+1:index+1"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="MAJOR" v-text="toType=='edit'&&plans[index]!=null&&plans[index]!=undefined?plans[index].MAJOR:''"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="STUDY_PERIOD" v-text="toType=='edit'&&plans[index]!=null&&plans[index]!=undefined?plans[index].STUDY_PERIOD:''"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="ALL_CLASS_HOUR" v-text="toType=='edit'&&plans[index]!=null&&plans[index]!=undefined?plans[index].ALL_CLASS_HOUR:''"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="TEXTBOOK" v-text="toType=='edit'&&plans[index]!=null&&plans[index]!=undefined?plans[index].TEXTBOOK:''"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="CLASS_SET" v-text="toType=='edit'&&plans[index]!=null&&plans[index]!=undefined?plans[index].CLASS_SET:''"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="WAY_TARGET" v-text="toType=='edit'&&plans[index]!=null&&plans[index]!=undefined?plans[index].WAY_TARGET:''"></p></td>
+
+  </tr>
+</table>
+<div class="bz">
+注：此表为样表，请用A4纸另打印。 
+</div>
+
+	<div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+		<span style="width: 100%;text-align: center;">
+			<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+			<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+			<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+		</span>
+	</div>
+</div>
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="../../js/teachingprogram.js"></script> 
+</body>
+</html>

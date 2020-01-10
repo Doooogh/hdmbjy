@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/material/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body>
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+
+
+								<div style="width: 100%;">
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">名称</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="NAME" id="NAME" v-model="pd.NAME" maxlength="255" title="名称" readonly="readonly">
+		                                </div>
+									</div>	
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">许可证号</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="BIANMA" id="BIANMA" v-model="pd.BIANMA" maxlength="255" title="许可证号" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">变更前校名</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="SCHOOLNAME" id="SCHOOLNAME" v-model="pd.SCHOOLNAME" maxlength="255" title="变更前校名" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">负责人</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="HEADMAN" id="HEADMAN" v-model="pd.HEADMAN" maxlength="255" title="负责人" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">电话</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="TEL" id="TEL" v-model="pd.TEL" maxlength="255" title="电话" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">举办者</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ORGANIZER" id="ORGANIZER" v-model="pd.ORGANIZER" maxlength="255" title="举办者" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">电话</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="OPHONE" id="OPHONE" v-model="pd.OPHONE" maxlength="255" title="电话" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">联系人</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="CONTACTS" id="CONTACTS" v-model="pd.CONTACTS" maxlength="255" title="联系人" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">电话</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="CPHONE" id="CPHONE" v-model="pd.CPHONE" maxlength="255" title="电话" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">学校电话</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="SCHOOLTEL" id="SCHOOLTEL" v-model="pd.SCHOOLTEL" maxlength="255" title="学校电话" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">招生对象</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="RECRUIT" id="RECRUIT" v-model="pd.RECRUIT" maxlength="255" title="招生对象" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">举办内容</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ORGANIZER" id="CONTENT" v-model="pd.CONTENT" maxlength="255" title="举办内容" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">地址</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ADDRESS" id="ADDRESS" v-model="pd.ADDRESS" maxlength="255" title="地址" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备注</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="BZ" id="BZ" v-model="pd.BZ" maxlength="255" title="备注" readonly="readonly">
+		                                </div>
+									</div>
+									
+									<div class="input-group" style="margin-top:10px;background-color: white" >
+							            	<span style="width: 100%;text-align: center;">
+							            		<a class="btn btn-light btn-sm" onclick="top.Dialog.close()">取消</a>
+							            	</span>
+							        </div>
+									
+								</div>	
+
+
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+
+<script type="text/javascript">
+
+var vm = new Vue({
+	el: '#app',
+	
+	data:{
+		varList: [],	//list
+		DEPDETAILED_ID: '',	//机构详细信息主键ID
+		DEPARTMENT_ID: '',	//机构信息id
+		RECRUIT: '',	
+		CONTENT: '',	
+		pd: [],
+		loading:false	//加载状态
+    },
+    
+	methods: {
+		
+        //初始执行
+        init() {
+        	var ID = this.getUrlKey('ID');	//机构id
+        	this.DEPARTMENT_ID = ID;
+        	this.getList();
+        	
+        	setTimeout(function(){
+        		vm.getDict();
+            },300)
+        },
+       
+        getList: function(){
+        	this.loading = true;
+        	$.ajax({
+        		xhrFields: {
+                    withCredentials: true
+                },
+        		type: "POST",
+        		url: httpurl+'depdetailed/getDepAll',
+        		data: {DEPARTMENT_ID:this.DEPARTMENT_ID,tm:new Date().getTime()},
+        		dataType:"json",
+        		success: function(data){
+        		 if("success" == data.result){
+        			    vm.pd = data.pd;							//参数map
+						vm.RECRUIT = data.pd.RECRUIT;
+						vm.CONTENT = data.pd.CONTENT;
+						vm.LEDGER = data.pd.LEDGER;
+						vm.REGISTER = data.pd.REGISTER;
+						vm.DEPDETAILED_ID = data.pd.DEPDETAILED_ID;
+        		 }else if ("exception" == data.result){
+                 	showException("机构详细信息",data.exception);//显示异常
+                 }
+        		}
+        	}).done().fail(function(){
+                swal("登录失效!", "请求服务器无响应，稍后再试", "warning");
+                setTimeout(function () {
+                	window.location.href = "../../login.html";
+                }, 2000);
+            });
+        },
+        getDict: function (){
+    		
+    		$.ajax({
+    			xhrFields: {
+                withCredentials: true
+            	},
+    			type: "POST",
+    			url: httpurl+'dictionaries/getLevelsByNameEn?tm='+new Date().getTime(),
+    	    	data: {NAME_EN:'Enrollment target'},
+    			dataType:'json',
+    			success: function(data){
+    				 var ss = "";
+    				 $.each(data.list, function(i, dvar){
+    					var  recruit = vm.RECRUIT;
+    					if (recruit.indexOf(dvar.BIANMA) != -1) {
+    						ss = ss + dvar.NAME +" " 
+    					}
+    				 });
+    				 vm.pd.RECRUIT = ss;
+    			}
+    		});
+    		
+    		$.ajax({
+    			xhrFields: {
+                withCredentials: true
+            	},
+    			type: "POST",
+    			url: httpurl+'dictionaries/getLevelsByNameEn?tm='+new Date().getTime(),
+    	    	data: {NAME_EN:'Organizing contents'},
+    			dataType:'json',
+    			success: function(data){
+    				 var ss = "";
+    				 $.each(data.list, function(i, dvar){
+    					  var content = vm.CONTENT;
+    						if (content.indexOf(dvar.BIANMA) != -1) {
+    							ss = ss + dvar.NAME +" " 
+    						}
+    					 
+    				 });
+    				 vm.pd.CONTENT = ss;
+    			}
+    		});
+    		
+    		
+    	},
+    	
+    	//根据url参数名称获取参数值
+        getUrlKey: function (name) {
+            return decodeURIComponent(
+                (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
+        }
+	} ,
+	
+	
+	mounted(){
+        this.init();
+    }
+})
+		
+</script>
+
+</body>
+</html>

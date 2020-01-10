@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+    
+	<!-- lodash js库 -->
+	<script type="text/javascript" src="../../../assets/js/lodash.min.js"></script>
+	
+	<!-- layui css -->
+	<link rel="stylesheet" href="../../../assets/css/layui/layui.css">
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+	<style>
+		
+		.to_fulldata:hover{
+			color:#ad1313;
+		}
+		.
+		
+		.toEdit_fulldata{
+			margin-left: 20px;
+		}
+		
+		.toEdit_fulldata:hover{
+			color:slateblue;
+		}
+		
+	</style>
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+					
+								<div style="width: 100%;">
+									<div id="showform">
+										<input type="hidden" :value="GOVERNMENT_ID" id="GOVERNMENT_ID">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">姓名</span></span>
+										    </div>
+										    <input type="text" class="form-control"  ref="USERNAME" id="USERNAME" v-model="HEADMAN" maxlength="255" disabled="true"  >
+										</div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">机构名字</span></span>
+										    </div>
+										    <input type="text" class="form-control"  ref="DEPARTMENT_NAME" id="DEPARTMENT_NAME" v-model="NAME" maxlength="255" disabled="true" >
+										</div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">审批类型</span></span>
+										    </div>
+											<select class="form-control" ref="appType1" id="appType1" v-model="appType1" :disabled="msg=='edit'" style="height: 33px;padding-left:10px; margin-right: 50px;  border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+												<option value="">请选择审批父类型</option>
+											</select>
+											<div class="input-group-prepend">
+											    <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">审批类型</span></span>
+											</div>
+											<select class="form-control" ref="appType2" id="appType2" v-model="appType2" :disabled="msg=='edit'" style="height: 33px;padding-left:10px;   border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+												<option value="">请选择审批子项目</option>
+											</select>
+										    <!-- <input type="text" class="form-control"  ref="DEPARTMENT_NAME" id="DEPARTMENT_NAME" v-model="NAME" maxlength="255" disabled="true" > -->
+										</div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">填写表单</span></span>
+										    </div>
+											
+											<div id="" class="form-control" style="min-height:100px ;height: auto;max-height: 250px; overflow-y:auto;padding-left:10px;   border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+												<!-- <div v-for="(form,index) in formList" v-if="formListLength!=0&&appType2!=''" >
+													<div v-for="(approveForm,aindex) in approveFormList" v-if="approveFormListLength!=0&&form.FULLDATA_ID==approveForm.FULLDATA_ID">
+														<b style="margin-right: 10px;">·</b>
+														<a href="#" class="to_fulldata" :is_optional="form.OPTIONAL" :is_ts="approveForm.SUB_STATUS"  :fulldata_id="(form.FULLDATA_ID!=''&&form.FULLDATA_ID!=undefined&&form.FULLDATA_ID==approveForm.FULLDATA_ID)?approveForm.FORMDATA_ID:''" v-on:click="toFulldata($event,form.PAGE_NAME,form.FULLDATA_ID,GOVERNMENT_ID,form.ALLURL,approveForm.APPROVEFORM_ID)">{{form.NAME}}</a>
+														<span  :style="form.FULLDATA_ID==approveForm.FULLDATA_ID&&approveForm.SUB_STATUS==0?styleShow:styleHidden">已完成填写</span>
+														<span  :style="form.FULLDATA_ID==approveForm.FULLDATA_ID&&approveForm.SUB_STATUS==1?styleShow:styleHidden">(暂存状态，请正式提交该表单)</span>
+													</div>
+													<div  v-if="approveFormList.length==0">
+														<b style="margin-right: 10px;">·</b>
+														<a href="#" class="to_fulldata" :is_optional="form.OPTIONAL" fulldata_id="" is_ts="" approveform_id="" v-on:click="toFulldata($event,form.PAGE_NAME,form.FULLDATA_ID,GOVERNMENT_ID,form.ALLURL)">{{form.NAME}}</a>
+														<span  :style="styleHidden">已完成填写</span>
+														<span  :style="styleHidden">(暂存状态，请正式提交该表单)</span>
+													</div>
+												</div> -->
+												<div v-for="(form,index) in allForm" v-if="formListLength!=0&&appType2!=''" >
+													<!-- <div v-for="(approveForm,aindex) in approveFormList" v-if="approveFormListLength!=0&&form.FULLDATA_ID==approveForm.FULLDATA_ID">
+														<b style="margin-right: 10px;">·</b>
+														<a href="#" class="to_fulldata" :is_optional="form.OPTIONAL" :is_ts="approveForm.SUB_STATUS"  :fulldata_id="(form.FULLDATA_ID!=''&&form.FULLDATA_ID!=undefined&&form.FULLDATA_ID==approveForm.FULLDATA_ID)?approveForm.FORMDATA_ID:''" v-on:click="toFulldata($event,form.PAGE_NAME,form.FULLDATA_ID,GOVERNMENT_ID,form.ALLURL,approveForm.APPROVEFORM_ID)">{{form.NAME}}</a>
+														<span  :style="form.FULLDATA_ID==approveForm.FULLDATA_ID&&approveForm.SUB_STATUS==0?styleShow:styleHidden">已完成填写</span>
+														<span  :style="form.FULLDATA_ID==approveForm.FULLDATA_ID&&approveForm.SUB_STATUS==1?styleShow:styleHidden">(暂存状态，请正式提交该表单)</span>
+													</div>
+													<div  v-if="approveFormList.length==0">
+														<b style="margin-right: 10px;">·</b>
+														<a href="#" class="to_fulldata" :is_optional="form.OPTIONAL" fulldata_id="" is_ts="" approveform_id="" v-on:click="toFulldata($event,form.PAGE_NAME,form.FULLDATA_ID,GOVERNMENT_ID,form.ALLURL)">{{form.NAME}}</a>
+														<span  :style="styleHidden">已完成填写</span>
+														<span  :style="styleHidden">(暂存状态，请正式提交该表单)</span>
+													</div> -->
+													<div>
+														<b style="margin-right: 10px;">·</b>
+														<a href="#" class="to_fulldata" :is_optional="form.OPTIONAL" :is_ts="form.SUB_STATUS"  :fulldata_id="form.SAVED?form.FORMDATA_ID:''" v-on:click="toFulldata($event,form.PAGE_NAME,form.FULLDATA_ID,GOVERNMENT_ID,form.ALLURL,form.APPROVEFORM_ID)">{{form.NAME}}</a>
+														<span  :style="form.SAVED&&form.SUB_STATUS==0?styleShow:styleHidden" class="show_status">已完成填写</span>
+														<span  :style="form.SAVED&&form.SUB_STATUS==1?styleShow:styleHidden" class="show_status">(暂存状态，请正式提交该表单)</span>
+													</div>
+												</div>
+												<div  v-if="appType2==''" >
+													<b style="color: #ad1313;">请选择审批子类型!</b>
+												</div>
+												<div  v-if="formListLength==0&&appType2!=''&&appType2!=undefined&&appType2!=null" >
+													<b style="color: #ad1313;">没有审批表单需要填写!</b>
+												</div>
+											</div>
+										</div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">附件</span></span>
+										    </div>
+										    <!--<input type="text" class="form-control" ref="DESCRIPTION" id="ATTACHMENT" v-model="pd.ATTACHMENT" maxlength="255" placeholder="这里选择附件" title="附件">-->
+										    <div class="layui-upload form-group form-control" style="min-height: 250px!important;overflow:auto!important;"  ref="ATTACHMENT_IDS" id="ATTACHMENT_IDS">
+										        <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" id="testList" style="margin-right: 20px">选择多文件</button>
+										        <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" id="sub"  >开始上传</button>
+												<span style="font-size: 12px;color: darkred;margin-left: 30px;">(单个文件不能超过50M)</span>
+										        <div class="layui-upload-list" style="margin-bottom: 20px">
+										            <table class="layui-table">
+										                <thead>
+															<tr><th>文件名</th>
+																<th>大小</th>
+																<th>状态</th>
+																<th>操作</th>
+															</tr>
+														</thead>
+										                <tbody id="demoList"></tbody>
+										            </table>
+										        </div>
+										    </div>
+										</div>
+									<div class="layui-col-md12" v-show="attachmentList.length>0">
+									      <div class="layui-card layui-row">
+									        <div class="layui-card-header"><b>注：上传附件所需</b></div>
+									        <div class="layui-card-body layui-row">
+									          <ul class="layui-col-md12">
+												  <li style="width: 50%;" class="layui-col-md6" v-for="(att,index) in attachmentList">{{index+1+'. '+att.NAME}}</li>
+											  </ul>
+									        </div>
+									      </div>
+									    </div>
+										
+										<div class="input-group" style="margin-top:10px;background-color: white" >
+											<span style="width: 100%;text-align: center;">
+												<!-- <a class="btn btn-default" href="#" role="button">保存</a> -->
+												<a class="btn btn-light btn-sm" v-on:click="save(1)">保存</a>
+												<a class="btn btn-light btn-sm" v-on:click="save(0)">上报</a>
+												<a class="btn btn-light btn-sm" onclick="top.Dialog.close()">取消</a>
+											</span>
+										</div>
+							       </div>
+						           <!-- [加载状态 ] start -->
+								    <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+								    <!-- [ 加载状态  ] End -->
+								</div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- select插件 -->
+<script src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script src="../../../assets/js/pages/form-select-custom.js"></script>
+
+<!--layui-->
+<script type="text/javascript" src="../../../assets/js/layui/layui.js"></script>
+<script type="text/javascript" src="../../../assets/js/layui/layer.js"></script>
+
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+<!-- 本页js -->
+<script src="../../../assets/js-v/government/government_edit.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>海淀区民办学校通讯录</title>
+<link href="../css/pagetable.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../../../../../assets/js/jquery-3.3.1.min.js"></script>
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css·">
+<style>
+	.input-group{
+			background: #f4f7fa;
+		    position: relative;
+		    display: -ms-flexbox;
+		    display: flex;
+		    -ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
+		    -ms-flex-align: stretch;
+		    align-items: stretch;
+		    width: 100%;
+		}
+	
+</style>
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+	$(".tableT p").blur(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	});
+	
+});
+</script>
+</head>
+<body>
+
+	<div class="pagetable" id="app">
+			<input type="hidden" :value="ADDRESSBOOK_ID" :id="FORM_ID"/>
+			<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+			<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+			<h1>海淀区民办学校通讯录</h1>
+			<ul>
+				<li style="width:50%;" ref="DATE_FILL" id="DATE_FILL">填表日期：<p class="alignc" style="width:50px;display:inline-block;" contenteditable="false" ref="YEAR" id="YEAR" v-text="pd.YEAR"></p>年<p class="alignc" style="width:50px;display:inline-block;" contenteditable="false" ref="MONTH" id="MONTH" v-text="pd.MONTH"></p>月<p class="alignc" style="width:50px;display:inline-block;" contenteditable="false" ref="DAY" id="DAY" v-text="pd.DAY"></p>日</li>
+				<li style="width:50%;text-align:right"  ref="RUNNING_LICENSE" id="RUNNING_LICENSE" >办学许可证号：教民1101087<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="NUM1" id="NUM1" v-text="pd.NUM1"></p>9<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="NUM2" id="NUM2" v-text="pd.NUM2"></p>号<span :contenteditable="isPreview?false:true"></span></li>
+			</ul>
+			<table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				<th width="100">学校全称</th>
+				<td colspan="4"><p :contenteditable="isPreview?false:true" ref="SCHOOL_NAME" id="SCHOOL_NAME" v-text="pd.SCHOOL_NAME"></p></td>
+				<th width="100">电话传真</th>
+				<td colspan="2"><p :contenteditable="isPreview?false:true" ref="SCHOOL_TELEFACSIMILE" id="SCHOOL_TELEFACSIMILE" v-text="pd.SCHOOL_TELEFACSIMILE"></p></td>
+			  </tr>
+			  <tr>
+				<th>校址</th>
+				<td colspan="4"><p :contenteditable="isPreview?false:true"  ref="SCHOOL_LOCATION" id="SCHOOL_LOCATION" v-text="pd.SCHOOL_LOCATION" ></p></td>
+				<th>网址、电子信箱</th>
+				<td colspan="2"><p :contenteditable="isPreview?false:true" ref="EMAIL" id="EMAIL" v-text="pd.EMAIL"></p></td>
+			  </tr>
+			  <tr>
+				<th>校长</th>
+				<td><p ref="SCHOOLMASTER" id="SCHOOLMASTER" v-text="pd.SCHOOLMASTER":contenteditable="isPreview?false:true"></p></td>
+				<th width="100">手机电话</th>
+				<td><p ref="SCHOOLMASTER_PHONE" id="SCHOOLMASTER_PHONE" v-text="pd.SCHOOLMASTER_PHONE"  :contenteditable="isPreview?false:true"></p></td>
+				<th width="100">联系人</th>
+				<td><p ref="CONTACT_PERSON" id="CONTACT_PERSON" v-text="pd.CONTACT_PERSON" :contenteditable="isPreview?false:true"></p></td>
+				<th width="100">电话手机</th>
+				<td><p ref="CONTACT_PERSON_PHONE" id="CONTACT_PERSON_PHONE" v-text="pd.CONTACT_PERSON_PHONE" :contenteditable="isPreview?false:true"></p></td>
+			  </tr>
+			  <tr>
+				<th>通信地址</th>
+				<td colspan="5"><p ref="ADRESSE" id="ADRESSE" v-text="pd.ADRESSE" :contenteditable="isPreview?false:true"></p></td>
+				<th>邮编</th>
+				<td><p ref="POSTCODE" id="POSTCODE" v-text="pd.POSTCODE"  :contenteditable="isPreview?false:true"></p></td>
+			  </tr>
+			  <tr>
+				<th>收信名称或个人</th>
+				<td colspan="5"><p  ref="NAME_RECIPIENT" id="NAME_RECIPIENT" v-text="pd.NAME_RECIPIENT" :contenteditable="isPreview?false:true"></p></td>
+				<th>电话</th>
+				<td><p ref="RECIPIENT_PHONE" id="RECIPIENT_PHONE" v-text="pd.RECIPIENT_PHONE":contenteditable="isPreview?false:true"></p></td>
+			  </tr>
+			  <tr>
+				<th>举办者</th>
+				<td colspan="5"><p ref="ORGANIZER" id="ORGANIZER" v-text="pd.ORGANIZER" :contenteditable="isPreview?false:true"></p></td>
+				<th>电话传真</th>
+				<td><p ref="ORGANIZER_TELEFACSIMILE" id="ORGANIZER_TELEFACSIMILE" v-text="pd.ORGANIZER_TELEFACSIMILE" :contenteditable="isPreview?false:true"></p></td>
+			  </tr>
+			  <tr>
+				<th>备注</th>
+				<td colspan="7"><p  ref="REMARK" id="REMARK" v-text="pd.REMARK" :contenteditable="isPreview?false:true"></p></td>
+				</tr>
+			</table>
+			<div class="bz">
+			注：凡校长、举办者、通信地址、收信人、联系人及电话发生变化的，请在两周内将新的通信录报到学前科。
+			</div>
+
+			<div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+				<span style="width: 100%;text-align: center;">
+							<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+							<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+							<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+				</span>
+			</div>
+		
+	</div>
+
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="../js/addressbook.js"></script> 
+</body>
+</html>

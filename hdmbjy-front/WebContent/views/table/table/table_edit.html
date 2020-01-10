@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>海淀区民办教育管理平台</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="../../../assets/css/bootstrap/bootstrap.min.css">
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+	<!--layui-->
+	<!-- <link rel="stylesheet" href="../../../assets/css/layui/modules/layer/default/layer.css">
+	<link rel="stylesheet" href="../../../assets/css/layui/layui.css" > -->
+	
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+	
+	
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+	<!-- table js和css -->
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/fileinput.min.css" rel="stylesheet">
+	<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+	<link href="form_builder/animate.min.css" rel="stylesheet">
+	<link href="form_builder/summernote.css" rel="stylesheet">
+  
+	<link href="form_builder/style.min862f.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="javascript/fileinput.min.js"></script>
+	<script src="javascript/bootstrap-datetimepicker.min.js"></script>
+	<script src="javascript/distpicker.data.min.js"></script>
+	<script src="javascript/distpicker.min.js"></script>
+	<script src="javascript/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="javascript/zh.js"></script>
+	<script src="https://cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	<script src="form_builder/beautifyhtml.js"></script>
+	<script src="javascript/index.js"></script>
+</head>
+
+<body style="background-color:#f7f5f6;">
+    <div class="container-fluid" style="padding:0px; margin:0px;" id="app">
+        <div class="row-fluid clearfix">
+            <div class="col-md-12 column">
+                <div style="width:1080px; margin:0 auto; margin-top:20px;">
+                    <div class="conference-cont" style=" margin-top:20px;">
+                        <!-- <div class="set-til">第一步<span style="padding-left:10px;">报名表单设置</span></div> -->
+                        <div class="wrapper wrapper-content" style="margin-top: 55px;">
+                            <div class="row" style="border-left: 2px dashed rgba(0,0,0,0.12);border-right: 2px dashed rgba(0,0,0,0.12);border-bottom: 2px dashed rgba(0,0,0,0.12);">
+                                <div id="colzuo" class="col-sm-9" style="border-right: 2px dashed rgba(0,0,0,0.12);">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title">
+                                            <h5>拖拽/点击右侧表单项到此区域</h5>
+                                            <div class="ibox-tools">
+                                                <!-- <button type="submit" class="btn btn-warning" data-clipboard-text="testing" id="copy-to-clipboard">复制代码</button> -->
+                                            <button type="button" class="btn btn-yulan">预览</button>
+                                            </div>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <div class="row form-body form-horizontal m-t">
+                                                <div class="col-md-12 droppable sortable ui-droppable ui-sortable" id="options_add" ref="options_add">
+													<div class="form-group draggable ui-draggable dropped " c_type="head"><label class="col-sm-2 control-label">反馈表标题：</label><div   id="TITLE" ref="TITLE" class="col-sm-7"><input type="text" class="form-control" v-model="pd.TITLE" placeholder="请输入反馈表标题"></div></div>
+                                                </div>
+												<button type="button" class="btn btn-warning"  @click="save()">保存</button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="colyou" class="col-sm-3">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title">
+                                            <h5>自定义表单项</h5>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <form role="form" class="form-horizontal m-t">
+                                                <p><b>常用项</b></p>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <div id="name" class="draggable ui-draggable btntexts">
+                                                                姓名
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div id="phone" class="draggable ui-draggable btntexts">
+                                                                电话
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div id="email" class="draggable ui-draggable btntexts">
+                                                                邮箱
+                                                            </div>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div id="card" class="draggable ui-draggable btntexts">
+                                                                身份证
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div id="www" class="draggable ui-draggable btntexts">
+                                                                个人网站
+                                                            </div>
+                                                        </td>
+                                                        <!-- <td>
+                                                            <div id="logo" class="draggable ui-draggable btntexts">
+                                                                上传Logo
+                                                            </div>
+                                                        </td> -->
+                                                       
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div id="sex" class="draggable ui-draggable btntexts">
+                                                                性别
+                                                            </div>
+                                                        </td>
+                                                         <td>
+                                                            <div id="occupation" class="draggable ui-draggable btntexts">
+                                                                职位
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div id="profile" class="draggable ui-draggable btntexts">
+                                                                个人简介
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <p><b>自定义项</b></p>
+                                                <div id="text" class="form-group draggable ui-draggable btntext">
+                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> 文本框 <img src="image/add_form_img01.png"></label>
+                                                </div>
+                                               <!--  <div id="select" class="form-group draggable ui-draggable btntext">
+                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> 下拉框 <img src="image/add_form_img05.png"></label>
+                                                </div> -->
+                                                <div id="radio" class="form-group draggable ui-draggable btntext">
+                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> 单选 <img src="image/add_form_img03.png"></label>
+                                                </div>
+                                                <div id="checkbox" class="form-group draggable ui-draggable btntext">
+                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> 多选 <img src="image/add_form_img04.png"></label>
+                                                </div>
+                                                <div id="textarea" class="form-group draggable ui-draggable btntext">
+                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> 多行文本 <img src="image/add_form_img02.png"></label>
+                                                </div>
+                                                <!-- <div id="datetime" class="form-group draggable ui-draggable btntext">
+                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> 时间 <img src="image/add_form_img06.png"></label>
+                                                </div>
+                                                <div id="file" class="form-group draggable ui-draggable btntext">
+                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> 上传 <img src="image/add_form_img07.png"></label>
+                                                </div>
+                                                <div id="picker" class="form-group draggable ui-draggable btntext">
+                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> 省市区 <img src="image/add_form_img08.png"></label>
+                                                </div> -->
+                                            </form>
+											
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+    </div>
+	<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+	<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+	
+	<!-- 日期插件 -->
+	<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+	<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+	<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+	
+	<!-- select插件 -->
+	<script src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+	<script src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+	<script src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+	<script src="../../../assets/js/pages/form-select-custom.js"></script>
+	
+	<script src="../../../assets/js/topinyin.js"></script>
+	<script src="../../../assets/js/Math.uuid.js"></script>
+	<!-- 表单验证提示 -->
+	<script src="../../../assets/js/jquery.tips.js"></script>
+	<script src="../../../assets/js-v/table/table_edit.js"></script>
+</body>
+</html>

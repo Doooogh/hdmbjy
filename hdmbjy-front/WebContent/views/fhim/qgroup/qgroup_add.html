@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+
+	<link rel="stylesheet" href="../../../plugins/fhim/dist/css/layui.css?v=1">
+	
+	<!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+    
+</head>
+
+<body>
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+   <!-- [ 主内容区 ] start -->
+   <div class="pcoded-wrapper" id="app">
+       <div class="pcoded-content">
+           <div class="pcoded-inner-content">
+               <div class="main-body">
+                   <div class="page-wrapper">
+                       <!-- [ Main Content ] start -->
+                       <div class="row">
+
+		    			   <!-- [ Hover-table ] start -->
+                           <div class="col-xl-12">
+                               <div class="card">
+					
+									<div id="showform" style="padding-top: 10px;padding-left: 10px;">
+									<table style="width: 900px;">
+										<tr>
+											<td>
+						                        <div class="input-group input-group-sm mb-3">
+						                           	<input class="form-control" id="keywords" type="text" v-model="keywords" id="keywords" placeholder="请输入群名称" />
+						                        </div>
+											</td>
+											<td style="float: left;padding-left: 10px;">
+												<a class="btn btn-light btn-sm" v-on:click="getList" style="width: 23px;height:30px;margin-top:1px;" title="检索">
+													<i style="margin-top:-3px;margin-left: -6px;" class="feather icon-search"></i>
+												</a>
+												<a class="btn btn-light btn-sm" href="../friends/friends_add.html" style="height:30px;margin-top:1px;" title="找人">
+													找人
+												</a>
+											</td>
+										</tr>
+									</table>
+									<table>
+										<tr>
+											<td>
+												<table>
+													<!-- 开始循环 -->	
+													<template v-for="(zdata,zindex) in varList">
+													<tr>
+														<template v-for="(data,index) in zdata">
+														<td>
+															<div style="padding-left:30px;padding-top:15px;padding-bottom:15px" class="center">
+															    <li v-bind:data-uid="data.QGROUP_ID" data-fromGroup="0" v-bind:data-username="data.NAME" v-bind:data-avatar="(null == data.PHOTO || '' == data.PHOTO)?httpurl+'assets/images/user/avatar-2.jpg':httpurl+data.PHOTO" >
+															      <a data-type="agree" class="layui-fh" style="cursor:pointer;">
+															        <img v-bind:src="(null == data.PHOTO || '' == data.PHOTO)?'../../../assets/images/user/avatar-2.jpg':httpurl+data.PHOTO" width="50" height="50" class="layui-circle layim-msgbox-avatar">
+															      </a>
+															      <p class="layim-msgbox-user" style="text-align: center;">
+															        <a data-type="agree" class="layui-fh" style="cursor:pointer;">{{data.NAME}}</a>
+															      </p>
+															    </li>
+															</div>
+														</td>
+														</template>
+													</tr>
+													</template>
+													
+													<tr v-show="varList.length==0">
+														<td colspan="100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{'' == keywords?"请先搜索":'没有相关群'}}</td>
+													</tr>
+													<tr>
+														<td style="height: 15px;"></td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+									</div>
+									<!-- [加载状态 ] start -->
+								    <div v-show="loading" style="margin-top:1px;">
+								    	<div class="d-flex justify-content-center">
+	                                   <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+	                                          <span class="sr-only">Loading...</span>
+	                                      </div>
+	                                  </div>
+	                                  <br><br>
+	                              	</div>
+								    <!-- [ 加载状态  ] End -->
+					
+                   				</div>
+                              </div>
+                              <!-- [ Hover-table ] end -->
+
+                          </div>
+                          <!-- [ Main Content ] end -->
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    <!-- [ 主内容区 ] end -->
+        
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script type="text/javascript" src="../../../assets/js/jquery.tips.js"></script>
+<script type="text/javascript" src="../../../plugins/fhim/dist/layui.js?v=1"></script>
+
+<!-- 本页面js -->
+<script type="text/javascript" src="../../../assets/js-v/fhim/qgroup_add.js"></script>
+
+</body>
+</html>

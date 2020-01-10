@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+    <script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+    <!-- 树形下拉框start -->
+	<script type="text/javascript" src="../../../plugins/selectZtree/selectTree.js"></script>
+	<script type="text/javascript" src="../../../plugins/selectZtree/framework.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../../plugins/selectZtree/import_fh.css"/>
+	<script type="text/javascript" src="../../../plugins/selectZtree/ztree/ztree.js"></script>
+	<link type="text/css" rel="stylesheet" href="../../../plugins/selectZtree/ztree/ztree.css"></link>
+	<!-- 树形下拉框end -->
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+					
+								<div style="width: 100%;">
+									<div id="showform">
+										<div class="input-group input-group-sm mb-3" style="margin-top: -22px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">姓名</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="NAME" id="NAME" v-model="pd.NAME" maxlength="50" placeholder="这里输入姓名" title="姓名">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">英文</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="NAME_EN" id="NAME_EN" v-model="pd.NAME_EN" maxlength="50" placeholder="这里输入英文" title="英文">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">编码</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="BIANMA" id="BIANMA" v-model="pd.BIANMA" maxlength="100" placeholder="这里输入编码" title="编码">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">部门</span></span>
+		                                    </div>
+		                                    <div style="margin-top: 4px;margin-left: 2px;" class="selectTree" id="selectTree"></div><input type="text" id="st" style="width: 1px;height: 1px;border: 0px;" />
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">职责</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="FUNCTIONS" id="FUNCTIONS" v-model="pd.FUNCTIONS" maxlength="255" placeholder="这里输入职责" title="职责">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">电话</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="TEL" id="TEL" v-model="pd.TEL" maxlength="20" placeholder="这里输入电话" title="电话">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">邮箱</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="EMAIL" id="EMAIL" v-model="pd.EMAIL" maxlength="50" placeholder="这里输入邮箱" title="邮箱">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">性别</span></span>
+		                                    </div>
+		                                    <select v-model="SEX" id="SEX" ref="SEX"  title="性别" style="width:432px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+		                                    	<option value="男">男</option>
+												<option value="女">女</option>
+		                                    </select>
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">出生日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control date" ref="BIRTHDAY" id="BIRTHDAY" maxlength="32" placeholder="这里输入出生日期" title="出生日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">民族</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="NATION" id="NATION" v-model="pd.NATION" maxlength="10" placeholder="这里输入民族" title="民族">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">岗位类别</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="JOBTYPE" id="JOBTYPE" v-model="pd.JOBTYPE" maxlength="30" placeholder="这里输入岗位类别" title="岗位类别">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">参加工作时间</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control date" ref="JOBJOINTIME" id="JOBJOINTIME" maxlength="32" placeholder="这里输入参加工作时间" title="参加工作时间">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">籍贯</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="FADDRESS" id="FADDRESS" v-model="pd.FADDRESS" maxlength="100" placeholder="这里输入籍贯" title="籍贯">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">政治面貌</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="POLITICAL" id="POLITICAL" v-model="pd.POLITICAL" maxlength="30" placeholder="这里输入政治面貌" title="政治面貌">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">入团时间</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control date" ref="PJOINTIME" id="PJOINTIME" maxlength="32" placeholder="这里输入入团时间" title="入团时间">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">身份证号</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="SFID" id="SFID" v-model="pd.SFID" maxlength="20" placeholder="这里输入身份证号" title="身份证号">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">婚姻状况</span></span>
+		                                    </div>
+		                                    <select v-model="MARITAL" id="MARITAL" ref="MARITAL"  title="婚姻状况" style="width:432px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+		                                    	<option value="未婚">未婚</option>
+												<option value="已婚">已婚</option>
+		                                    </select>
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">进本单位时间</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control date" ref="DJOINTIME" id="DJOINTIME" maxlength="32" placeholder="这里输入进本单位时间" title="进本单位时间">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">现岗位</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="POST" id="POST" v-model="pd.POST" maxlength="30" placeholder="这里输入现岗位" title="现岗位">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">上岗时间</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control date" ref="POJOINTIME" id="POJOINTIME" maxlength="32" placeholder="这里输入上岗时间" title="上岗时间">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">学历</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="EDUCATION" id="EDUCATION" v-model="pd.EDUCATION" maxlength="10" placeholder="这里输入学历" title="学历">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">毕业学校</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="SCHOOL" id="SCHOOL" v-model="pd.SCHOOL" maxlength="30" placeholder="这里输入毕业学校" title="毕业学校">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">专业</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="MAJOR" id="MAJOR" v-model="pd.MAJOR" maxlength="30" placeholder="这里输入专业" title="专业">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">职称</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="FTITLE" id="FTITLE" v-model="pd.FTITLE" maxlength="30" placeholder="这里输入职称" title="职称">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">职业资格证</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="CERTIFICATE" id="CERTIFICATE" v-model="pd.CERTIFICATE" maxlength="30" placeholder="这里输入职业资格证" title="职业资格证">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">劳动合同时长</span></span>
+		                                    </div>
+		                                    <input type="number" class="form-control" ref="CONTRACTLENGTH" id="CONTRACTLENGTH" v-model="pd.CONTRACTLENGTH" maxlength="2" placeholder="这里输入劳动合同时长" title="劳动合同时长"><div style="margin-top: 4px;margin-left: 3px;">年</div>
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">签订日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control date" ref="CSTARTTIME" id="CSTARTTIME" maxlength="32" placeholder="这里输入签订日期" title="签订日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">终止日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control date" ref="CENDTIME" id="CENDTIME" maxlength="32" placeholder="这里输入终止日期" title="终止日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">现住址</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ADDRESS" id="ADDRESS" v-model="pd.ADDRESS" maxlength="100" placeholder="这里输入现住址" title="现住址">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">备注</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="BZ" id="BZ" v-model="pd.BZ" maxlength="255" placeholder="这里输入备注" title="备注">
+		                                </div>
+							            <div class="input-group" style="margin-top:10px;background-color: white" >
+							            	<span style="width: 100%;text-align: center;">
+							            		<a class="btn btn-light btn-sm" v-on:click="save">保存</a>
+							            		<a class="btn btn-light btn-sm" onclick="top.Dialog.close()">取消</a>
+							            	</span>
+							            </div>
+							       </div>
+						           <!-- [加载状态 ] start -->
+								    <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+								    <!-- [ 加载状态  ] End -->
+								</div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页面js -->
+<script type="text/javascript" src="../../../assets/js-v/fhoa/staff_edit.js"></script>
+
+</body>
+</html>

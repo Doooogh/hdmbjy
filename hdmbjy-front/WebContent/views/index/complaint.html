@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>海淀区民办教育管理平台</title>
+<link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+<link href="../../assets/index/css/common.css" rel="stylesheet" type="text/css">
+<link href="../../assets/index/css/list.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../assets/index/js/jquery.min.js"></script>
+<script type="text/javascript" src="../../assets/index/js/jquery.SuperSlide.2.1.1.js"></script>
+
+<!-- vue -->
+<script src="../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script src="../../assets/js-v/config.js"></script>
+
+<script>
+$(function(){
+	$(".searchhistory a").each(function(index){if(index > 2){ $(this).remove();};});
+	$(".slideTxtBox").slide({trigger:"click",pnLoop:false});
+});
+</script>
+
+
+</head>
+<body>
+<div class="wrap" id = "app">
+    <div class="wrap_main clearfixhack">
+    <!-- 主体 开始 -->
+		<div class="indextop">
+			<div class="container">
+				海淀区民办教育管理平台
+				<!-- <a class="fr c666" href="#">联系我们</a>
+				<a class="fr c666" href="#">人才招聘</a>
+				<a class="fr c666" href="#">首页</a> -->
+			</div>
+		</div><!-- indextop  end  -->
+		<div class="indexhead">
+			<div class="container">
+				<img class="logo" src="../../assets/index/img/logo.png" />
+				<!-- <div class="searchbox">
+					<div class="searchinput"><input type="text" placeholder="请输入您要搜索的内容" /></div>
+					<div class="searchbtn"><a href="#"></a></div>
+					<div class="searchhistory">热门搜索：<a href="#">教育</a><a href="#">海淀</a><a href="#">幼儿园</a></div>
+				</div> -->
+			</div>
+		</div><!-- indexhead  end  -->
+    	<div class="indexmenu">
+			<div class="container">
+				<ul>
+					<li><a href="../index/index.html">首页</a></li>
+					<template v-for="(data,index) in listCategory">
+						<li v-if="data.name == '投诉举报'" class="on"><a v-bind:href="data.url">{{data.name}}</a></li>
+						<li v-if="data.name != '投诉举报'"><a v-bind:href="data.url">{{data.name}}</a></li>
+					</template>
+				<ul>
+			</div>
+		</div><!-- indexmenu  end  -->
+		<div class="container clearfix mb20">
+			<div class="pageTS">
+				<div class="head">
+					<h4>投诉举报</h4>
+				</div>
+				<div class="pagemapmid slideTxtBox">
+					<div class="pagemapmid_T hd clearfix">
+						<ul class="cp_Tmeun">
+								<li class="on" id = "t1"><a href="#" @click="title(1)">举报投诉</a></li>
+								<li id = "t2"><a href="#" @click="title(2)">投诉进程</a></li>
+								<li id = "t3"><a href="#" @click="title(3)">投诉结果</a></li>
+						</ul>
+					</div>
+					<div class="pagemapmid_B bd">
+						<div id = "n1">
+							<p class="tips">----------- 请如实填写投诉信息 -----------</p>
+							<table class="table_M" width="100%" border="0" cellspacing="0" cellpadding="0">
+							  <tr>
+								<th>举报人</th>
+								<td><input type="text" id="JB_USER" /></td>
+								<th>举报人电话</th>
+								<td><input type="text" id="JB_TEL" /></td>
+							  </tr>
+							  <tr>
+								<th>被举报单位</th>
+								<td><input type="text" id="UNIT" /></td>
+								<th>备注</th>
+								 <td>
+									<input type="text" id="TYPE" />
+								</td>
+							  </tr>
+							  <!-- <tr>
+								<th>法定代表人</th>
+								<td><input type="text" id = ""/></td>
+								<th>法人类型</th>
+								<td><input type="text" id = ""/></td>
+							  </tr> -->
+							  <tr>
+								<th>举报原由</th>
+								<td colspan="3"><input type="text" id="REASON" /></td>
+							  </tr>
+							</table>
+						</div>
+						<div class="" id = "n2">
+							<p class="tips">----------- 请如输入查询编号 -----------</p>
+							<table class="table_M" width="100%" border="0" cellspacing="0" cellpadding="0">
+							  <tr>
+								<th>投诉编号</th>
+								<td colspan="3"><input type="text" id = "NO" /></td>
+							  </tr>
+							</table>
+							<p class="tips" id = "ts"></p>
+						</div>
+						<div class="" id = "n3">
+							<p class="tips">----------- 投诉反馈 -----------</p>
+							<div class="ptext" id="ptext">
+							 请到查询页面查询
+							</div>
+							
+							<P style="margin-top: 70px" ID ="time"></P>
+						</div>
+					</div>
+					<center v-if="typeBtn == '1'"><a href="#" class="btn1 mr20 mb20 prevStop">上一步</a><a href="#" class="btn1 mb20 " @click="save()">下一步</a></center>
+					<center v-if="typeBtn == '2'"><a href="#" class="btn1 mr20 mb20">上一步</a><a href="#" id="nextType" class="btn1 mb20 " @click="find()">下一步</a></center>
+				</div> <!-- prev mr20 mb20 prev--> <!-- next mb20  next nextStop @click="save()"--> 
+			</div><!-- list_L  end  -->
+		</div>
+    <!-- 主体  结束  -->
+    </div>
+</div>
+<!-- 底部  开始  -->
+<div class="footer">
+	<div class="main">
+		<p>版权所有：北京市海淀区教育委员会     京ICP备17037050号-2</br>
+		地址：北京市海淀区西四环北路11号　咨询热线：96181</p>
+	</div>
+</div>
+<!-- 底部  结束  -->
+</body>
+
+<script type="text/javascript" src="../../assets/js/pre-loader.js"></script>
+<script src="../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../assets/js/jquery.tips.js"></script>
+<script type="text/javascript" src="../../assets/index/js/complaint.js"></script>
+
+
+</html>

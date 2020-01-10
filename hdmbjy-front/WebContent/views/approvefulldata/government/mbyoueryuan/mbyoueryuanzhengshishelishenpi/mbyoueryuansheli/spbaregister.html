@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>幼儿园审批备案登记表</title>
+<link href="css/pagetables_sl_register.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<!-- <link rel="stylesheet" href="../../../../../../assets/css/style.css"> -->
+<style>
+	.input-group{
+		background: #f4f7fa;
+		    position: relative;
+		    display: -ms-flexbox;
+		    display: flex;
+		    -ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
+		    -ms-flex-align: stretch;
+		    align-items: stretch;
+		    width: 100%;
+		}
+	}
+</style>
+	<!-- jquery  -->
+	<script type="text/javascript" src="../../../../../../assets/js/jquery-3.3.1.min.js"></script>
+    <!-- vue -->
+	<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+});
+</script>
+</head>
+<body >
+<div class="pagetable">
+<h1>举办者基本情况</h1>
+<div id="app">
+	<input type="hidden" :value="GBSLFORMDATA_ID" :id="FORM_ID"/>
+	<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+	<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+	<table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0" >
+	  <tr>
+	    <th width="15%">举办单位名称</th>
+	    <td width="30%"><p :contenteditable="isPreview?false:true" id="SCHOOL_NAME" ref="SCHOOL_NAME" v-text="pd.SCHOOL_NAME"></p></td>
+	    <th width="15%">电话</th>
+	    <td width="30%"><p :contenteditable="isPreview?false:true" id="PHONE" v-text="pd.PHONE"></p></td>
+	  </tr>
+	  <tr>
+	    <th>单位地址</th>
+	    <td><p :contenteditable="isPreview?false:true"id="ADDRESS" ref="ADDRESS"  v-text="pd.ADDRESS"></p></td>
+	    <th>邮政编码</th>
+	    <td><p :contenteditable="isPreview?false:true" id="POSTCODE"   ref="POSTCODE" v-text="pd.POSTCODE"></p></td>
+	  </tr>
+	  <tr>
+	    <th>法定代表人</th>
+	    <td><p :contenteditable="isPreview?false:true" id="LEGALPERSON" ref="LEGALPERSON" v-text="pd.LEGALPERSON"></p></td>
+	    <th>法人类型</th>
+	    <td><p :contenteditable="isPreview?false:true" id="LEGALPERSON_TYPE" ref="LEGALPERSON_TYPE" v-text="pd.LEGALPERSON_TYPE"></p></td>
+	  </tr>
+	  <tr>
+	    <th>注册资金</th>
+	    <td><p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" id="REGISTERED_FUND"  ref="REGISTERED_FUND" v-text="pd.REGISTERED_FUND"></p>（万元）</td>
+	    <th>现有总资金</th>
+	    <td><p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" id="TOTAL_EXISTING_FUNDS" ref="TOTAL_EXISTING_FUNDS"  v-text="pd.TOTAL_EXISTING_FUNDS"></p>（万元）</td>
+	  </tr>
+	  <tr>
+	    <th>开户银行</th>
+	    <td><p :contenteditable="isPreview?false:true" id="DEPOSIT_BANK" ref="DEPOSIT_BANK"  v-text="pd.DEPOSIT_BANK"></p></td>
+	    <th>提供办学资金</th>
+	    <td><p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" id="FUNDING_FOR_SCHOOL"  ref="FUNDING_FOR_SCHOOL"   v-text="pd.FUNDING_FOR_SCHOOL"></p>（万元）</td>
+	  </tr>
+	  <tr>
+	    <th>银行账号</th>
+	    <td colspan="3"><p :contenteditable="isPreview?false:true" id="BANK_ACCOUNT" ref="BANK_ACCOUNT"  v-text="pd.BANK_ACCOUNT" ></p></td>
+	    </tr>
+	</table>
+	<div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+			<span style="width: 100%;text-align: center;">
+						<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+						<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+						<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+			</span>
+	</div>
+</div>
+
+</div>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="js/spbaregister_edit.js"></script>
+</body>
+</html>

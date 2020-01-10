@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <link rel="stylesheet" href="../../../plugins/json-viewer/css/jquery.json-viewer.css" type="text/css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body>
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>服务器接口测试</h5>
+                                        </div>
+                                        <div class="card-block">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="feather icon-feather"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" id="urlAddress" v-model.trim="urlAddress" placeholder="接口地址" aria-label="接口地址" aria-describedby="basic-addon1">
+                                                <a class="btn btn-info btn-sm" v-on:click="getData" style="margin-left: 5px;padding-top: 11px" title="检索">
+													请求
+												</a>
+												<a class="btn btn-secondary btn-sm" v-on:click="setReset" style="margin-left: 5px;padding-top: 11px" title="检索">
+													重置
+												</a>
+		                                        <div class="custom-control custom-radio custom-control-inline" style="margin-top: 10px;margin-left: 15px;">
+		                                             <input type="radio" name="radio-p-fill-5" id="fhradio0" v-model="type" value="POST" class="custom-control-input"/>
+		                                             <label for="fhradio0" class="custom-control-label">POST</label>
+		                                         </div>
+		                                         <div class="custom-control custom-radio custom-control-inline" style="margin-top: 10px;">
+		                                             <input type="radio" name="radio-p-fill-5" id="fhradio1" v-model="type" value="GET" class="custom-control-input"/>
+		                                             <label for="fhradio1" class="custom-control-label">GET</label>
+		                                         </div>
+		                                         <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">加密参数</span>
+                                                </div>
+                                                <input class="form-control" type="text" v-model="FKEY" placeholder="输入参数名称(选填)" style="max-width:166px;" />
+                                            </div>
+                                            <div class="input-group mb-3" style="margin-top: -8px;">
+                                            <textarea class="form-control" id="resultData" v-model="resultData"  style="width:100%;height: 100px;"  title="返回结果" placeholder="返回原始结果">{{resultData}}</textarea>
+                                            </div>
+                                            <div class="input-group mb-3" style="margin-top: -8px;">
+                                            <pre id="json-renderer"></pre>
+                                            </div>
+                                            	请求接口用时：<font color="red"><b>{{useTime}}</b></font> 毫秒
+                                            <div class="alert alert-success" role="alert" style="margin-top: 5px;">
+                                                	校验加密规则：(取其中一个参数名+当前日期[格式 20190822]+混淆码",fh," 然后md5加密 的值作为 参数FKEY的值提交)
+                                            </div>
+                                            <!-- [加载状态 ] start -->
+                                           	<div v-show="loading">
+									    	<div class="d-flex justify-content-center" style="margin-top:2px;float: left;">
+	                                            <div class="spinner-grow spinner-grow-sm" role="status">
+	                                                <span class="sr-only">Loading...</span>
+	                                            </div>
+	                                        </div>
+	                                        </div>
+									    	<!-- [ 加载状态  ] End --> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<script type="text/javascript" src="../../../assets/js/jQuery.md5.js"></script>
+
+<script type="text/javascript" src="../../../plugins/json-viewer/js/jquery.json-viewer.js"></script> 
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页面js -->
+<script type="text/javascript" src="../../../assets/js-v/tools/interfacetest.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript" charset="utf-8" src="../../assets/js/jquery-1.7.2.js"></script>
+
+<body>
+<script>
+   $(function () {
+       var temp = parent.window.frames["ueFrame"];  //取值
+       window.addEventListener('message', function(e) {
+           var  remarks=e.data;
+           if(remarks.code==0){  //设置数据
+               window.parent.postMessage(getContent(), '*');
+           }
+       }, false);
+       function getContent() {
+           return temp.getContent();
+       }
+
+   });
+</script>
+</body>
+</html>

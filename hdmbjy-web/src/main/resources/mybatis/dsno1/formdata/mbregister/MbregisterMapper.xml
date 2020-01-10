@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.formdata.mbregister.MbregisterMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		AF_MBREGISTER
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.MBREGISTER_ID,
+		f.SC_ALLNAME,
+		f.PRINCIPAL_AND_PHONE,	
+		f.LINKMAN_AND_PHONE,	
+		f.PRINCIPAL,	
+		f.CHAIRMAN,	
+		f.LEGAL_PERSON,	
+		f.DECISION_MAKING_MEMBER,	
+		f.BROCHURE_AND_ADVERTISEMENT,	
+		f.ANNUAL_AUDIT_REPORT,	
+		f.CHANGE_OF_ORGANIZER,	
+		f.REFUND_METHOD,	
+		f.CONSTITUTION,	
+		f.RECORD_BEFORE,	
+		f.RECORD_AFTER,	
+		f.ORGANIZER_OPINION,	
+		f.ORGANIZER_DATE,	
+		f.COMPETENT_ADVICE,	
+		f.COMPETENT_DATE,	
+		f.DELIVERY_AND_PHONE,	
+		f.DELIVERY_DATE,	
+		f.ACCEPTOR,	
+		f.ACCEPTING_DATE,	
+		f.VERIFIER,	
+		f.VERIFIER_DATE,	
+		f.COMPLETION_DATE,	
+		f.DELIVERED,	
+		f.PROCESS_AND_DATE,	
+		f.ADDRESSEE_AND_DATE,	
+		f.NUMBER,	
+		f.FIELD2,	
+		f.FIELD3
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		MBREGISTER_ID,
+		SC_ALLNAME,
+		PRINCIPAL_AND_PHONE,	
+		LINKMAN_AND_PHONE,	
+		PRINCIPAL,	
+		CHAIRMAN,	
+		LEGAL_PERSON,	
+		DECISION_MAKING_MEMBER,	
+		BROCHURE_AND_ADVERTISEMENT,	
+		ANNUAL_AUDIT_REPORT,	
+		CHANGE_OF_ORGANIZER,	
+		REFUND_METHOD,	
+		CONSTITUTION,	
+		RECORD_BEFORE,	
+		RECORD_AFTER,	
+		ORGANIZER_OPINION,	
+		ORGANIZER_DATE,	
+		COMPETENT_ADVICE,	
+		COMPETENT_DATE,	
+		DELIVERY_AND_PHONE,	
+		DELIVERY_DATE,	
+		ACCEPTOR,	
+		ACCEPTING_DATE,	
+		VERIFIER,	
+		VERIFIER_DATE,	
+		COMPLETION_DATE,	
+		DELIVERED,	
+		PROCESS_AND_DATE,	
+		ADDRESSEE_AND_DATE,	
+		NUMBER,	
+		FIELD2,	
+		FIELD3
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{MBREGISTER_ID},
+		#{SC_ALLNAME},
+		#{PRINCIPAL_AND_PHONE},	
+		#{LINKMAN_AND_PHONE},	
+		#{PRINCIPAL},	
+		#{CHAIRMAN},	
+		#{LEGAL_PERSON},	
+		#{DECISION_MAKING_MEMBER},	
+		#{BROCHURE_AND_ADVERTISEMENT},	
+		#{ANNUAL_AUDIT_REPORT},	
+		#{CHANGE_OF_ORGANIZER},	
+		#{REFUND_METHOD},	
+		#{CONSTITUTION},	
+		#{RECORD_BEFORE},	
+		#{RECORD_AFTER},	
+		#{ORGANIZER_OPINION},	
+		#{ORGANIZER_DATE},	
+		#{COMPETENT_ADVICE},	
+		#{COMPETENT_DATE},	
+		#{DELIVERY_AND_PHONE},	
+		#{DELIVERY_DATE},	
+		#{ACCEPTOR},	
+		#{ACCEPTING_DATE},	
+		#{VERIFIER},	
+		#{VERIFIER_DATE},	
+		#{COMPLETION_DATE},	
+		#{DELIVERED},	
+		#{PROCESS_AND_DATE},	
+		#{ADDRESSEE_AND_DATE},	
+		#{NUMBER},	
+		#{FIELD2},	
+		#{FIELD3}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field2"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			MBREGISTER_ID = #{MBREGISTER_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			MBREGISTER_ID = #{MBREGISTER_ID},
+			SC_ALLNAME = #{SC_ALLNAME},
+			PRINCIPAL_AND_PHONE = #{PRINCIPAL_AND_PHONE},
+			LINKMAN_AND_PHONE = #{LINKMAN_AND_PHONE},
+			PRINCIPAL = #{PRINCIPAL},
+			CHAIRMAN = #{CHAIRMAN},
+			LEGAL_PERSON = #{LEGAL_PERSON},
+			DECISION_MAKING_MEMBER = #{DECISION_MAKING_MEMBER},
+			BROCHURE_AND_ADVERTISEMENT = #{BROCHURE_AND_ADVERTISEMENT},
+			ANNUAL_AUDIT_REPORT = #{ANNUAL_AUDIT_REPORT},
+			CHANGE_OF_ORGANIZER = #{CHANGE_OF_ORGANIZER},
+			REFUND_METHOD = #{REFUND_METHOD},
+			CONSTITUTION = #{CONSTITUTION},
+			RECORD_BEFORE = #{RECORD_BEFORE},
+			RECORD_AFTER = #{RECORD_AFTER},
+			ORGANIZER_OPINION = #{ORGANIZER_OPINION},
+			ORGANIZER_DATE = #{ORGANIZER_DATE},
+			COMPETENT_ADVICE = #{COMPETENT_ADVICE},
+			COMPETENT_DATE = #{COMPETENT_DATE},
+			DELIVERY_AND_PHONE = #{DELIVERY_AND_PHONE},
+			DELIVERY_DATE = #{DELIVERY_DATE},
+			ACCEPTOR = #{ACCEPTOR},
+			ACCEPTING_DATE = #{ACCEPTING_DATE},
+			VERIFIER = #{VERIFIER},
+			VERIFIER_DATE = #{VERIFIER_DATE},
+			COMPLETION_DATE = #{COMPLETION_DATE},
+			DELIVERED = #{DELIVERED},
+			PROCESS_AND_DATE = #{PROCESS_AND_DATE},
+			ADDRESSEE_AND_DATE = #{ADDRESSEE_AND_DATE},
+			NUMBER = #{NUMBER},
+			FIELD2 = #{FIELD2},
+			FIELD3 = #{FIELD3}
+		where 
+			MBREGISTER_ID = #{MBREGISTER_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.MBREGISTER_ID = #{MBREGISTER_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 1=1
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				-->
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			MBREGISTER_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

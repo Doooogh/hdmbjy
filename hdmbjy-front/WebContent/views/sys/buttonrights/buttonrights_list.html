@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body>
+<!-- [加载状态 ] start -->
+<div class="loader-bg">
+    <div class="loader-track">
+        <div class="loader-fill"></div>
+    </div>
+</div>
+<!-- [ 加载状态  ] End -->
+
+<!-- [ 主内容区 ] start -->
+    <div class="pcoded-wrapper" id="app">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+
+			    			<!-- [ Hover-table ] start -->
+                            <div class="col-xl-12">
+                                <div class="card">
+
+									<table style="margin-top: 8px;margin-left: 20px;">
+										<tr height="35">
+											<td style="width:50px;">角色组:</td>
+											<!-- 角色组循环 -->
+											<template v-for="(role,index) in roleList">
+												<td>
+													<button v-bind:class="'btn btn-'+(ROLE_ID == role.role_ID?'secondary':'light')+' btn-sm'"  v-on:click="getList(role.role_ID)">
+													<i class="feather icon-users"></i>{{role.role_NAME}}
+													</button>
+												</td>
+												<td style="width:1px;"></td>
+											</template>
+											<td v-show="loading">
+												<!-- [加载状态 ] start -->
+										    	<div class="d-flex justify-content-center" style="margin-top:-1px;">
+		                                            <div class="spinner-grow spinner-grow-sm" role="status">
+		                                                <span class="sr-only">Loading...</span>
+		                                            </div>
+		                                        </div>
+										    	<!-- [ 加载状态  ] End -->
+											</td>
+										</tr>
+										<tr v-show="roleList.length==0"><td colspan="100">没有相关数据</td></tr>
+									</table>
+									
+									<div class="card-block table-border-style" style="margin-top: -15px">
+			                        	<div class="table-responsive">
+			                            	<table class="table table-hover">
+												<thead>
+												<tr>
+													<th style="width: 50px;">NO</th>
+													<th>角色</th>
+													<template v-if="edit">
+														<!-- 按钮循环 -->
+														<template v-for="fhbutton in buttonlist">
+															<th style="text-align: center;">{{fhbutton.NAME}}</th>
+														</template>
+													</template>
+												</tr>
+												</thead>
+												<!-- 角色循环 -->
+												<template v-for="(rdata,index) in roleList_z">
+												<tr>
+												<td style="width:30px;">{{index+1}}</td>
+												<td v-bind:id="'ROLE_NAMETd'+rdata.role_ID">{{rdata.role_NAME }}</td>
+												<template v-if="edit">
+													<!-- 按钮循环 -->
+													<template v-for="(fhbutton,vsb) in buttonlist">
+														<!-- 关联表循环 -->
+														<template v-for="(varRb,vsRb) in roleFhbuttonlist">
+															<template v-if="rdata.role_ID == varRb.ROLE_ID && fhbutton.FHBUTTON_ID == varRb.BUTTON_ID">
+																<span style="display: none;">{{rbvalue = true}}</span>
+															</template>
+														</template>
+														<td style="height: 20px;text-align: center;">
+	                                                        <div class="switch switch-info d-inline m-r-10">
+	                                                            <input type="checkbox" v-bind:id="'switch-i-'+index+vsb" v-on:click="upRb(rdata.role_ID,fhbutton.FHBUTTON_ID)" v-model="rbvalue">
+	                                                            <label v-bind:for="'switch-i-'+index+vsb" class="cr"></label>
+	                                                        </div>
+														</td>
+														<span style="display: none;">{{rbvalue = false}}</span>
+													</template>
+												</template>
+												</tr>
+												</template>
+												<tr v-show="roleList_z.length==0"><td colspan="100">没有相关数据</td></tr>
+											</table>
+											<table style="width:100%;margin-top:15px;">
+												<tr>
+													<td style="vertical-align:top;">
+														<a class="btn btn-light btn-sm" v-on:click="changeView">切换视图</a>
+													</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+
+                                </div>
+                            </div>
+                            <!-- [ Hover-table ] end -->
+
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- [ 主内容区 ] end -->
+        
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 本页面js -->
+<script type="text/javascript" src="../../../assets/js-v/sys/buttonrights_list.js"></script>
+
+</body>
+</html>

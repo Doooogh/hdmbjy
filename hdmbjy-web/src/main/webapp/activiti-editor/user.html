@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>海淀民办教育</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="stylesheet" href="../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../assets/fonts/material/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../assets/plugins/multi-select/css/multi-select.css">
+    
+    <!-- vue -->
+	<script src="../assets/js/vue.js"></script>
+
+</head>
+
+<body>
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+
+							    <!-- [ Hover-table ] start -->
+                                <div class="col-xl-12">
+                                    <div class="card">
+         									<input type="hidden" v-model="USERNAME" id="USERNAME" />
+											<!-- 检索条件  -->
+											<div style="padding-left: 15px;padding-top: 15px;">
+											<table>
+												<tr>
+													<td>
+								                        <div class="input-group input-group-sm mb-3">
+                                                        	<input class="form-control" type="text" v-model="pd.KEYWORDS" placeholder="这里输入关键词" />
+                                                    	</div>
+													</td>
+													<td style="padding-left:2px;">
+								                        <div class="input-group input-group-sm mb-3">
+								                        	<input type="text" class="form-control date" id="STRARTTIME" readonly="readonly" placeholder="开始日期" title="最近登录开始时间" style="width:93px;">
+								                        </div>
+													</td>
+													<td style="padding-left:2px;">
+								                        <div class="input-group input-group-sm mb-3">
+								                        	<input type="text" class="form-control date" readonly="readonly" placeholder="结束日期" title="最近登录截止时间" style="width:93px;">
+								                        </div>
+													</td>
+													<td style="vertical-align:top;padding-left:2px;width: 100px;">
+								                        <select class="js-example-placeholder-multiple col-sm-12" id="ROLE_ID" data-placeholder="请选择角色" >
+								                        	<option value=""></option>
+	                                                        <template v-for="data in roleList">
+															<option v-bind:value="data.role_ID">{{data.role_NAME}}</option>
+															</template>
+	                                                    </select>
+													</td>
+													<td style="vertical-align:top;padding-left:5px;">
+														<a class="btn btn-light btn-sm" v-on:click="getList" style="width: 23px;height:30px;margin-top:1px;" title="检索">
+															<i style="margin-top:-3px;margin-left: -6px;"  class="feather icon-search"></i>
+														</a>
+													</td>
+													<td v-show="loading">
+													<!-- [加载状态 ] start -->
+											    	<div class="d-flex justify-content-center" style="margin-top:-10px;">
+			                                            <div class="spinner-grow spinner-grow-sm" role="status">
+			                                                <span class="sr-only">Loading...</span>
+			                                            </div>
+			                                        </div>
+											    	<!-- [ 加载状态  ] End -->
+													</td>
+												</tr>
+											</table>
+											</div>
+											<!-- 检索  -->
+									
+								            <div class="card-block table-border-style" style="margin-top: -15px">
+	                                            <div class="table-responsive">
+	                                                <table class="table table-hover">
+									                 <thead>
+										                 <tr>
+										                    <th id="fhadminth">NO</th>
+															<th>编号</th>
+															<th>用户名</th>
+															<th>姓名</th>
+															<th>角色</th>
+										                 </tr>
+									                 </thead>
+									                 <tbody>
+									                 <!-- 开始循环 -->	
+									                 	<template v-for="(user,index) in varList">
+										                 <tr v-on:dblclick="setUser(user.USERNAME)" style="cursor:pointer;">
+										                     <td scope="row">{{page.showCount*(page.currentPage-1)+index+1}}</td>
+										                     <td>{{user.NUMBER}}</td>
+										                     <td>{{user.USERNAME}}</td>
+										                     <td>{{user.NAME}}</td>
+										                     <td>{{user.ROLE_NAME}}</td>
+										                 </tr>
+										                </template>
+														<tr v-show="varList.length==0">
+															<td colspan="10">没有相关数据</td>
+														</tr>
+									                 </tbody>
+									             </table>
+										             <table style="width:100%;margin-top:15px;">
+														<tr>
+															<td style="vertical-align:top;"></td>
+															<td style="vertical-align:top;"><div style="float: right;padding-top: 0px;margin-top: 0px;" v-html="page.pageStr"></div></td>
+														</tr>
+													</table>
+												</div>
+											</div>
+													          
+                                    </div>
+                                </div>
+                                <!-- [ Hover-table ] end -->
+
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../assets/js/pre-loader.js"></script>
+<script src="../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- select插件 -->
+<script src="../assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script src="../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script src="../assets/js/pages/form-select-custom.js"></script>
+
+<!-- 表单验证提示 -->
+<script src="../assets/js/jquery.tips.js"></script>
+
+<script type="text/javascript">
+var locat = (window.location+'').split('/'); 
+var vm = new Vue({
+	el: '#app',
+	
+	data:{
+		roleList: [],	//角色list
+		varList: [],	//用户list
+		page: [],		//分页类
+		pd: [],			//map
+		ROLE_ID: '',	//角色ID
+		USERNAME: '',	//用户名
+		showCount: -1,	//每页显示条数(这个是系统设置里面配置的，初始为-1即可，固定此写法)
+		currentPage: 1,	//当前页码
+		loading:false	//加载状态
+    },
+
+	methods: {
+		
+        //初始执行
+        init() {
+        	if('activiti-editor'== locat[3]){locat =  locat[0]+'//'+locat[2];}else{locat =  locat[0]+'//'+locat[2]+'/'+locat[3];};
+    		this.pd.KEYWORDS = '';
+    		this.getList();
+    		this.choiceTips();
+        },
+        
+        //获取列表
+        getList: function(){
+        	this.loading = true;
+       		this.pd.STRARTTIME = $("#STRARTTIME").val();
+           	this.pd.ENDTIME = $("#ENDTIME").val();
+           	this.ROLE_ID = $("#ROLE_ID").val();
+        	$.ajax({
+        		type: "POST",
+        		url: locat+'/user/listUsersForWindow?showCount='+this.showCount+'&currentPage='+this.currentPage,
+        		data: {KEYWORDS:this.pd.KEYWORDS,STRARTTIME:this.pd.STRARTTIME,ENDTIME:this.pd.ENDTIME,ROLE_ID:this.ROLE_ID,tm:new Date().getTime()},
+        		dataType:"json",
+        		success: function(data){
+        		 if("success" == data.result){
+        			 vm.roleList = data.roleList;
+        			 vm.varList = data.userList;
+        			 vm.page = data.page;
+        			 vm.pd = data.pd;
+        			 vm.loading = false;
+        		 }else if ("exception" == data.result){
+                 	showException("选择用户",data.exception);//显示异常
+                 }
+        		}
+        	}).done().fail(function(){
+                swal("登录失效!", "请求服务器无响应，稍后再试", "warning");
+            });
+        },
+		
+    	//选定用户
+    	setUser: function (USERNAME){
+    		this.USERNAME = USERNAME;
+    		this.userBinding();
+    	},
+
+    	//选定用户
+    	userBinding: function (){
+    		if('' == this.USERNAME){
+    			$("#fhadminth").tips({
+    				side:3,
+    	            msg:'没有选择任何用户',
+    	            bg:'#AE81FF',
+    	            time:2
+    	        });
+    		}else{
+    			$("#USERNAME").val(this.USERNAME);
+    			parent.Dialog.close();
+    		}
+    	},
+    	
+    	//提示双击选择
+    	choiceTips: function (){
+    		$("#fhadminth").tips({
+    			side:1,
+    	        msg:'双击选择角色',
+    	        bg:'#AE81FF',
+    	        time:6
+    	    });
+    	},
+    	
+    	//根据url参数名称获取参数值
+        getUrlKey: function (name) {
+            return decodeURIComponent(
+                (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
+        },
+        
+        //-----分页必用----start
+        nextPage: function (page){
+        	this.currentPage = page;
+        	this.getList();
+        },
+        changeCount: function (value){
+        	this.showCount = value;
+        	this.getList();
+        },
+        toTZ: function (){
+        	var toPaggeVlue = document.getElementById("toGoPage").value;
+        	if(toPaggeVlue == ''){document.getElementById("toGoPage").value=1;return;}
+        	if(isNaN(Number(toPaggeVlue))){document.getElementById("toGoPage").value=1;return;}
+        	this.nextPage(toPaggeVlue);
+        }
+       //-----分页必用----end
+		
+	},
+	
+	mounted(){
+        this.init();
+    }
+})
+		
+</script>
+</body>
+</html>

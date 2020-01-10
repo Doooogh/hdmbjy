@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="../../../assets/fonts/material/css/materialdesignicons.min.css">
+
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body>
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+
+							    <!-- [ Hover-table ] start -->
+                                <div class="col-xl-12">
+                                    <div class="card">
+							
+										<table style="margin-top: 15px;margin-left: 15px;">
+											<tr>
+												<td>
+												<button type="button" class="btn btn-light btn-sm"><i class="mdi mdi-database"></i>{{dbtype}}</button>
+												<button type="button" class="btn btn-light btn-sm" id="backupts"><i class="mdi mdi-arrow-right-bold"></i>{{databaseName}}</button>
+												</td>
+												<td>
+													<!-- [加载状态 ] start -->
+												    <div v-show="loading">
+												    	<div class="d-flex justify-content-center">
+					                                        <div class="spinner-border" style="width: 2rem; height:2rem;" role="status">
+				                                                <span class="sr-only"></span>
+				                                            </div>
+				                                        </div>
+				                                    </div>
+												    <!-- [ 加载状态  ] End -->
+												</td>
+												<td>
+												<div id="backuping2" style="padding-top: 8px; display:none">&nbsp;正在备份……</div>
+												</td>
+											</tr>
+										</table>
+										<div class="card-block table-border-style" style="margin-top: -15px">
+                                     		<div class="table-responsive">
+												<table class="table table-hover">	
+													<thead>
+														<tr>
+															<template v-if="dbtype != 'sqlserver'">
+															<th style="width: 50px;" id="cts">
+									                            <div class="checkbox d-inline">
+		                                                            <input type="checkbox" name="fhcheckbox" id="zcheckbox">
+		                                                            <label  style="max-height: 12px;" for="zcheckbox" class="cr"></label>
+		                                                        </div>
+															</th>
+															</template>
+															<th style="width:50px;">NO</th>
+															<th>表名</th>
+															<template v-if="dbtype != 'sqlserver'">
+															<th>&nbsp;&nbsp;&nbsp;&nbsp;操作</th>
+															</template>
+															<template v-if="dbtype != 'sqlserver'">
+															<th style="width:50px;"></th>
+															</template>
+															<th style="width:50px;">NO</th>
+															<th>表名</th>
+															<template v-if="dbtype != 'sqlserver'">
+															<th>&nbsp;&nbsp;&nbsp;&nbsp;操作</th>
+															</template>
+														</tr>
+													</thead>
+																			
+													<tbody>
+														<!-- 开始循环 -->	
+														<template v-for="(data,index) in varList">
+														<tr>
+															<template v-for="(data2,index2) in data">
+																<template v-if="dbtype != 'sqlserver'">
+																<td v-bind:id="'ffhid'+index+'-'+index2">
+																  	<div class="checkbox d-inline">
+	                                                            		<input type="checkbox"  name='ids' v-bind:value="data2" v-bind:id="'fhid'+index+'-'+index2">
+	                                                            		<label  style="max-height: 12px;" v-bind:for="'fhid'+index+'-'+index2" class="cr"></label>
+	                                                        		</div>
+																</td>
+																</template>
+																<td scope="row" style="width: 50px;">
+																	{{index2 == 0 ? index+1 : (index+1) + varList.length}}
+																</td>
+																<td class='left' style="width: 220px;">{{data2}}</td>
+																<template v-if="dbtype != 'sqlserver'">
+																<td>
+																	<a v-show="add" style="height:20px;" class="btn btn-light btn-sm" v-on:click="backupTable(data2,'fhid'+index+'-'+index2)"><div style="margin-top:-6px;margin-left: -1px;">备份</div></a>
+																</td>
+																</template>
+															</template>
+														</tr>
+														</template>
+														<tr v-show="varList.length==0">
+															<td colspan="10">没有相关数据</td>
+														</tr>
+													</tbody>
+												</table>
+												<table style="width:100%;">
+													<tr>
+														<td style="vertical-align:top;">
+															<template v-if="dbtype != 'sqlserver'">
+																<a v-show="add" class="btn btn-light btn-sm" v-on:click="makeAll('确定要批量备份这些表吗？')">备份表</a>
+															</template>
+															<a v-show="add" class="btn btn-light btn-sm" v-on:click="backupall" id="alldata">备份整个库</a>
+														</td>
+														<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;"></div></td>
+													</tr>
+												</table>
+											</div>
+										</div>
+										
+                                    </div>
+                                </div>
+                                <!-- [ Hover-table ] end -->
+
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 表单验证提示 -->
+<script type="text/javascript" src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页面js -->
+<script type="text/javascript" src="../../../assets/js-v/fhdb/table_list.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.questionnaire.SubjectMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		TK_SUBJECT
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.SORT,	
+		f.TITLE,	
+		f.TYPE,	
+		f.OPTIONA,	
+		f.OPTIONB,	
+		f.OPTIONC,	
+		f.OPTIOND,	
+		f.OPTIONE,	
+		f.OPTIONF,	
+		f.OPTIONG,	
+		f.OPTIONH,	
+		f.BZ,	
+		f.CREATETIME,	
+		f.CREATEUSER,	
+		f.UPDATETIME,	
+		f.SUBJECT_ID
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		SORT,	
+		TITLE,	
+		TYPE,	
+		OPTIONA,	
+		OPTIONB,	
+		OPTIONC,	
+		OPTIOND,	
+		OPTIONE,	
+		OPTIONF,	
+		OPTIONG,	
+		OPTIONH,	
+		BZ,	
+		CREATETIME,	
+		CREATEUSER,	
+		UPDATETIME,	
+		SUBJECT_ID
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{SORT},	
+		#{TITLE},	
+		#{TYPE},	
+		#{OPTIONA},	
+		#{OPTIONB},	
+		#{OPTIONC},	
+		#{OPTIOND},	
+		#{OPTIONE},	
+		#{OPTIONF},	
+		#{OPTIONG},	
+		#{OPTIONH},	
+		#{BZ},	
+		#{CREATETIME},	
+		#{CREATEUSER},	
+		#{UPDATETIME},	
+		#{SUBJECT_ID}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field2"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			SUBJECT_ID = #{SUBJECT_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			SORT = #{SORT},
+			TITLE = #{TITLE},
+			TYPE = #{TYPE},
+			OPTIONA = #{OPTIONA},
+			OPTIONB = #{OPTIONB},
+			OPTIONC = #{OPTIONC},
+			OPTIOND = #{OPTIOND},
+			OPTIONE = #{OPTIONE},
+			OPTIONF = #{OPTIONF},
+			OPTIONG = #{OPTIONG},
+			OPTIONH = #{OPTIONH},
+			BZ = #{BZ},
+			CREATEUSER = #{CREATEUSER},
+			SUBJECT_ID = SUBJECT_ID
+		where 
+			SUBJECT_ID = #{SUBJECT_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.SUBJECT_ID = #{SUBJECT_ID}
+	</select>
+	<!-- 查询最后插入的一条数据 -->
+	<select id="findByLast" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			1=1 GROUP BY f.SORT DESC LIMIT 1 
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+			d3.BIANMA BIANMA3,
+			d3.NAME DNAME3,
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+			left join 
+			<include refid="dicTableName"></include> d3
+			on f.TYPE = d3.BIANMA
+		where 1=1
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件-->
+					f.TITLE LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					 or 
+					f.TYPE LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				
+				)
+		</if>
+		ORDER BY f.SORT ASC
+	 
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		d3.BIANMA BIANMA3,
+		d3.NAME DNAME3,
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		left join 
+			<include refid="dicTableName"></include> d3
+			on f.TYPE = d3.BIANMA
+		where 1 = 1 
+		ORDER BY f.SORT ASC	
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			SUBJECT_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

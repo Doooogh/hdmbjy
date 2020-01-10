@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>海淀区民办教育管理平台</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/fonts/material/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <link rel="stylesheet" href="../../../assets/css/layui/layui.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body>
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+
+							    <!-- [ Hover-table ] start -->
+                                <div class="col-xl-12">
+                                    <div class="card">
+         
+										<!-- 检索条件  -->
+										<div style="padding-left: 15px;padding-top: 15px;">
+										<table>
+											<tr>
+												<td>
+							                        <div class="input-group input-group-sm mb-3">
+                                                       	<input class="form-control" type="text" v-model="pd.KEYWORDS" placeholder="这里输入关键词" />
+                                                   	</div>
+												</td>
+												<td style="padding-left:2px;">
+							                        <div class="input-group input-group-sm mb-3">
+							                        	<input type="text" class="form-control date" id="STRARTTIME" readonly="readonly" placeholder="开始日期" title="最近登录开始时间" style="width:93px;">
+							                        </div>
+												</td>
+												<td style="padding-left:2px;">
+							                        <div class="input-group input-group-sm mb-3">
+							                        	<input type="text" class="form-control date" id="ENDTIME" readonly="readonly" placeholder="结束日期" title="最近登录截止时间" style="width:93px;">
+							                        </div>
+												</td>
+												<td style="vertical-align:top;padding-left:2px;width: 150px;">
+							                        <select class="js-example-placeholder-multiple col-sm-12" id="ROLE_ID" data-placeholder="请选择角色" >
+							                        	<option value=""></option>
+                                                        <template v-for="data in roleList">
+														<option v-bind:value="data.role_ID">{{data.role_NAME}}</option>
+														</template>
+                                                    </select>
+												</td>
+												<td style="vertical-align:top;padding-left:5px;">
+													<a class="btn btn-light btn-sm" v-on:click="getList " style="width: 23px;height:30px;margin-top:1px;" title="检索">
+														<i style="margin-top:-3px;margin-left: -6px;"  class="feather icon-search"></i>
+													</a>
+													<!-- <a v-show="toExcel" class="btn btn-light btn-sm" v-on:click="goExcel" style="width: 23px;height:30px;margin-top:1px;margin-left: -9px;" title="导出到excel表格">
+														<i style="margin-top:-3px;margin-left: -6px;" class="mdi mdi-cloud-download"></i>
+													</a>
+													<a v-show="fromExcel" class="btn btn-light btn-sm" v-on:click="getExcel" style="width: 23px;height:30px;margin-top:1px;margin-left: -9px;" title="从EXCEL导入到系统">
+														<i style="margin-top:-3px;margin-left: -6px;" class="mdi mdi-cloud-upload"></i>
+													</a> -->
+												</td>
+												<td v-show="loading">
+												<!-- [加载状态 ] start -->
+										    	<div class="d-flex justify-content-center" style="margin-top:-10px;">
+		                                            <div class="spinner-grow spinner-grow-sm" role="status">
+		                                                <span class="sr-only">Loading...</span>
+		                                            </div>
+		                                        </div>
+										    	<!-- [ 加载状态  ] End -->
+												</td>
+											</tr>
+										</table>
+										</div>
+										<!-- 检索  -->
+								
+							            <div class="card-block table-border-style" style="margin-top: -15px">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+								                 <thead>
+									                 <tr>
+														<th style="width: 50px;" id="cts">
+								                            <div class="checkbox d-inline">
+	                                                            <input type="checkbox" name="fhcheckbox" id="zcheckbox">
+	                                                            <label  style="max-height: 12px;" for="zcheckbox" class="cr"></label>
+	                                                        </div>
+														</th>
+									                    <th>NO</th>
+														<th>用户名</th>
+														<th>姓名</th>
+														<th>角色</th>
+														<th>邮箱</th>
+														<!-- <th>部门机构</th> -->
+														<th>最近登录</th>
+														<th>上次登录IP</th>
+														<th>操作</th>
+									                 </tr>
+								                 </thead>
+								                 <tbody>
+								                 	<!-- 开始循环 -->	
+								                 	<template v-for="(user,index) in varList">
+										                 <tr>
+															 <td>
+															  	<div class="checkbox d-inline">
+	                                                            	<input type="checkbox" v-bind:id="'zcheckbox'+index" name='ids' v-bind:value="user.USER_ID" v-bind:alt="user.EMAIL" v-bind:title="user.USERNAME">
+	                                                            	<label  style="max-height: 12px;" v-bind:for="'zcheckbox'+index" class="cr"></label>
+	                                                        	</div>
+															 </td>
+										                     <td scope="row">{{page.showCount*(page.currentPage-1)+index+1}}</td>
+										                     <td>{{user.USERNAME}}</td>
+										                     <td>{{user.NAME}}</td>
+										                     <td>{{user.ROLE_NAME}}</td>
+										                     <td>
+										                    	<a title="发送电子邮件">{{user.EMAIL}}&nbsp;<!-- <i v-show="email" class="mdi mdi-email-plus" v-on:click="sendEmail(user.EMAIL)" style="text-decoration:none;cursor:pointer;"></i> --></a>
+										                     </td>
+										                     <!-- <td>{{user.DEPARTMENT_NAME}}</td> -->
+										                     <td>{{user.LAST_LOGIN}}</td>
+										                     <td>{{user.IP}}</td>
+										                     <td>
+																<!-- <a v-show="fhSms" title='发送站内信' v-on:click="sendFhsms(user.USERNAME)" style="cursor:pointer;"><i class="mdi mdi-email-plus-outline"></i></a> -->
+										                     	<a v-show="edit" title="修改" v-on:click="editUser(user.USER_ID)" style="cursor:pointer;"><button type="button" class="layui-btn layui-btn-xs layui-btn-warm">修改</button></a>
+										                     	<a v-show="del" title="删除" v-on:click="delUser(user.USER_ID,user.NAME)" style="cursor:pointer;"><button type="button" class="layui-btn layui-btn-xs layui-btn-danger">删除</button></a>
+										                     </td>
+
+										                 </tr>
+									                </template>
+													<tr v-show="varList.length==0">
+														<td colspan="10">没有相关数据</td>
+													</tr>
+								                 </tbody>
+								             </table>
+									             <table style="width:100%;margin-top:15px;">
+													<tr>
+														<td style="vertical-align:top;">
+															<a v-show="add" class="btn btn-light btn-sm" v-on:click="addUser">新增</a></shiro:hasPermission>
+									                 		<a v-show="del" class="btn btn-light btn-sm" v-on:click="makeAll('确定要删除选中的用户吗?');" style="margin-left:-9px;">删除</a>
+									                 		<!-- <a v-show="email" class="btn btn-light btn-sm" title="批量发送站内信" v-on:click="makeAll('确定要给选中的用户发送邮件?');" style="margin-left:-9px;">发邮件</a>
+									                 		<a v-show="fhSms" class="btn btn-light btn-sm" title="批量发送站内信" v-on:click="makeAll('确定要给选中的用户发送站内信吗?');" style="margin-left:-9px;">发站内信</a> -->
+														</td>
+														<td style="vertical-align:top;"><div style="float: right;padding-top: 0px;margin-top: 0px;" v-html="page.pageStr"></div></td>
+													</tr>
+												</table>
+											</div>
+										</div>
+													          
+                                    </div>
+                                </div>
+                                <!-- [ Hover-table ] end -->
+
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- select插件 -->
+<script src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script src="../../../assets/js/pages/form-select-custom.js"></script>
+
+<!-- 表单验证提示 -->
+<script type="text/javascript" src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页面js --> 
+<script type="text/javascript" src="../../../assets/js-v/sys/user_list.js"></script>
+
+</body>
+</html>

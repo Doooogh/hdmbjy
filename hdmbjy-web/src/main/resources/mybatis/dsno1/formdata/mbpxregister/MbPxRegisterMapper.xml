@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.formdata.mbpxregister.MbPxRegisterMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		AF_MBPXREGISTER
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.SC_ALLNAME,	
+		f.PRINCIPAL_AND_PHONE,	
+		f.LINKMAN_AND_PHONE,	
+		f.PRINCIPAL,	
+		f.DECISION_MAKING_HEADMAN,	
+		f.DECISION_MAKING_MEMBER,	
+		f.LEGAL_PERSON,	
+		f.CHANGE_OF_ORGANIZER,	
+		f.OPEN_MAJOR,	
+		f.RECORD_BEFORE,	
+		f.RECORD_AFTER,	
+		f.ORGANIZER_OPINION,	
+		f.ORGANIZER_DATE,	
+		f.COMPETENT_ADVICE,	
+		f.COMPETENT_DATE,	
+		f.DELIVERY_AND_PHONE,	
+		f.DELIVERY_DATE,	
+		f.ACCEPTOR,	
+		f.ACCEPTING_DATE,	
+		f.VERIFIER,	
+		f.VERIFIER_DATE,	
+		f.NUMBER1,	
+		f.NUMBER2,	
+		f.BEIZHU,	
+		f.MBPXREGISTER_ID,
+		f.HAIJIAO_NUMBER
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		SC_ALLNAME,	
+		PRINCIPAL_AND_PHONE,	
+		LINKMAN_AND_PHONE,	
+		PRINCIPAL,	
+		DECISION_MAKING_HEADMAN,	
+		DECISION_MAKING_MEMBER,	
+		LEGAL_PERSON,	
+		CHANGE_OF_ORGANIZER,	
+		OPEN_MAJOR,	
+		RECORD_BEFORE,	
+		RECORD_AFTER,	
+		ORGANIZER_OPINION,	
+		ORGANIZER_DATE,	
+		COMPETENT_ADVICE,	
+		COMPETENT_DATE,	
+		DELIVERY_AND_PHONE,	
+		DELIVERY_DATE,	
+		ACCEPTOR,	
+		ACCEPTING_DATE,	
+		VERIFIER,	
+		VERIFIER_DATE,	
+		NUMBER1,	
+		NUMBER2,	
+		BEIZHU,	
+		MBPXREGISTER_ID,
+		HAIJIAO_NUMBER
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{SC_ALLNAME},	
+		#{PRINCIPAL_AND_PHONE},	
+		#{LINKMAN_AND_PHONE},	
+		#{PRINCIPAL},	
+		#{DECISION_MAKING_HEADMAN},	
+		#{DECISION_MAKING_MEMBER},	
+		#{LEGAL_PERSON},	
+		#{CHANGE_OF_ORGANIZER},	
+		#{OPEN_MAJOR},	
+		#{RECORD_BEFORE},	
+		#{RECORD_AFTER},	
+		#{ORGANIZER_OPINION},	
+		#{ORGANIZER_DATE},	
+		#{COMPETENT_ADVICE},	
+		#{COMPETENT_DATE},	
+		#{DELIVERY_AND_PHONE},	
+		#{DELIVERY_DATE},	
+		#{ACCEPTOR},	
+		#{ACCEPTING_DATE},	
+		#{VERIFIER},	
+		#{VERIFIER_DATE},	
+		#{NUMBER1},	
+		#{NUMBER2},	
+		#{BEIZHU},	
+		#{MBPXREGISTER_ID},
+		#{HAIJIAO_NUMBER}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field2"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			MBPXREGISTER_ID = #{MBPXREGISTER_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			SC_ALLNAME = #{SC_ALLNAME},
+			PRINCIPAL_AND_PHONE = #{PRINCIPAL_AND_PHONE},
+			LINKMAN_AND_PHONE = #{LINKMAN_AND_PHONE},
+			PRINCIPAL = #{PRINCIPAL},
+			DECISION_MAKING_HEADMAN = #{DECISION_MAKING_HEADMAN},
+			DECISION_MAKING_MEMBER = #{DECISION_MAKING_MEMBER},
+			LEGAL_PERSON = #{LEGAL_PERSON},
+			CHANGE_OF_ORGANIZER = #{CHANGE_OF_ORGANIZER},
+			OPEN_MAJOR = #{OPEN_MAJOR},
+			RECORD_BEFORE = #{RECORD_BEFORE},
+			RECORD_AFTER = #{RECORD_AFTER},
+			ORGANIZER_OPINION = #{ORGANIZER_OPINION},
+			ORGANIZER_DATE = #{ORGANIZER_DATE},
+			COMPETENT_ADVICE = #{COMPETENT_ADVICE},
+			COMPETENT_DATE = #{COMPETENT_DATE},
+			DELIVERY_AND_PHONE = #{DELIVERY_AND_PHONE},
+			DELIVERY_DATE = #{DELIVERY_DATE},
+			ACCEPTOR = #{ACCEPTOR},
+			ACCEPTING_DATE = #{ACCEPTING_DATE},
+			VERIFIER = #{VERIFIER},
+			VERIFIER_DATE = #{VERIFIER_DATE},
+			NUMBER1 = #{NUMBER1},
+			NUMBER2 = #{NUMBER2},
+			BEIZHU = #{BEIZHU},
+			HAIJIAO_NUMBER=#{HAIJIAO_NUMBER}
+		where 
+			MBPXREGISTER_ID = #{MBPXREGISTER_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.MBPXREGISTER_ID = #{MBPXREGISTER_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 1=1
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				-->
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			MBPXREGISTER_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

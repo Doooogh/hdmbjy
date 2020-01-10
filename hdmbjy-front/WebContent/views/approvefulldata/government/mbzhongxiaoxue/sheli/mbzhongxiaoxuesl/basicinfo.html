@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>决策机构（       ）成员个人基本情况表</title>
+
+<link href="../css/pagetable.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<style>
+	.input-group{
+		background: #f4f7fa;
+		    position: relative;
+		    display: -ms-flexbox;
+		    display: flex;
+		    -ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
+		    -ms-flex-align: stretch;
+		    align-items: stretch;
+		    width: 100%;
+		}
+	}
+</style>
+<style type="text/css">
+#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+</style>
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+	$(".tableT p").blur(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	});
+	
+});
+</script>
+
+<script>
+//图片上传预览    IE是用了滤镜。
+        function previewImage(file)
+        {
+          var MAXWIDTH  = 260; 
+          var MAXHEIGHT = 180;
+          var div = document.getElementById('preview');
+          if (file.files && file.files[0])
+          {
+              div.innerHTML ='<img id=imghead>';
+              var img = document.getElementById('imghead');
+              img.onload = function(){
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                img.width  =  rect.width;
+                img.height =  rect.height;
+//                 img.style.marginLeft = rect.left+'px';
+                img.style.marginTop = rect.top+'px';
+              }
+              var reader = new FileReader();
+              reader.onload = function(evt){img.src = evt.target.result;}
+              reader.readAsDataURL(file.files[0]);
+          }
+          else //兼容IE
+          {
+            var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+            file.select();
+            var src = document.selection.createRange().text;
+            div.innerHTML = '<img id=imghead>';
+            var img = document.getElementById('imghead');
+            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+            status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+            div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+          }
+        }
+        function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+            var param = {top:0, left:0, width:width, height:height};
+            if( width>maxWidth || height>maxHeight )
+            {
+                rateWidth = width / maxWidth;
+                rateHeight = height / maxHeight;
+                 
+                if( rateWidth > rateHeight )
+                {
+                    param.width =  maxWidth;
+                    param.height = Math.round(height / rateWidth);
+                }else
+                {
+                    param.width = Math.round(width / rateHeight);
+                    param.height = maxHeight;
+                }
+            }
+            param.left = Math.round((maxWidth - param.width) / 2);
+            param.top = Math.round((maxHeight - param.height) / 2);
+            return param;
+        }
+</script>
+</head>
+<body>
+<div class="pagetable">
+	<h1>决策机构（     <p class="inlinep" :contenteditable="isPreview?false:true"></p>   ）成员个人基本情况表</h1>
+	<div id="app" >
+		<input type="hidden" :value="BASICINFO_ID" :id="FORM_ID"/>
+		<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+		<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+		<table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<th width="100">姓名</th>
+			<td width="100"><p :contenteditable="isPreview?false:true" ref="NAME" id="NAME" v-text="pd.NAME"></p></td>
+			<th width="100">性别</th>
+			<td><p :contenteditable="isPreview?false:true" ref="SEX" id="SEX" v-text="pd.SEX"></p></td>
+			<th width="100">民族</th>
+			<td colspan="3"><p :contenteditable="isPreview?false:true" ref="NATIONALITY" id="NATIONALITY" v-text="pd.NATIONALITY"></p></td>
+			<td width="20%" rowspan="4" class="img">
+				<div id="preview"><img id="imghead" width=100% height=auto border=0 src=''></div>
+				<input type="file" onchange="previewImage(this)" />  
+			</td>
+		  </tr>
+		  <tr>
+			<th>出生日期</th>
+			<td class="alignc" colspan="3" ref="BIRTHDAY" id="BIRTHDAY">
+				<p ref="YEAR" id="YEAR" v-text="pd.YEAR" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true"></p>年
+				<p style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="MONTH" id="MONTH" v-text="pd.MONTH"></p>月
+				<p style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="DAY" id="DAY" v-text="pd.DAY"></p>日
+			</td>
+			<th>政治面貌</th>
+			<td colspan="3"><p :contenteditable="isPreview?false:true"  ref="POLITICS_STATUS" id="POLITICS_STATUS" v-text="pd.POLITICS_STATUS"></p></td>
+			</tr>
+		  <tr>
+			<th>职称</th>
+			<td colspan="3"><p :contenteditable="isPreview?false:true"  ref="TITLE" id="TITLE" v-text="pd.TITLE" ></p></td>
+			<th>文化程度</th>
+			<td colspan="3"><p :contenteditable="isPreview?false:true" ref="STANDARD_ULTURE" id="STANDARD_ULTURE" v-text="pd.STANDARD_ULTURE"></p></td>
+			</tr>
+		  <tr>
+			<th>身份证号码</th>
+			<td colspan="3"><p :contenteditable="isPreview?false:true" ref="ID_NUMBER" id="ID_NUMBER" v-text="pd.ID_NUMBER"></p></td>
+			<th>健康状况</th>
+			<td><p :contenteditable="isPreview?false:true" ref="HEALTH_CONDITION" id="HEALTH_CONDITION" v-text="pd.HEALTH_CONDITION"></p></td>
+			<th width="100">是否退休</th>
+			<td><p :contenteditable="isPreview?false:true" ref="ISRETIREMENT" id="ISRETIREMENT" v-text="pd.ISRETIREMENT"></p></td>
+			</tr>
+		  <tr>
+			<th>原工作单位及职务</th>
+			<td colspan="6"><p :contenteditable="isPreview?false:true" ref="ORIGINAL_WORK" id="ORIGINAL_WORK" v-text="pd.ORIGINAL_WORK" ></p></td>
+			<th width="100">手机电话</th>
+			<td><p :contenteditable="isPreview?false:true" ref="PHONE" id="PHONE" v-text="pd.PHONE"></p></td>
+		  </tr>
+		  <tr>
+			<th>现家庭住址</th>
+			<td colspan="6"><p :contenteditable="isPreview?false:true" ref="ADDRESS" id="ADDRESS" v-text="pd.ADDRESS"></p></td>
+			<th>邮政编码</th>
+			<td><p :contenteditable="isPreview?false:true" ref="POST_CODE" id="POST_CODE" v-text="pd.POST_CODE"></p></td>
+		  </tr>
+		  <tr>
+			<th>个人简历</th>
+			<td colspan="8"><p class="mh200" :contenteditable="isPreview?false:true" ref="RESUME" id="RESUME" v-text="pd.RESUME"></p></td>
+			</tr>
+		  <tr>
+			<th rowspan="3">本人意见</th>
+			<td colspan="8">
+				<p class="mh200" :contenteditable="isPreview?false:true" ref="OPINION" id="OPINION" v-text="pd.OPINION"></p>签字（盖章）：</br>
+				<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true"></p>年
+				<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true"></p>月
+				<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true"></p>日
+			</td>
+			</tr>
+		</table>
+		<div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+				<span style="width: 100%;text-align: center;">
+							<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+							<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+							<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+				</span>
+		</div>
+	</div>
+	
+</div>
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="../js/basicinfo.js"></script>
+</body>
+</html>

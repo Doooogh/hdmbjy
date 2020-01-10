@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>海淀区民办教育管理平台</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+					
+								<div style="width: 100%;">
+									<div id="showform">
+														            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">id</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="DETERMINATIVETABLE_ID" id="DETERMINATIVETABLE_ID" v-model="pd.DETERMINATIVETABLE_ID" maxlength="64" placeholder="这里输入id" title="id">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">姓名</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="NAME" id="NAME" v-model="pd.NAME" maxlength="255" placeholder="这里输入姓名" title="姓名">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">性别</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="SEX" id="SEX" v-model="pd.SEX" maxlength="16" placeholder="这里输入性别" title="性别">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">学历</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="EDUCATION" id="EDUCATION" v-model="pd.EDUCATION" maxlength="255" placeholder="这里输入学历" title="学历">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">政治面貌</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="POLITICS_STATUS" id="POLITICS_STATUS" v-model="pd.POLITICS_STATUS" maxlength="255" placeholder="这里输入政治面貌" title="政治面貌">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">拟任职务</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="DESIGNATE_DPOSITION" id="DESIGNATE_DPOSITION" v-model="pd.DESIGNATE_DPOSITION" maxlength="255" placeholder="这里输入拟任职务" title="拟任职务">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">专职兼职</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="FULLTIME_OR_PARTTIME" id="FULLTIME_OR_PARTTIME" v-model="pd.FULLTIME_OR_PARTTIME" maxlength="255" placeholder="这里输入专职兼职" title="专职兼职">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">职称</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="TITLE" id="TITLE" v-model="pd.TITLE" maxlength="255" placeholder="这里输入职称" title="职称">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">出生日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="BIRTHDAY" id="BIRTHDAY" v-model="pd.BIRTHDAY" maxlength="255" placeholder="这里输入出生日期" title="出生日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">身份证号</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ID_NUMBER" id="ID_NUMBER" v-model="pd.ID_NUMBER" maxlength="18" placeholder="这里输入身份证号" title="身份证号">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">从事教育教学工作年限</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="WORK_YEAR" id="WORK_YEAR" v-model="pd.WORK_YEAR" maxlength="16" placeholder="这里输入从事教育教学工作年限" title="从事教育教学工作年限">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">从教专业</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="TEACH_MAJOR" id="TEACH_MAJOR" v-model="pd.TEACH_MAJOR" maxlength="255" placeholder="这里输入从教专业" title="从教专业">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">健康情况</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="HEALTHY_CONDITION" id="HEALTHY_CONDITION" v-model="pd.HEALTHY_CONDITION" maxlength="255" placeholder="这里输入健康情况" title="健康情况">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">是否退休</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ISRETIREMENT" id="ISRETIREMENT" v-model="pd.ISRETIREMENT" maxlength="16" placeholder="这里输入是否退休" title="是否退休">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">原工作单位以及职务</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ORIGINAL_WORK" id="ORIGINAL_WORK" v-model="pd.ORIGINAL_WORK" maxlength="255" placeholder="这里输入原工作单位以及职务" title="原工作单位以及职务">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">电话手机</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="PHONE" id="PHONE" v-model="pd.PHONE" maxlength="255" placeholder="这里输入电话手机" title="电话手机">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">现家庭住址</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="NOW_ADDRESS" id="NOW_ADDRESS" v-model="pd.NOW_ADDRESS" maxlength="255" placeholder="这里输入现家庭住址" title="现家庭住址">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">邮政编码</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="POSTCODE" id="POSTCODE" v-model="pd.POSTCODE" maxlength="32" placeholder="这里输入邮政编码" title="邮政编码">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">个人简历</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="RESUME" id="RESUME" v-model="pd.RESUME" maxlength="0" placeholder="这里输入个人简历" title="个人简历">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">当事人意见</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="PARTY_OPINION" id="PARTY_OPINION" v-model="pd.PARTY_OPINION" maxlength="512" placeholder="这里输入当事人意见" title="当事人意见">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">当事人签字日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="PARTY_OPINION_DATE" id="PARTY_OPINION_DATE" v-model="pd.PARTY_OPINION_DATE" maxlength="512" placeholder="这里输入当事人签字日期" title="当事人签字日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">人事部门意见</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="HR_DE_OPINION" id="HR_DE_OPINION" v-model="pd.HR_DE_OPINION" maxlength="0" placeholder="这里输入人事部门意见" title="人事部门意见">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">人事部门签字日期</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="HR_DE_OPINION_DATE" id="HR_DE_OPINION_DATE" v-model="pd.HR_DE_OPINION_DATE" maxlength="255" placeholder="这里输入人事部门签字日期" title="人事部门签字日期">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">举办者政治思想表现道德品质鉴定</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="AUTHENTICATE_RES" id="AUTHENTICATE_RES" v-model="pd.AUTHENTICATE_RES" maxlength="255" placeholder="这里输入举办者政治思想表现道德品质鉴定" title="举办者政治思想表现道德品质鉴定">
+		                                </div>
+							            <div class="input-group" style="margin-top:10px;background-color: white" >
+							            	<span style="width: 100%;text-align: center;">
+							            		<a class="btn btn-light btn-sm" v-on:click="save">保存</a>
+							            		<a class="btn btn-light btn-sm" onclick="top.Dialog.close()">取消</a>
+							            	</span>
+							            </div>
+							       </div>
+						           <!-- [加载状态 ] start -->
+								    <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+								    <!-- [ 加载状态  ] End -->
+								</div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- select插件 -->
+<script src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script src="../../../assets/js/pages/form-select-custom.js"></script>
+
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+
+<script type="text/javascript">
+
+var vm = new Vue({
+	el: '#app',
+	
+	data:{
+		DETERMINATIVETABLE_ID: '',	//主键ID
+		pd: [],						//存放字段参数
+		msg:'add'
+    },
+	
+	methods: {
+		
+        //初始执行
+        init() {
+        	var FID = this.getUrlKey('FID');	//当接收过来的FID不为null时,表示此页面是修改进来的
+        	if(null != FID){
+        		this.msg = 'edit';
+        		this.DETERMINATIVETABLE_ID = FID;
+        		this.getData();
+        	}
+        	setTimeout(function(){
+        		vm.getDict();
+            },200);
+        },
+        
+        //去保存
+    	save: function (){
+    		
+			if(this.pd.DETERMINATIVETABLE_ID == '' || this.pd.DETERMINATIVETABLE_ID == undefined){
+				$("#DETERMINATIVETABLE_ID").tips({
+					side:3,
+		            msg:'请输入id',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.DETERMINATIVETABLE_ID = '';
+				this.$refs.DETERMINATIVETABLE_ID.focus();
+			return false;
+			}
+			if(this.pd.NAME == '' || this.pd.NAME == undefined){
+				$("#NAME").tips({
+					side:3,
+		            msg:'请输入姓名',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.NAME = '';
+				this.$refs.NAME.focus();
+			return false;
+			}
+			if(this.pd.SEX == '' || this.pd.SEX == undefined){
+				$("#SEX").tips({
+					side:3,
+		            msg:'请输入性别',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.SEX = '';
+				this.$refs.SEX.focus();
+			return false;
+			}
+			if(this.pd.EDUCATION == '' || this.pd.EDUCATION == undefined){
+				$("#EDUCATION").tips({
+					side:3,
+		            msg:'请输入学历',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.EDUCATION = '';
+				this.$refs.EDUCATION.focus();
+			return false;
+			}
+			if(this.pd.POLITICS_STATUS == '' || this.pd.POLITICS_STATUS == undefined){
+				$("#POLITICS_STATUS").tips({
+					side:3,
+		            msg:'请输入政治面貌',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.POLITICS_STATUS = '';
+				this.$refs.POLITICS_STATUS.focus();
+			return false;
+			}
+			if(this.pd.DESIGNATE_DPOSITION == '' || this.pd.DESIGNATE_DPOSITION == undefined){
+				$("#DESIGNATE_DPOSITION").tips({
+					side:3,
+		            msg:'请输入拟任职务',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.DESIGNATE_DPOSITION = '';
+				this.$refs.DESIGNATE_DPOSITION.focus();
+			return false;
+			}
+			if(this.pd.FULLTIME_OR_PARTTIME == '' || this.pd.FULLTIME_OR_PARTTIME == undefined){
+				$("#FULLTIME_OR_PARTTIME").tips({
+					side:3,
+		            msg:'请输入专职兼职',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.FULLTIME_OR_PARTTIME = '';
+				this.$refs.FULLTIME_OR_PARTTIME.focus();
+			return false;
+			}
+			if(this.pd.TITLE == '' || this.pd.TITLE == undefined){
+				$("#TITLE").tips({
+					side:3,
+		            msg:'请输入职称',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.TITLE = '';
+				this.$refs.TITLE.focus();
+			return false;
+			}
+			if(this.pd.BIRTHDAY == '' || this.pd.BIRTHDAY == undefined){
+				$("#BIRTHDAY").tips({
+					side:3,
+		            msg:'请输入出生日期',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.BIRTHDAY = '';
+				this.$refs.BIRTHDAY.focus();
+			return false;
+			}
+			if(this.pd.ID_NUMBER == '' || this.pd.ID_NUMBER == undefined){
+				$("#ID_NUMBER").tips({
+					side:3,
+		            msg:'请输入身份证号',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.ID_NUMBER = '';
+				this.$refs.ID_NUMBER.focus();
+			return false;
+			}
+			if(this.pd.WORK_YEAR == '' || this.pd.WORK_YEAR == undefined){
+				$("#WORK_YEAR").tips({
+					side:3,
+		            msg:'请输入从事教育教学工作年限',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.WORK_YEAR = '';
+				this.$refs.WORK_YEAR.focus();
+			return false;
+			}
+			if(this.pd.TEACH_MAJOR == '' || this.pd.TEACH_MAJOR == undefined){
+				$("#TEACH_MAJOR").tips({
+					side:3,
+		            msg:'请输入从教专业',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.TEACH_MAJOR = '';
+				this.$refs.TEACH_MAJOR.focus();
+			return false;
+			}
+			if(this.pd.HEALTHY_CONDITION == '' || this.pd.HEALTHY_CONDITION == undefined){
+				$("#HEALTHY_CONDITION").tips({
+					side:3,
+		            msg:'请输入健康情况',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.HEALTHY_CONDITION = '';
+				this.$refs.HEALTHY_CONDITION.focus();
+			return false;
+			}
+			if(this.pd.ISRETIREMENT == '' || this.pd.ISRETIREMENT == undefined){
+				$("#ISRETIREMENT").tips({
+					side:3,
+		            msg:'请输入是否退休',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.ISRETIREMENT = '';
+				this.$refs.ISRETIREMENT.focus();
+			return false;
+			}
+			if(this.pd.ORIGINAL_WORK == '' || this.pd.ORIGINAL_WORK == undefined){
+				$("#ORIGINAL_WORK").tips({
+					side:3,
+		            msg:'请输入原工作单位以及职务',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.ORIGINAL_WORK = '';
+				this.$refs.ORIGINAL_WORK.focus();
+			return false;
+			}
+			if(this.pd.PHONE == '' || this.pd.PHONE == undefined){
+				$("#PHONE").tips({
+					side:3,
+		            msg:'请输入电话手机',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.PHONE = '';
+				this.$refs.PHONE.focus();
+			return false;
+			}
+			if(this.pd.NOW_ADDRESS == '' || this.pd.NOW_ADDRESS == undefined){
+				$("#NOW_ADDRESS").tips({
+					side:3,
+		            msg:'请输入现家庭住址',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.NOW_ADDRESS = '';
+				this.$refs.NOW_ADDRESS.focus();
+			return false;
+			}
+			if(this.pd.POSTCODE == '' || this.pd.POSTCODE == undefined){
+				$("#POSTCODE").tips({
+					side:3,
+		            msg:'请输入邮政编码',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.POSTCODE = '';
+				this.$refs.POSTCODE.focus();
+			return false;
+			}
+			if(this.pd.RESUME == '' || this.pd.RESUME == undefined){
+				$("#RESUME").tips({
+					side:3,
+		            msg:'请输入个人简历',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.RESUME = '';
+				this.$refs.RESUME.focus();
+			return false;
+			}
+			if(this.pd.PARTY_OPINION == '' || this.pd.PARTY_OPINION == undefined){
+				$("#PARTY_OPINION").tips({
+					side:3,
+		            msg:'请输入当事人意见',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.PARTY_OPINION = '';
+				this.$refs.PARTY_OPINION.focus();
+			return false;
+			}
+			if(this.pd.PARTY_OPINION_DATE == '' || this.pd.PARTY_OPINION_DATE == undefined){
+				$("#PARTY_OPINION_DATE").tips({
+					side:3,
+		            msg:'请输入当事人签字日期',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.PARTY_OPINION_DATE = '';
+				this.$refs.PARTY_OPINION_DATE.focus();
+			return false;
+			}
+			if(this.pd.HR_DE_OPINION == '' || this.pd.HR_DE_OPINION == undefined){
+				$("#HR_DE_OPINION").tips({
+					side:3,
+		            msg:'请输入人事部门意见',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.HR_DE_OPINION = '';
+				this.$refs.HR_DE_OPINION.focus();
+			return false;
+			}
+			if(this.pd.HR_DE_OPINION_DATE == '' || this.pd.HR_DE_OPINION_DATE == undefined){
+				$("#HR_DE_OPINION_DATE").tips({
+					side:3,
+		            msg:'请输入人事部门签字日期',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.HR_DE_OPINION_DATE = '';
+				this.$refs.HR_DE_OPINION_DATE.focus();
+			return false;
+			}
+			if(this.pd.AUTHENTICATE_RES == '' || this.pd.AUTHENTICATE_RES == undefined){
+				$("#AUTHENTICATE_RES").tips({
+					side:3,
+		            msg:'请输入举办者政治思想表现道德品质鉴定',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				this.pd.AUTHENTICATE_RES = '';
+				this.$refs.AUTHENTICATE_RES.focus();
+			return false;
+			}
+    		
+    		$("#showform").hide();
+    		$("#jiazai").show();
+    		
+            //发送 post 请求提交保存
+            $.ajax({
+	            	xhrFields: {
+	                    withCredentials: true
+	                },
+					type: "POST",
+					url: httpurl+'determinativetable/'+this.msg,
+			    	data: {DETERMINATIVETABLE_ID:this.DETERMINATIVETABLE_ID,
+				    DETERMINATIVETABLE_ID:this.pd.DETERMINATIVETABLE_ID,
+				    NAME:this.pd.NAME,
+				    SEX:this.pd.SEX,
+				    EDUCATION:this.pd.EDUCATION,
+				    POLITICS_STATUS:this.pd.POLITICS_STATUS,
+				    DESIGNATE_DPOSITION:this.pd.DESIGNATE_DPOSITION,
+				    FULLTIME_OR_PARTTIME:this.pd.FULLTIME_OR_PARTTIME,
+				    TITLE:this.pd.TITLE,
+				    BIRTHDAY:this.pd.BIRTHDAY,
+				    ID_NUMBER:this.pd.ID_NUMBER,
+				    WORK_YEAR:this.pd.WORK_YEAR,
+				    TEACH_MAJOR:this.pd.TEACH_MAJOR,
+				    HEALTHY_CONDITION:this.pd.HEALTHY_CONDITION,
+				    ISRETIREMENT:this.pd.ISRETIREMENT,
+				    ORIGINAL_WORK:this.pd.ORIGINAL_WORK,
+				    PHONE:this.pd.PHONE,
+				    NOW_ADDRESS:this.pd.NOW_ADDRESS,
+				    POSTCODE:this.pd.POSTCODE,
+				    RESUME:this.pd.RESUME,
+				    PARTY_OPINION:this.pd.PARTY_OPINION,
+				    PARTY_OPINION_DATE:this.pd.PARTY_OPINION_DATE,
+				    HR_DE_OPINION:this.pd.HR_DE_OPINION,
+				    HR_DE_OPINION_DATE:this.pd.HR_DE_OPINION_DATE,
+				    AUTHENTICATE_RES:this.pd.AUTHENTICATE_RES,
+			    	tm:new Date().getTime()},
+					dataType:"json",
+					success: function(data){
+                        if("success" == data.result){
+                        	swal("", "保存成功", "success");
+                        	setTimeout(function(){
+                        		top.Dialog.close();//关闭弹窗
+                            },1000);
+                        }else if ("exception" == data.result){
+                        	showException("民办学校举办者基本情况及政治思想品德鉴定表",data.exception);//显示异常
+                        	$("#showform").show();
+                    		$("#jiazai").hide();
+                        }
+                    }
+				}).done().fail(function(){
+                   swal("登录失效!", "请求服务器无响应，稍后再试", "warning");
+                   $("#showform").show();
+           		   $("#jiazai").hide();
+                });
+    	},
+    	
+    	//根据主键ID获取数据
+    	getData: function(){
+    		//发送 post 请求
+            $.ajax({
+            	xhrFields: {
+                    withCredentials: true
+                },
+				type: "POST",
+				url: httpurl+'determinativetable/goEdit',
+		    	data: {DETERMINATIVETABLE_ID:this.DETERMINATIVETABLE_ID,tm:new Date().getTime()},
+				dataType:"json",
+				success: function(data){
+                     if("success" == data.result){
+                     	vm.pd = data.pd;							//参数map
+                     }else if ("exception" == data.result){
+                     	showException("民办学校举办者基本情况及政治思想品德鉴定表",data.exception);	//显示异常
+                     	$("#showform").show();
+                 		$("#jiazai").hide();
+                     }
+                  }
+			}).done().fail(function(){
+                  swal("登录失效!", "请求服务器无响应，稍后再试", "warning");
+                  $("#showform").show();
+          		  $("#jiazai").hide();
+               });
+    	},
+    	
+    	//获取数据字典数据
+		getDict: function (){
+		},
+    	
+    	//根据url参数名称获取参数值
+        getUrlKey: function (name) {
+            return decodeURIComponent(
+                (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
+        }
+        
+	},
+	
+	mounted(){
+        this.init();
+    }
+})
+				
+</script>
+
+</body>
+</html>

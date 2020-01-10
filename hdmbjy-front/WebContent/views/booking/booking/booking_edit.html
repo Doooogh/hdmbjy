@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/css/datepicker/datepicker.css">
+    <!-- datepicker -->
+	<!-- <link rel="stylesheet" href="css/datepicker.css"> -->
+	<!-- lodash js库 -->
+	<script type="text/javascript" src="../../../assets/js/lodash.min.js"></script>
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+	<!-- layui  -->
+	<link rel="stylesheet" href="../../../plugins/css/layui.css">
+	<script src="../../../plugins/layui/layui.js"></script>
+
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+					
+								<div style="width: 100%;">
+									<div id="showform">
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+											<div class="input-group-prepend">
+											    <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">预约信息表</span></span>
+											</div>
+											<select class="form-control" v-model="BOOKINGINFO_ID" id="BOOKINGINFO_ID" ref="BOOKINGINFO_ID" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+											  <option value="">预约信息表</option>
+											</select>
+		                                    <!-- <input type="text" class="form-control" ref="BOOKINGINFO_ID" id="BOOKINGINFO_ID" v-model="pd.BOOKINGINFO_ID" maxlength="64" placeholder="这里输入预约信息表id" title="预约信息表id"> -->
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                   
+		                                    <!-- <input type="text" class="form-control" ref="APPROVAL_ROLE" id="APPROVAL_ROLE" v-model="pd.APPROVAL_ROLE" maxlength="64" placeholder="这里输入审批角色" title="审批角色"> -->
+											
+											<div class="input-group-prepend">
+											    <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">审批角色</span></span>
+											</div>
+											<select class="form-control" v-model="APPROVAL_ROLE" id="APPROVAL_ROLE" ref="APPROVAL_ROLE" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+											  <option value="">审批角色</option>
+											</select>
+											
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;" v-show="hasBookingInfo">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">预约时间区间</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control date" disabled="disabled" v-model="BOOKINGINFO_TIMERANGE" ref="BOOKINGINFO_TIMERANGE" id="BOOKINGINFO_TIMERANGE" >
+		                                </div>
+							            <!-- <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">预约结束时间</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control date" ref="END_TIME" id="END_TIME" maxlength="32" placeholder="这里输入预约结束时间" title="预约结束时间">
+		                                </div> -->
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">预约人数</span></span>
+		                                    </div>
+		                                    <input type="number" class="form-control" ref="ALL_NUM" id="ALL_NUM" v-model="pd.ALL_NUM" maxlength="16" placeholder="这里输入预约人数" title="预约人数">
+		                                </div>
+										
+										
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 100px;"><span style="width: 100%;">选择时间</span></span>
+										    </div>
+										    <!--<input type="text" class="form-control" ref="DESCRIPTION" id="ATTACHMENT" v-model="pd.ATTACHMENT" maxlength="255" placeholder="这里选择附件" title="附件">-->
+										    <div class="layui-upload form-group form-control" style="min-height: 150px!important;overflow:auto!important;padding-top: 10px!important;"  ref="RANGE" id="RANGE">
+										       	<table id="choose_times" style="float: left;margin-right: 20px;">
+													<tr v-if="!hasTime" style="height: 33px;" >
+														<td style="width: 300px;"><b>请选择时间</b></td>
+													</tr>
+												</table>
+												<input type="hidden" id="" class="layui-input" id="test20" placeholder="yyyy-MM-dd HH:mm:ss" style="width: 300px;" disabled="disabled" />
+												<a id="click-0" v-show="!show" @click="check()" class="btn btn-light btn-sm" >添加</a><a id="click00"  @click="addTime" v-show="show" disabled="disabled"  class="btn btn-light btn-sm" >添加</a>
+										    </div>
+										</div>
+							            
+							            <div class="input-group" style="margin-top:10px;background-color: white" >
+							            	<span style="width: 100%;text-align: center;">
+							            		<a class="btn btn-light btn-sm" v-on:click="save">保存</a>
+							            		<a class="btn btn-light btn-sm" onclick="top.Dialog.close()">取消</a>
+							            	</span>
+							            </div>
+							       </div>
+						           <!-- [加载状态 ] start -->
+								    <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+								    <!-- [ 加载状态  ] End -->
+								</div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<script src="../../../assets/plugins/datepicker/plugins/moment.min.js"></script>
+<script src="../../../assets/plugins/datepicker/datepicker.all.min.js"></script>
+<script src="../../../assets/plugins/datepicker/datepicker.en.js"></script>
+
+<!-- select插件 -->
+<script src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script src="../../../assets/js/pages/form-select-custom.js"></script>
+
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本业js -->
+<script src="../../../assets/js-v/booking/booking_edit.js"></script>
+
+</body>
+</html>

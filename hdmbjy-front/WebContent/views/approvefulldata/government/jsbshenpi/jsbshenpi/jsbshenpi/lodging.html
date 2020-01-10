@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>寄宿部申报表</title>
+<link href="css/pagetable.css" rel="stylesheet" type="text/css">
+<!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/jquery-3.3.1.min.js"></script>
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<style type="text/css">
+#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+</style>
+
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+
+
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+	$(".tableT p").blur(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	});
+	
+});
+</script>
+<script>
+//图片上传预览    IE是用了滤镜。
+        function previewImage(file)
+        {
+          var MAXWIDTH  = 260; 
+          var MAXHEIGHT = 180;
+          var div = document.getElementById('preview');
+          if (file.files && file.files[0])
+          {
+              div.innerHTML ='<img id=imghead>';
+              var img = document.getElementById('imghead');
+              img.onload = function(){
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                img.width  =  rect.width;
+                img.height =  rect.height;
+//                 img.style.marginLeft = rect.left+'px';
+                img.style.marginTop = rect.top+'px';
+              }
+              var reader = new FileReader();
+              reader.onload = function(evt){img.src = evt.target.result;}
+              reader.readAsDataURL(file.files[0]);
+          }
+          else //兼容IE
+          {
+            var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+            file.select();
+            var src = document.selection.createRange().text;
+            div.innerHTML = '<img id=imghead>';
+            var img = document.getElementById('imghead');
+            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+            status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+            div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+          }
+        }
+        function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+            var param = {top:0, left:0, width:width, height:height};
+            if( width>maxWidth || height>maxHeight )
+            {
+                rateWidth = width / maxWidth;
+                rateHeight = height / maxHeight;
+                 
+                if( rateWidth > rateHeight )
+                {
+                    param.width =  maxWidth;
+                    param.height = Math.round(height / rateWidth);
+                }else
+                {
+                    param.width = Math.round(width / rateHeight);
+                    param.height = maxHeight;
+                }
+            }
+            param.left = Math.round((maxWidth - param.width) / 2);
+            param.top = Math.round((maxHeight - param.height) / 2);
+            return param;
+        }
+</script>
+</head>
+<body>
+<div class="pagetable" id="app">
+ 	<input type="hidden" :value="LODGING_ID" :id="FORM_ID"/>
+	<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+	<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+
+  <h1>开办寄宿部申报表</h1>
+	<table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th width="12.5%">单位名称</th>
+    <td colspan="3"><p :contenteditable="isPreview?false:true" ref="UNIT_NAME" id="UNIT_NAME" v-text="pd.UNIT_NAME"></p></td>
+    <th width="12.5%">法人姓名</th>
+    <td colspan="3"><p :contenteditable="isPreview?false:true" ref="CORPORATION" id="CORPORATION" v-text="pd.CORPORATION"></p></td>
+    </tr>
+  <tr>
+    <th>单位地址</th>
+    <td colspan="3"><p :contenteditable="isPreview?false:true" ref="ADDRESS" id="ADDRESS" v-text="pd.ADDRESS"></p></td>
+    <th>校（园）长联系电话</th>
+    <td colspan="3"><p :contenteditable="isPreview?false:true" ref="TELEPHONE" id="TELEPHONE" v-text="pd.TELEPHONE"></p></td>
+    </tr>
+  <tr>
+    <th>主管校长姓名</th>
+    <td><p :contenteditable="isPreview?false:true" ref="PRINCIPAL_NAME" id="PRINCIPAL_NAME" v-text="pd.PRINCIPAL_NAME"></p></td>
+    <th width="12.5%">办公电话</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="OFFICETEL" id="OFFICETEL" v-text="pd.OFFICETEL"></p></td>
+    <th width="12.5%">手机</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="PHONE" id="PHONE" v-text="pd.PHONE"></p></td>
+    </tr>
+  <tr>
+    <th>在校学生总数</th>
+    <td><p :contenteditable="isPreview?false:true" ref="STUDENT_NUM" id="STUDENT_NUM" v-text="pd.STUDENT_NUM"></p></td>
+    <th>普通教室</th>
+    <td colspan="2"><p style="width:calc(100% - 30px);display:inline-block;" :contenteditable="isPreview?false:true" ref="REGULAR_CLASSROOM" id="REGULAR_CLASSROOM" v-text="pd.REGULAR_CLASSROOM"></p>间</td>
+    <th>专业教室</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="PROFESSIONAL_CLASSROOM" id="PROFESSIONAL_CLASSROOM" v-text="pd.PROFESSIONAL_CLASSROOM"></p></td>
+    </tr>
+  <tr>
+    <th>审批寄宿生人数</th>
+    <td><p :contenteditable="isPreview?false:true" ref="BOARDERS_NUM" id="BOARDERS_NUM" v-text="pd.BOARDERS_NUM"></p></td>
+    <th>寄宿生是否单独编班</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="BOARDER_ISNOTCLASS" id="BOARDER_ISNOTCLASS" v-text="pd.BOARDER_ISNOTCLASS"></p></td>
+    <th>寄宿生班最高班额</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="BOARDER_MAXCLASS" id="BOARDER_MAXCLASS" v-text="pd.BOARDER_MAXCLASS"></p></td>
+    </tr>
+  <tr>
+    <th>学生宿舍</th>
+    <td><p style="width:calc(100% - 30px);display:inline-block;" :contenteditable="isPreview?false:true" ref="STUDENT_DORM" id="STUDENT_DORM" v-text="pd.STUDENT_DORM"></p>间</td>
+    <th>是否为非教学用房</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="TEACHING_ISNOTHOUSE" id="TEACHING_ISNOTHOUSE" v-text="pd.TEACHING_ISNOTHOUSE"></p></td>
+    <th>住宿楼出口数</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="STAYFLOOR_EXITNUM" id="STAYFLOOR_EXITNUM" v-text="pd.STAYFLOOR_EXITNUM"></p></td>
+    </tr>
+  <tr>
+    <th>宿舍床位/间</th>
+    <td><p :contenteditable="isPreview?false:true" ref="DORMBED_NUM" id="DORMBED_NUM" v-text="pd.DORMBED_NUM"></p></td>
+    <th>宿舍区配备灭火器总数</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="ANNIHILATOR_NUM" id="ANNIHILATOR_NUM" v-text="pd.ANNIHILATOR_NUM"></p></td>
+    <th>有无经批准的学生食堂</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="ISNOTAPPROVAL_CANTEEN" id="ISNOTAPPROVAL_CANTEEN" v-text="pd.ISNOTAPPROVAL_CANTEEN"></p></td>
+    </tr>
+  <tr>
+    <th>每间宿舍使用面积（平方米）</th>
+    <td><p :contenteditable="isPreview?false:true" ref="DORMAREA" id="DORMAREA" v-text="pd.DORMAREA"></p></td>
+    <th>校医姓名</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="DOCTORNAME" id="DOCTORNAME" v-text="pd.DOCTORNAME"></p></td>
+    <th>校医联系电话</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="DOCTOR_PHONE" id="DOCTOR_PHONE" v-text="pd.DOCTOR_PHONE"></p></td>
+    </tr>
+  <tr>
+    <th>宿舍管理老师数额</th>
+    <td colspan="3"><p :contenteditable="isPreview?false:true" ref="TEACHER_NUM" id="TEACHER_NUM" v-text="pd.TEACHER_NUM" ></p></td>
+    <th>住宿楼联系电话</th>
+    <td colspan="3"><p :contenteditable="isPreview?false:true" ref="STAY_PHONE" id="STAY_PHONE" v-text="pd.STAY_PHONE"></p></td>
+    </tr>
+  <tr>
+    <th rowspan="4">目前各年级住宿生人数</th>
+    <th width="12.5%">中学</th>
+    <td class="alignc">初一<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="MIDDLE_ONE" id="MIDDLE_ONE" v-text="pd.MIDDLE_ONE"></p>人</td>
+    <td class="alignc" width="12.5%">初二<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="MIDDLE_TWO" id="MIDDLE_TWO" v-text="pd.MIDDLE_TWO"></p>人</td>
+    <td class="alignc">初三<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="MIDDLE_THREE" id="MIDDLE_THREE" v-text="pd.MIDDLE_THREE" ></p>人</td>
+    <td class="alignc">高一<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="SENIOR_ONE" id="SENIOR_ONE" v-text="pd.SENIOR_ONE"></p>人</td>
+    <td class="alignc" width="12.5%">高二<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="SENIOR_TWO" id="SENIOR_TWO" v-text="pd.SENIOR_TWO"></p>人</td>
+    <td class="alignc" width="12.5%">高三<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="SENIOR_THREE" id="SENIOR_THREE" v-text="pd.SENIOR_THREE"></p>人</td>
+  </tr>
+  <tr>
+    <th>小学</th>
+    <td class="alignc">小一<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="PRIMARY_ONE" id="PRIMARY_ONE" v-text="pd.PRIMARY_ONE"></p>人</td>
+    <td class="alignc">小二<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="PRIMARY_TWO" id="PRIMARY_TWO" v-text="pd.PRIMARY_TWO"></p>人</td>
+    <td class="alignc">小三<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="PRIMARY_THREE" id="PRIMARY_THREE" v-text="pd.PRIMARY_THREE"></p>人</td>
+    <td class="alignc">小四<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="PRIMARY_FOUR" id="PRIMARY_FOUR" v-text="pd.PRIMARY_FOUR"></p>人</td>
+    <td class="alignc">小五<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="PRIMARY_FIVE" id="PRIMARY_FIVE" v-text="pd.PRIMARY_FIVE"></p>人</td>
+    <td class="alignc">小六<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="PRIMARY_SIX" id="PRIMARY_SIX" v-text="pd.PRIMARY_SIX"></p>人</td>
+  </tr>
+  <tr>
+    <th>职高</th>
+    <td class="alignc" colspan="2">高一<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="JOB_ONE" id="JOB_ONE" v-text="pd.JOB_ONE"></p>人</td>
+    <td class="alignc" colspan="2">高二<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="JOB_TWO" id="JOB_TWO" v-text="pd.JOB_TWO"></p>人</td>
+    <td class="alignc" colspan="2">高三<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="JOB_THREE" id="JOB_THREE" v-text="pd.JOB_THREE"></p>人</td>
+    </tr>
+  <tr>
+    <th>幼儿园</th>
+    <td class="alignc" colspan="2">小班<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="KINDERGARTEN_ONE" id="KINDERGARTEN_ONE" v-text="pd.KINDERGARTEN_ONE"></p>人</td>
+    <td class="alignc" colspan="2">中班<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="KINDERGARTEN_TWO" id="KINDERGARTEN_TWO" v-text="pd.KINDERGARTEN_TWO"></p>人</td>
+    <td class="alignc" colspan="2">大班<p style="width:calc(100% - 60px);display:inline-block;" :contenteditable="isPreview?false:true" ref="KINDERGARTEN_THREE" id="KINDERGARTEN_THREE" v-text="pd.KINDERGARTEN_THREE"></p>人</td>
+    </tr>
+  <tr>
+    <th>校（园）长意见</th>
+    <td colspan="7">
+	    <p class="mh200" :contenteditable="isPreview?false:true" ref="OPINION" id="OPINION" v-text="pd.OPINION"></p>
+	           校（园）长（法人）签字：</br>（盖章）</br>
+	    <p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="YEAR" id="YEAR" v-text="pd.YEAR"></p>
+	          年
+	    <p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="MONTH" id="MONTH" v-text="pd.MONTH"></p>
+	          月
+	    <p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="DAY" id="DAY" v-text="pd.DAY"></p>日
+    </td>
+    </tr>
+  <tr>
+    <th>各审批部门意见汇总</th>
+    <td colspan="7">
+		<ul class="tableul1 clearfix">
+			<li>主管业务科室（<p class="inlinep" :contenteditable="isPreview?false:true" ref="OPINION_ZYYWKS" id="OPINION_ZYYWKS" v-text="pd.OPINION_ZYYWKS"></p>）</li>
+			<li>保健所（<p class="inlinep" :contenteditable="isPreview?false:true" ref="OPINION_BJS" id="OPINION_BJS" v-text="pd.OPINION_BJS"></p>   ）</li>
+			<li>保卫科（<p class="inlinep" :contenteditable="isPreview?false:true" ref="OPINION_BWK" id="OPINION_BWK" v-text="pd.OPINION_BWK"></p>   ）</li> 
+			<li>后勤中心（<p class="inlinep" :contenteditable="isPreview?false:true" ref="OPINION_HQZX" id="OPINION_HQZX" v-text="pd.OPINION_HQZX"></p>   ）</li>
+			<li>食品安全科（<p class="inlinep" :contenteditable="isPreview?false:true" ref="OPINION_SPAQK" id="OPINION_SPAQK" v-text="pd.OPINION_SPAQK"></p>   ）</li>
+			<li>基建科（<p class="inlinep" :contenteditable="isPreview?false:true" ref="OPINION_JJK" id="OPINION_JJK" v-text="pd.OPINION_JJK"></p>   ）</li>
+		</ul>
+	</td>
+  </tr>
+  <tr>
+    <th>教育行政部门意见</th>
+    <td colspan="7">
+    <p class="mh200" :contenteditable="isPreview?false:true" ref="OPINION_DEP" id="OPINION_DEP" v-text="pd.OPINION_DEP"></p>主管领导签字：</br>
+    <p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="YEAR1" id="YEAR1" v-text="pd.YEAR1"></p>年
+    <p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="MONTH1" id="MONTH1" v-text="pd.MONTH1"></p>月
+    <p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="DAY1" id="DAY1" v-text="pd.DAY1"></p>日</td>
+    </tr>
+</table>
+   <div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+		<span style="width: 100%;text-align: center;">
+			<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+			<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+			<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+		</span>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="js/lodging.js"></script>
+
+</html>

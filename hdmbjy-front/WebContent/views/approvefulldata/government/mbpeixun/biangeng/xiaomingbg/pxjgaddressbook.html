@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>海淀区民办教育培训机构通讯录</title>
+  <link href="../../css/pagetable.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+  <link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+	$(".tableT p").blur(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	});
+	
+});
+</script>
+</head>
+<body>
+<div class="pagetable" id="app">
+    <input type="hidden" :value="PXJGADDRESSBOOK_ID" :id="FORM_ID"/>
+    <input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+    <input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+	<h1>海淀区民办教育培训机构通讯录</h1>
+
+	<ul>
+		<li style="width:50%;" ref="FILLFORM_DATE" id="FILLFORM_DATE">填表日期：<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="YEAR" id="YEAR" v-text="pd.YEAR"></p>年<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="MONTH" id="MONTH" v-text="pd.MONTH"></p>月<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="DAY" id="DAY" v-text="pd.DAY"></p>日</li>
+		<li style="width:50%;text-align:right">办学许可证号：教民1101087<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="LICENCE_ONE" id="LICENCE_ONE" v-text="pd.LICENCE_ONE"></p>9<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="LICENCE_TWO" id="LICENCE_TWO" v-text="pd.LICENCE_TWO"></p>号<span :contenteditable="isPreview?false:true"></span></li>
+	</ul>
+	<table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th width="12.5%">学校全称</th>
+    <td colspan="5"><p :contenteditable="isPreview?false:true" ref="SCHOOL_NAME" id="SCHOOL_NAME" v-text="pd.SCHOOL_NAME"></p></td>
+    <th width="12.5%">办公电话</th>
+    <td width="12.5%"><p :contenteditable="isPreview?false:true" ref="OFFICE_PHONE" id="OFFICE_PHONE" v-text="pd.OFFICE_PHONE"></p></td>
+  </tr>
+  <tr>
+    <th>校址</th>
+    <td colspan="5"><p :contenteditable="isPreview?false:true" ref="SCHOOL_ADDRESS" id="SCHOOL_ADDRESS" v-text="pd.SCHOOL_ADDRESS"></p></td>
+    <th>招生电话</th>
+    <td><p :contenteditable="isPreview?false:true" ref="ENROLLMENT_PHONE" id="ENROLLMENT_PHONE" v-text="pd.ENROLLMENT_PHONE"></p></td>
+  </tr>
+  <tr>
+    <th>学校网址</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="SCHOOL_WEBSITE" id="SCHOOL_WEBSITE" v-text="pd.SCHOOL_WEBSITE"></p></td>
+    <th>电子邮箱</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="ELECTRONIC_MAIL" id="ELECTRONIC_MAIL" v-text="pd.ELECTRONIC_MAIL"></p></td>
+    <th>投诉电话</th>
+    <td><p :contenteditable="isPreview?false:true" ref="COMPLAINT_PHONE" id="COMPLAINT_PHONE" v-text="pd.COMPLAINT_PHONE"></p></td>
+  </tr>
+  <tr>
+    <th>接收群发手机</th>
+    <td colspan="5">仅限于校长或举办者1人<strong>固定手机号码</strong><p style="width:calc(100% - 250px);display:inline-block;" :contenteditable="isPreview?false:true" ref="PRINCIPAL_PHONE" id="PRINCIPAL_PHONE" v-text="pd.PRINCIPAL_PHONE"></p></td>
+    <th>24小时电话</th>
+    <td><p :contenteditable="isPreview?false:true" ref="TWENTYFOUR_PHONE" id="TWENTYFOUR_PHONE" v-text="pd.TWENTYFOUR_PHONE"></p></td>
+  </tr>
+  <tr>
+    <th width="12.5%">校长（中心主任）</th>
+    <td width="12.5%"><p :contenteditable="isPreview?false:true" ref="PRINCIPAL_NAME" id="PRINCIPAL_NAME" v-text="pd.PRINCIPAL_NAME"></p></td>
+    <th width="12.5%">单位电话</th>
+    <td width="12.5%"><p :contenteditable="isPreview?false:true" ref="PRINCIPAL_WORKPHONE" id="PRINCIPAL_WORKPHONE" v-text="pd.PRINCIPAL_WORKPHONE"></p></td>
+    <th width="12.5%">住宅电话</th>
+    <td width="12.5%"><p :contenteditable="isPreview?false:true" ref="PRINCIPAL_HOUSEPHONE" id="PRINCIPAL_HOUSEPHONE" v-text="pd.PRINCIPAL_HOUSEPHONE"></p></td>
+    <th width="12.5%">手机</th>
+    <td width="12.5%"><p :contenteditable="isPreview?false:true" ref="PRINCIPAL_MOBILEPHONE" id="PRINCIPAL_MOBILEPHONE" v-text="pd.PRINCIPAL_MOBILEPHONE"></p></td>
+  </tr>
+  <tr>
+    <th>法定代表人</th>
+    <td><p :contenteditable="isPreview?false:true" ref="LEGAL_NAME" id="LEGAL_NAME" v-text="pd.LEGAL_NAME"></p></td>
+    <th>单位电话</th>
+    <td><p :contenteditable="isPreview?false:true" ref="LEGAL_WORKPHONE" id="LEGAL_WORKPHONE" v-text="pd.LEGAL_WORKPHONE"></p></td>
+    <th>住宅电话</th>
+    <td><p :contenteditable="isPreview?false:true" ref="LEGAL_HOUSEPHONE" id="LEGAL_HOUSEPHONE" v-text="pd.LEGAL_HOUSEPHONE"></p></td>
+    <th>手机</th>
+    <td><p :contenteditable="isPreview?false:true" ref="LEGAL_MOBILEPHONE" id="LEGAL_MOBILEPHONE" v-text="pd.LEGAL_MOBILEPHONE"></p></td>
+  </tr>
+  <tr>
+    <th>举办者（个人）</th>
+    <td><p :contenteditable="isPreview?false:true" ref="GR_ORGAN_NAME" id="GR_ORGAN_NAME" v-text="pd.GR_ORGAN_NAME"></p></td>
+    <th>单位电话</th>
+    <td><p :contenteditable="isPreview?false:true" ref="GR_ORGAN_WORKPHONE" id="GR_ORGAN_WORKPHONE" v-text="pd.GR_ORGAN_WORKPHONE"></p></td>
+    <th>住宅电话</th>
+    <td><p :contenteditable="isPreview?false:true" ref="GR_ORGAN_HOUSEPHONE" id="GR_ORGAN_HOUSEPHONE" v-text="pd.GR_ORGAN_HOUSEPHONE"></p></td>
+    <th>手机</th>
+    <td><p :contenteditable="isPreview?false:true" ref="GR_ORGAN_MOBILEPHONE" id="GR_ORGAN_MOBILEPHONE" v-text="pd.GR_ORGAN_MOBILEPHONE"></p></td>
+  </tr>
+  <tr>
+    <th>举办者（单位）</th>
+    <td colspan="5"><p :contenteditable="isPreview?false:true" ref="DW_ORGAN_NAME" id="DW_ORGAN_NAME" v-text="pd.DW_ORGAN_NAME"></p></td>
+    <th>电话</th>
+    <td><p :contenteditable="isPreview?false:true" ref="DW_ORGAN_PHONE" id="DW_ORGAN_PHONE" v-text="pd.DW_ORGAN_PHONE"></p></td>
+  </tr>
+  <tr>
+    <th>通信地址收信名称</th>
+    <td colspan="5"><p :contenteditable="isPreview?false:true" ref="MAIL_ADDRESS" id="MAIL_ADDRESS" v-text="pd.MAIL_ADDRESS"></p></td>
+    <th>邮政编码</th>
+    <td><p :contenteditable="isPreview?false:true" ref="POSTAL_CODE" id="POSTAL_CODE" v-text="pd.POSTAL_CODE"></p></td>
+  </tr>
+  <tr>
+    <th>联系人</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="LINKMAN" id="LINKMAN" v-text="pd.LINKMAN"></p></td>
+    <th>手机</th>
+    <td colspan="2"><p :contenteditable="isPreview?false:true" ref="MOBILE_PHONE" id="MOBILE_PHONE" v-text="pd.MOBILE_PHONE"></p></td>
+    <th>电话</th>
+    <td><p :contenteditable="isPreview?false:true" ref="PHONE" id="PHONE" v-text="pd.PHONE"></p></td>
+  </tr>
+  <tr>
+    <th>备注</th>
+    <td colspan="7"><p :contenteditable="isPreview?false:true" ref="BEIZHU" id="BEIZHU" v-text="pd.BEIZHU"></p></td>
+    </tr>
+</table>
+
+	<div class="bz">
+	注：凡学校校长（中心主任）、举办者、通信地址、收信人、联系人及电话发生变化的，请在两周之内将新的通信录报到社管科。
+	</div>
+    <div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+          <span style="width: 100%;text-align: center;">
+              <button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+              <button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+              <button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+          </span>
+    </div>
+</div>
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="../../js/pxjgaddressbook.js"></script>
+</body>
+</html>

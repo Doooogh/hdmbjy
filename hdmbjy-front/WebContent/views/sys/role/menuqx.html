@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+	<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+	<link type="text/css" rel="stylesheet" href="../../../plugins/zTree/2.6/zTreeStyle.css"/>
+	<script type="text/javascript" src="../../../plugins/zTree/2.6/jquery.ztree-2.6.min.js"></script>
+	
+	<!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+    
+<body>
+
+</head>
+<body>
+
+	    <!-- [加载状态 ] start -->
+	    <div class="loader-bg">
+	        <div class="loader-track">
+	            <div class="loader-fill"></div>
+	        </div>
+	    </div>
+	    <!-- [ 加载状态  ] End -->
+		
+		<div id="app">
+			<div id="showform">
+				<div style="overflow: scroll; scrolling: yes;height:421px;width: 319px;">
+				<ul id="tree" class="tree" style="overflow:auto;">
+					<li><img src="../../../assets/images/loading.gif" /></li>
+				</ul>
+				</div>
+				<div style="width: 100%;padding-top: 5px;text-align: center;">
+					<a class="btn btn-light btn-sm" v-on:click="goSave">保存</a>
+					<a class="btn btn-light btn-sm" onclick="top.Dialog.close();">取消</a>
+				</div>
+			</div>
+		</div>
+	
+	    <!-- [加载状态 ] start -->
+	    <div id="jiazai" style="display:none;margin-top:35px;">
+	    	<div class="d-flex justify-content-center">
+	         <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+	                <span class="sr-only">Loading...</span>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- [ 加载状态  ] End -->
+	
+	<!-- App functions and actions -->
+	<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+	<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+	
+	<!-- 本页面js --> 
+	<script type="text/javascript" src="../../../assets/js-v/sys/menuqx.js"></script>
+	
+</body>
+</html>

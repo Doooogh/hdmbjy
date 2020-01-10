@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.category.CategoryMapper">
+
+	<resultMap type="category" id="categoryResultMap">
+		<id column="ID" property="id"/>
+		<result column="PARENT_ID" property="parentId"/>
+		<result column="PARENT_IDS" property="parentIds"/>
+		<result column="OFFICE_ID" property="officeId"/>
+		<result column="ORDER" property="order"/>
+		<result column="NAME" property="name"/>
+		<result column="IMAGE" property="image"/>
+		<result column="URL" property="url"/>
+		<result column="TARGET" property="target"/>
+		<result column="VISIBLE" property="visible"/>
+		<result column="DESCRIPTION" property="description"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="UPDATE_DATE" property="updateDate"/>
+		<result column="ISCONT" property="iscont"/>
+	</resultMap>
+
+	<!-- ztree -->
+	<resultMap type="category" id="CategoryZtreeResultMap">
+		<id column="ID" property="id"/>
+		<result column="NAME" property="name"/>
+		<result column="URL" property="url"/>
+		<result column="PARENT_ID" property="parentId"/>
+		<result column="ORDER" property="order"/>
+		<result column="IMAGE" property="image"/>
+		<result column="TYPE" property="type"/>
+		<result column="TARGET" property="target"></result>
+	</resultMap>
+
+	<!--表名 -->
+	<sql id="tableName">
+		CMS_CATEGORY
+	</sql>
+
+	<!-- 字段 -->
+	<sql id="Field">
+		ID,
+ 		`NAME`,
+ 		PARENT_ID,
+ 		OFFICE_ID,
+ 		PARENT_IDS,
+ 		`ORDER`,
+ 		IMAGE,
+ 		URL,
+ 		TARGET,
+ 		`TYPE`,
+ 		VISIBLE,
+ 		DESCRIPTION,
+ 		CREATE_DATE,
+ 		ISCONT
+	</sql>
+
+	<!-- 字段 -->
+	<sql id="Field1">
+ 		`NAME`,
+ 		PARENT_IDS,
+ 		`ORDER`,
+ 		IMAGE,
+ 		URL,
+ 		`TYPE`,
+ 		CREATE_DATE,
+ 		ISCONT
+	</sql>
+
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id},
+ 		#{name},
+ 		#{parentId},
+ 		#{officeId},
+ 		#{parentIds},
+ 		#{order},
+ 		#{image},
+ 		#{url},
+ 		#{target},
+ 		#{type},
+ 		#{visible},
+ 		#{description},
+ 		#{createDate},
+ 		#{iscont}
+ 		
+	</sql>
+
+	<!--新增 -->
+	<insert id="addCategory" parameterType="Category">
+		insert into
+		<include refid="tableName"></include>
+		(
+		<include refid="Field"></include>
+		) values (
+		<include refid="FieldValue"></include>
+		)
+	</insert>
+
+	<!--编辑 -->
+	<update id="edit" parameterType="Category">
+		update
+		<include refid="tableName"></include>
+		set
+		<if test="name!=null and name!=''">name =#{name},</if>
+		<if test="parentId!=null and parentId!=''">parent_id  =#{parentId} ,</if>
+		<if test="order!=null and order!=''">`order`=#{order},</if>
+		<if test="url!=null and url!=''">`url`=#{url},</if>
+		<if test="type!=null and type!=''">type=#{type},</if>
+		<if test="description!=null and description!=''">`description`=#{description},</if>
+		<if test="image!=null and image!=''">`image`=#{image},</if>
+		<if test="iscont!=null and iscont!=''">`iscont`=#{iscont},</if>
+		update_date =#{updateDate}
+		where
+		id=#{id}
+	</update>
+
+	<!--通过菜单ID获取数据 -->
+	<select id="getCategoryById" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include>
+		where id=#{id}
+	</select>
+
+	<!--取最大ID-->
+	<select id="findMaxId" parameterType="pd" resultType="pd">
+		select MAX(id) MID from
+		<include refid="tableName"></include>
+	</select>
+
+	<!--通过ID获取其子一级菜单 -->
+	<select id="listSubCategoryByParentId" parameterType="String" resultMap="categoryResultMap">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include>
+		where PARENT_ID = #{parentId} order by (`order`+0)
+	</select>
+
+	<!--删除菜单-->
+	<delete id="deleteCategoryById" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where id=#{id}
+	</delete>
+
+	<select id="listAllCategory" parameterType="pd" resultMap="categoryResultMap">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include>
+
+	</select>
+	
+    <select id="listSubCategoryByName" parameterType="String" resultMap="categoryResultMap">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include>
+		where NAME = #{name}
+	</select>
+
+
+
+	<!--保存菜单图标  -->
+	<!--<update id="editicon" parameterType="pd">-->
+		<!--update-->
+		<!--<include refid="tableName"></include>-->
+		<!--set-->
+		<!--Category_ICON=#{Category_ICON}-->
+		<!--where-->
+		<!--Category_ID=#{Category_ID}-->
+	<!--</update>-->
+</mapper>

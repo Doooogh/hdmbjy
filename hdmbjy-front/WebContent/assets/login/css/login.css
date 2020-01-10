@@ -1,0 +1,23 @@
+
+.cavs{
+  	z-index:1;
+  	position: fixed;
+  	width:95%;
+  	margin-left: 20px;
+  	margin-right: 20px;
+ }
+  	
+ #date_time {
+    color: white;
+    position: fixed;
+    left: 5%;
+    bottom: 10%;
+    font-family: Arial;
+}
+#time {
+    font-size: 86px;
+    }
+#date {
+    font-size: 30px;
+    padding-left: 10px;
+}

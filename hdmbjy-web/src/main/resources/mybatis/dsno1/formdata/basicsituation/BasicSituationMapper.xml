@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.formdata.basicsituation.BasicSituationMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		AF_BASICSITUATION
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.NAME,	
+		f.SEX,	
+		f.NATION,	
+		f.BIRTHDAY_YEAR,	
+		f.BIRTHDAY_MONTH,	
+		f.BIRTHDAY_DAY,	
+		f.POLITICS_STATUS,	
+		f.TITLE,	
+		f.EDUCATION,	
+		f.ID_NUMBER,	
+		f.HEALTH_CONDITION,	
+		f.ISRETIREMENT,	
+		f.ORIGINAL_WORK_AND_POSITION,	
+		f.PHONE,	
+		f.ADDRESS,	
+		f.POST,	
+		f.JOB_RESUME,	
+		f.MY_OPINION,	
+		f.MY_OPINION_DATE,	
+		f.DEPARTMENT_OPINION,	
+		f.DEPARTMENT_OPINION_DATE,	
+		f.BASICSITUATION_ID
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		NAME,	
+		SEX,	
+		NATION,	
+		BIRTHDAY_YEAR,	
+		BIRTHDAY_MONTH,	
+		BIRTHDAY_DAY,	
+		POLITICS_STATUS,	
+		TITLE,	
+		EDUCATION,	
+		ID_NUMBER,	
+		HEALTH_CONDITION,	
+		ISRETIREMENT,	
+		ORIGINAL_WORK_AND_POSITION,	
+		PHONE,	
+		ADDRESS,	
+		POST,	
+		JOB_RESUME,	
+		MY_OPINION,	
+		MY_OPINION_DATE,	
+		DEPARTMENT_OPINION,	
+		DEPARTMENT_OPINION_DATE,	
+		BASICSITUATION_ID
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{NAME},	
+		#{SEX},	
+		#{NATION},	
+		#{BIRTHDAY_YEAR},	
+		#{BIRTHDAY_MONTH},	
+		#{BIRTHDAY_DAY},	
+		#{POLITICS_STATUS},	
+		#{TITLE},	
+		#{EDUCATION},	
+		#{ID_NUMBER},	
+		#{HEALTH_CONDITION},	
+		#{ISRETIREMENT},	
+		#{ORIGINAL_WORK_AND_POSITION},	
+		#{PHONE},	
+		#{ADDRESS},	
+		#{POST},	
+		#{JOB_RESUME},	
+		#{MY_OPINION},	
+		#{MY_OPINION_DATE},	
+		#{DEPARTMENT_OPINION},	
+		#{DEPARTMENT_OPINION_DATE},	
+		#{BASICSITUATION_ID}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field2"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			BASICSITUATION_ID = #{BASICSITUATION_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			NAME = #{NAME},
+			SEX = #{SEX},
+			NATION = #{NATION},
+			BIRTHDAY_YEAR = #{BIRTHDAY_YEAR},
+			BIRTHDAY_MONTH = #{BIRTHDAY_MONTH},
+			BIRTHDAY_DAY = #{BIRTHDAY_DAY},
+			POLITICS_STATUS = #{POLITICS_STATUS},
+			TITLE = #{TITLE},
+			EDUCATION = #{EDUCATION},
+			ID_NUMBER = #{ID_NUMBER},
+			HEALTH_CONDITION = #{HEALTH_CONDITION},
+			ISRETIREMENT = #{ISRETIREMENT},
+			ORIGINAL_WORK_AND_POSITION = #{ORIGINAL_WORK_AND_POSITION},
+			PHONE = #{PHONE},
+			ADDRESS = #{ADDRESS},
+			POST = #{POST},
+			JOB_RESUME = #{JOB_RESUME},
+			MY_OPINION = #{MY_OPINION},
+			MY_OPINION_DATE = #{MY_OPINION_DATE},
+			DEPARTMENT_OPINION = #{DEPARTMENT_OPINION},
+			DEPARTMENT_OPINION_DATE = #{DEPARTMENT_OPINION_DATE},
+			BASICSITUATION_ID = BASICSITUATION_ID
+		where 
+			BASICSITUATION_ID = #{BASICSITUATION_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.BASICSITUATION_ID = #{BASICSITUATION_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 1=1
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				-->
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			BASICSITUATION_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

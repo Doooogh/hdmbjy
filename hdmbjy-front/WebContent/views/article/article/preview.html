@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>海淀区民办教育管理平台</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/material/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="../../../assets/css/bootstrap/bootstrap.min.css">
+
+    <!-- vue -->
+    <script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+<body>
+
+<div id="main">
+    <div class="panel panel-default">
+        <div class="panel-body" style="min-height: 500px;display: flex;flex-direction:column;align-items:center!important;">
+
+            <h3 style="">{{pd.TITLE}}</h3>
+            <div style="width: 100%;height: 100%;" v-html="pd.REMARKS">
+            </div>
+        </div>
+    </div>
+    <div style="border-top: 1px #cdcdcd solid">
+        <div class="page-header" style="margin-left: 30px">
+            <h4>附件 <small>file</small></h4>
+        </div>
+        <span  v-if="varList.length==0">
+            没有附件
+        </span>
+
+        <ul  v-for="(data,index) in varList" style="margin-bottom: 20px">
+            <a href="#" v-on:click="downloadAtt(data.ID,data.URL)" style="text-decoration:none;"><li  style="list-style: none;" >{{index+1}}.{{data.ORIGINAL_NAME}}</li></a>
+        </ul>
+
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+
+<script type="text/javascript" src="../../../assets/js-v/article/preview.js"></script>
+</body>
+</html>

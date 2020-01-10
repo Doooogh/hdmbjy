@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.formdata.member.MemberMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		AF_MEMBER
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.MEMBER_ID,	
+		f.NAME,	
+		f.SEX,	
+		f.AGE,	
+		f.EDUCATION,	
+		f.TITLE,	
+		f.TEACH_AGE,	
+		f.TENURE,	
+		f.ID_NUMBER,	
+		f.ORIGINAL_WORK_JOB,	
+		f.HOME_POST_TEL,	
+		f.POLICYMAKING_ID,	
+		f.FIELD1,	
+		f.FIELD2,	
+		f.FIELD3
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		MEMBER_ID,	
+		`NAME`,
+		SEX,	
+		AGE,	
+		EDUCATION,	
+		TITLE,	
+		TEACH_AGE,	
+		TENURE,	
+		ID_NUMBER,	
+		ORIGINAL_WORK_JOB,	
+		HOME_POST_TEL,	
+		POLICYMAKING_ID,	
+		FIELD1,	
+		FIELD2,	
+		FIELD3
+	</sql>
+
+
+	<!-- 字段值 -->
+	<sql id="saveAllFieldValue">
+		#{item.MEMBER_ID},
+		#{item.NAME},
+		#{item.SEX},
+		#{item.AGE},
+		#{item.EDUCATION},
+		#{item.TITLE},
+		#{item.TEACH_AGE},
+		#{item.TENURE},
+		#{item.ID_NUMBER},
+		#{item.ORIGINAL_WORK_JOB},
+		#{item.HOME_POST_TEL},
+		#{item.POLICYMAKING_ID},
+		#{item.FIELD1},
+		#{item.FIELD2},
+		#{item.FIELD3}
+	</sql>
+
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{MEMBER_ID},	
+		#{NAME},	
+		#{SEX},	
+		#{AGE},	
+		#{EDUCATION},	
+		#{TITLE},	
+		#{TEACH_AGE},	
+		#{TENURE},	
+		#{ID_NUMBER},	
+		#{ORIGINAL_WORK_JOB},	
+		#{HOME_POST_TEL},	
+		#{POLICYMAKING_ID},	
+		#{FIELD1},	
+		#{FIELD2},	
+		#{FIELD3}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field2"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			MEMBER_ID = #{MEMBER_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			MEMBER_ID = #{MEMBER_ID},
+			NAME = #{NAME},
+			SEX = #{SEX},
+			AGE = #{AGE},
+			EDUCATION = #{EDUCATION},
+			TITLE = #{TITLE},
+			TEACH_AGE = #{TEACH_AGE},
+			TENURE = #{TENURE},
+			ID_NUMBER = #{ID_NUMBER},
+			ORIGINAL_WORK_JOB = #{ORIGINAL_WORK_JOB},
+			HOME_POST_TEL = #{HOME_POST_TEL},
+			POLICYMAKING_ID = #{POLICYMAKING_ID},
+			FIELD1 = #{FIELD1},
+			FIELD2 = #{FIELD2},
+			FIELD3 = #{FIELD3}
+		where 
+			MEMBER_ID = #{MEMBER_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.MEMBER_ID = #{MEMBER_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 1=1
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				-->
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			MEMBER_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+
+	<!-- 批量添加 -->
+	<insert id="batchSave" parameterType="java.util.List" >
+		INSERT INTO
+		<include refid="tableName"></include>
+		(
+		<include refid="Field2"></include>
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			<include refid="saveAllFieldValue"></include>
+			)
+		</foreach>
+	</insert>
+
+	<select id="findByPolicymakingId" resultType="pd" parameterType="pd">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include> f
+		where 1=1
+		<if test="POLICYMAKING_ID!=null and POLICYMAKING_ID!=''">
+			and f.POLICYMAKING_ID=#{POLICYMAKING_ID}
+		</if>
+	</select>
+
+	<delete id="deleteByPolicymakingId" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where POLICYMAKING_ID=#{POLICYMAKING_ID}
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

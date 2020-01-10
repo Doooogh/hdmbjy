@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>计算器</title>
+    <link rel="stylesheet" href="../../../plugins/calculator/css/style.css">
+</head>
+
+<body>
+  <form class="calc">
+    <p class="calc-display">
+      <input type="text" name="res" id="res" value="" class="calc-display-input" onFocus="this.blur()">
+    </p>
+    <p class="calc-row">
+      <button type="button" class="calc-button calc-button-gray" onClick="s('Just....')">mrc</button>
+      <button type="button" class="calc-button calc-button-gray" onClick="s('....do..')">m-</button>
+      <button type="button" class="calc-button calc-button-gray" onClick="s('......it')">m+</button>
+      <button type="button" class="calc-button calc-button-red calc-button-big" onClick="a('/')">÷</button>
+    </p>
+    <p class="calc-row">
+      <button type="button" class="calc-button" onClick="a('7')">7</button>
+      <button type="button" class="calc-button" onClick="a('8')">8</button>
+      <button type="button" class="calc-button" onClick="a('9')">9</button>
+      <button type="button" class="calc-button calc-button-red calc-button-big" onClick="a('*')">x</button>
+    </p>
+    <p class="calc-row">
+      <button type="button" class="calc-button" onClick="a('4')">4</button>
+      <button type="button" class="calc-button" onClick="a('5')">5</button>
+      <button type="button" class="calc-button" onClick="a('6')">6</button>
+      <button type="button" class="calc-button calc-button-red calc-button-big" onClick="a('-')">-</button>
+    </p>
+    <p class="calc-row">
+      <button type="button" class="calc-button" onClick="a('1')">1</button>
+      <button type="button" class="calc-button" onClick="a('2')">2</button>
+      <button type="button" class="calc-button" onClick="a('3')">3</button>
+      <button type="button" class="calc-button calc-button-red calc-button-big" onClick="a('+')">+</button>
+    </p>
+    <p class="calc-row">
+      <button type="button" class="calc-button" onClick="a('0')">0</button>
+      <button type="button" class="calc-button" onClick="a('.')">.</button>
+      <button type="button" class="calc-button" onClick="s('')">C</button>
+      <button type="button" class="calc-button calc-button-yellow calc-button-big" onClick="e()">=</button>
+    </p>
+  </form>
+
+  <script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+  <script>
+    function s(v) { document.getElementById('res').value = v }
+    function a(v) { document.getElementById('res').value += v }
+    function e() { try { s(eval(document.getElementById('res').value)) } catch(e) { s('Error') } }
+  </script>
+</body>
+</html>

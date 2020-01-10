@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>海淀区民办学校申请备案登记表</title>
+<link href="css/pagetable.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../../../../../assets/js/jquery-3.3.1.min.js"></script>
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+	$(".tableT p").blur(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	});
+	
+});
+</script>
+</head>
+<body>
+<div class="pagetable"  id="app">
+	<input type="hidden" :value="MBREGISTER_ID" :id="FORM_ID"/>
+	<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+	<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+	<h1>海淀区民办学校申请备案登记表</h1>
+	<table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+		<th>学校全称（盖章）</th>
+		<td colspan="6"><p :contenteditable="isPreview?false:true" ref="SC_ALLNAME" id="SC_ALLNAME" v-text="pd.SC_ALLNAME"></p></td>
+		<th colspan="3">教民110108（<p class="inlinep" :contenteditable="isPreview?false:true"  ref="NUMBER" id="NUMBER" v-text="pd.NUMBER"></p>）号</th>
+	  </tr>
+	  <tr>
+		<th>校长及电话</th>
+		<td colspan="4"><p :contenteditable="isPreview?false:true" ref="PRINCIPAL_AND_PHONE" id="PRINCIPAL_AND_PHONE" v-text="pd.PRINCIPAL_AND_PHONE"></p></td>
+		<th colspan="2">联系人及电话</th>
+		<td colspan="3"><p :contenteditable="isPreview?false:true" ref="LINKMAN_AND_PHONE" id="LINKMAN_AND_PHONE" v-text="pd.LINKMAN_AND_PHONE"></p></td>
+		</tr>
+	  <tr>
+		<th width="10%" rowspan="2">预备案项目</th>
+		<th width="10%">校长</th>
+		<th width="10%">董事长（理事长）</th>
+		<th width="10%">法定代表人</th>
+		<th width="10%">决策机构成员</th>
+		<th width="10%">招生简章和广告</th>
+		<th width="10%">年度审计报告</th>
+		<th width="10%">举办者更名</th>
+		<th width="10%">收退费办法</th>
+		<th width="10%">章程</th>
+	  </tr>
+	  <tr>
+		<td><p :contenteditable="isPreview?false:true" ref="PRINCIPAL" id="PRINCIPAL" v-text="pd.PRINCIPAL"></p></td>
+		<td><p :contenteditable="isPreview?false:true" ref="CHAIRMAN" id="CHAIRMAN" v-text="pd.CHAIRMAN"></p></td>
+		<td><p :contenteditable="isPreview?false:true" ref="LEGAL_PERSON" id="LEGAL_PERSON" v-text="pd.LEGAL_PERSON"></p></td>
+		<td><p :contenteditable="isPreview?false:true" ref="DECISION_MAKING_MEMBER" id="DECISION_MAKING_MEMBER" v-text="pd.DECISION_MAKING_MEMBER"></p></td>
+		<td><p :contenteditable="isPreview?false:true" ref="BROCHURE_AND_ADVERTISEMENT" id="BROCHURE_AND_ADVERTISEMENT" v-text="pd.BROCHURE_AND_ADVERTISEMENT"></p></td>
+		<td><p :contenteditable="isPreview?false:true" ref="ANNUAL_AUDIT_REPORT" id="ANNUAL_AUDIT_REPORT" v-text="pd.ANNUAL_AUDIT_REPORT"></p></td>
+		<td><p :contenteditable="isPreview?false:true" ref="CHANGE_OF_ORGANIZER" id="CHANGE_OF_ORGANIZER" v-text="pd.CHANGE_OF_ORGANIZER"></p></td>
+		<td><p :contenteditable="isPreview?false:true" ref="REFUND_METHOD" id="REFUND_METHOD" v-text="pd.REFUND_METHOD"></p></td>
+		<td><p :contenteditable="isPreview?false:true" ref="CONSTITUTION" id="CONSTITUTION" v-text="pd.CONSTITUTION"></p></td>
+	  </tr>
+	  <tr>
+		<th width="10%">备案前</th>
+		<td colspan="9"><p :contenteditable="isPreview?false:true" ref="RECORD_BEFORE" id="RECORD_BEFORE" v-text="pd.RECORD_BEFORE"></p></td>
+		</tr>
+	  <tr>
+		<th>备案后</th>
+		<td colspan="9"><p :contenteditable="isPreview?false:true" ref="RECORD_AFTER" id="RECORD_AFTER" v-text="pd.RECORD_AFTER"></p></td>
+		</tr>
+	  <tr>
+		<th>举办者意见</th>
+		<td colspan="4" ref="ORGANIZER_DATE" id="ORGANIZER_DATE">
+			<p class="mh200" :contenteditable="isPreview?false:true" ref="ORGANIZER_OPINION" id="ORGANIZER_OPINION" v-text="pd.ORGANIZER_OPINION"></p>个人举办者签字：</br>单位举办者盖公章（法人代表人签字）：</br>
+			<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="YEAR1" id="YEAR1" v-text="pd.YEAR1"></p>年
+			<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="MONTH1" id="MONTH1" v-text="pd.MONTH1"></p>月
+			<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="DAY1" id="DAY1" v-text="pd.DAY1"></p>日
+		</td>
+		<th>教育业务主管部门意见</th>
+		<td colspan="4" ref="COMPETENT_DATE" id="COMPETENT_DATE">
+			<p class="mh200" :contenteditable="isPreview?false:true" ref="COMPETENT_ADVICE" id="COMPETENT_ADVICE" v-text="pd.COMPETENT_ADVICE"></p>业务部门领导签字：</br>
+			<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="YEAR2" id="YEAR2" v-text="pd.YEAR2"></p>年
+			<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="MONTH2" id="MONTH2" v-text="pd.MONTH2"></p>月
+			<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="DAY2" id="DAY2" v-text="pd.DAY2"></p>日
+		</td>
+		</tr>
+	  <tr>
+		<th>交件人及电话</th>
+		<td colspan="4"><p ref="DELIVERY_AND_PHONE" id="DELIVERY_AND_PHONE" v-text="pd.DELIVERY_AND_PHONE" :contenteditable="isPreview?false:true"></p></td>
+		<th>交件日期</th>
+		<td colspan="4"><p  ref="DELIVERY_DATE" id="DELIVERY_DATE" v-text="pd.DELIVERY_DATE" :contenteditable="isPreview?false:true"></p></td>
+		</tr>
+	  <tr>
+		<th>受理人</th>
+		<td colspan="4"><p ref="ACCEPTOR" id="ACCEPTOR" v-text="pd.ACCEPTOR" :contenteditable="isPreview?false:true"></p></td>
+		<th>受理日期</th>
+		<td colspan="4"><p ref="ACCEPTING_DATE" id="ACCEPTING_DATE" v-text="pd.ACCEPTING_DATE" :contenteditable="isPreview?false:true"></p></td>
+		</tr>
+	  <tr>
+		<th>审核人</th>
+		<td colspan="4"><p ref="VERIFIER" id="VERIFIER" v-text="pd.VERIFIER" :contenteditable="isPreview?false:true"></p></td>
+		<th>审核日期</th>
+		<td colspan="4"><p ref="VERIFIER_DATE" id="VERIFIER_DATE" v-text="pd.VERIFIER_DATE" :contenteditable="isPreview?false:true"></p></td>
+		</tr>
+	  <tr>
+		<th>通知办结日期</th>
+		<td colspan="4"><p ref="COMPLETION_DATE" id="COMPLETION_DATE" v-text="pd.COMPLETION_DATE" :contenteditable="isPreview?false:true"></p></td>
+		<th>送达地点</th>
+		<td colspan="4"><p ref="DELIVERED" id="DELIVERED" v-text="pd.DELIVERED" :contenteditable="isPreview?false:true"></p></td>
+		</tr>
+	  <tr>
+		<th>送达人及日期</th>
+		<td colspan="4"><p ref="PROCESS_AND_DATE" id="PROCESS_AND_DATE" v-text="pd.PROCESS_AND_DATE" :contenteditable="isPreview?false:true"></p></td>
+		<th>收件人及日期</th>
+		<td colspan="4"><p ref="ADDRESSEE_AND_DATE" id="ADDRESSEE_AND_DATE" v-text="pd.ADDRESSEE_AND_DATE" :contenteditable="isPreview?false:true"></p></td>
+		</tr>
+	</table>
+	<div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+		<span style="width: 100%;text-align: center;">
+					<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+					<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+					<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+		</span>
+	</div>
+	<div class="bz">
+	注：此表一式二份，请用黑色签字笔填写，并在所要备案事项下划勾。
+	</div>
+
+</div>
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="js/mbregister.js"></script>   
+</body>
+</html>

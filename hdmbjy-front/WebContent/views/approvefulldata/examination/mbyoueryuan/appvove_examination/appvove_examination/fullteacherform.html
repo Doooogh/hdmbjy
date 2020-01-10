@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>附件3民办幼儿园专职教师名册</title>
+<link href="css/pagetable.css" rel="stylesheet" type="text/css">
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-3.3.1.min.js"></script> -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<script>
+$(function(){
+	/* var index=4;
+	if(vm.toType=='edit'){
+		index=Object.keys(vm.members).length+1
+	} */
+	/* $(".btntj").live("click",function(){
+		var newT = "<tr class=\"member_num\"><td><p contenteditable=\"true\" class=\"ORDER\">"+ (index) +"</p></td><td><p contenteditable=\"true\" class=\"NAME\"></p></td><td><p contenteditable=\"true\" class=\"SEX\"></p></td><td><p contenteditable=\"true\" class=\"BIRTHDAY\"></p></td><td><p contenteditable=\"true\" class=\"ID_CARD\"></p></td><td><p contenteditable=\"true\" class=\"HOUSEHOLD\"></p></td><td><p contenteditable=\"true\" class=\"HAS_TEACHER_CERTIFICATE\"></p></td><td><p contenteditable=\"true\" class=\"TEACH_COURSE\"></p></td></tr>";
+			$(".tableT").append(newT);
+			index=index+1;
+	}); */
+	$("td").live("click",function(){
+		$(this).parent().parent().find(".trselect").removeClass("trselect");
+		$(this).parent().addClass("trselect");
+	});
+	/* $(".btnsc").live("click",function(){
+		$(".trselect").remove();
+		
+	}); */
+});
+</script>
+</head>
+<body>
+<div class="pagetable" id="app">
+	<input type="hidden" :value="FULLTEACHERFORM_ID" :id="FORM_ID"/>
+	<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+	<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+<h1>幼儿园专职教师名册</h1>
+
+<ul>
+	<li>单位（公章）</li>
+	<li></li>
+	<li><a v-show="!isPreview" class="btntj" href="javascript:void(0)" @click="addTable()">增加列表</a><a  v-show="!isPreview" class="btnsc" href="javascript:void(0)"  @click="delTable()">删除列表</a></li>
+</ul>
+<table class="tableT alignc" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th width="3%">序号</th>
+    <th width="10%">姓名</th>
+    <th width="10%">性别</th>
+    <th width="10%">出生年月</th>
+    <th width="27%">身份证号</th>
+    <th width="15%">户籍</th>
+    <th width="10%">是否有教师资格证</th>
+    <th width="15%">任教课程</th>
+    </tr>
+  <tr class="trselect member_num">
+   <td><p :contenteditable="isPreview?false:false" class="ORDER" v-text="toType==='edit'&&members[0]!=undefined?'1':'1'">1</p></td>
+    <td><p :contenteditable="isPreview?false:true" class="NAME" v-text="toType==='edit'&&members[0]!=undefined?members[0].NAME:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="SEX" v-text="toType==='edit'&&members[0]!=undefined?members[0].SEX:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="BIRTHDAY" v-text="toType=='edit'&&members[0]!=undefined?members[0].BIRTHDAY:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="ID_CARD" v-text="toType=='edit'&&members[0]!=undefined?members[0].ID_CARD:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="HOUSEHOLD" v-text="toType=='edit'&&members[0]!=undefined?members[0].HOUSEHOLD:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="HAS_TEACHER_CERTIFICATE" v-text="toType=='edit'&&members[0]!=undefined?members[0].HAS_TEACHER_CERTIFICATE:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="TEACH_COURSE" v-text="toType=='edit'&&members[0]!=undefined?members[0].TEACH_COURSE:''"></p></td>
+  </tr>
+  <tr class="trselect member_num">
+  <td><p :contenteditable="isPreview?false:false" class="ORDER" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?'2':'2'">2</p></td>
+  <td><p :contenteditable="isPreview?false:true" class="NAME" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].NAME:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="SEX" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].SEX:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="BIRTHDAY" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].BIRTHDAY:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="ID_CARD" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].ID_CARD:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="HOUSEHOLD" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].HOUSEHOLD:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="HAS_TEACHER_CERTIFICATE" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].HAS_TEACHER_CERTIFICATE:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="TEACH_COURSE" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].TEACH_COURSE:''"></p></td>
+  
+  </tr>
+  <tr class="trselect member_num">
+ <td><p :contenteditable="isPreview?false:false" class="ORDER" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?'3':'3'">3</p></td>
+ <td><p :contenteditable="isPreview?false:true" class="NAME" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].NAME:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="SEX" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].SEX:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="BIRTHDAY" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].BIRTHDAY:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="ID_CARD" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].ID_CARD:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="HOUSEHOLD" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].HOUSEHOLD:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="HAS_TEACHER_CERTIFICATE" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].HAS_TEACHER_CERTIFICATE:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="TEACH_COURSE" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].TEACH_COURSE:''"></p></td>
+
+  </tr>
+  
+  <tr v-for="(member,index) in members" v-if="index>=3&&toType==='edit'" class="member_num">
+  	<td><p :contenteditable="isPreview?false:false" class="ORDER" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?index+1:index+1"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="NAME" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].NAME:''"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="SEX" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].SEX:''"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="BIRTHDAY" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].BIRTHDAY:''"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="ID_CARD" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].ID_CARD:''"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="HOUSEHOLD" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].HOUSEHOLD:''"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="HAS_TEACHER_CERTIFICATE" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].HAS_TEACHER_CERTIFICATE:''"></p></td>
+  	<td><p :contenteditable="isPreview?false:true" class="TEACH_COURSE" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].TEACH_COURSE:''"></p></td>
+ </tr>
+</table>
+<ul>
+	<li>填表人：<span :contenteditable="isPreview?false:true" v-text="pd.FULL_BY" id="pd.FULL_BY" ref="pd.FULL_BY">123</span></li>
+	<li>联系电话：<span :contenteditable="isPreview?false:true" v-text="pd.PHONE" id="PHONE" ref="PHONE"></span></li>
+	<li>日期：<span :contenteditable="isPreview?false:true" v-text="pd.DATE" id="DATE" ref="DATE"></span></li>
+</ul>
+<div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+		<span style="width: 100%;text-align: center;">
+			<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+			<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+			<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+		</span>
+</div>
+</div>
+
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="js/fullteacherform.js"></script> 	
+</body>
+</html>

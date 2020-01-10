@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/material/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+	<link rel="stylesheet" href="../../../assets/css/bootstrap/bootstrap.css">
+
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+	<style>
+		[v-cloak] {
+		    display: none;
+		}
+	</style>
+</head>
+
+<body>
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+							    <!-- [ Hover-table ] start -->
+                                <div class="col-xl-12">
+                                    <div class="card">
+										<div class="card-block table-border-style" style="margin-top: -15px">
+											<div class="table-responsive" style="padding: 20px;">
+												
+												 	
+												<template v-if="status==0&&!hiddenStatus" v-cloak>
+													<h3 class="panel-title" style="color: firebrick;font-size: 18px;">流程已作废</h3>
+												</template>
+												<template v-if="status==1&&!hiddenStatus" v-cloak>
+													<h3 class="panel-title" style="color: firebrick;font-size: 18px;">流程进行中</h3>
+												</template>
+												<template v-if="status==2&&!hiddenStatus" v-cloak>
+													<h3 class="panel-title" style="color: firebrick;font-size: 18px;">流程已完成</h3>
+												</template>
+												
+												<div class="panel panel-default" style="margin-top: 30px;">
+												  <div class="panel-heading">
+												    <h3 class="panel-title">审批项目信息</h3>
+												   
+												  </div>
+												  <div class="panel-body">
+												    <table class="table table-hover">
+												      <template v-for="(data,index) in varList">
+												      	<tr>
+												      		<template v-if="data.NAME_ != 'RESULT'">
+												      			<td style="width:75px;text-align: right;padding-top: 10px;">{{data.NAME_ == 'USERNAME'?'登录用户':data.NAME_}}</td>
+												      			<td style="padding-top: 10px;">{{data.TEXT_}}</td>
+												      		</template>
+												      	</tr>
+												      </template>
+												    </table>
+												  </div>
+												</div>
+												<div class="panel panel-default">
+												  <div class="panel-heading">
+												    <h3 class="panel-title">审批流程信息</h3>
+												  </div>
+												  <div class="panel-body">
+													  <div  id="profile"  >
+													    
+													      	<table  class="table table-hover" style="margin-top: 10px;">
+													  		<tr>
+													  			<th style="width:50px;">步骤</th>
+													  			<th style="width:150px;">任务节点</th>
+													  			<th style="width:150px;">办理人</th>
+													  			<th style="width:150px;"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>审批开始时间</th>
+													  			<th style="width:150px;"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>审批结束时间</th>
+													  			<th style="width:120px;">用时</th>
+													  			<th>审批意见</th>
+													  		</tr>
+													  		<template v-for="(data,index) in hitaskList">
+													  			<tr>
+													  				<td style="width: 30px;text-align: center;">{{index+1}}</td>
+													  				<td style="padding-top: 10px;">{{data.ACT_NAME_}}</td>
+													  				<td style="padding-top: 10px;">
+													  					<template v-if="null != data.ASSIGNEE_">
+													  						<a v-on:click="viewUser(data.ASSIGNEE_)" style="cursor:pointer;">{{data.ASSIGNEE_}}</a>
+													  					</template>
+													  				</td>
+													  				<td style="padding-top: 10px;">{{formatDate(data.START_TIME_)}}</td>
+													  				<td style="padding-top: 10px;">
+													  					<template v-if="null == data.END_TIME_">正在审批……</template>
+													  					<template v-if="null != data.END_TIME_">{{formatDate(data.END_TIME_)}}</template>
+													  				</td>
+													  				<td class='center'>{{data.ZTIME}}</td>
+													  				<td style="padding-top: 10px;">
+													  					<template v-if="null != data.TEXT_">
+													  					<template v-for="(zdata,zindex) in ((data.TEXT_).split(',fh,'))">
+													                              <template v-if="zindex == 0">{{zdata}}</template>
+													                              <template v-if="zindex == 1">
+													                              	<a v-on:click="details('d'+(index+1))" style="cursor:pointer;" title="详情">&nbsp;</a>
+													                              </template>
+													                      </template>
+													                      </template>
+													                      <textarea v-bind:id="'d'+(index+1)" style="display: none;">{{data.TEXT_}}</textarea>
+													  				</td>
+													  			</tr>
+													  		</template>
+													  		</table>
+													      
+													  </div>
+												
+												  </div>
+												</div>
+												<div class="panel panel-default">
+												  <div class="panel-heading">
+												    <h3 class="panel-title">审批资料</h3>
+												  </div>
+												  <div class="panel-body">
+													  
+													  <div v-show="hasAttachment" style="margin-bottom: 40px!important;">
+													  	<b  style="font-size:20px ;">附件</b>
+													  	<table class="table table-hover" >
+													  		<thead>
+													  			<th>序号</th>
+													  			<th>文件名</th>
+													  			<th>预览</th>
+													  			<th>下载</th>	
+													  		</thead>
+													  		<tr v-for="(att,index) in attList">
+													  			<td style="width: 25%!important;">{{index+1}}</td>
+													  			<td style="width: 25%!important;">{{att.ORIGINAL_NAME}}</td>
+													  			<td style="width: 25%!important;">
+													  				<a title="预览" href="#" v-on:click="preview(att.ID,att.URL)"><i class="fa fa-eye"  aria-hidden="true"></i> </a>
+													  			</td>
+													  			<td style="width: 25%!important;">
+													  				<a title="下载" href="#" v-on:click="downloadAtt(att.ID,att.URL)"><i class="fa fa-download" aria-hidden="true"></i></a>
+													  			</td>
+													  		</tr>
+													  	</table>
+													  </div>
+													  <div v-show="hasApproveForm">
+													  	<b style="font-size:20px ;">表单</b>
+													  	<table class="table table-hover">
+													  		<tr>
+													  			<th>序号</th>
+													  			<th>文件名</th>
+													  			<th>预览</th>
+													  			<!-- <th>下载</th>	 -->
+													  		</tr>
+													  		<tr v-for="(appForm,index) in approveFormList">
+													  			<td style="width: 25%!important;">{{index+1}}</td>
+													  			<td style="width: 25%!important;">{{appForm.NAME}}</td>
+													  			<td style="width: 25%!important;">
+													  				<a title="预览" href="#" v-on:click="previewForm(appForm.ALLURL,appForm.FORMDATA_ID)"><i class="fa fa-eye"  aria-hidden="true"></i> </a>
+													  			</td>
+													  			<!-- <td style="width: 25%!important;">s
+													  				<a title="下载" href="#" v-on:click="downloadAtt(appForm.ALLURL,appForm.FORNDATA_ID)"><i class="fa fa-download" aria-hidden="true"></i></a>
+													  			</td> -->
+													  		</tr>
+													  	</table>
+													  </div>
+												  </div>
+												</div>
+											</div>
+										</div>
+                                    </div>
+                                </div>
+                                <!-- [ Hover-table ] end -->
+
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+<!-- 本页js -->
+<script type="text/javascript" src="../../../assets/js-v/util/formatDate.js"></script>
+<script src="../../../assets/js-v/government/government_detail.js"></script>
+
+</html>

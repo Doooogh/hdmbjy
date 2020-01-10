@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.organization.OrganizationMapper">
+
+	<resultMap type="organization" id="organizationResultMap">
+		<id column="ORGANIZATION_ID" property="ORGANIZATION_ID"/>
+		<result column="PARENT_ID" property="PARENT_ID"/>
+		<result column="NAME" property="NAME"/>
+	</resultMap>
+
+	<!--表名 -->
+	<sql id="tableName">
+		OA_ORGANIZATION
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.ORGANIZATION_ID,	
+		f.NAME,	
+		f.NAME_EN,	
+		f.LICENCE,	
+		f.PARENT_ID,	
+		f.PARENT_IDS,	
+		f.HEADMAN,	
+		f.HEADMAN_ID,	
+		f.HIS_HEADMANS,	
+		f.TEL,	
+		f.INTRO,	
+		f.MAJOR,	
+		f.BIANZHI,	
+		f.ADDRESS,	
+		f.POSTS,	
+		f.CREATE_TIME,	
+		f.TYPE,	
+		f.HEADMAN_PHONE,	
+		f.DISTRICT,	
+		f.FIELD4,	
+		f.FIELD5,	
+		f.FIELD6
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		ORGANIZATION_ID,	
+		`NAME`,
+		NAME_EN,	
+		LICENCE,	
+		PARENT_ID,	
+		PARENT_IDS,	
+		HEADMAN,	
+		HEADMAN_ID,	
+		HIS_HEADMANS,	
+		TEL,	
+		INTRO,	
+		MAJOR,	
+		BIANZHI,	
+		ADDRESS,	
+		POSTS,	
+		CREATE_TIME,	
+		`TYPE`,
+		HEADMAN_PHONE,	
+		DISTRICT,	
+		FIELD4,	
+		FIELD5,	
+		FIELD6
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{ORGANIZATION_ID},	
+		#{NAME},	
+		#{NAME_EN},	
+		#{LICENCE},	
+		#{PARENT_ID},	
+		#{PARENT_IDS},	
+		#{HEADMAN},	
+		#{HEADMAN_ID},	
+		#{HIS_HEADMANS},	
+		#{TEL},	
+		#{INTRO},	
+		#{MAJOR},	
+		#{BIANZHI},	
+		#{ADDRESS},	
+		#{POSTS},	
+		#{CREATE_TIME},	
+		#{TYPE},	
+		#{HEADMAN_PHONE},	
+		#{DISTRICT},	
+		#{FIELD4},	
+		#{FIELD5},	
+		#{FIELD6}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field2"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			ORGANIZATION_ID = #{ORGANIZATION_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			ORGANIZATION_ID = #{ORGANIZATION_ID},
+			`NAME` = #{NAME},
+			NAME_EN = #{NAME_EN},
+			LICENCE = #{LICENCE},
+			PARENT_ID = #{PARENT_ID},
+			PARENT_IDS = #{PARENT_IDS},
+			HEADMAN = #{HEADMAN},
+			HEADMAN_ID = #{HEADMAN_ID},
+			HIS_HEADMANS = #{HIS_HEADMANS},
+			TEL = #{TEL},
+			INTRO = #{INTRO},
+			MAJOR = #{MAJOR},
+			BIANZHI = #{BIANZHI},
+			ADDRESS = #{ADDRESS},
+			POSTS = #{POSTS},
+			CREATE_TIME = #{CREATE_TIME},
+			`TYPE` = #{TYPE},
+			HEADMAN_PHONE = #{HEADMAN_PHONE},
+			DISTRICT = #{DISTRICT},
+			FIELD4 = #{FIELD4},
+			FIELD5 = #{FIELD5},
+			FIELD6 = #{FIELD6}
+		where 
+			ORGANIZATION_ID = #{ORGANIZATION_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.ORGANIZATION_ID = #{ORGANIZATION_ID}
+	</select>
+	
+	<select id="findByLicence" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.LICENCE = #{LICENCE}
+	</select>
+	<!-- 通过用户ID获取数据 -->
+	<select id="findByUserId" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.HEADMAN_ID = #{userid}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 1=1
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				-->
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+
+		where 1=1
+			<if test="TYPE!=null and TYPE!=''">
+				and f.TYPE=#{TYPE}
+			</if>
+			<if test="DISTRICT!=null and DISTRICT!=''">
+				and f.DISTRICT=#{DISTRICT}
+			</if>
+
+	</select>
+	<!-- 列表(地图使用) -->
+	<select id="listAllMap" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+
+		where 1=1
+			<if test="TYPE!=null and TYPE!=''">
+				and f.TYPE=#{TYPE}
+			</if>
+			<if test="DISTRICT!=null and DISTRICT!=''">
+				and f.DISTRICT=#{DISTRICT}
+			</if>
+			<if test="KEYWORDS != null and KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件 -->
+					f.NAME LIKE CONCAT(CONCAT('%', #{KEYWORDS}),'%')
+					 or 
+					f.ADDRESS LIKE CONCAT(CONCAT('%', #{KEYWORDS}),'%') 
+				
+				)
+			</if>
+	</select>
+	
+	<select id="lists" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+	</select>
+
+
+	<select id="listAllOrganization" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include>
+		f
+
+	</select>
+
+	<!--通过ID获取其子一级菜单 -->
+	<select id="listSublistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include> f
+		where 1=1
+		<if test="pd.ORGANIZATION_ID!=null and pd.ORGANIZATION_ID!='' and pd.ORGANIZATION_ID!='-1'">
+		and PARENT_ID = #{pd.ORGANIZATION_ID}
+		</if>
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件-->
+					f.NAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					 or 
+					f.ADDRESS LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				
+				)
+		</if>
+	</select>
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			ORGANIZATION_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	<select id="findCountType" parameterType="String" resultType="Long">
+		SELECT COUNT(*) FROM oa_organization f WHERE f.type = #{type}
+	</select>
+	<select id="findByTypeXQ" parameterType="String" resultType="Long">
+		SELECT COUNT(*) FROM oa_organization f WHERE f.DISTRICT = #{bianma}
+	</select>
+
+	<select id="findByHeadmanType" resultType="pd" parameterType="pd">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include> f
+		where f.HEADMAN_ID=#{headmanType}
+	</select>
+	<select id="findByHeadmanId" resultType="pd" parameterType="pd">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include> f
+		where f.HEADMAN_ID=#{HEADMAN_ID}
+	</select>
+
+
+
+
+	<select id="count" resultType="int" parameterType="pd">
+		select
+		count(ORGANIZATION_ID)
+		from
+		<include refid="tableName"></include>
+		where 1=1
+	</select>
+
+
+
+	<!-- fh313596790qq(青苔) -->
+</mapper>

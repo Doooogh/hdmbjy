@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>培训学校___个人基本情况表</title>
+<link href="../../css/pagetable.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<style type="text/css">
+#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+</style>
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+	$(".tableT p").blur(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	});
+	
+});
+</script>
+<script>
+//图片上传预览    IE是用了滤镜。
+        function previewImage(file)
+        {
+          var MAXWIDTH  = 260; 
+          var MAXHEIGHT = 180;
+          var div = document.getElementById('preview');
+          if (file.files && file.files[0])
+          {
+              div.innerHTML ='<img id=imghead>';
+              var img = document.getElementById('imghead');
+              img.onload = function(){
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                img.width  =  rect.width;
+                img.height =  rect.height;
+//                 img.style.marginLeft = rect.left+'px';
+                img.style.marginTop = rect.top+'px';
+              }
+              var reader = new FileReader();
+              reader.onload = function(evt){img.src = evt.target.result;}
+              reader.readAsDataURL(file.files[0]);
+          }
+          else //兼容IE
+          {
+            var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+            file.select();
+            var src = document.selection.createRange().text;
+            div.innerHTML = '<img id=imghead>';
+            var img = document.getElementById('imghead');
+            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+            status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+            div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+          }
+        }
+        function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+            var param = {top:0, left:0, width:width, height:height};
+            if( width>maxWidth || height>maxHeight )
+            {
+                rateWidth = width / maxWidth;
+                rateHeight = height / maxHeight;
+                 
+                if( rateWidth > rateHeight )
+                {
+                    param.width =  maxWidth;
+                    param.height = Math.round(height / rateWidth);
+                }else
+                {
+                    param.width = Math.round(width / rateHeight);
+                    param.height = maxHeight;
+                }
+            }
+            param.left = Math.round((maxWidth - param.width) / 2);
+            param.top = Math.round((maxHeight - param.height) / 2);
+            return param;
+        }
+</script>
+</head>
+<body>
+<div class="pagetable" id="app">
+	<input type="hidden" :value="PXSCBASICINFOTABLE_ID" :id="FORM_ID"/>
+	<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+	<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+	<h1>培训学校<p class="inlinep" ref="SC_NAME" id="SC_NAME" v-text="pd.SC_NAME"  :contenteditable="isPreview?false:true" style="text-decoration : underline ;"></p>   个人基本情况表</h1>
+	<table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+		<th width="8%">姓名</th>
+		<td width="8%" colspan="2"><p :contenteditable="isPreview?false:true" ref="NAME" id="NAME" v-text="pd.NAME" ></p></td>
+		<th width="8%">性别</th>
+		<td><p :contenteditable="isPreview?false:true" ref="SEX" id="SEX" v-text="pd.SEX"></p></td>
+		<th width="8%">年龄</th>
+		<td><p :contenteditable="isPreview?false:true"  ref="AGE" id="AGE" v-text="pd.AGE" ></p></td>
+		<th width="8%">学历</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true" ref="EDUCATION" id="EDUCATION" v-text="pd.EDUCATION" ></p></td>
+		<td width="20%" rowspan="4" class="img">
+			<div id="preview"><img id="imghead" width=100% height=auto border=0 src=''></div>
+			<input type="file" onchange="previewImage(this)" />  
+		</td>
+	  </tr>
+	  <tr>
+		<th>身份证号</th>
+		<td colspan="6"><p :contenteditable="isPreview?false:true" ref="ID_NUMBER" id="ID_NUMBER" v-text="pd.ID_NUMBER"></p></td>
+		<th>职称</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true" ref="TITLE" id="TITLE" v-text="pd.TITLE"></p></td>
+		</tr>
+	  <tr>
+		<th>培训机构拟任职务</th>
+		<td class="alignc" colspan="9"><p :contenteditable="isPreview?false:true" ref="DUTY" id="DUTY" v-text="pd.DUTY"></p></td>
+		</tr>
+	  <tr>
+		<th>从事教育教学工作年限</th>
+		<td width="8%"><p style="width:calc(100% - 30px);display:inline-block;" :contenteditable="isPreview?false:true" ref="YEAR_OF_NUMBER" id="YEAR_OF_NUMBER" v-text="pd.YEAR_OF_NUMBER"></p>年</td>
+		<th width="8%">从教专业</th>
+		<td colspan="3"><p :contenteditable="isPreview?false:true" ref="MAJOR" id="MAJOR" v-text="pd.MAJOR"></p></td>
+		<th width="8%">健康状况</th>
+		<td><p :contenteditable="isPreview?false:true" ref="HEALTHY_CONDITION" id="HEALTHY_CONDITION" v-text="pd.HEALTHY_CONDITION"></p></td>
+		<th width="8%">是否退休</th>
+		<td><p :contenteditable="isPreview?false:true"  ref="RETIRE" id="RETIRE" v-text="pd.RETIRE"></p></td>
+		</tr>
+	  <tr>
+		<th rowspan="2">原工作单位及职务</th>
+		<td rowspan="2" colspan="8"><p :contenteditable="isPreview?false:true" ref="ORIGINAL_COMPANY_AND_DUTY" id="ORIGINAL_COMPANY_AND_DUTY" v-text="pd.ORIGINAL_COMPANY_AND_DUTY" ></p></td>
+		<th width="8%">单位电话</th>
+		<td><p :contenteditable="isPreview?false:true" ref="ORIGINAL_COMPANY_TEL" id="ORIGINAL_COMPANY_TEL" v-text="pd.ORIGINAL_COMPANY_TEL" ></p></td>
+	  </tr>
+	  <tr>
+		<th width="8%">手机</th>
+		<td><p :contenteditable="isPreview?false:true"  ref="ORIGINAL_COMPANY_PHONE" id="ORIGINAL_COMPANY_PHONE" v-text="pd.ORIGINAL_COMPANY_PHONE"></p></td>
+	  </tr>
+	  <tr>
+		<th rowspan="2">现家庭住址</th>
+		<td rowspan="2" colspan="8"><p :contenteditable="isPreview?false:true" ref="NOW_ADDRESS" id="NOW_ADDRESS" v-text="pd.NOW_ADDRESS"></p></td>
+		<th width="8%">邮政编码</th>
+		<td><p :contenteditable="isPreview?false:true" ref="POST" id="POST" v-text="pd.POST" ></p></td>
+	  </tr>
+	  <tr>
+		<th width="8%">住宅电话</th>
+		<td><p :contenteditable="isPreview?false:true" ref="HOMEPHONE" id="HOMEPHONE" v-text="pd.HOMEPHONE"></p></td>
+	  </tr>
+	  <tr>
+		<th>个人简历</th>
+		<td colspan="10"><p class="mh200" :contenteditable="isPreview?false:true" ref="JOB_RESUME" id="JOB_RESUME" v-text="pd.JOB_RESUME" ></p></td>
+		</tr>
+	  <tr>
+		<th>所在单位人事部门意见</th>
+		<td colspan="10"><p class="mh200" :contenteditable="isPreview?false:true"  ref="DEPT_OPINION" id="DEPT_OPINION" v-text="pd.DEPT_OPINION"></p></td>
+	  </tr>
+	</table>
+	
+	<div class="bz">
+	注:</br>                                                                                                           1.此表为培训机构举办者、校长、法定代表人,决策机构负责人基本情况表.   </br>                                      2.本人需出具有效证件原件及复印件各一份(请用A4型纸正反面复印).    </br>                                                  3.此表可复印,同一人任多职只填一份表.</br>   
+	</div>
+	<div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+			<span style="width: 100%;text-align: center;">
+				<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+				<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+				<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+			</span>
+	</div>
+</div>
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="../../js/pxscbasicinfotable.js"></script>
+</body>
+</html>

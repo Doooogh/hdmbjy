@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body>
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+
+							    <!-- [ Hover-table ] start -->
+                                <div class="col-xl-12">
+                                    <div class="card">
+         
+										<div class="card-block table-border-style" style="margin-top: -5px">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">	
+													<thead>
+														<tr>
+															<th style="width: 50px;">NO</th>
+															<th>组名</th>
+															<th style="width: 100px;">操作</th>
+														</tr>
+													</thead>
+																			
+													<tbody>
+														<!-- 开始循环 -->	
+														<template v-for="(data,index) in varList">
+															<tr>
+																<td scope="row">{{page.showCount*(page.currentPage-1)+index+1}}</td>
+																<td>{{data.NAME}}</td>
+																<td>
+																	<a v-show="edit" v-on:click="goEdit(data.FGROUP_ID);" style="cursor:pointer;"><i class="feather icon-edit-2"></i></a>
+								                    				<a v-show="del" title="删除" v-on:click="goDel(data.FGROUP_ID);" style="cursor:pointer;"><i class="feather icon-x"></i></a>
+																</td>
+															</tr>
+														</template>
+														<tr v-show="varList.length==0">
+															<td colspan="10">没有相关数据</td>
+														</tr>
+													</tbody>
+												</table>
+												<table style="width:100%;margin-top:15px;">
+													<tr>
+														<td style="vertical-align:top;width: 69px;">
+															<a v-show="add" class="btn btn-light btn-sm" v-on:click="goAdd">新增</a>
+														</td>
+														<td v-show="loading">
+															<!-- [加载状态 ] start -->
+													    	<div class="d-flex justify-content-center" style="margin-top:-10px;">
+					                                            <div class="spinner-grow spinner-grow-sm" role="status">
+					                                                <span class="sr-only">Loading...</span>
+					                                            </div>
+					                                        </div>
+													    	<!-- [ 加载状态  ] End -->
+														</td>
+														<td style="vertical-align:top;"><div style="float: right;padding-top: 0px;margin-top: 0px;" v-html="page.pageStr"></div></td>
+													</tr>
+												</table>
+											</div>
+                                        </div>
+			
+                                    </div>
+                                </div>
+                                <!-- [ Hover-table ] end -->
+
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 表单验证提示 -->
+<script type="text/javascript" src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页面js -->
+<script type="text/javascript" src="../../../assets/js-v/fhim/fgroup_list.js"></script>
+
+</body>
+</html>

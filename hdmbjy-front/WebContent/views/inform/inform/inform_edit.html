@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+	<!-- ztree css -->
+	<link rel="stylesheet" href="../../../plugins/zTree/3.5/css/zTreeStyle/zTreeStyle.css" />
+	
+	<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+	
+	<!--layui-->
+	<link rel="stylesheet" href="../../../assets/css/layui/modules/layer/default/layer.css">
+	<link rel="stylesheet" href="../../../assets/css/layui/layui.css" >
+    <!-- ztree -->
+	<script type="text/javascript"  src="../../../plugins/zTree/3.5/js/jquery.ztree.core.js"></script>
+	<script type="text/javascript" src="../../../plugins/zTree/3.5/js/jquery.ztree.excheck.js"></script>
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+	<script type="text/javascript" src="../../../assets/js/lodash.min.js"></script>
+	
+
+</head>
+<style>
+	.range_filter{
+		display: block;	
+		padding-right: 5px;
+	}
+	.range_filter_one{
+		display: inline;	
+	}
+	.filter_level2{
+		display: inline;	
+		margin-right: 5px;
+		width: 8%;
+		
+	
+	}
+	.filter_level2 a{
+		color: #101d37;
+		font-size: 12px;
+	}
+	.filter_level2 a:hover{
+		color:rgb(206, 76, 76);
+		font-size: 12px;
+	}
+	.list_top{
+		width: 6%;
+		float: left;
+	}
+	.list_bottom{
+		width: 90%;
+		float: left;
+		margin-top: 30px;
+		padding-bottom: 30px;
+	}
+	.sc_one{
+		width: 45%;
+		margin-right: 5px;
+		color: #000000;
+		width: 280px;
+		text-overflow:ellipsis;
+		height: 20px;
+		max-width: 45%;
+		overflow: hidden;
+		white-space: nowrap;
+		margin-bottom: 3px;
+	}
+</style>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+					
+								<div style="width: 100%;">
+									<div id="showform">
+														        
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">通知标题</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="TITLE" id="TITLE" v-model="pd.TITLE" maxlength="255" placeholder="这里输入通知标题" title="通知标题">
+		                                </div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">发起人姓名</span></span>
+										    </div>
+										    <input type="text" class="form-control" ref="INITIATOR_NAME" id="INITIATOR_NAME" v-model="pd.INITIATOR_NAME" maxlength="128" placeholder="这里输入发起人姓名" title="发起人姓名">
+										</div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+											<div class="input-group-prepend">
+											    <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">通知类型</span></span>
+											</div>
+											<select class="form-control" v-model="TYPE" id="TYPE" ref="TYPE" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+											  <option value="">通知类型</option>
+											</select>
+											<!-- <select v-model="TYPE" class="form-control" id="TYPE" ref="TYPE" title="请假类型" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;"></select> -->
+										</div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">通知内容</span></span>
+										    </div>
+											 <textarea placeholder="请输入内容" class="form-control"  style="min-height:200px ;height: auto;max-height: 450px; overflow-y:auto" v-model="pd.CONTENT"></textarea>
+											</div>
+										
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend ">
+										        <span class="input-group-text" style="width: 79px;height:400px "><span style="width: 100%;">接收人</span></span>
+										    </div>
+											<div class="form-control" style="height:400px " id="INFORMANT">
+												<div>
+													<div class="rang_filter1">
+														<div style="float: left;width: 6%;">
+															<span class="filter_level2 filter1" >
+															  <a href="#" rel="nofollow" id="filter1" @click="filter('','',$event)" style="font-weight: bold;color:rgb(206, 76, 76)!important;margin-right: 20px;">不限</a>
+															</span>
+														</div>
+														<div style="float: left;width: 90%;">
+															<ul class="range_filter" >
+																	
+																	<li class="filter_level2 filter1" >
+																	  <a href="#"  @click="filter('MINBAN_KINDERGARTEN_SCHOOL','',$event)" >民办幼儿园</a>
+																	</li>
+																	<li  class="filter_level2 filter1">
+																	  <a href="#" @click="filter('NO_EDUCATIONAL_ADMINISTRATION','',$event)" >公办幼儿园</a>
+																	</li>
+																	<li class="filter_level2  filter1">
+																	  <a href="#"  @click="filter('BOARDING_DEPARTMENT_APPROVAL','',$event)">寄宿部审批</a>
+																	</li>
+																	<li class="filter_level2  filter1">
+																	  <a href="#"  @click="filter('MINBAN_CULTIVATE_SCHOOL','',$event)" >民办培训学校</a>
+																	</li>
+																	<li class="filter_level2  filter1">
+																	  <a href="#"  @click="filter('MINBAN_MIDDLE_AND_PRIMARY_SCHOOL','',$event)" >民办中小学</a>
+																	</li>
+															</ul>	
+														</div>
+														
+													</div>
+													<!-- <div class="rang_filter1">
+														<div style="float: left;width: 6%;">
+															<span class="filter_level2 filter2" >
+															  <a href="#" rel="nofollow" id="filter2" @click="filter('','',$event)" style="font-weight: bold;color:rgb(206, 76, 76)!important;margin-right: 20px;">不限</a>
+															</span>
+														</div>
+														<div style="float: left;width: 90%;" >
+															<ul class="range_filter" id="district_filter" >
+																	<li class="filter_level2 filter2" v-for="district in districtList">
+																	  <a href="#" @click="filter('',district.DICTIONARIES_ID,$event)" v-text="district.NAME"></a>
+																	</li>
+															</ul>	
+														</div>
+														
+													</div> -->
+												</div>
+												<hr>
+												<div class="sc_list" style="min-height:300px ;height: auto;max-height: 380px; overflow-y:auto;padding-bottom: 30px;">
+													<div class="list_top">
+														<label class="checkbox-inline">
+														  <input type="checkbox" id="all_check" value="" @click="allCheck($event)"> 全选
+														</label>
+													</div>
+													<div class="list_bottom">
+														
+														<label class="checkbox-inline sc_one" v-for="organization in orList">
+														  <input type="checkbox"  :value="organization.HEADMAN_ID" / >{{organization.NAME}}
+														</label>
+														
+													</div>
+												</div>
+											</div>
+											
+											
+											
+										
+										
+										<!-- 	<div id="leftTree" class="ztree form-control" style="min-height:100px ;height: auto;max-height: 150px; overflow-y:auto">
+												<img src="../../../assets/images/loading.gif" />
+											</div> -->
+											
+										    <!-- <input type="text" class="form-control" ref="RECIPIENT" id="RECIPIENT" v-model="pd.RECIPIENT" maxlength="512" placeholder="这里输入接收人" title="接收人"> -->
+										</div>
+							           <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+							               <div class="input-group-prepend">
+							                   <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">附件</span></span>
+							               </div>
+							               <!--<input type="text" class="form-control" ref="DESCRIPTION" id="ATTACHMENT" v-model="pd.ATTACHMENT" maxlength="255" placeholder="这里选择附件" title="附件">-->
+							               <div class="layui-upload form-group form-control" id="attachment" style="min-height: 150px!important;overflow:auto!important;">
+							                   <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" id="testList" style="margin-right: 20px">选择多文件</button>
+							                   <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" id="sub"  >开始上传</button>
+											   <span style="font-size: 12px;color: darkred;margin-left: 30px;">(单个文件不能超过50M)</span>
+							                   <div class="layui-upload-list" style="margin-bottom: 20px">
+							                       <table class="layui-table">
+							                           <thead>
+							                           <tr><th>文件名</th>
+							                               <th>大小</th>
+							                               <th>状态</th>
+							                               <th>操作</th>
+							                           </tr></thead>
+							                           <tbody id="demoList"></tbody>
+							                       </table>
+							                   </div>
+							           
+							           
+							               </div>
+							           </div>
+									   <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+									       <div class="input-group-prepend">
+									           <span class="input-group-text" style="width: 79px;word-wrap:break-word!important; word-break:break-all!important;overflow: hidden!important; flex-wrap: wrap; "><div><p style="width: 100%;height: auto!important;">选择回执</p><p style="width: 100%;height: auto!important;color: darkred;">(可不选)</p></div></span>
+									       </div>
+									       <!--<input type="text" class="form-control" ref="DESCRIPTION" id="ATTACHMENT" v-model="pd.ATTACHMENT" maxlength="255" placeholder="这里选择附件" title="附件">-->
+									       <div class="layui-upload form-group form-control" id="attachment" style="min-height: 250px!important;overflow:auto!important;">
+									           <div  style="min-height:200px ;height: auto;max-height: 380px; overflow-y:auto;padding-bottom: 30px;margin-bottom: 20px">
+													<table class="layui-table">
+													    <thead>
+															<tr>
+																<th style="width: 50%;"><span>回执名称</span><span style="color: darkred;font-weight: bold;margin-left: 20px;">{{selectedTableTitle}}</span></th>
+																<th style="width: 50%;">操作</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr v-for="informTable in informTables">
+																<th class="table_title"  style="width: 50%;" :id="informTable.TABLE_ID">{{informTable.TITLE}}</th>
+																<th style="width: 50%;">
+																	 <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" :style="" @click="chooseInformTable($event,informTable.TABLE_ID,informTable.TITLE)">选择</button>
+																	 <button type="button" class="layui-btn layui-btn-sm" @click="previewInformTable($event,informTable.TABLE_ID,informTable.TITLE)">预览</button>
+																</th>
+															</tr>
+														</tbody>
+													</table>
+													<button type="button" class="layui-btn layui-btn-sm" @click="clearInformTable()">重置选择</button>
+												
+									           </div>
+									       </div>
+									   </div>
+							            <div class="input-group" style="margin-top:10px;background-color: white" >
+							            	<span style="width: 100%;text-align: center;">
+							            		<a class="btn btn-light btn-sm" v-on:click="save">直接发布</a>
+												<a class="btn btn-light btn-sm" v-on:click="saveDraft">存为草稿</a>
+							            		<a class="btn btn-light btn-sm" onclick="top.Dialog.close()">取消</a>
+							            	</span>
+							            </div>
+							       </div>
+						           <!-- [加载状态 ] start -->
+								    <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+								    <!-- [ 加载状态  ] End -->
+								</div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- select插件 -->
+<script src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script src="../../../assets/js/pages/form-select-custom.js"></script>
+
+<!-- <script src="../../../assets/plugins/bootstrap/js/bootstrap.min.js"></script> -->
+
+
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+  <!--layui-->
+<script type="text/javascript" src="../../../assets/js/layui/layui.js"></script>
+<script type="text/javascript" src="../../../assets/js/layui/layer.js"></script>
+<script type="text/javascript" src="../../../assets/js/layui/lay/modules/layer.js"></script>
+<!-- 本页js -->
+<script src="../../../assets/js-v/inform/inform_edit.js"></script>
+</body>
+</html>

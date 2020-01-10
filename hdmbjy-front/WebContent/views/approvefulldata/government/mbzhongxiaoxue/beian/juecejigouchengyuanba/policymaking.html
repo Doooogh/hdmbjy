@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>决 策 机 构（               ）成 员 名 单</title>
+<link href="css/pagetable.css" rel="stylesheet" type="text/css">
+<link href="pagetable.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../../../../../assets/js/jquery-3.3.1.min.js"></script>
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+$(function(){
+	var index=4;
+	if(vm.toType=='edit'){
+		console.log(vm.toType);
+		index=Object.keys(vm.members).length+1
+	}
+	$(".btntj").live("click",function(){
+	var newT = "<tr class=\"member_num\"><td><p contenteditable=\"false\" class=\"ORDER\">"+ (index) +"</p></td><td><p contenteditable=\"true\" class=\"NAME\"></p></td><td><p contenteditable=\"true\" class=\"SEX\"></p></td><td><p contenteditable=\"true\" class=\"AGE\"></p></td><td><p contenteditable=\"true\" class=\"EDUCATION\"></p></td><td><p contenteditable=\"true\" class=\"TITLE\"></p></td><td><p contenteditable=\"true\" class=\"TEACH_AGE\"></p></td><td><p contenteditable=\"true\" class=\"TENURE\"></p></td><td><p contenteditable=\"true\" class=\"ID_NUMBER\" ></p></td><td><p contenteditable=\"true\" class=\"ORIGINAL_WORK_JOB\"></p></td><td><p contenteditable=\"true\" class=\"HOME_POST_TEL\"></p></td></tr>";
+		$(".tableT").append(newT);
+		index=index+1;
+		console.log(index);
+		
+	});
+	$("td").live("click",function(){
+		$(this).parent().parent().find(".trselect").removeClass("trselect");
+		$(this).parent().addClass("trselect");
+	});
+	$(".btnsc").live("click",function(){
+		$(".trselect").remove();
+	});
+});
+</script>
+</head>
+<body>
+<div class="pagetable" id="app">
+<h1>决 策 机 构（        <p class="inlinep" :contenteditable="isPreview?false:true"></p>       ）成 员 名 单</h1>
+
+	<input type="hidden" :value="POLICYMAKING_ID" :id="FORM_ID"/>
+	<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+	<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+<ul>
+	<li>学校（盖章）</li>
+	<li>地址：<span :contenteditable="isPreview?false:true" v-text="pd.ADDRESS" id="ADDRESS" ref="ADDRESS"></span></li>
+	<li>填表日期：<span :contenteditable="isPreview?false:true">{{pd.FULLTABLE_DATE}}</span><a class="btntj" v-if="!isPreview" href="javascript:void(0)">增加列表</a><a class="btnsc" v-if="!isPreview" href="javascript:void(0)">删除列表</a></li>
+</ul>
+<table class="tableT alignc" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th width="3%">序号</th>
+    <th width="7%">姓名</th>
+    <th width="7%">性别</th>
+    <th width="7%">年龄</th>
+    <th width="7%">学历</th>
+    <th width="7%">职称</th>
+    <th width="7%">从教年限</th>
+    <th width="7%">在校任职</th>
+    <th width="15%">身份证号</th>
+    <th width="15%">原工作单位及职务</th>
+    <th width="18%">家庭住址、邮编、联系电话</th>
+    </tr>
+  <tr class="trselect member_num"  >
+    <td><p :contenteditable="isPreview?false:false" class="ORDER" v-text="toType==='edit'&&members[0]!=undefined?'1':'1'">1</p></td>
+    <td><p :contenteditable="isPreview?false:true" class="NAME" v-text="toType==='edit'&&members[0]!=undefined?members[0].NAME:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="SEX" v-text="toType==='edit'&&members[0]!=undefined?members[0].SEX:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="AGE" v-text="toType=='edit'&&members[0]!=undefined?members[0].AGE:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="EDUCATION" v-text="toType=='edit'&&members[0]!=undefined?members[0].EDUCATION:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="TITLE" v-text="toType=='edit'&&members[0]!=undefined?members[0].TITLE:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="TEACH_AGE" v-text="toType=='edit'&&members[0]!=undefined?members[0].TEACH_AGE:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="TENURE" v-text="toType=='edit'&&members[0]!=undefined?members[0].TENURE:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="ID_NUMBER" v-text="toType=='edit'&&members[0]!=undefined?members[0].ID_NUMBER:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="ORIGINAL_WORK_JOB" v-text="toType=='edit'&&members[0]!=undefined?members[0].ORIGINAL_WORK_JOB:''"></p></td>
+    <td><p :contenteditable="isPreview?false:true" class="HOME_POST_TEL" v-text="toType=='edit'&&members[0]!=undefined?members[0].HOME_POST_TEL:''"></p></td>
+  </tr>
+  <tr class="member_num">
+  <td><p :contenteditable="isPreview?false:false" class="ORDER" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?'2':'2'">2</p></td>
+  <td><p :contenteditable="isPreview?false:true" class="NAME" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].NAME:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="SEX" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].SEX:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="AGE" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].AGE:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="EDUCATION" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].EDUCATION:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="TITLE" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].TITLE:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="TEACH_AGE" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].TEACH_AGE:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="TENURE" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].TENURE:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="ID_NUMBER" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].ID_NUMBER:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="ORIGINAL_WORK_JOB" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].ORIGINAL_WORK_JOB:''"></p></td>
+  <td><p :contenteditable="isPreview?false:true" class="HOME_POST_TEL" v-text="toType=='edit'&&members[1]!=null&&members[1]!=undefined?members[1].HOME_POST_TEL:''"></p></td>
+  </tr>
+  <tr class="member_num">
+ <td><p :contenteditable="isPreview?false:false" class="ORDER" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?'3':'3'">3</p></td>
+ <td><p :contenteditable="isPreview?false:true" class="NAME" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].NAME:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="SEX" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].SEX:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="AGE" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].AGE:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="EDUCATION" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].EDUCATION:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="TITLE" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].TITLE:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="TEACH_AGE" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].TEACH_AGE:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="TENURE" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].TENURE:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="ID_NUMBER" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].ID_NUMBER:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="ORIGINAL_WORK_JOB" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].ORIGINAL_WORK_JOB:''"></p></td>
+ <td><p :contenteditable="isPreview?false:true" class="HOME_POST_TEL" v-text="toType=='edit'&&members[2]!=null&&members[2]!=undefined?members[2].HOME_POST_TEL:''"></p></td>
+  </tr>
+  
+  <tr v-for="(member,index) in members" v-if="index>=3&&toType==='edit'" class="member_num">
+	<td><p :contenteditable="isPreview?false:false" class="ORDER" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?index+1:index+1"></p></td>
+	<td><p :contenteditable="isPreview?false:true" class="NAME" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].NAME:''"></p></td>
+	<td><p :contenteditable="isPreview?false:true" class="SEX" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].SEX:''"></p></td>
+	<td><p :contenteditable="isPreview?false:true" class="AGE" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].AGE:''"></p></td>
+	<td><p :contenteditable="isPreview?false:true" class="EDUCATION" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].EDUCATION:''"></p></td>
+	<td><p :contenteditable="isPreview?false:true" class="TITLE" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].TITLE:''"></p></td>
+	<td><p :contenteditable="isPreview?false:true" class="TEACH_AGE" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].TEACH_AGE:''"></p></td>
+	<td><p :contenteditable="isPreview?false:true" class="TENURE" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].TENURE:''"></p></td>
+	<td><p :contenteditable="isPreview?false:true" class="ID_NUMBER" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].ID_NUMBER:''"></p></td>
+	<td><p :contenteditable="isPreview?false:true" class="ORIGINAL_WORK_JOB" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].ORIGINAL_WORK_JOB:''"></p></td>
+	<td><p :contenteditable="isPreview?false:true" class="HOME_POST_TEL" v-text="toType=='edit'&&members[index]!=null&&members[index]!=undefined?members[index].HOME_POST_TEL:''"></p></td>
+  </tr>
+</table>
+<div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+	<span style="width: 100%;text-align: center;">
+				<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+				<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+				<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+	</span>
+</div>
+<div class="bz">
+注：</br>1.决策机构是指：董事会、理事会、或其他决策机构（请单项选择并填写在上面括号内），决策机构成员需至少5人单数组成；</br>
+2.理事会或者董事会由举办者或者其代表、校长、教职工代表等人组成，其中1/3以上成员应具备5年以上教育教学经验。</br>
+3.此表可复印。
+</div>
+</div>
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="js/policymaking.js"></script>       
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>海淀区民办教育管理平台</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div style="width: 100%;">
+								<div style="width: 100%;margin-top: 15px;">
+								<template v-if="msg == '2'">
+					            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">职位</span></span>
+                                    </div>
+                                    <input type="text" class="form-control" v-model="null==rpd?'无此用户名':rpd.ROLE_NAME" disabled="disabled"  title="职位">
+                                </div>
+								</template>
+								<template v-else>
+					            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">职位</span></span>
+                                    </div>
+                                    <div  style="max-width:469px;margin-left: 2px;">
+										<select class="js-example-placeholder-multiple col-sm-12" style="height: 30px;border: 0; background: transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none; ">
+											<template v-for="data in roleList">
+												<template v-if="data.role_ID == pd.ROLE_ID">
+												<option v-bind:value="data.role_ID" selected>{{data.role_NAME}}</option>
+												</template>
+												<template v-else>
+												<option v-bind:value="data.role_ID">{{data.role_NAME}}</option>
+												</template>
+											</template>
+										</select>
+					            	</div>
+                                </div>
+					            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">用户名</span></span>
+                                    </div>
+                                    <input type="text" class="form-control" v-model="0==pd.length?'无此用户名':pd.USERNAME" disabled="disabled"  title="用户名">
+                                </div>
+					            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">编号</span></span>
+                                    </div>
+                                    <input type="text" class="form-control" v-model="pd.NUMBER" disabled="disabled"  title="编号">
+                                </div>
+					            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">姓名</span></span>
+                                    </div>
+                                    <input type="text" class="form-control" v-model="pd.NAME" disabled="disabled"  title="姓名">
+                                </div>
+								<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">手机号</span></span>
+                                    </div>
+                                    <input type="text" class="form-control" v-model="pd.PHONE" disabled="disabled"  title="手机号">
+                                </div>
+                                <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">邮箱</span></span>
+                                    </div>
+                                    <input type="text" class="form-control" v-model="pd.EMAIL" disabled="disabled"  title="邮箱">
+                                </div>
+					            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备注</span></span>
+                                    </div>
+                                    <input type="text" class="form-control" v-model="pd.BZ" disabled="disabled"  title="备注">
+                                </div>
+								</template>
+	    						</div>
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 本页面js --> 
+<script type="text/javascript" src="../../../assets/js-v/sys/user_view.js"></script>
+
+</html>

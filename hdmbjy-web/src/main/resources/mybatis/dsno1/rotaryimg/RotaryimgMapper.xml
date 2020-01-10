@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.rotaryimg.RotaryimgMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		OA_ROTARYIMG
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.TITLE,	
+		f.TYPE,	
+		f.IMG_PATH,	
+		f.IMG_URL,	
+		f.BZ,	
+		f.CREATOR_DATE,	
+		f.SPARE1,	
+		f.SPARE2,	
+		f.SPARE3,	
+		f.ROTARYIMG_ID
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		TITLE,	
+		TYPE,	
+		IMG_PATH,	
+		IMG_URL,	
+		BZ,	
+		CREATOR_DATE,	
+		SPARE1,	
+		SPARE2,	
+		SPARE3,	
+		ROTARYIMG_ID
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{TITLE},	
+		#{TYPE},	
+		#{IMG_PATH},	
+		#{IMG_URL},	
+		#{BZ},	
+		#{CREATOR_DATE},	
+		#{SPARE1},	
+		#{SPARE2},	
+		#{SPARE3},	
+		#{ROTARYIMG_ID}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field2"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			ROTARYIMG_ID = #{ROTARYIMG_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			TITLE = #{TITLE},
+			TYPE = #{TYPE},
+			IMG_PATH = #{IMG_PATH},
+			IMG_URL = #{IMG_URL},
+			BZ = #{BZ},
+			CREATOR_DATE = #{CREATOR_DATE},
+			SPARE1 = #{SPARE1},
+			ROTARYIMG_ID = ROTARYIMG_ID
+		where 
+			ROTARYIMG_ID = #{ROTARYIMG_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.ROTARYIMG_ID = #{ROTARYIMG_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		,d.BIANMA,
+	    d.NAME DNAME
+		from 
+		<include refid="tableName"></include> f
+		left join 
+		<include refid="dicTableName"></include> d
+		on f.type = d.BIANMA  
+		where 1=1 
+		<if test="pd.SPARE1 != null and pd.SPARE1 != ''">
+		and SPARE1 = #{pd.SPARE1}
+		</if>
+		
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+					<!-- 根据需求自己加检索条件 -->
+					f.TITLE LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+				<!--	 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				-->
+				)
+		</if>
+		
+		ORDER BY f.CREATOR_DATE DESC
+		
+		
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+	</select>
+	
+	<select id="listAllType" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 1=1 and SPARE1 = '1'
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			ROTARYIMG_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- 删除图片 -->
+	<update id="delTp" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			IMG_PATH = ''
+		where 
+			ROTARYIMG_ID = #{ROTARYIMG_ID}
+	</update>
+	
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

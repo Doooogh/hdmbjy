@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>海淀区民办教育管理平台</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+   <!--  <script src="../../../assets/js-vue/vue-treeselect.min.js"></script>
+    <link rel="stylesheet" href="../../../assets/css/vue-treeselect.min.css"> -->
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+    
+     <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+	    
+							    <div style="width: 100%;">
+							       <div id="showform">
+								    <!-- <template>
+									    <div v-if = "msg == 'saveUser'" class="input-group input-group-sm mb-3" id="DEPARTMENT_IDDIV">
+											 <treeselect  id="DEPARTMENT_ID" name="DEPARTMENT_ID" :options="options1" :normalizer="normalizer" :multiple="false"  v-model="value"  placeholder="选择部门"  @input="hasValue"/>
+									   	</div>
+									   	
+									    <div v-if = "msg == 'editUser'" class="input-group input-group-sm mb-3" id="DEPARTMENT_IDDIV">
+											 <treeselect disabled="disabled"  id="DEPARTMENT_ID" name="DEPARTMENT_ID" :options="options1" :normalizer="normalizer" :multiple="false"  v-model="value"  placeholder="选择部门"/>
+									   	</div>
+									   	 <div  class="input-group input-group-sm mb-3" id="DEPARTMENT_IDDIV">
+											 <treeselect  id="DEPARTMENT_ID" name="DEPARTMENT_ID" :options="options1" :normalizer="normalizer" :multiple="false"  v-model="value"  placeholder="选择部门"/>
+									   	</div>
+								    </template> -->
+							       
+							       
+							    	<template v-if="fx != 'head'">
+									<div class="input-group input-group-sm mb-3" id="ROLE_IDts">
+										<select class="js-example-placeholder-multiple col-sm-12" ref="ROLE_ID" id="ROLE_ID" data-placeholder="请选择主职角色">
+											<option value=""></option>
+											<template v-for="data in roleList">
+												<template v-if="data.role_ID == pd.ROLE_ID">
+												<option v-bind:value="data.role_ID" selected>{{data.role_NAME}}</option>	
+												</template>
+												<template v-else>
+												<option v-bind:value="data.role_ID">{{data.role_NAME}}</option>
+												</template>
+											</template>
+										</select>
+						            </div>
+							    	</template>
+							    	<template v-if="fx != 'head'">
+									<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										<select class="js-example-basic-multiple col-sm-12" multiple="multiple" id="ZROLE_IDS" style="width: 100%;" data-placeholder="请选择副职角色">
+                                            <option value=""></option>
+											<template v-for="data in roleList">
+												<template v-if="'1' == data.rights">
+												<option v-bind:value="data.role_ID" selected>{{data.role_NAME}}</option>
+												</template>
+												<template v-else>
+												<option v-bind:value="data.role_ID">{{data.role_NAME}}</option>
+												</template>
+											</template>
+                                        </select>
+						            </div>
+							    	</template>
+						            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+	                                    <div class="input-group-prepend">
+	                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">用户名</span></span>
+	                                    </div>
+	                                    <input type="text" class="form-control" ref="USERNAME" id="USERNAME" v-model.trim="pd.USERNAME" maxlength="32" placeholder="这里输入用户名" title="用户名">
+	                                </div>
+						            <template v-if="fx != 'head'">
+						            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+	                                    <div class="input-group-prepend">
+	                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">编号</span></span>
+	                                    </div>
+	                                    <input type="text" class="form-control" ref="NUMBER" id="NUMBER" v-model.trim="pd.NUMBER" maxlength="32" placeholder="这里输入编号" title="编号" v-on:blur="hasNumber">
+	                                </div>
+									</template>
+									<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+	                                    <div class="input-group-prepend">
+	                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">密码</span></span>
+	                                    </div>
+	                                    <input class="form-control" type="password" ref="PASSWORD" id="PASSWORD" v-model="PASSWORD"   maxlength="32" placeholder="输入密码" title="密码">
+	                                </div>
+									<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+	                                    <div class="input-group-prepend">
+	                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">确认密码</span></span>
+	                                    </div>
+	                                    <input class="form-control" type="password" ref="chkpwd" id="chkpwd" v-model="chkpwd"  maxlength="32" placeholder="确认密码" title="确认密码">
+	                                </div>
+	                                <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+	                                    <div class="input-group-prepend">
+	                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">姓名</span></span>
+	                                    </div>
+	                                    <input type="text" class="form-control" ref="NAME" id="NAME" v-model="pd.NAME"  maxlength="32" placeholder="这里输入姓名" title="姓名" >
+	                                </div>
+	                                <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+	                                    <div class="input-group-prepend">
+	                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">手机号</span></span>
+	                                    </div>
+	                                    <input class="form-control" type="number" ref="PHONE" id="PHONE" v-model="pd.PHONE"  maxlength="32" placeholder="这里输入手机号" title="手机号" >
+	                                </div>
+									<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+	                                    <div class="input-group-prepend">
+	                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">邮箱</span></span>
+	                                    </div>
+	                                    <input class="form-control" type="email" ref="EMAIL" id="EMAIL" v-model="pd.EMAIL" maxlength="32" placeholder="这里输入邮箱" title="邮箱" v-on:blur="hasEmail">
+	                                </div>
+	                                <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+	                                    <div class="input-group-prepend">
+	                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">备注</span></span>
+	                                    </div>
+	                                    <input class="form-control" type="text" ref="BZ" id="BZ" v-model="pd.BZ" placeholder="这里输入备注" maxlength="64" title="备注">
+	                                </div>
+						            <div class="input-group" style="margin-top:10px;background-color: white" >
+						            	<span style="width: 100%;text-align: center;">
+						            		<a class="btn btn-light btn-sm" v-on:click="save">保存</a>
+						            		<a class="btn btn-light btn-sm" onclick="top.Dialog.close();">取消</a>
+						            	</span>
+						            </div>
+						           </div>
+								   <!-- [加载状态 ] start -->
+								   <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                   </div>
+								   <!-- [ 加载状态  ] End -->
+							    </div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+    <script>
+    
+    
+    
+    
+    
+    </script>
+    
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- select插件 -->
+<script type="text/javascript" src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="../../../assets/js/pages/form-select-custom.js"></script>
+
+<!-- 表单验证提示 -->
+<script type="text/javascript" src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页面js -->
+<script type="text/javascript" src="../../../assets/js-v/sys/userEdit.js"></script>
+  
+</body>
+</html>

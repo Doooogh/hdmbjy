@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+    
+</head>
+
+<body>
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+
+							    <!-- [ Hover-table ] start -->
+                                <div class="col-xl-12">
+                                    <div class="card">
+										<div style="padding-left: 15px;padding-top: 15px;">
+											<!-- 检索条件  -->
+											<table>
+												<tr>
+													<td>
+								                        <div class="input-group input-group-sm mb-3">
+                                                        	<input class="form-control" id="KEYWORDS" type="text" v-model="KEYWORDS" placeholder="这里输入关键词" />
+                                                    	</div>
+													</td>
+													<td style="vertical-align:top;padding-left:5px;">
+														<a class="btn btn-light btn-sm" v-on:click="getList" style="width: 23px;height:30px;margin-top:1px;" title="检索"><i style="margin-top:-3px;margin-left: -6px;"  class="feather icon-search"></i></a>
+													</td>
+													<td v-show="loading">
+														<!-- [加载状态 ] start -->
+												    	<div class="d-flex justify-content-center" style="margin-top:-10px;">
+				                                            <div class="spinner-grow spinner-grow-sm" role="status">
+				                                                <span class="sr-only">Loading...</span>
+				                                            </div>
+				                                        </div>
+												    	<!-- [ 加载状态  ] End -->
+													</td>
+												</tr>
+											</table>
+											<!-- 检索  -->
+                                        </div>
+                                        <div class="card-block table-border-style" style="margin-top: -15px">
+                                          		<div class="table-responsive">
+									             <table class="table table-hover">
+									                 <thead>
+										                 <tr>
+															<th style="width: 50px;" id="cts">
+									                            <div class="checkbox d-inline">
+		                                                            <input type="checkbox" name="fhcheckbox" id="zcheckbox">
+		                                                            <label  style="max-height: 12px;" for="zcheckbox" class="cr"></label>
+		                                                        </div>
+															</th>
+										                    <th style="width: 50px;">NO</th>
+															<th>说明</th>
+															<th>包名</th>
+															<th>类名</th>
+															<th>表名</th>
+															<th>类型</th>
+															<th>创建时间</th>
+															<th>操作</th>
+										                 </tr>
+									                 </thead>
+									                 <tbody>
+									                 	<!-- 开始循环 -->	
+									                 	<template v-for="(data,index) in varList">
+											                 <tr>
+																 <td>
+		                                                        	<div class="checkbox d-inline">
+		                                                            	<input type="checkbox" v-bind:id="'zcheckbox'+index" name='ids' v-bind:value="data.CREATECODE_ID">
+		                                                            	<label  style="max-height: 12px;" v-bind:for="'zcheckbox'+index" class="cr"></label>
+		                                                        	</div>
+																 </td>
+											                     <td scope="row">{{page.showCount*(page.currentPage-1)+index+1}}</td>
+											                     <td>{{data.TITLE}}</td>
+																 <td>{{data.PACKAGENAME}}</td>
+																 <td>{{data.OBJECTNAME}}</td>
+																 <td>{{data.TABLENAME.replace(',fh,', '')}}</td>
+																 <td>
+																	{{data.FHTYPE == "single"?"单表":""}}
+																	{{data.FHTYPE == "tree"?"树形":""}}
+																	{{data.FHTYPE == "fathertable"?"主表":""}}
+																	{{data.FHTYPE == "sontable"?"明细表":""}}
+																 </td>
+																 <td>{{data.CREATETIME}}</td>
+											                     <td>
+											                     	<a v-show="edit" title="编辑" v-on:click="productCode(data.CREATECODE_ID)" style="cursor:pointer;"><i class="feather icon-edit-2"></i></a>
+											                     	<a v-show="del" title="删除" v-on:click="goDel(data.CREATECODE_ID)" style="cursor:pointer;"><i class="feather icon-x"></i></a>
+											                     </td>
+											                 </tr>
+										                </template>
+														<tr v-show="varList.length==0">
+															<td colspan="10">没有相关数据</td>
+														</tr>
+									                 </tbody>
+									             </table>
+									             
+									             <table style="width:100%;margin-top:15px;">
+													<tr>
+														<td style="vertical-align:top;">
+															<a v-show="add" class="btn btn-light btn-sm" v-on:click="productCode('add')">启动生成器</a>
+															<a v-show="del" class="btn btn-light btn-sm" v-on:click="makeAll('确定要删除选中的数据吗?')">删除</a>
+														</td>
+														<td style="vertical-align:top;"><div style="float: right;padding-top: 0px;margin-top: 0px;" v-html="page.pageStr"></div></td>
+													</tr>
+												</table>
+											</div>
+										</div>
+                                    </div>
+                                </div>
+                                <!-- [ Hover-table ] end -->
+
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script type="text/javascript" src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页面js -->
+<script type="text/javascript" src="../../../assets/js-v/tools/createcode_list.js"></script>
+
+</body>
+</html>

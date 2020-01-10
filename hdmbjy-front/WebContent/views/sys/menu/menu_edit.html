@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+        <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+	    
+							    <div style="width: 100%;">
+							    <div id="showform">
+							    <h6 style="margin-left: 5px;">上级菜单：{{PARENT_ID == '0' ?'(无) 此项为顶级菜单':pds.MENU_NAME}}</h6>
+						            <div class="input-group input-group-sm mb-3">
+	                                    <div class="input-group-prepend">
+	                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">菜单名称</span></span>
+	                                    </div>
+	                                    <input type="text" class="form-control" ref="MENU_NAME" id="MENU_NAME"  v-model="MENU_NAME"  maxlength="32" placeholder="这里输入菜单名称" title="菜单名称" >
+	                                </div>
+							   		<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+	                                    <div class="input-group-prepend">
+	                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">菜单链接</span></span>
+	                                    </div>
+	                                    <template v-if="PARENT_ID == '0'">
+											<input type="text" ref="MENU_URL" id="MENU_URL" v-model="MENU_URL" readonly="readonly" placeholder="顶级菜单禁止输入" class="form-control" />
+										</template>
+										<template v-else>
+											<input type="text" ref="MENU_URL" id="MENU_URL" v-model="MENU_URL" placeholder="这里输入菜单链接" class="form-control" maxlength="250" title="菜单链接" />
+										</template>
+	                                </div>
+						            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+	                                    <div class="input-group-prepend">
+	                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">权限标识</span></span>
+	                                    </div>
+	                                    <template v-if="PARENT_ID == '0'">
+					                    	<input type="text" ref="SHIRO_KEY" id="SHIRO_KEY" v-model="SHIRO_KEY" readonly="readonly" placeholder="顶级菜单禁止输入" class="form-control" />
+					                    </template>
+										<template v-else>
+											<input type="text" class="form-control" ref="SHIRO_KEY" id="SHIRO_KEY"  v-model="SHIRO_KEY"  maxlength="32" placeholder="这里输入菜单权限标识(选填)" title="权限标识" >
+										</template>
+	                                </div>
+						            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+	                                    <div class="input-group-prepend">
+	                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">菜单序号</span></span>
+	                                    </div>
+	                                    <input type="number" class="form-control" ref="MENU_ORDER" id="MENU_ORDER"  v-model.number="MENU_ORDER"  maxlength="3" placeholder="这里输入菜单序号" title="菜单序号" >
+	                                </div>
+						            <div class="input-group input-group-sm mb-3" style="margin-top: 0px;background-color: white">
+						                <div class="input-group-prepend">
+	                                        <span style="width: 79px;"><span style="width: 100%;">菜单状态：</span></span>
+	                                    </div>
+                                        <div class="custom-control custom-radio custom-control-inline" style="margin-top:-1px;">
+                                             <input type="radio" name="radio-p-fill-5" id="fhradio0" v-model="MENU_STATE" value="1" class="custom-control-input"/>
+                                             <label for="fhradio0" class="custom-control-label">显示</label>
+                                         </div>
+                                         <div class="custom-control custom-radio custom-control-inline" style="margin-top:-1px;">
+                                             <input type="radio" name="radio-p-fill-5" id="fhradio1" v-model="MENU_STATE" value="0" class="custom-control-input"/>
+                                             <label for="fhradio1" class="custom-control-label">隐藏</label>
+                                         </div>
+						            </div>
+						            <div class="input-group" style="margin-top:0px;background-color: white" >
+						            	<span style="width: 100%;padding-left: 15px;">
+						            		<a class="btn btn-light btn-sm" v-on:click="save();">保存</a>
+						            		<a class="btn btn-light btn-sm" v-on:click="goback(PARENT_ID,'back')">取消</a>
+						            	</span>
+						            </div>
+						            
+						        </div>
+						           
+								<!-- [加载状态 ] start -->
+							    <div id="jiazai" style="display:none;margin-top:50px;">
+							    	<div class="d-flex justify-content-center">
+                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                               <span class="sr-only">Loading...</span>
+                                           </div>
+                                       </div>
+                                   </div>
+							    <!-- [ 加载状态  ] End -->
+						           
+							    </div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script type="text/javascript" src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页面js --> 
+<script type="text/javascript" src="../../../assets/js-v/sys/menu_edit.js"></script>  
+
+</body>
+</html>

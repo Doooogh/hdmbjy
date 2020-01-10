@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/fonts/material/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <link rel="stylesheet" href="../../../assets/css/layui/layui.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body>
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+
+							    <!-- [ Hover-table ] start -->
+                                <div class="col-xl-12">
+                                    <div class="card">
+										<div class="card-block table-border-style" style="margin-top: 5px">
+                                        	<div class="table-responsive">
+									             <table class="table table-hover">
+									                 <thead>
+										                 <tr>
+										                    <th>NO</th>
+															<th>名称</th>
+															<th>资源路径</th>
+															<th>权限标识</th>
+															<th>状态</th>
+															<th>操作</th>
+										                 </tr>
+									                 </thead>
+									                 <tbody>
+									                 <!-- 开始循环 -->	
+									                 	<template v-for="(data,index) in menuList">
+											                 <tr>
+											                     <td scope="row">{{data.menu_ORDER}}</td>
+											                     <td><i v-bind:class="data.menu_ICON"></i> <a v-on:click="getList(data.menu_ID)" style="cursor:pointer;">{{data.menu_NAME}}  <i class="feather icon-chevron-down"></i></a> </td>
+											                     <td>{{data.menu_URL == '#' ? '&nbsp;&nbsp;&nbsp;&nbsp;(无)': data.menu_URL}}</td>
+											                     <td>{{'' == data.shiro_KEY || null == data.shiro_KEY ?'(无)': data.shiro_KEY}}</td>
+											                     <td>&nbsp;<i v-bind:class="'feather ' + (data.menu_STATE == 1? 'icon-eye': 'icon-eye-off')"></i></td>
+											                     <td>
+											                     	<template v-if="MENU_ID == '0'">
+											                     		<a v-show="edit" title="编辑图标" v-on:click="setIcon(data.menu_ID)" style="cursor:pointer;"><button type="button" class="layui-btn layui-btn-xs layui-btn">编辑图标</button></a>
+											                     	</template>
+											                     	<a v-show="edit" title="修改" v-on:click="editMenu(data.menu_ID,'edit')" style="cursor:pointer;"><button type="button" class="layui-btn layui-btn-xs layui-btn-warm">修改</button></a>
+											                     	<a v-show="del" title="删除" v-on:click="delMenu(data.menu_NAME,data.menu_ID)" style="cursor:pointer;"><button type="button" class="layui-btn layui-btn-xs layui-btn-danger">删除</button></a>
+											                     </td>
+											                 </tr>
+										                </template>
+														<tr v-show="menuList.length==0">
+															<td colspan="10">没有相关数据</td>
+														</tr>
+									                 </tbody>
+									             </table>
+		             
+									             <table style="margin-top:15px;">
+													<tr>
+														<td style="vertical-align:top;">
+															<a v-show="add" class="btn btn-light btn-sm" v-on:click="editMenu(MENU_ID,'add');">新增</a>
+															<template v-if="MENU_ID != '0'">
+															<a class="btn btn-light btn-sm" v-on:click="getList(pd.PARENT_ID);">返回</a>
+															</template>
+														</td>
+														<td v-show="loading">
+															<!-- [加载状态 ] start -->
+													    	<div class="d-flex justify-content-center" style="margin-top:-6px;">
+					                                            <div class="spinner-grow spinner-grow-sm" role="status">
+					                                                <span class="sr-only">Loading...</span>
+					                                            </div>
+					                                        </div>
+													    	<!-- [ 加载状态  ] End -->
+														</td>
+													</tr>
+												</table>
+												
+											</div>
+                                   		</div>
+	                                </div>
+	                            </div>
+	                            <!-- [ Hover-table ] end -->
+
+	                        </div>
+	                        <!-- [ Main Content ] end -->
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	<!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 表单验证提示 -->
+<script type="text/javascript" src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页面js --> 
+<script type="text/javascript" src="../../../assets/js-v/sys/menu_list.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>海淀区民办学校申请终止审批表</title>
+<link href="css/pagetable.css" rel="stylesheet" type="text/css">
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-3.3.1.min.js"></script> -->
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<script type="text/javascript" src="js//jquery.min.js"></script>
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+	$(".tableT p").blur(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	});
+	
+});
+</script>
+</head>
+<body>
+<div class="pagetable" id="app">
+		<input type="hidden" :value="ZHONGZHIAPPROVE_ID" :id="FORM_ID"/>
+		<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+		<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+	<h1>海淀区民办学校申请终止审批表</h1>
+	<table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+		<th width="10%">学校全称（盖章）</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true" ref="SC_NAME" id="SC_NAME" v-text ="pd.SC_NAME"></p></td>
+		<th width="10%">证号</th>
+		<th colspan="2">教民1101087（<p class="inlinep" :contenteditable="isPreview?false:true" ref="CERTIFICATE_NUM" id="CERTIFICATE_NUM" v-text ="pd.CERTIFICATE_NUM"></p>）号</th>
+	  </tr>
+	  <tr>
+		<th>校长</th>
+		<td width="30%"><p :contenteditable="isPreview?false:true" ref="PRESIDENT" id="PRESIDENT" v-text ="pd.PRESIDENT"></p></td>
+		<th width="10%">联系人</th>
+		<td><p :contenteditable="isPreview?false:true" ref="LINKMAN" id="LINKMAN" v-text ="pd.LINKMAN"></p></td>
+		<th width="10%">联系电话</th>
+		<td width="30%"><p :contenteditable="isPreview?false:true" ref="PHONE" id="PHONE" v-text ="pd.PHONE"></p></td>
+		</tr>
+	  <tr>
+		<th>学校地址</th>
+		<td colspan="5"><p :contenteditable="isPreview?false:true" ref="SC_ADDRESS" id="SC_ADDRESS" v-text ="pd.SC_ADDRESS"></p></td>
+		</tr>
+	  <tr>
+		<th>终止办学理由</th>
+		<td colspan="5"><p :contenteditable="isPreview?false:true" ref="REASON" id="REASON" v-text ="pd.REASON"></p></td>
+		</tr>
+	  <tr>
+		<th>举办者意见</th>
+		<td colspan="2" ref="OPINION_DATE" id="OPINION_DATE"><p class="mh200" :contenteditable="isPreview?false:true" ref="OPINION" id="OPINION" v-text ="pd.OPINION"></p>法定代表人签字：</br>单位（章）：</br>
+		<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="YEAR1" id="YEAR1" v-text ="pd.YEAR1"></p>年
+		<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="MONTH1" id="MONTH1" v-text ="pd.MONTH1"></p>月
+		<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="DAY1" id="DAY1" v-text ="pd.DAY1"></p>日
+		</td>
+		<th>教育行政部门审批意见</th>
+		<td colspan="2" ref="APPROVE_OPINION_DATE" id="APPROVE_OPINION_DATE"><p class="mh200" :contenteditable="isPreview?false:true" ref="APPROVE_OPINION" id="APPROVE_OPINION" v-text ="pd.APPROVE_OPINION"></p>审定人签字：</br>
+		<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="YEAR2" id="YEAR2" v-text ="pd.YEAR2"></p>年
+		<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true"  ref="MONTH2" id="MONTH2" v-text ="pd.MONTH2"></p>月
+		<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true"  ref="DAY2" id="DAY2" v-text ="pd.MONTH1"></p>日
+		</td>
+		</tr>
+	  <tr>
+		<th>交件人及电话</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true" ref="DELIVERY_AND_PHONE" id="DELIVERY_AND_PHONE" v-text ="pd.DELIVERY_AND_PHONE"></p></td>
+		<th>交件日期</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true" ref="DELIVERY_DATE" id="DELIVERY_DATE" v-text ="pd.DELIVERY_DATE"></p></td>
+		</tr>
+	  <tr>
+		<th>受理人</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true" ref="RECEIVER" id="RECEIVER" v-text ="pd.RECEIVER"></p></td>
+		<th>受理日期</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true" ref="RECEIVER_DATE" id="RECEIVER_DATE" v-text ="pd.RECEIVER_DATE"ref="RECEIVER_DATE" id="RECEIVER_DATE" v-text ="pd.RECEIVER_DATE"></p></td>
+		</tr>
+	  <tr>
+		<th>审核人</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true" ref="VERIFIER" id="VERIFIER" v-text ="pd.VERIFIER"></p></td>
+		<th>审核日期</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true" ref="VERIFIER_DATE" id="VERIFIER_DATE" v-text ="pd.VERIFIER_DATE"></p></td>
+		</tr>
+	  <tr>
+		<th>通知办结日期</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true"  ref="NOTIFY_DATE_COMPLETION" id="NOTIFY_DATE_COMPLETION" v-text ="pd.NOTIFY_DATE_COMPLETION"></p></td>
+		<th>送达地点</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true" ref="DELIVERED_TO_SITE" id="DELIVERED_TO_SITE" v-text ="pd.DELIVERED_TO_SITE"></p></td>
+		</tr>
+	  <tr>
+		<th>送达人及日期</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true" ref="SERVINT_PERSON_AND_DATE" id="SERVINT_PERSON_AND_DATE" v-text ="pd.SERVINT_PERSON_AND_DATE" ></p></td>
+		<th>收件人及日期</th>
+		<td colspan="2"><p :contenteditable="isPreview?false:true" ref="ADDRESSEE_AND_DATE" id="ADDRESSEE_AND_DATE" v-text ="pd.ADDRESSEE_AND_DATE"></p></td>
+		</tr>
+	</table>
+	<div class="bz">
+	注：此表一式二份，请用黑色签字笔填写。
+	</div>
+	<span style="width: 100%;text-align: center;">
+				<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+				<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+				<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+	</span>
+
+</div>
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="JS/zhongzhiapprove.js"></script>
+</body>
+</html>

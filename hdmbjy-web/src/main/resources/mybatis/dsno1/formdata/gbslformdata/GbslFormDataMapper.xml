@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.formdata.gbslformdata.GbslFormDataMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		CMS_GBSLFORMDATA
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.GBSLFORMDATA_ID,	
+		f.SCHOOL_NAME,	
+		f.PHONE,	
+		f.ADDRESS,	
+		f.POSTCODE,	
+		f.LEGALPERSON,	
+		f.LEGALPERSON_TYPE,	
+		f.REGISTERED_FUND,	
+		f.TOTAL_EXISTING_FUNDS,	
+		f.DEPOSIT_BANK,	
+		f.FUNDING_FOR_SCHOOL,	
+		f.BANK_ACCOUNT,	
+		f.CREATE_TIME,	
+		f.UPDATE_TIME,	
+		f.GBSLFORMDATA_ID
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		GBSLFORMDATA_ID,	
+		SCHOOL_NAME,	
+		PHONE,	
+		ADDRESS,	
+		POSTCODE,	
+		LEGALPERSON,	
+		LEGALPERSON_TYPE,	
+		REGISTERED_FUND,	
+		TOTAL_EXISTING_FUNDS,	
+		DEPOSIT_BANK,	
+		FUNDING_FOR_SCHOOL,	
+		BANK_ACCOUNT,	
+		CREATE_TIME,	
+		UPDATE_TIME
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{GBSLFORMDATA_ID},	
+		#{SCHOOL_NAME},	
+		#{PHONE},	
+		#{ADDRESS},	
+		#{POSTCODE},	
+		#{LEGALPERSON},	
+		#{LEGALPERSON_TYPE},	
+		#{REGISTERED_FUND},	
+		#{TOTAL_EXISTING_FUNDS},	
+		#{DEPOSIT_BANK},	
+		#{FUNDING_FOR_SCHOOL},	
+		#{BANK_ACCOUNT},	
+		#{CREATE_TIME},	
+		#{UPDATE_TIME}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field2"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+
+	<!-- 新增 并且返回主键-->
+	<insert id="saveRetId" parameterType="pd" useGeneratedKeys="true">
+
+		<selectKey keyProperty="GBSLFORMDATA_ID" order="AFTER" resultType="java.lang.String">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+
+		insert into
+		<include refid="tableName"></include>
+		(
+		<include refid="Field2"></include>
+		) values (
+		<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			GBSLFORMDATA_ID = #{GBSLFORMDATA_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			GBSLFORMDATA_ID = #{GBSLFORMDATA_ID},
+			SCHOOL_NAME = #{SCHOOL_NAME},
+			PHONE = #{PHONE},
+			ADDRESS = #{ADDRESS},
+			POSTCODE = #{POSTCODE},
+			LEGALPERSON = #{LEGALPERSON},
+			LEGALPERSON_TYPE = #{LEGALPERSON_TYPE},
+			REGISTERED_FUND = #{REGISTERED_FUND},
+			TOTAL_EXISTING_FUNDS = #{TOTAL_EXISTING_FUNDS},
+			DEPOSIT_BANK = #{DEPOSIT_BANK},
+			FUNDING_FOR_SCHOOL = #{FUNDING_FOR_SCHOOL},
+			BANK_ACCOUNT = #{BANK_ACCOUNT},
+			CREATE_TIME = #{CREATE_TIME},
+			UPDATE_TIME = #{UPDATE_TIME},
+			GBSLFORMDATA_ID = GBSLFORMDATA_ID
+		where 
+			GBSLFORMDATA_ID = #{GBSLFORMDATA_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.GBSLFORMDATA_ID = #{GBSLFORMDATA_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 1=1
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				-->
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			GBSLFORMDATA_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

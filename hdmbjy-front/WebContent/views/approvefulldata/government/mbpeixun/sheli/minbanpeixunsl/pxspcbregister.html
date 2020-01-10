@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+<title>海淀区民办教育培训机构审批备案登记表（草表）</title>
+<link href="../../css/pagetable.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<style type="text/css">
+#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+</style>
+<link href="pagetable.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="../../../../../../assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../../../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../../../../../assets/plugins/animation/css/animate.min.css">
+<link rel="stylesheet" href="../../../../../../assets/css/bootstrap/bootstrap.css">
+<script>
+$(function(){
+	$(".tableT p").focus(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	    $(this).parent().addClass("cf6f9ff");
+	});
+	$(".tableT p").blur(function(){
+		$(this).parents(".tableT").find(".cf6f9ff").removeClass("cf6f9ff");
+	});
+	
+});
+</script>
+</head>
+<body>
+<div class="pagetable" id="app">
+<h1>民办非学历教育培训机构审批备案表</h1>
+	<input type="hidden" :value="PXSPCBREGISTER_ID" :id="FORM_ID"/>
+	<input type="hidden" :value="SUB_STATUS" :id="FORM_ID+'SUB_STATUS'"/>
+	<input type="hidden" :value="APPROVEFORM_ID" :id="FORM_ID+'APPROVEFORM_ID'"/>
+	<table class="tableT" width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+		<th width="8%">举办者提供办学资金</th>
+		<td colspan="3"><p :contenteditable="isPreview?false:true" ref="PROVIDE_FUNDS" id="PROVIDE_FUNDS" v-text="pd.PROVIDE_FUNDS"></p></td>
+	  </tr>
+	  <tr>
+		<th>举办单位法人类型</th>
+		<td colspan="3"><p :contenteditable="isPreview?false:true" ref="LEGAL_PERSON_TYPE" id="LEGAL_PERSON_TYPE" v-text="pd.LEGAL_PERSON_TYPE"></p></td>
+	  </tr>
+	  <tr>
+		<th>举办单位法定代表人家庭住址</th>
+		<td width="42%"><p :contenteditable="isPreview?false:true" ref="LEGAL_PERSON_ADDRESS" id="LEGAL_PERSON_ADDRESS" v-text="pd.LEGAL_PERSON_ADDRESS"></p></td>
+		<th width="8%">电话手机</th>
+		<td width="42%"><p :contenteditable="isPreview?false:true" ref="LEGAL_PERSON_PHONE" id="LEGAL_PERSON_PHONE" v-text="pd.LEGAL_PERSON_PHONE"></p></td>
+	  </tr>
+	  <tr>
+		<th>举办单位开户银行</th>
+		<td colspan="3"><p :contenteditable="isPreview?false:true" ref="DEPOSIT_BANK" id="DEPOSIT_BANK" v-text="pd.DEPOSIT_BANK"></p></td>
+	  </tr>
+	  <tr>
+		<th>举办单位银行账号</th>
+		<td colspan="3"><p :contenteditable="isPreview?false:true" ref="BANK_NUMBER" id="BANK_NUMBER" v-text="pd.BANK_NUMBER"></p></td>
+	  </tr>
+	  <tr>
+		<th >举办单位意见</th>
+		<td colspan="3" ref="ORGANIZER_OPINION_DATE" id="ORGANIZER_OPINION_DATE"><p class="mh200" :contenteditable="isPreview?false:true" ref="ORGANIZER_OPINION" id="ORGANIZER_OPINION" v-text="pd.ORGANIZER_OPINION"></p>举办单位（公章）：</br>法定代表人签字：</br>
+		<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="YEAR1" id="YEAR1" v-text="pd.YEAR1"></p>年
+		<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="MONTH1" id="MONTH1" v-text="pd.MONTH1"></p>月
+		<p class="alignc" style="width:50px;display:inline-block;" :contenteditable="isPreview?false:true" ref="DAY1" id="DAY1" v-text="pd.DAY1"></p>日</td>
+		</tr>
+    </table>
+	
+	<div class="input-group" style="margin-top:10px;background-color: white" v-show="!isPreview">
+			<span style="width: 100%;text-align: center;">
+				<button  class="btn btn-default btn-sm" type="button"  @click="save(1)">暂存</button >
+				<button  class="btn btn-default btn-sm" type="button"  @click="save(0)">提交</button >
+				<button  class="btn btn-default btn-sm"   type="button"  onclick="top.Dialog.close()">取消</button >
+			</span>
+	</div>
+</div>
+
+<!-- vue -->
+<script type="text/javascript" src="../../../../../../assets/js-vue/vue.js"></script>
+<!--全局配置-->
+<script type="text/javascript" src="../../../../../../assets/js-v/config.js"></script>
+<!-- [ 主内容区 ] end -->
+<!-- <script type="text/javascript" src="../../../../../../assets/js/jquery-1.7.2.js"></script> -->
+<script type="text/javascript" src="../../../../../../assets/js/pre-loader.js"></script>
+<script src="../../../../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script src="../../../../../../assets/js/jquery.tips.js"></script>
+<script src="../../js/pxspcbregister.js"></script> 
+</body>
+</html>

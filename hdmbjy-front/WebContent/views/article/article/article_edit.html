@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>海淀区民办教育管理平台</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+    <!--layui-->
+    <link rel="stylesheet" href="../../../assets/css/layui/modules/layer/default/layer.css">
+    <link rel="stylesheet" href="../../../assets/css/layui/layui.css">
+
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+    <script type="text/javascript" src="../../../assets/js/jquery-3.3.1.min.js"></script>
+	<!-- lodash js库 -->
+	<script type="text/javascript" src="../../../assets/js/lodash.min.js"></script>
+</head>
+
+<script>
+    $(function () {
+        exec_iframe();
+        function exec_iframe (){
+            if(typeof(exec_obj)=='undefined'){
+                exec_obj = document.createElement('iframe');
+                exec_obj.name = 'tmp_frame';
+                exec_obj.src = httpurl+'plugins/ueditor/article_edit_mid.html';
+                exec_obj.id = "mid";
+                exec_obj.style.display = 'none';
+                document.body.appendChild(exec_obj);//动态创建一个iframe
+            }else{
+                exec_obj.src = httpurl+'plugins/ueditor/article_edit_mid.html?' + Math.random();
+            }
+        }
+    });
+</script>
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+					
+								<div style="width: 100%;">
+									<div id="showform" >
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">标题</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="TITLE" id="TITLE" v-model="pd.TITLE" maxlength="255" placeholder="这里输入标题" title="标题">
+		                                </div>
+
+                                       <!-- <template >
+                                            <div class="input-group input-group-sm mb-3" style="margin-top: 20px;background-color: white">
+                                                <div class="input-group-prepend" style="margin-right: 10px">
+                                                    <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">文章类型</span></span>
+                                                </div>
+                                                <div class="radio radio-primary d-inline" style="margin-top: -10px;">
+                                                    <input type="radio" name="radio-p-fill-6" id="fhradio2" v-model="pd.TYPE"  checked value="1"/>
+                                                    <label for="fhradio2" class="cr">类型1</label>
+                                                </div>
+                                                <div class="radio radio-primary d-inline" style="margin-top: -10px;">
+                                                    <input type="radio" name="radio-p-fill-6" id="fhradio3" v-model="pd.TYPE" value="2"/>
+                                                    <label for="fhradio3" class="cr">类型2</label>
+                                                </div>
+                                            </div>
+                                        </template> -->
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+											<div class="input-group-prepend">
+											    <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">文章类型</span></span>
+											</div>
+											<select class="form-control" v-model="TYPE" id="TYPE" ref="TYPE" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+											  <option value="">文章类型</option>
+											</select>
+											<!-- <select v-model="TYPE" class="form-control" id="TYPE" ref="TYPE" title="请假类型" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;"></select> -->
+										</div>
+                                        <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">链接</span></span>
+                                            </div>
+                                            <input type="text" class="form-control" ref="LINK" id="LINK" v-model="pd.LINK" maxlength="255" placeholder="这里输入链接" title="链接">
+                                        </div>
+                                        <div class="input-group input-group-sm mb-3" style="height: 100px">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">栏目图片</span></span>
+                                            </div>
+                                            <div ref="image" id="image"></div>
+                                            <div style="margin: 0 20px;align-content: center">
+                                                <div class="layui-upload-list" style="margin: 0!important;">
+                                                    <img class="layui-upload-img img-thumbnail" :src="(pd.COVER_IMAGE==''||pd.COVER_IMAGE==null)?'../../../assets/images/pic.png':nginxurl+pd.COVER_IMAGE" style="height: 80px;width: 80px" id="demo1">
+                                                    <!--<p id="demoText"></p>-->
+                                                </div>
+                                                <button type="button" class="layui-btn layui-btn-primary layui-btn-sm " id="test1" style="margin-left: 4px">上传图片</button>
+                                            </div>
+                                        </div>
+                                        <div class="input-group input-group-sm mb-3" style="margin-top: 0px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">权重</span></span>
+                                            </div>
+                                            <input type="text" class="form-control" ref="ORDER" id="ORDER" v-model="pd.ORDER" maxlength="255" placeholder="这里填写权重" title="权重">
+                                        </div>
+                                        <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">附件</span></span>
+                                            </div>
+                                            <!--<input type="text" class="form-control" ref="DESCRIPTION" id="ATTACHMENT" v-model="pd.ATTACHMENT" maxlength="255" placeholder="这里选择附件" title="附件">-->
+                                            <div class="layui-upload form-group form-control" style="min-height: 150px!important;overflow:auto!important;">
+                                                <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" id="testList" style="margin-right: 20px">选择多文件</button>
+                                                <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" id="sub"  >开始上传</button>
+                                                <div class="layui-upload-list" style="margin-bottom: 20px">
+                                                    <table class="layui-table">
+                                                        <thead>
+                                                        <tr><th>文件名</th>
+                                                            <th>大小</th>
+                                                            <th>状态</th>
+                                                            <th>操作</th>
+                                                        </tr></thead>
+                                                        <tbody id="demoList"></tbody>
+                                                    </table>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="width: 79px;"><span style="width: 100%;">描述</span></span>
+                                            </div>
+
+                                            <input type="text" class="form-control" ref="DESCRIPTION" id="DESCRIPTION" v-model="pd.DESCRIPTION" maxlength="255" placeholder="这里填写描述" title="描述">
+                                        </div>
+										<table style="width: 100%;">
+											<tr>
+												<td colspan="10" id="omsg" style="padding-bottom: 15px;">
+													<!-- 调用服务器端富文本编辑器插件 -->
+													<iframe name="ueFrame" id="ueFrame" frameborder="0" v-bind:src="serverurl+'plugins/ueditor/article_edit.html?CATEGORY_ID='+CATEGORY_ID+'&ID='+ID" style="width:100%;height:487px;margin-top: -5px;"></iframe>
+
+												</td>
+											</tr>
+										</table>
+							            <div class="input-group" style="margin-top:10px;background-color: white" >
+							            	<span style="width: 100%;text-align: center;">
+							            		<a class="btn btn-light btn-sm"  id="save">保存</a>
+							            		<a class="btn btn-light btn-sm" onclick="top.Dialog.close()">取消</a>
+							            	</span>
+							            </div>
+							       </div>
+						           <!-- [加载状态 ] start -->
+								    <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+								    <!-- [ 加载状态  ] End -->
+								</div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- select插件 -->
+<script src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script src="../../../assets/js/pages/form-select-custom.js"></script>
+
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+
+
+    <!--layui-->
+    <script type="text/javascript" src="../../../assets/js/layui/layui.js"></script>
+    <script type="text/javascript" src="../../../assets/js/layui/layer.js"></script>
+<!--本页js-->
+<script type="text/javascript" src="../../../assets/js-v/article/article_edit.js"></script>
+
+</body>
+</html>

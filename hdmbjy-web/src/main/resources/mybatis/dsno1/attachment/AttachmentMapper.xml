@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.attachment.AttachmentMapper">
+
+    <!--表名 -->
+    <sql id="tableName">
+		CMS_ATTACHMENT
+	</sql>
+
+    <!--数据字典表名 -->
+    <sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+
+    <!-- 字段 -->
+    <sql id="Field">
+        ID,
+        NAME,
+        ORIGINAL_NAME,
+        URL,
+        DATE_FORMAT(CREATE_DATE,'%Y-%m-%d %H:%i:%s')	CREATE_DATE, CREATE_DATE,
+        CREATE_BY，
+        P_TYPE,
+        C_TYPE,
+	</sql>
+
+    <!-- 字段用于新增 -->
+    <sql id="Field2">
+
+		NAME,
+        ORIGINAL_NAME,
+        URL,
+        CREATE_DATE,
+        CREATE_BY,
+        P_TYPE,
+        C_TYPE
+	</sql>
+
+    <!-- 字段值 -->
+    <sql id="FieldValue">
+		#{NAME},
+		#{ORIGINAL_NAME},
+		#{URL},
+		#{CREATE_DATE},
+		#{CREATE_BY},
+		#{P_TYPE},
+		#{C_TYPE}
+	</sql>
+
+
+    <select id="listPage" parameterType="pd" resultType="pd">
+        select
+        <include refid="Field"></include>
+        from
+        <include refid="tableName"></include>
+        where 1=1
+        <if test="IDS!=null and IDS!=''">  and ID in #{IDS} </if>
+
+
+    </select>
+
+    <insert id="save" parameterType="pd"   keyProperty="ID" useGeneratedKeys="true" >
+        insert  into
+        <include refid="tableName"></include>
+        (
+        <include refid="Field2"></include>
+        )values (
+        <include refid="FieldValue"></include>
+        )
+
+    </insert>
+
+    <delete id="delete"  parameterType="pd" >
+        delete from
+        <include refid="tableName"></include>
+        where ID =#{ID}
+    </delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteAll" parameterType="String">
+        delete from
+        <include refid="tableName"></include>
+        where
+        ID in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </delete>
+
+    <select id="findAttachmentByIds" parameterType="pd" resultType="pd">
+        select ID,ORIGINAL_NAME ,`NAME` ,URL ,  DATE_FORMAT(CREATE_DATE,'%Y-%m-%d %H:%i:%s') as `CREATE_DATE`,CREATE_BY,P_TYPE,C_TYPE from cms_attachment where id in (${ATTACHMENT})
+    </select>
+
+
+    <select id="getOneById" parameterType="pd" resultType="pd">
+        select ID,ORIGINAL_NAME,`NAME` ,URL ,CREATE_DATE,CREATE_BY,P_TYPE,C_TYPE from cms_attachment where id =#{ID}
+    </select>
+
+
+</mapper>

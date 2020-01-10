@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/material/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+	<!--layui-->
+	<link rel="stylesheet" href="../../../assets/css/layui/modules/layer/default/layer.css">
+	<link rel="stylesheet" href="../../../assets/css/layui/layui.css" >
+	
+    <link rel="stylesheet" href="../../../assets/css/bootstrap/bootstrap.min.css">
+
+    <!-- vue -->
+    <script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+	<style>
+		#textarea {
+		            display: block;
+		            margin: 0 auto;
+		            overflow: hidden;
+		            width: 60%;
+		            font-size: 14px;
+		            height: 18px;
+		            line-height: 24px;
+		            padding: 2px;
+		        }
+	</style>
+
+</head>
+<body>
+
+<div id="main">
+  
+    <div style="border-top: 1px #cdcdcd solid">
+		<div class="jumbotron"    style="padding-left: 60px!important;padding-bottom: 10px!important;padding-top:10px;margin-bottom: 0px;">
+		  <div class="page-header" style="float:left;margin:0;width: 100%;">
+		      <h3 style="margin:0;line-height:50px;font-family:SimHei">回执单</h3>
+		  </div>
+		  <div style="float:left;width:calc(100% - 80px)">
+			  <table class="layui-table">
+			      <thead>
+					<tr>
+						<td colspan="3" style="text-align: center;width: 100%;">{{informTable.TITLE}}</td>
+					</tr>
+			  		<tr>
+			  			<th style="width: 10%;">序号</th>
+			  			<th style="width: 30%;">名称</th>
+			  			<th style="width: 60%;">内容</th>
+			  		</tr>
+			  	</thead>
+			  	<tbody>
+			  		<tr v-for="(option,index) in options" class="table_options">
+						<td style="width: width: 10%;">{{index+1}}</td>
+			  			<td style="width: 30%;" class="option_name">{{option.NAME}}</td>
+						<template v-if="option.TYPE=='INPUT'">
+							<td  :c_type="option.TYPE" :contentEditable="!isPreviewInformTable?true:false"  :id="option.PINYIN" class="option_value option_type" :c_name="option.PINYIN">
+							</td>
+						</template>
+						<template v-if="option.TYPE=='RADIO'">
+							<td  :c_type="option.TYPE" style="width: 60%;" class="option_type" :id="option.PINYIN" :c_name="option.PINYIN">
+								<template v-for="coption in option.childOption" style="margin-right: 40px;">
+								<input type="radio" :id="coption.PINYIN"  :disabled="!isPreviewInformTable?false:true" :name="option.PINYIN" class="option_value"  :value="coption.PINYIN" style="margin-left: 10px;" >{{coption.NAME}}
+								</template>
+							</td>
+						</template>
+						<template v-if="option.TYPE=='CHECKBOX'">
+							<td  :c_type="option.TYPE" style="width: 60%;" :id="option.PINYIN"  class="option_type" :c_name="option.PINYIN">
+								<template v-for="coption in option.childOption" style="margin-right: 10px;">
+								<input type="checkbox" :id="coption.PINYIN" :disabled="!isPreviewInformTable?false:true" :name="option.PINYIN" class="option_value" :value="coption.PINYIN" style="margin-left: 10px;" >{{coption.NAME}}
+								</template>
+							</td>
+						</template>
+						<template v-if="option.TYPE=='TEXTAREA'">
+							<td  :c_type="option.TYPE" :id="option.PINYIN"  style="width: 60%;height: 100px;" :contentEditable="!isPreviewInformTable?true:false" class="option_value option_type" :c_name="option.PINYIN">
+							</td>
+						</template>
+				
+			  			<td>
+			  			</td>
+			  		</tr>
+			  	</tbody>
+			  </table>
+		  </div>
+		  <div style="clear:both;"></div>
+		</div>
+		
+        
+
+    </div>
+</div>
+
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+  <!--layui-->
+<script type="text/javascript" src="../../../assets/js/layui/layui.js"></script>
+<script type="text/javascript" src="../../../assets/js/layui/layer.js"></script>
+<script type="text/javascript" src="../../../assets/js/layui/lay/modules/layer.js"></script>
+
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- bootstrap_table js -->
+	
+	<script src="../../../assets/js/bootstarp/bootstrap.js"></script>
+	<script src="../../../assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="../../../assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+<script type="text/javascript" src="../../../assets/js-v/inform/informtable.js"></script>
+</body>
+</html>

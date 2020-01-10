@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <title>海淀区民办教育管理平台</title>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+  <!-- ztree -->
+  <link rel="stylesheet" href="../../../plugins/zTree/3.5/css/zTreeStyle/zTreeStyle.css" />
+  <script type="text/javascript"  src="../../../plugins/zTree/3.5/js/jquery.ztree.core.js"></script>
+  <script type="text/javascript" src="../../../plugins/zTree/3.5/js/jquery.ztree.excheck.js"></script>
+    <!-- vue -->
+    <script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+<body>
+
+<div style="width:100%;" id="app">
+    <table style="width:100%;">
+        <tr>
+            <td style="width:15%;" valign="top">
+                <div style="width:15%;">
+                    <ul id="leftTree" class="ztree">
+                        <li><img src="../../../assets/images/loading.gif" /></li>
+                    </ul>
+                </div>
+            </td>
+            <td style="width:85%;" valign="top" >
+                <iframe name="treeFrame" id="treeFrame" frameborder="0" :src="'scuser_list.html?oId=0&tPage='+TPAGE" style="margin:0 auto;width:100%;height:100%;"></iframe>
+            </td>
+        </tr>
+        
+    </table>
+</div>
+
+<!-- 本页面js -->
+<script type="text/javascript" src="../../../assets/js-v/scuser/scuser_ztree_general.js"></script>
+
+</body>
+</html>

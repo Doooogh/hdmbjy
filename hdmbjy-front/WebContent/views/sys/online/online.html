@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+
+</head>
+
+<body>
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+
+							    <!-- [ Hover-table ] start -->
+                                <div class="col-xl-12">
+                                    <div class="card">
+                                        <div style="padding-left: 15px;padding-top: 15px;">
+											<table style="margin-top:10px;">
+												<tr style="height:26px;">
+													<td style="padding-left: 15px;">在线人数：</td>
+													<td>
+														<div style="width:39px;">{{userCount}}</div>
+													</td>
+													<td v-show="loading">
+														<!-- [在线状态 ] start -->
+												    	<div class="d-flex justify-content-center" style="margin-top:0px;">
+				                                            <div class="spinner-grow spinner-grow-sm" role="status">
+				                                                <span class="sr-only">Loading...</span>
+				                                            </div>
+				                                        </div>
+												    	<!-- [ 在线状态  ] End -->
+													</td>
+												</tr>
+											</table>
+                                        </div>
+                                        <div class="card-block table-border-style" style="margin-top: -15px">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+														<tr>
+															<th style="width: 50px;" id="cts">
+									                            <div class="checkbox d-inline">
+		                                                            <input type="checkbox" name="fhcheckbox" id="zcheckbox">
+		                                                            <label  style="max-height: 12px;" for="zcheckbox" class="cr"></label>
+		                                                        </div>
+															</th>
+															<th style="width: 50px;">NO</th>
+															<th>用户名</th>
+															<th style="width: 86px;text-align: center;">操作</th>
+														</tr>
+													</thead>
+									                <tbody id="userlist">
+									                
+										                <template v-for="(user,index) in userList">
+										                	<tr>
+							    								 <td>
+							    									<div class="checkbox d-inline">
+							                                    		<input type="checkbox" v-bind:id="'zcheckbox'+index" name="ids" v-bind:value="user">
+							                                    		<label  style="max-height: 12px;" v-bind:for="'zcheckbox'+index" class="cr"></label>
+							                                		</div>
+							    								</td>
+							    								<td>{{index+1}}</td>
+							    								<td><a v-on:click="editUser(user)" style="cursor:pointer;">{{user}}</a></td>
+							    								<td>
+							    									<a style="height:23px;" class="btn btn-light btn-sm" v-on:click="goOutTUser(user)"><div style="margin-top:-5px;margin-left: -5px;">&nbsp;强制下线</div></a>
+							    								</td>
+							    							</tr>
+										                </template>
+									                
+									                </tbody>
+                                                </table>
+                                                
+                                                <table style="width:100%;margin-top:15px;">
+													<tr>
+														<td style="vertical-align:top;">
+															<a class="btn btn-light btn-sm" v-on:click="makeAll('确定要把这些用户强制下线吗?');" title="批量强制下线" >强制下线</a>
+														</td>
+													</tr>
+												</table>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- [ Hover-table ] end -->
+
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+<!-- 表单验证提示 -->
+<script type="text/javascript" src="../../../assets/js/jquery.tips.js"></script>
+
+<!-- 本页面js --> 
+<script type="text/javascript" src="../../../assets/js-v/sys/online.js"></script>
+
+</body>
+</html>

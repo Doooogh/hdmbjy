@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fh.mapper.dsno1.formdata.jsbshenpi.LodgingMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		AF_LODGING
+	</sql>
+	
+	<!--数据字典表名 -->
+	<sql id="dicTableName">
+		SYS_DICTIONARIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		f.UNIT_NAME,	
+		f.CORPORATION,	
+		f.ADDRESS,	
+		f.TELEPHONE,	
+		f.PRINCIPAL_NAME,	
+		f.OFFICETEL,	
+		f.PHONE,	
+		f.STUDENT_NUM,	
+		f.REGULAR_CLASSROOM,	
+		f.PROFESSIONAL_CLASSROOM,	
+		f.BOARDERS_NUM,	
+		f.BOARDER_ISNOTCLASS,	
+		f.BOARDER_MAXCLASS,	
+		f.STUDENT_DORM,	
+		f.TEACHING_ISNOTHOUSE,	
+		f.STAYFLOOR_EXITNUM,	
+		f.DORMBED_NUM,	
+		f.ANNIHILATOR_NUM,	
+		f.ISNOTAPPROVAL_CANTEEN,	
+		f.DORMAREA,	
+		f.DOCTORNAME,	
+		f.DOCTOR_PHONE,	
+		f.TEACHER_NUM,	
+		f.STAY_PHONE,	
+		f.MIDDLE_ONE,	
+		f.MIDDLE_TWO,	
+		f.MIDDLE_THREE,	
+		f.SENIOR_ONE,	
+		f.SENIOR_TWO,	
+		f.SENIOR_THREE,	
+		f.PRIMARY_ONE,	
+		f.PRIMARY_TWO,	
+		f.PRIMARY_THREE,	
+		f.PRIMARY_FOUR,	
+		f.PRIMARY_FIVE,	
+		f.PRIMARY_SIX,	
+		f.JOB_ONE,	
+		f.JOB_TWO,	
+		f.JOB_THREE,	
+		f.KINDERGARTEN_ONE,	
+		f.KINDERGARTEN_TWO,	
+		f.KINDERGARTEN_THREE ,	
+		f.OPINION,	
+		f.OPINION_DATE,	
+		f.OPINION_ZYYWKS,	
+		f.OPINION_BJS,	
+		f.OPINION_BWK,	
+		f.OPINION_HQZX,	
+		f.OPINION_SPAQK,	
+		f.OPINION_JJK,	
+		f.OPINION_DEP,	
+		f.OPINION_DEPDATE,	
+		f.LODGING_ID
+	</sql>
+	
+	<!-- 字段用于新增 -->
+	<sql id="Field2">
+		UNIT_NAME,	
+		CORPORATION,	
+		ADDRESS,	
+		TELEPHONE,	
+		PRINCIPAL_NAME,	
+		OFFICETEL,	
+		PHONE,	
+		STUDENT_NUM,	
+		REGULAR_CLASSROOM,	
+		PROFESSIONAL_CLASSROOM,	
+		BOARDERS_NUM,	
+		BOARDER_ISNOTCLASS,	
+		BOARDER_MAXCLASS,	
+		STUDENT_DORM,	
+		TEACHING_ISNOTHOUSE,	
+		STAYFLOOR_EXITNUM,	
+		DORMBED_NUM,	
+		ANNIHILATOR_NUM,	
+		ISNOTAPPROVAL_CANTEEN,	
+		DORMAREA,	
+		DOCTORNAME,	
+		DOCTOR_PHONE,	
+		TEACHER_NUM,	
+		STAY_PHONE,	
+		MIDDLE_ONE,	
+		MIDDLE_TWO,	
+		MIDDLE_THREE,	
+		SENIOR_ONE,	
+		SENIOR_TWO,	
+		SENIOR_THREE,	
+		PRIMARY_ONE,	
+		PRIMARY_TWO,	
+		PRIMARY_THREE,	
+		PRIMARY_FOUR,	
+		PRIMARY_FIVE,	
+		PRIMARY_SIX,	
+		JOB_ONE,	
+		JOB_TWO,	
+		JOB_THREE,	
+		KINDERGARTEN_ONE,	
+		KINDERGARTEN_TWO,	
+		KINDERGARTEN_THREE ,	
+		OPINION,	
+		OPINION_DATE,	
+		OPINION_ZYYWKS,	
+		OPINION_BJS,	
+		OPINION_BWK,	
+		OPINION_HQZX,	
+		OPINION_SPAQK,	
+		OPINION_JJK,	
+		OPINION_DEP,	
+		OPINION_DEPDATE,	
+		LODGING_ID
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{UNIT_NAME},	
+		#{CORPORATION},	
+		#{ADDRESS},	
+		#{TELEPHONE},	
+		#{PRINCIPAL_NAME},	
+		#{OFFICETEL},	
+		#{PHONE},	
+		#{STUDENT_NUM},	
+		#{REGULAR_CLASSROOM},	
+		#{PROFESSIONAL_CLASSROOM},	
+		#{BOARDERS_NUM},	
+		#{BOARDER_ISNOTCLASS},	
+		#{BOARDER_MAXCLASS},	
+		#{STUDENT_DORM},	
+		#{TEACHING_ISNOTHOUSE},	
+		#{STAYFLOOR_EXITNUM},	
+		#{DORMBED_NUM},	
+		#{ANNIHILATOR_NUM},	
+		#{ISNOTAPPROVAL_CANTEEN},	
+		#{DORMAREA},	
+		#{DOCTORNAME},	
+		#{DOCTOR_PHONE},	
+		#{TEACHER_NUM},	
+		#{STAY_PHONE},	
+		#{MIDDLE_ONE},	
+		#{MIDDLE_TWO},	
+		#{MIDDLE_THREE},	
+		#{SENIOR_ONE},	
+		#{SENIOR_TWO},	
+		#{SENIOR_THREE},	
+		#{PRIMARY_ONE},	
+		#{PRIMARY_TWO},	
+		#{PRIMARY_THREE},	
+		#{PRIMARY_FOUR},	
+		#{PRIMARY_FIVE},	
+		#{PRIMARY_SIX},	
+		#{JOB_ONE},	
+		#{JOB_TWO},	
+		#{JOB_THREE},	
+		#{KINDERGARTEN_ONE},	
+		#{KINDERGARTEN_TWO},	
+		#{KINDERGARTEN_THREE },	
+		#{OPINION},	
+		#{OPINION_DATE},	
+		#{OPINION_ZYYWKS},	
+		#{OPINION_BJS},	
+		#{OPINION_BWK},	
+		#{OPINION_HQZX},	
+		#{OPINION_SPAQK},	
+		#{OPINION_JJK},	
+		#{OPINION_DEP},	
+		#{OPINION_DEPDATE},	
+		#{LODGING_ID}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field2"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			LODGING_ID = #{LODGING_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			UNIT_NAME = #{UNIT_NAME},
+			CORPORATION = #{CORPORATION},
+			ADDRESS = #{ADDRESS},
+			TELEPHONE = #{TELEPHONE},
+			PRINCIPAL_NAME = #{PRINCIPAL_NAME},
+			OFFICETEL = #{OFFICETEL},
+			PHONE = #{PHONE},
+			STUDENT_NUM = #{STUDENT_NUM},
+			REGULAR_CLASSROOM = #{REGULAR_CLASSROOM},
+			PROFESSIONAL_CLASSROOM = #{PROFESSIONAL_CLASSROOM},
+			BOARDERS_NUM = #{BOARDERS_NUM},
+			BOARDER_ISNOTCLASS = #{BOARDER_ISNOTCLASS},
+			BOARDER_MAXCLASS = #{BOARDER_MAXCLASS},
+			STUDENT_DORM = #{STUDENT_DORM},
+			TEACHING_ISNOTHOUSE = #{TEACHING_ISNOTHOUSE},
+			STAYFLOOR_EXITNUM = #{STAYFLOOR_EXITNUM},
+			DORMBED_NUM = #{DORMBED_NUM},
+			ANNIHILATOR_NUM = #{ANNIHILATOR_NUM},
+			ISNOTAPPROVAL_CANTEEN = #{ISNOTAPPROVAL_CANTEEN},
+			DORMAREA = #{DORMAREA},
+			DOCTORNAME = #{DOCTORNAME},
+			DOCTOR_PHONE = #{DOCTOR_PHONE},
+			TEACHER_NUM = #{TEACHER_NUM},
+			STAY_PHONE = #{STAY_PHONE},
+			MIDDLE_ONE = #{MIDDLE_ONE},
+			MIDDLE_TWO = #{MIDDLE_TWO},
+			MIDDLE_THREE = #{MIDDLE_THREE},
+			SENIOR_ONE = #{SENIOR_ONE},
+			SENIOR_TWO = #{SENIOR_TWO},
+			SENIOR_THREE = #{SENIOR_THREE},
+			PRIMARY_ONE = #{PRIMARY_ONE},
+			PRIMARY_TWO = #{PRIMARY_TWO},
+			PRIMARY_THREE = #{PRIMARY_THREE},
+			PRIMARY_FOUR = #{PRIMARY_FOUR},
+			PRIMARY_FIVE = #{PRIMARY_FIVE},
+			PRIMARY_SIX = #{PRIMARY_SIX},
+			JOB_ONE = #{JOB_ONE},
+			JOB_TWO = #{JOB_TWO},
+			JOB_THREE = #{JOB_THREE},
+			KINDERGARTEN_ONE = #{KINDERGARTEN_ONE},
+			KINDERGARTEN_TWO = #{KINDERGARTEN_TWO},
+			KINDERGARTEN_THREE  = #{KINDERGARTEN_THREE },
+			OPINION = #{OPINION},
+			OPINION_DATE = #{OPINION_DATE},
+			OPINION_ZYYWKS = #{OPINION_ZYYWKS},
+			OPINION_BJS = #{OPINION_BJS},
+			OPINION_BWK = #{OPINION_BWK},
+			OPINION_HQZX = #{OPINION_HQZX},
+			OPINION_SPAQK = #{OPINION_SPAQK},
+			OPINION_JJK = #{OPINION_JJK},
+			OPINION_DEP = #{OPINION_DEP},
+			OPINION_DEPDATE = #{OPINION_DEPDATE},
+			LODGING_ID = LODGING_ID
+		where 
+			LODGING_ID = #{LODGING_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 
+			f.LODGING_ID = #{LODGING_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+		where 1=1
+		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+				-->
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> f
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			LODGING_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

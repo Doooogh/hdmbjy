@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FH Admin</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    
+    <!-- 日期插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/material-datetimepicker/css/bootstrap-material-datetimepicker.css">
+    
+    <!-- select插件 -->
+    <link rel="stylesheet" href="../../../assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/multi-select/css/multi-select.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body style="background-color: white">
+    
+    <!-- [加载状态 ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ 加载状态  ] End -->
+
+    <!-- [ 主内容区 ] start -->
+        <div class="pcoded-wrapper" id="app">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+					
+								<div style="width: 100%;">
+									<div id="showform">
+									
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 110px;"><span style="width: 100%;">名字</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="NAME" id="NAME"  :disabled="msg=='edit'" v-model="pd.NAME" maxlength="64" placeholder="这里输入名字" title="名字">
+		                                </div>
+							         <!--   <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 110px;"><span style="width: 100%;">负责人姓名</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="HEADMAN" id="HEADMAN" :disabled="msg=='edit'" v-model="pd.HEADMAN" maxlength="64" placeholder="这里输入负责人姓名" title="负责人姓名">
+		                                </div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 110px;"><span style="width: 100%;">负责人联系方式</span></span>
+										    </div>
+										    <input type="text" class="form-control" ref="HEADMAN_PHONE" id="HEADMAN_PHONE" v-model="pd.HEADMAN_PHONE" maxlength="11" placeholder="这里输入负责人联系方式" title="联系方式">
+										</div> -->
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 110px;"><span style="width: 100%;">类型 </span></span>
+										    </div>
+										    <!-- <input type="text" class="form-control" ref="ISACTIVE" id="ISACTIVE" v-model="pd.ISACTIVE" maxlength="8" placeholder="这里输入是否在编  1 在编  0 未在编" title="是否在编  1 在编  0 未在编"> -->
+											<!-- <select class="form-control" v-model="TYPE" id="TYPE" ref="TYPE" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+											 <option value="" >请选择类型</option>
+											  <option value="1">幼儿园</option>
+											  <option value="2">小学</option>
+											  <option value="3">初中</option>
+											  <option value="4">高中</option>
+											  <option value="5">培训机构</option>
+											</select> -->
+											<input type="text" class="form-control" ref="TYPE_NAME" id="TYPE_NAME" v-model="TYPE_NAME"  title="类型" disabled="disabled">
+										</div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 110px;"><span style="width: 100%;">学区</span></span>
+										    </div>
+											 <select class="form-control" v-model="DISTRICT" id="DISTRICT" ref="DISTRICT" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+											</select> 
+										   <!--  <input type="text" class="form-control" ref="DISTRICT_NAME" id="DISTRICT_NAME" v-model="DISTRICT_NAME"  title="学区" disabled="disabled"> -->
+										</div>
+										<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 110px;"><span style="width: 100%;">许可证号</span></span>
+										    </div>
+										    <input type="text" class="form-control" ref="LICENCE" id="LICENCE" v-model="pd.LICENCE" maxlength="64" placeholder="这里输入许可证号" title="许可证号">
+										</div>
+									<!-- 	<div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+										    <div class="input-group-prepend">
+										        <span class="input-group-text" style="width: 110px;"><span style="width: 100%;">编制</span></span>
+										    </div>
+										    <input type="text" class="form-control" ref="BIANZHI" id="BIANZHI" v-model="pd.BIANZHI" maxlength="64" placeholder="这里输入机构编制" title="编制">
+										</div> -->
+							          
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 110px;"><span style="width: 100%;">联系方式</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="TEL" id="TEL" v-model="pd.TEL" maxlength="11" placeholder="这里输入联系方式" title="联系方式">
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 110px;"><span style="width: 100%;">简介</span></span>
+		                                    </div>
+		                                   <!--  <input type="text" class="form-control" ref="INTRO" id="INTRO" v-model="pd.INTRO" maxlength="100" placeholder="这里输入简介  字数100字以内" title="简介"> -->
+		                                	<textarea rows="2" cols="4" class="form-control" ref="INTRO" id="INTRO" maxlength="100" v-model="pd.INTRO" placeholder="这里输入简介  字数100字以内" title="备注"></textarea>
+		                                </div>
+							            <div class="input-group input-group-sm mb-3" style="margin-top: -10px;">
+		                                    <div class="input-group-prepend">
+		                                        <span class="input-group-text" style="width: 110px;"><span style="width: 100%;">地址</span></span>
+		                                    </div>
+		                                    <input type="text" class="form-control" ref="ADDRESS" id="ADDRESS" v-model="pd.ADDRESS" maxlength="1000" placeholder="这里输入地址" title="地址">
+		                                </div>
+							         
+							            <div class="input-group" style="margin-top:10px;background-color: white" >
+							            	<span style="width: 100%;text-align: center;">
+							            		<a class="btn btn-light btn-sm" v-on:click="save">保存</a>
+							            		<a class="btn btn-light btn-sm" @click="goback()">取消</a>
+							            	</span>
+							            </div>
+							       </div>
+						           <!-- [加载状态 ] start -->
+								    <div id="jiazai" style="display:none;margin-top:50px;">
+								    	<div class="d-flex justify-content-center">
+	                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+								    <!-- [ 加载状态  ] End -->
+								</div>
+	    
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- [ 主内容区 ] end -->
+    
+<script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../../../assets/js/pre-loader.js"></script>
+<script src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+
+<!-- 日期插件 -->
+<script src="../../../assets/js/pages/moment-with-locales.min.js"></script>
+<script src="../../../assets/plugins/material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="../../../assets/js/pages/form-picker-custom.js"></script>
+
+<!-- select插件 -->
+<script src="../../../assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<script src="../../../assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+<script src="../../../assets/js/pages/form-select-custom.js"></script>
+
+<!-- 表单验证提示 -->
+<script src="../../../assets/js/jquery.tips.js"></script>
+
+<script type="text/javascript" src="../../../assets/js-v/organization/organization_edit.js"></script>
+
+</body>
+</html>

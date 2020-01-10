@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>海淀区民办教育管理平台</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="FH Admin QQ313596790" />
+
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="../../../assets/fonts/material/css/materialdesignicons.min.css">
+    
+    <!--引入弹窗组件-->
+    <link type="text/css" rel="stylesheet" href="../../../plugins/fhdrag/style.css" />
+    
+    <!-- 及时通讯css -->
+	<link rel="stylesheet" href="../../../plugins/fhim/dist/css/layui.css">
+	<link rel="stylesheet" href="../../../plugins/fhim/dist/css/contextMenu.css">
+    
+    <!-- vue -->
+	<script src="../../../assets/js-vue/vue.js"></script>
+    <!--全局配置-->
+    <script src="../../../assets/js-v/config.js"></script>
+
+</head>
+
+<body id="FHSKIN3" class="">
+    <div  id="app">
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ Pre-loader ] End -->
+
+    <!-- [ navigation menu ] start  pcoded-navbar mob-open -->
+    <nav id="FHSKIN1" v-bind:class="SKIN.split(',')[0]">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand header-logo" align="center">
+                <a class="b-brand" style="width: 70%;padding-left: 80px;" >
+                    <div class="b-bg">
+						<img src="../../../assets/images/bg-images/logo.png" alt="" style="width: 60px;height: 60px;" >
+                        <!-- <i class="feather icon-facebook"></i> -->
+                    </div>
+                    <!-- <span class="b-title">{{sysName}}</span> -->
+                </a>
+                <a class="mobile-menu" id="mobile-collapse" style="cursor:pointer;"><span></span></a>
+            </div>
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar" id="fhll">
+                    
+                    <!-- 一级菜单循环开始 -->
+					<template v-for="menu1 in menuList">
+					
+						<!-- 判断此一级菜单是否有权限，并且状态是可视的 -->
+						<template v-if="menu1.hasMenu && '1' == menu1.menu_STATE">
+						
+							<li class="nav-item pcoded-hasmenu" v-bind:id="'lm'+menu1.menu_ID">
+		          				<a style="cursor:pointer;" class="nav-link"><span class="pcoded-micon"><i v-bind:class="menu1.menu_ICON"></i></span><span class="pcoded-mtext">{{menu1.menu_NAME}}</span></a>
+	          					<ul class="pcoded-submenu">
+	          						<!-- 判断是否有二级级菜单 -->
+		          					<template v-if="0 != menu1.subMenu.length">
+		          					
+		          						<!-- 二级菜单循环开始 -->
+										<template v-for="menu2 in menu1.subMenu">
+										
+											<!-- 判断此二级菜单是否有权限，并且状态是可视的 -->
+											<template v-if="menu2.hasMenu && '1' == menu2.menu_STATE">
+											
+											  	<li v-bind:class="0 != menu2.subMenu.length?'pcoded-hasmenu':''" v-bind:id="'z'+menu2.menu_ID">
+								                  
+								                  <template v-if="null != menu2.menu_URL && '#' != menu2.menu_URL">
+									                  <a style="cursor:pointer;" target="mainFrame" v-on:click="siMenu('z'+menu2.menu_ID,'lm'+menu1.menu_ID,menu2.menu_NAME,menu2.menu_URL)">
+									                  	{{menu2.menu_NAME}}
+									                  </a>
+								                  </template>
+								                  <template v-else>
+								                  	<a style="cursor:pointer;">
+									                  	{{menu2.menu_NAME}}
+									                </a>
+								                  </template>
+								                  
+								                  <!-- 判断是否有三级级菜单 -->
+		          								  <template v-if="0 != menu2.subMenu.length">
+		          								  	<ul class="pcoded-submenu">
+		          								  	
+		          								  		<!-- 三级菜单循环开始 -->
+														<template v-for="menu3 in menu2.subMenu">
+															
+															<!-- 判断此三级菜单是否有权限，并且状态是可视的 -->
+															<template v-if="menu3.hasMenu && '1' == menu3.menu_STATE">
+															
+																<li v-bind:id="'m'+menu3.menu_ID">
+																
+																	<!-- 判断是否有四级级菜单 -->
+		          								  					<template v-if="0 != menu3.subMenu.length">
+																		<a style="cursor:pointer;" target="mainFrame" v-on:click="siMenu('m'+menu3.menu_ID,'lm'+menu1.menu_ID,menu3.menu_NAME,'../menu/menu_ztree_other.html?MENU_ID='+menu3.menu_ID)">
+																			{{menu3.menu_NAME}}<i style="margin-left: 8px;" class="feather icon-chevron-right"></i>
+																		</a>
+																	</template>
+																	<template v-else>
+																		<template v-if="null != menu3.menu_URL && '#' != menu3.menu_URL">
+														                  <a style="cursor:pointer;" target="mainFrame" v-on:click="siMenu('m'+menu3.menu_ID,'lm'+menu1.menu_ID,menu3.menu_NAME,menu3.menu_URL)">
+														                  	{{menu3.menu_NAME}}
+														                  </a>
+													                  </template>
+													                  <template v-else>
+													                  	<a style="cursor:pointer;">
+														                  	{{menu3.menu_NAME}}
+														                </a>
+													                  </template>
+												                  	</template>
+																
+																</li>
+																
+		          								  			</template>
+		          								  	
+								                  		</template>
+								                  		
+								                  	</ul>
+								                  </template>
+								                  
+				          						</li>
+				          						
+			          						</template>
+			          						
+		          						</template>
+		          						
+		          					</template>
+	          					</ul>
+							</li>
+							
+						</template>		
+						
+					</template>
+                   <!-- 一级菜单循环结束 -->
+                   
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- [ navigation menu ] end -->
+
+    <!-- [ 头部 ] start -->
+
+    <header id="FHSKIN2" v-bind:class="SKIN.split(',')[1]">
+
+        <div class="m-header">
+            <a class="mobile-menu" id="mobile-collapse1" style="cursor:pointer;"><span></span></a>
+            <a class="b-brand">
+                   <div class="b-bg">
+                       <i class="feather icon-trending-up"></i>
+                   </div>
+                   <span class="b-title">sysName</span>
+               </a>
+        </div>
+        <a class="mobile-menu" id="mobile-header" style="cursor:pointer;">
+            <i class="feather icon-more-horizontal"></i>
+        </a>
+        <div class="collapse navbar-collapse" style="padding-left: 50px;">
+			<div>
+				<span style="font-family: 黑体;font-size: 25px;">海淀区民办教育管理平台</span>
+			</div>
+            <ul class="navbar-nav ml-auto">
+				<!-- <li><a href="#" @click="tabMethod">测试子页面方法</a></li> -->
+				<li>{{orgName}}</li>
+				<li>{{user_name}}</li>
+                <li v-show="!isUser"><a style="cursor:pointer;color:white" class="full-screen" href="../../index/index.html" target="_blank">进入页面</a></li>
+            	<li><a style="cursor:pointer;color:white" class="full-screen" onclick="javascript:toggleFullScreen()">全屏</a></li>
+                <!-- <li>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown" id="myIm"><i class="icon feather icon-bell" id="taskCount"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right notification">
+                            <div class="noti-head">
+                                <h6 class="d-inline-block m-b-0">待办任务</h6>
+                            </div>
+                            <ul class="noti-body" id="myTask" style="margin-top: -30px;" >
+                            </ul>
+                            <div class="noti-footer">
+                                <button v-on:click="rutasklist" style="height:23px;" class="btn btn-light btn-sm"><div style="margin-top:-5px;margin-left: -5px;">&nbsp;查看我的任务列表</div></button>
+                            </div>
+                        </div>
+                    </div>
+                </li> -->
+                <li><a style="cursor:pointer;" class="displayChatbox" v-on:click="fhsms" id="fhsmsCount"><i class="icon feather icon-mail"></i></a></li>
+                <li>
+                    <div class="dropdown drp-user">
+                        <a style="cursor:pointer;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon feather icon-settings"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-notification">
+                            <div class="pro-head">
+                                <img class="img-radius" v-bind:src="userPhoto">
+                                <span>{{user_name}}</span>
+                                <a v-on:click="logout" style="cursor:pointer;" class="dud-logout" title="退出系统">
+                                    <i class="feather icon-log-out"></i>
+                                </a>
+                            </div>
+                            <ul class="pro-body">
+                                <li v-show="systemset" v-on:click="sysSet"><a style="cursor:pointer;" class="dropdown-item"><i class="feather icon-settings"></i> 系统设置</a></li>
+                                <li v-on:click="goEditMyInfo"><a class="dropdown-item" style="cursor:pointer;"><i class="feather icon-user"></i> 修改资料</a></li>
+                                <li v-on:click="editPhoto"><a class="dropdown-item" style="cursor:pointer;"><i class="feather icon-image"></i> 修改头像</a></li>
+                                <li v-on:click="logout"><a class="dropdown-item" style="cursor:pointer;"><i class="feather icon-lock"></i> 退出系统</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+       
+    </header>
+       
+    <!-- [ 头部  ] end -->
+
+    <!-- [ 主内容区 ] start -->
+    <section class="pcoded-main-container">
+
+		<iframe name="mainFrame" id="mainFrame" frameborder="0" src="tab.html" style="margin:0 auto;width:100%;height:100%;"></iframe>
+
+    </section>
+    <!-- [ 主内容区 ] end -->
+
+    <!-- Warning Section start -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 11]>
+        <div class="ie-warning">
+            <h1>警告!!</h1>
+            <p>您使用的是过时版本的Internet Explorer，请升级
+               <br/>使用以下任何Web浏览器访问此网站.
+            </p>
+            <div class="iew-container">
+                <ul class="iew-download">
+                    <li>
+                        <a href="http://www.google.com/chrome/">
+                            <img src="../../../assets/images/browser/chrome.png" alt="Chrome">
+                            <div>Chrome</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.mozilla.org/en-US/firefox/new/">
+                            <img src="../../../assets/images/browser/firefox.png" alt="Firefox">
+                            <div>Firefox</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.opera.com">
+                            <img src="../../../assets/images/browser/opera.png" alt="Opera">
+                            <div>Opera</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.apple.com/safari/">
+                            <img src="../../../assets/images/browser/safari.png" alt="Safari">
+                            <div>Safari</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                            <img src="../../../assets/images/browser/ie.png" alt="">
+                            <div>IE (11 & above)</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <p>抱歉给您带来不便！!</p>
+        </div>
+    <![endif]-->
+    <!-- Warning Section Ends -->
+
+	<!-- 右侧菜单设置 -->
+	<div id="styleSelector" class="menu-styler">
+		<div class="style-toggler">
+			<a style="cursor:pointer;"></a>
+		</div>
+		<div class="style-block">
+			<h6 class="mb-2">风格设置</h6>
+			<hr class="my-0">
+			<h6>皮肤</h6>
+			<div class="theme-color layout-type" onclick="saveSkin()">
+				<a style="cursor:pointer;" v-bind:class="SKIN.split(',')[0]=='pcoded-navbar'?'active':''" data-value="menu-dark" data-toggle="tooltip" title="默认风格" onclick="saveSkindef()"><span></span><span></span></a>
+				<a style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('menu-light')>=0?'active':''" data-value="menu-light" data-toggle="tooltip" title="浅色风格"><span></span><span></span></a>
+				<a style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('dark')>=0?'active':''" data-value="dark" data-toggle="tooltip" title="黑色风格"><span></span><span></span></a>
+			</div>
+			<h6>预构建布局</h6>
+			<div class="form-group mb-3">
+				<div class="switch switch-primary d-inline m-r-10">
+					<input type="checkbox" id="icon-colored" v-model="iconColored" ><label for="icon-colored" class="cr"></label>
+				</div>
+				<label>图标颜色</label>
+			</div>
+			<ul class="nav nav-pills mb-2" id="pills-cust-tab" role="tablist">
+				<li class="nav-item"><a class="nav-link active" id="pills-color-tab" data-toggle="pill" href="#pills-color" role="tab" aria-controls="pills-color" aria-selected="true">颜色</a></li>
+				<li class="nav-item"><a class="nav-link" id="pills-pages-tab" data-toggle="pill" href="#pills-pages" role="tab" aria-controls="pills-pages" aria-selected="false">布局</a></li>
+			</ul>
+			<div class="tab-content" id="pills-cust-tabContent">
+				<div class="tab-pane fade show active" id="pills-color" role="tabpanel" aria-labelledby="pills-color-tab">
+					<h6>页眉背景</h6>
+					<div class="theme-color header-color" onclick="saveSkin()">
+						<a style="cursor:pointer;" v-bind:class="SKIN.split(',')[1].indexOf('header-default')>=0?'active':''" data-value="header-default"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[1].indexOf('header-blue')>=0?'active':''" data-value="header-blue"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[1].indexOf('header-red')>=0?'active':''" data-value="header-red"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[1].indexOf('header-purple')>=0?'active':''" data-value="header-purple"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[1].indexOf('header-lightblue')>=0?'active':''" data-value="header-lightblue"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[1].indexOf('header-dark')>=0?'active':''" data-value="header-dark"><span></span><span></span></a>
+					</div>
+					<h6>菜单背景</h6>
+					<div class="theme-color navbar-color" onclick="saveSkin()">
+						<a style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('navbar-default')>=0?'active':''" data-value="navbar-default"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('navbar-blue')>=0?'active':''" data-value="navbar-blue"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('navbar-red')>=0?'active':''" data-value="navbar-red"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('navbar-purple')>=0?'active':''" data-value="navbar-purple"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('navbar-lightblue')>=0?'active':''" data-value="navbar-lightblue"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('navbar-dark')>=0?'active':''" data-value="navbar-dark"><span></span><span></span></a>
+					</div>
+					<h6>右上颜色</h6>
+					<div class="theme-color brand-color" onclick="saveSkin()">
+						<a style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('brand-default')>=0?'active':''" data-value="brand-default"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('brand-blue')>=0?'active':''" data-value="brand-blue"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('brand-red')>=0?'active':''" data-value="brand-red"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('brand-purple')>=0?'active':''" data-value="brand-purple"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('brand-lightblue')>=0?'active':''" data-value="brand-lightblue"><span></span><span></span></a><a 
+						style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('brand-dark')>=0?'active':''" data-value="brand-dark"><span></span><span></span></a>
+					</div>
+					<h6>菜单背景图片</h6>
+					<div class="theme-color navbar-images" onclick="saveSkin()">
+						<a style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('navbar-image-1')>=0?'active':''" data-value="navbar-image-1"><span></span><span></span></a>
+						<a style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('navbar-image-2')>=0?'active':''" data-value="navbar-image-2"><span></span><span></span></a>
+						<a style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('navbar-image-3')>=0?'active':''" data-value="navbar-image-3"><span></span><span></span></a>
+						<a style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('navbar-image-4')>=0?'active':''" data-value="navbar-image-4"><span></span><span></span></a>
+						<a style="cursor:pointer;" v-bind:class="SKIN.split(',')[0].indexOf('navbar-image-5')>=0?'active':''" data-value="navbar-image-5"><span></span><span></span></a>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="pills-pages" role="tabpanel" aria-labelledby="pills-pages-tab">
+					<div class="form-group mb-0">
+						<div class="switch switch-primary d-inline m-r-10">
+							<input type="checkbox" id="menu-fixed" v-model="menuFixed" ><label for="menu-fixed" class="cr"></label>
+						</div>
+						<label>菜单固定</label>
+					</div>
+					<div class="form-group mb-0">
+						<div class="switch switch-primary d-inline m-r-10">
+							<input type="checkbox" id="box-layouts" v-model="boxlayouts" ><label for="box-layouts" class="cr"></label>
+						</div>
+						<label>总体居中</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <!-- 右侧菜单设置 -->
+    
+    <div id="fhsmsobj"><!-- 声音消息提示 --></div>
+    </div>	
+    <!-- Required Js -->
+    <script type="text/javascript" src="../../../assets/js/vendor-all.min.js"></script>
+    <script type="text/javascript" src="../../../assets/js/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="../../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../assets/js/pcoded.js"></script>
+    <script type="text/javascript" src="../../../assets/js/menu-setting.js"></script>
+    <script type="text/javascript" src="../../../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+    
+   	<!--引入弹窗组件start-->
+	<script type="text/javascript" src="../../../plugins/fhdrag/drag.js"></script>
+	<script type="text/javascript" src="../../../plugins/fhdrag/dialog.js"></script>
+	<!--引入弹窗组件end-->
+	
+	<!-- 提示 -->
+    <script type="text/javascript" src="../../../assets/js/jquery.tips.js"></script>
+     
+    <script type="text/javascript" src="../../../assets/js-v/sys/index.js"></script>
+    
+    <!-- 及时通讯js¨ 
+	<script type="text/javascript" src="../../../plugins/fhim/dist/layui.js"></script>
+	<script type="text/javascript" src="../../../assets/js-v/fhim/fhim.js"></script>
+-->
+</body>
+</html>
