@@ -51,7 +51,7 @@ function via(){
                
              
 
-                setInterval(function () {
+                setTimeout(function () {
 					 vm.getDict();
                     vm.getUData();
                 },1000);

@@ -1,13 +1,5 @@
 package org.fh.controller.scuser;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -24,16 +16,7 @@ import org.fh.service.organization.OrganizationService;
 import org.fh.service.scuser.ScuserService;
 import org.fh.service.system.DictionariesService;
 import org.fh.service.system.UsersService;
-import org.fh.util.Const;
-import org.fh.util.DateUtil;
-import org.fh.util.FileDownload;
-import org.fh.util.FileUpload;
-import org.fh.util.GetPinyin;
-import org.fh.util.Jurisdiction;
-import org.fh.util.ObjectExcelRead;
-import org.fh.util.ObjectExcelView;
-import org.fh.util.PathUtil;
-import org.fh.util.Tools;
+import org.fh.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 /** 
  * 说明：民办机构用户
@@ -706,7 +692,7 @@ public class ScuserController extends BaseController {
 						sysUser.put("STATUS", "0");							//状态
 						sysUser.put("SKIN", "assets/windows/images/bg_01.jpg");		//用户默认皮肤
 						sysUser.put("DEPARTMENT_ID", pd.getString("ORGANIZATION_ID"));		//用户默认皮肤
-						sysUser.put("PASSWORD", new SimpleHash("SHA-1", pd.getString("SCUSER_ID"), "123456").toString());			//密码加密
+						sysUser.put("PASSWORD", new SimpleHash("SHA-1", pd.getString("SCUSER_ID"), "hdmb20200117").toString());			//密码加密
 						sysUser.put("USERNAME",pd.getString("SCUSER_ID"));
 					    usersService.saveUser(sysUser);
 						PageData pdoa = new PageData();

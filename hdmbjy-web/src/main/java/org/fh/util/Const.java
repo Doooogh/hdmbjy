@@ -30,28 +30,28 @@ public class Const {
 	
 	public static final String FILEACTIVITI = "uploadFiles/activitiFile/";			//工作流生成XML和PNG目录
 	
-	public static final String FILEPATH = "E:/hdmbjy/file/groupImg/";              //栏目、文章、富文本图片上传路径
+	public static final String FILEPATH = "D:/hdmbjy/file/groupImg/";              //栏目、文章、富文本图片上传路径
 
-	public static final String ATTACHMENTPATH = "E:/hdmbjy/file/attachment/";				//文章附件上传路径
+	public static final String ATTACHMENTPATH = "D:/hdmbjy/file/attachment/";				//文章附件上传路径
 
-	public static final String PROCESSPATH = "E:/hdmbjy/file/process/";				//流程附件上传路径
+	public static final String PROCESSPATH = "D:/hdmbjy/file/process/";				//流程附件上传路径
 
-	public static final String ARTICLE_IMAGEPATH = "http://139.129.234.40:5112/";     //栏目、文章、富文本图片请求路径
+	public static final String ARTICLE_IMAGEPATH = "http://58.119.9.67:5112/";     //栏目、文章、富文本图片请求路径
 
-	public static final String ROTARYPATH = "E:/hdmbjy/file/rotaryImg/"; //轮播图片的存储路径
+	public static final String ROTARYPATH = "D:/hdmbjy/file/rotaryImg/"; //轮播图片的存储路径
 
 	public static  final String PRE_IMG="groupImg/";      //图片存储本地父目录
 	
-	public static  final String PDF_PATH="E:/hdmbjy/file/pdfpath/";      //pdf存储本地父目录
+	public static  final String PDF_PATH="D:/hdmbjy/file/pdfpath/";      //pdf存储本地父目录
 	
-	public static  final String WORD_PATH="E:/hdmbjy/file/wordpath/";    //转pdf源文件存储本地父目录
+	public static  final String WORD_PATH="D:/hdmbjy/file/wordpath/";    //转pdf源文件存储本地父目录
 	
-	public static  final String NGINX_PATH="E:/hdmbjy/file/";    //nginx 本地文件目录
+	public static  final String NGINX_PATH="D:/hdmbjy/file/";    //nginx 本地文件目录
 	
 	
-	public static  final String ARCHIVE_PATH="E:/hdmbjy/file/archive/";    //文档存储路径
+	public static  final String ARCHIVE_PATH="D:/hdmbjy/file/archive/";    //文档存储路径
 
-	public static  final String CONTRACT_PATH="E:/hdmbjy/file/contract/";    //合同存储路径
+	public static  final String CONTRACT_PATH="D:/hdmbjy/file/contract/";    //合同存储路径
 
 	public static final  String ATT_PTYPE_EXAMINATION="1";  //附件父类型  1 年审类型
 
@@ -86,28 +86,28 @@ public class Const {
 	public static final  String ADMIN_USERNAME="admin,gadmin,sheguanke,mbadmin,iadmin,jwlingdao,cjadmin,kz,sgk,jw";		 //系统管理员和普通管理员
 
 
-	public static final  String TEM_PDF_PATH="E:/hdmbjy/file/tempdfpath/";
+	public static final  String TEM_PDF_PATH="D:/hdmbjy/file/tempdfpath/";
 	
 	
-	public static  final String APPROVAL_PATH="E:/hdmbjy/file/approval/";// 审批确认文件
+	public static  final String APPROVAL_PATH="D:/hdmbjy/file/approval/";// 审批确认文件
 
 	public static  final String GENERAL_TEACHER="1";    //机构人员为普通老师
 	public static  final String FULLTIME_TEACHER="2";   //机构人员为专职老师
 	public static  final String HEADMAN_TEACHER="3";		//机构人员为负责人
 	//富文本本地图片路径
-	public static  final String UE_PATH="E:/hdmbjy/file/uepath/";
+	public static  final String UE_PATH="D:/hdmbjy/file/uepath/";
 	//NGINXURL 路径
 	public static  final String NGINXURL="http://127.0.0.1:8088/";
 
 	public static final  String ADMIN_ID="1";
 	
-	public static final  String TEMP_ZIP_PATH="E:/hdmbjy/file/zippath/";   //临时压缩文件位置
+	public static final  String TEMP_ZIP_PATH="D:/hdmbjy/file/zippath/";   //临时压缩文件位置
 
-	public static final  String ZIP_PATH="E:/hdmbjy/file/zippath/";   //压缩文件位置
+	public static final  String ZIP_PATH="D:/hdmbjy/file/zippath/";   //压缩文件位置
 
-	public static final  String EXAMINAMTION_ZIP_PATH="E:/hdmbjy/file/zippath/examination/";   //流程审批压缩文件位置
+	public static final  String EXAMINAMTION_ZIP_PATH="D:/hdmbjy/file/zippath/examination/";   //流程审批压缩文件位置
 
-	public static final  String GOVERNMENT_ZIP_PATH="E:/hdmbjy/file/zippath/government/";   //流程审批压缩文件位置
+	public static final  String GOVERNMENT_ZIP_PATH="D:/hdmbjy/file/zippath/government/";   //流程审批压缩文件位置
 
 	public static String USER_NAME="";
 

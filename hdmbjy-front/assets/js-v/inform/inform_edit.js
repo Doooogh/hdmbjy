@@ -87,8 +87,12 @@ var vm = new Vue({
 
            /* var treeObj = $.fn.zTree.getZTreeObj("leftTree");
             var nodes = treeObj.getCheckedNodes(true);
-            vm.getDepartmentIds(nodes); */
-			vm.getOrganizationIds();
+            vm.getDepartmentIds(nodes); 
+			 vm.getOrganizationIds();
+			 */
+			if(vm.INFORMANTS!=null&&vm.INFORMANTS!=''){
+			    vm.INFORMANTS=vm.INFORMANTS.substring(0,vm.INFORMANTS.length-1);
+				}
             if(this.INFORMANTS == '' || this.INFORMANTS == undefined){
                 $("#INFORMANT").tips({
                     side:3,
@@ -356,6 +360,9 @@ var vm = new Vue({
          }
         },
 		filter:function(OR_TYPE,OR_DISTRICT,e){
+			//先进行获取已经被勾选的机构
+			vm.getOrganizationIds();
+			
 			if(OR_TYPE==''&&OR_DISTRICT!=''){  //证明这个是在选择学区
 				vm.OR_DISTRICT=OR_DISTRICT;
 				$(".filter2 a").prop("style","color:#101d37!important");
@@ -378,6 +385,7 @@ var vm = new Vue({
 					$(e.target).prop("style","color:rgb(206, 76, 76);font-weight: bold");
 				}
 			}
+			//
 			vm.getOrganization();
 			setTimeout(function(){
 				vm.setOrganizationIds();
@@ -524,14 +532,16 @@ var vm = new Vue({
 
         },
 		getOrganizationIds:function(){
-			 vm.INFORMANTS='';
+			if(undefined==vm.INFORMANTS||null==vm.INFORMANTS){
+				vm.INFORMANTS='';
+			}
 			var allChecked=$(".list_bottom label input[type='checkbox']:checked");
 			$.each(allChecked,function(i,ele){
 				 vm.INFORMANTS+=($(ele).val()+",");
 			});
-			if(vm.INFORMANTS!=null&&vm.INFORMANTS!=''){
+			/* if(vm.INFORMANTS!=null&&vm.INFORMANTS!=''){
 			    vm.INFORMANTS=vm.INFORMANTS.substring(0,vm.INFORMANTS.length-1);
-			}
+			} */
 		},
 		setOrganizationIds:function(){
 			$(".list_bottom label input[type='checkbox']").prop("checked", false);

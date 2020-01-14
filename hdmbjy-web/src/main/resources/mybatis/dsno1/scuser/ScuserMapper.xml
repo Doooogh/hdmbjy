@@ -157,7 +157,7 @@
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select
-		s.USERNAME,d.NAME SEXNAME,
+		s.USERNAME,d.NAME SEXNAME,org.NAME AS ORGANIZATION_NAME,
 		<include refid="Field"></include>
 		from 
 		<include refid="tableName"></include> f
@@ -166,6 +166,8 @@
 		on f.SEX=d.BIANMA
 		LEFT JOIN SYS_USER s
 		on (f.ORGANIZATION_ID=s.DEPARTMENT_ID and f.PHONE=s.PHONE and f.NAME=s.NAME)
+		LEFT JOIN oa_organization org
+		on org.ORGANIZATION_ID= f.ORGANIZATION_ID
 		where 1=1
 		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
 			and

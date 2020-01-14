@@ -268,7 +268,7 @@ var vm=new Vue({
 									striped: true, // 设置为true会有隔行变色效果
 									dataType: "json", // 服务器返回的数据类型
 									singleSelect: false, // 设置为true将禁止多选
-									pageSize: 5, // 如果设置了分页，每页数据条数
+									pageSize: 10, // 如果设置了分页，每页数据条数
 									pageNumber: 1, // 如果设置了分布，首页页码
 									sortable: true,
 									pagination: true,
