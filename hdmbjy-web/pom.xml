@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.fh</groupId>
-	<artifactId>hdmbjy</artifactId>
+	<artifactId>hdmbjy-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging><!-- 以war运行是改成war -->
 
-	<name>hdmbjy</name>
+	<name>hdmbjy-web</name>
 	<description>fhadmin for Spring Boot</description>
 
 	<parent>

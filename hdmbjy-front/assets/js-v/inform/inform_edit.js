@@ -93,6 +93,7 @@ var vm = new Vue({
 			if(vm.INFORMANTS!=null&&vm.INFORMANTS!=''){
 			    vm.INFORMANTS=vm.INFORMANTS.substring(0,vm.INFORMANTS.length-1);
 				}
+				
             if(this.INFORMANTS == '' || this.INFORMANTS == undefined){
                 $("#INFORMANT").tips({
                     side:3,
@@ -249,7 +250,10 @@ var vm = new Vue({
         /* var treeObj = $.fn.zTree.getZTreeObj("leftTree");
          var nodes = treeObj.getCheckedNodes(true);
          vm.getDepartmentIds(nodes); */
-        			vm.getOrganizationIds();
+        			// vm.getOrganizationIds();
+		if(vm.INFORMANTS!=null&&vm.INFORMANTS!=''){
+			vm.INFORMANTS=vm.INFORMANTS.substring(0,vm.INFORMANTS.length-1);
+			}
          if(this.INFORMANTS == '' || this.INFORMANTS == undefined){
              $("#INFORMANT").tips({
                  side:3,
@@ -531,14 +535,39 @@ var vm = new Vue({
 
 
         },
+		
 		getOrganizationIds:function(){
+			var allArr=new Array();
 			if(undefined==vm.INFORMANTS||null==vm.INFORMANTS){
 				vm.INFORMANTS='';
 			}
-			var allChecked=$(".list_bottom label input[type='checkbox']:checked");
-			$.each(allChecked,function(i,ele){
-				 vm.INFORMANTS+=($(ele).val()+",");
-			});
+			
+				$.each(vm.INFORMANTS,function(i,inId){
+					 allArr.push(inId);
+				});
+				var allChecked=$(".list_bottom label input[type='checkbox']:checked");
+				debugger;
+				if(allChecked.length==0){
+					vm.INFORMANTS="";
+				}else{
+					$.each(allChecked,function(i,ele){
+						allArr.push($(ele).val());
+					});
+					var allSet=new Set(allArr);
+					/* $.each(allSet,function(i,ele){
+						 vm.INFORMANTS+=(ele+",");
+						console.log(123123);
+						console.log(vm.INFORMANTS);
+					}); */
+					for (var x of allSet) { // 遍历Set
+					 vm.INFORMANTS+=(x+",");
+					    console.log(123123);
+					    console.log(vm.INFORMANTS);
+					}
+				}
+				
+			
+		
 			/* if(vm.INFORMANTS!=null&&vm.INFORMANTS!=''){
 			    vm.INFORMANTS=vm.INFORMANTS.substring(0,vm.INFORMANTS.length-1);
 			} */
@@ -546,15 +575,21 @@ var vm = new Vue({
 		setOrganizationIds:function(){
 			$(".list_bottom label input[type='checkbox']").prop("checked", false);
 			var ids=vm.INFORMANTS;
-			var allDids=ids.split(",");
-			var allChecek=$(".list_bottom label input[type='checkbox']");
-			$.each(allDids,function(i,oId){
-				$.each(allChecek,function(i,ele){
-					if(oId==$(ele).val()){
-						$(ele).prop("checked", true);
-					}
-				})
-			});
+			debugger;
+			if(ids==""){
+				$(".list_bottom label input[type='checkbox']").prop("checked",false);
+			}else{
+				var allDids=ids.split(",");
+				var allChecek=$(".list_bottom label input[type='checkbox']");
+				$.each(allDids,function(i,oId){
+					$.each(allChecek,function(i,ele){
+						if(oId==$(ele).val()){
+							$(ele).prop("checked", true);
+						}
+					})
+				});	
+			}
+		
 		},
         getDepartmentIds:function(nodes){
             vm.INFORMANTS='';
