@@ -184,6 +184,30 @@ var vm = new Vue({
     			this.$refs.PASSWORD.focus();
     			return false;
     		}
+			if(this.PASSWORD.length<8){
+				$("#PASSWORD").tips({
+					side:3,
+			        msg:'密码长度不少于8',
+			        bg:'#AE81FF',
+			        time:2
+			    });
+				this.pd.PASSWORD = '';
+				this.$refs.PASSWORD.focus();
+				return false;
+			}
+			debugger;
+			if(!this.checkPS(this.PASSWORD)){
+				$("#PASSWORD").tips({
+					side:3,
+			        msg:'密码必须只能由字母和数字组成',
+			        bg:'#AE81FF',
+			        time:2
+			    });
+				this.pd.PASSWORD = '';
+				this.$refs.PASSWORD.focus();
+				return false;
+			}
+			debugger;
     		if(this.PASSWORD != this.chkpwd){
     			$("#chkpwd").tips({
     				side:3,
@@ -295,7 +319,16 @@ var vm = new Vue({
            		   $("#jiazai").hide();
                 });
     	},
-    	
+    	checkPS:function(str){
+			 // 判断字符串是否为数字和字母组合  
+			    var zg =  /^(?=.*[a-zA-Z]+)(?=.*[0-9]+)[a-zA-Z0-9]+$/;  
+			 
+			     if (!zg.test(str))  {  
+			        return false;  
+			     } else {  
+			        return true;  
+			     } 
+		},
     	//判断用户名是否存在
     	hasUser: function (){
     		$.ajax({

@@ -1,19 +1,12 @@
 package org.fh.controller.system;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
+import net.sf.json.JSONArray;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.fh.controller.base.BaseController;
 import org.fh.entity.Page;
 import org.fh.entity.PageData;
-import org.fh.entity.fhoa.Department;
 import org.fh.entity.system.Role;
 import org.fh.service.fhoa.DepartmentService;
 import org.fh.service.scuser.ScuserService;
@@ -21,15 +14,7 @@ import org.fh.service.system.FHlogService;
 import org.fh.service.system.RoleService;
 import org.fh.service.system.UeditorService;
 import org.fh.service.system.UsersService;
-import org.fh.util.Const;
-import org.fh.util.FileDownload;
-import org.fh.util.FileUpload;
-import org.fh.util.GetPinyin;
-import org.fh.util.Jurisdiction;
-import org.fh.util.ObjectExcelRead;
-import org.fh.util.ObjectExcelView;
-import org.fh.util.PathUtil;
-import org.fh.util.Tools;
+import org.fh.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import net.sf.json.JSONArray;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 说明：系统用户处理类
@@ -152,7 +141,38 @@ public class UsersController extends BaseController {
 		map.put("result", errInfo);
 		return map;
 	}
-	
+
+
+	/**
+	 * 检验用户是否修改了随机密码
+	 * @return
+	 */
+	@RequestMapping(value="/checkPS")
+	@ResponseBody
+	public Object checkPS() throws Exception {
+		Map<String,Object> map = new HashMap<String,Object>();
+		String errInfo = "success";
+		String userId = Jurisdiction.getUser().getUSER_ID();
+		PageData pageData=new PageData();
+		pageData.put("USER_ID",userId);
+		PageData currentUser= usersService.findById(pageData);
+		if(!Const.ADMIN_USERNAME.contains(Jurisdiction.getUsername())){
+			if(null!=currentUser){
+				String BZ=(null!=currentUser.get("BZ")?currentUser.getString("BZ"):"");
+				if(StringUtils.isBlank(BZ)||!BZ.endsWith("had_change")){
+					errInfo="error";
+					map.put("result",errInfo);
+					return map;
+				}
+			}else{
+				errInfo="error";
+				map.put("result",errInfo);
+				return map;
+			}
+		}
+		map.put("result", errInfo);
+		return map;
+	}
 	/**去修改用户页面(从系统用户页面修改)
 	 * @return
 	 * @throws Exception
@@ -278,6 +298,7 @@ public class UsersController extends BaseController {
 		String errInfo = "success";
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		PageData upd = new PageData();
 		if(!Jurisdiction.getUsername().equals(pd.getString("USERNAME"))){ //如果当前登录用户修改用户资料提交的用户名非本人
 			map.put("NAME",Jurisdiction.getName());
 			map.put("USERNAME",pd.getString("USERNAME"));
@@ -285,7 +306,6 @@ public class UsersController extends BaseController {
 //			FHLOG.save(Jurisdiction.getUsername(), "恶意修改用户资料："+pd.getString("USERNAME"));
 			return null;//不能修改非本人的资料
 		}else{			//如果当前登录用户修改用户资料提交的用户名是本人，则不能修改本人的角色ID
-			PageData upd = new PageData();
 			upd = usersService.findByUsername(pd);
 			pd.put("USER_ID", upd.getString("USER_ID")); //对ID还原本人ID，防止串改
 			pd.put("ROLE_ID", upd.getString("ROLE_ID")); //对角色ID还原本人角色ID
@@ -294,6 +314,11 @@ public class UsersController extends BaseController {
 		if(pd.getString("PASSWORD") != null && !"".equals(pd.getString("PASSWORD"))){
 			pd.put("PASSWORD", new SimpleHash("SHA-1", pd.getString("USERNAME"), pd.getString("PASSWORD")).toString());
 		}
+		String BZ=(null!=upd.get("BZ")?upd.getString("BZ"):"");
+		if(!BZ.endsWith("had_change")){
+			BZ+="had_change";
+		}
+		pd.put("BZ",BZ);
 		usersService.editUser(pd);	//执行修改
 		
 		PageData findScuser=new PageData();

@@ -1,11 +1,11 @@
  var zuulUrl = 'http://127.0.0.1:8081/';					//zuul网关路由服务host
 
 var httpurl = 'http://127.0.0.1:8081/';					//zuul网关路由服务host
- var nginxurl ='http://127.0.0.1:8088/';
+ var nginxurl ='http://127.0.0.1:5112/';
  
- var CONTRACT_PATH='E:/hdmbjy/file/contract/';   //合同上传路径
- var RECORD_PATH='E:/hdmbjy/file/record/';     //档案上传路径
- var RESUME_PATH='E:/hdmbjy/file/resume/';     //简历 上传路径
+ var CONTRACT_PATH='D:/hdmbjy/file/contract/';   //合同上传路径
+ var RECORD_PATH='D:/hdmbjy/file/record/';     //档案上传路径
+ var RESUME_PATH='D:/hdmbjy/file/resume/';     //简历 上传路径
  
  var GENERAL_TEACHER='1';    //机构人员为普通老师
  var FULLTIME_TEACHER='2'   //机构人员为专职老师

@@ -250,7 +250,7 @@ var vm = new Vue({
         /* var treeObj = $.fn.zTree.getZTreeObj("leftTree");
          var nodes = treeObj.getCheckedNodes(true);
          vm.getDepartmentIds(nodes); */
-        			// vm.getOrganizationIds();
+        			vm.getOrganizationIds();
 		if(vm.INFORMANTS!=null&&vm.INFORMANTS!=''){
 			vm.INFORMANTS=vm.INFORMANTS.substring(0,vm.INFORMANTS.length-1);
 			}
@@ -541,15 +541,16 @@ var vm = new Vue({
 			if(undefined==vm.INFORMANTS||null==vm.INFORMANTS){
 				vm.INFORMANTS='';
 			}
-			
-				$.each(vm.INFORMANTS,function(i,inId){
+				var temInformants=vm.INFORMANTS.split(",");
+				$.each(temInformants,function(i,inId){
+					if(inId!=''){
 					 allArr.push(inId);
+					}
 				});
 				var allChecked=$(".list_bottom label input[type='checkbox']:checked");
-				debugger;
-				if(allChecked.length==0){
+				/* if(allChecked.length==0){
 					vm.INFORMANTS="";
-				}else{
+				}else{ */
 					$.each(allChecked,function(i,ele){
 						allArr.push($(ele).val());
 					});
@@ -564,7 +565,7 @@ var vm = new Vue({
 					    console.log(123123);
 					    console.log(vm.INFORMANTS);
 					}
-				}
+				// }
 				
 			
 		
@@ -575,7 +576,6 @@ var vm = new Vue({
 		setOrganizationIds:function(){
 			$(".list_bottom label input[type='checkbox']").prop("checked", false);
 			var ids=vm.INFORMANTS;
-			debugger;
 			if(ids==""){
 				$(".list_bottom label input[type='checkbox']").prop("checked",false);
 			}else{

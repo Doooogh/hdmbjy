@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.*;
 
 /** 
@@ -561,6 +562,10 @@ public class ScuserController extends BaseController {
 			pd.put("AGE", "未知");
 			pd.put("ISACTIVE", "1");
 
+			List<Map> headmanInfos=new ArrayList<>();
+			int index=0;
+			String ORGANIZATION_ID="";
+
 			for(int i=0;i<listPd.size();i++){
 				if(listPd.get(i).containsKey("var0")&&listPd.get(i).containsKey("var1")&&listPd.get(i).containsKey("var2")&&listPd.get(i).containsKey("var3")&&listPd.get(i).containsKey("var4")&&listPd.get(i).containsKey("var5")&&listPd.get(i).containsKey("var6")) {
 				}else {
@@ -631,6 +636,9 @@ public class ScuserController extends BaseController {
 				for (int j = 0; j < ospd.size(); j++) {
 					if (ospd.get(j).getString("NAME").equals(var4)) {
 						pd.put("ORGANIZATION_ID", ospd.get(j).getString("ORGANIZATION_ID"));//机构id
+						if(StringUtils.isBlank(ORGANIZATION_ID)){
+							ORGANIZATION_ID=pd.getString("ORGANIZATION_ID");
+						}
 						if (pd.getString("TYPE").equals("3")) {
 							pd.put("SCUSER_ID", ospd.get(j).getString("LICENCE"));//id
 						}else {
@@ -678,8 +686,9 @@ public class ScuserController extends BaseController {
 				 }
 				 
 				 scuserService.save(pd);
-				 
+
 				 if (pd.getString("TYPE").equals("3")) {
+				 		String password=UuidUtil.getUUID(6);
 					    PageData sysUser=new PageData();  //系统用户
 						sysUser.put("NAME",var0);
 						sysUser.put("USER_ID",pd.getString("SCUSER_ID"));
@@ -692,7 +701,7 @@ public class ScuserController extends BaseController {
 						sysUser.put("STATUS", "0");							//状态
 						sysUser.put("SKIN", "assets/windows/images/bg_01.jpg");		//用户默认皮肤
 						sysUser.put("DEPARTMENT_ID", pd.getString("ORGANIZATION_ID"));		//用户默认皮肤
-						sysUser.put("PASSWORD", new SimpleHash("SHA-1", pd.getString("SCUSER_ID"), "hdmb20200117").toString());			//密码加密
+						sysUser.put("PASSWORD", new SimpleHash("SHA-1", pd.getString("SCUSER_ID"), password).toString());			//密码加密
 						sysUser.put("USERNAME",pd.getString("SCUSER_ID"));
 					    usersService.saveUser(sysUser);
 						PageData pdoa = new PageData();
@@ -702,7 +711,14 @@ public class ScuserController extends BaseController {
 						os.put("HEADMAN_ID", pd.getString("SCUSER_ID"));
 						os.put("HEADMAN_PHONE", var2);
 						organizationService.edit(os);
-						
+						 //将生成的机构负责人密码进行存储，然后进行导出
+						 Map<String,Object> headmanInfo=new HashMap<>();
+						 headmanInfo.put("序号",String.valueOf(++index));
+						 headmanInfo.put("机构名",var4);
+						 headmanInfo.put("负责人",var0);
+						 headmanInfo.put("用户名",pd.getString("SCUSER_ID"));
+						 headmanInfo.put("密码",password);
+						 headmanInfos.add(headmanInfo);
 				  }
 				 
 				// PageData sc = new PageData();
@@ -716,6 +732,25 @@ public class ScuserController extends BaseController {
 				 pd.put("AGE", "未知");
 				 pd.put("ISACTIVE", "1");
 				 
+			}
+			//将密码进行存储到本地
+			if(headmanInfos.size()!=0){
+				List<String> titles=new ArrayList<>();
+				titles.add("序号");
+				titles.add("机构名");
+				titles.add("负责人");
+				titles.add("用户名");
+				titles.add("密码");
+				PageData findOrganization=new PageData();
+				findOrganization.put("ORGANIZATION_ID",ORGANIZATION_ID);
+				PageData organization = organizationService.findById(findOrganization);
+				findOrganization.put("DICTIONARIES_ID",organization.get("PARENT_ID"));
+				PageData topParentOrganization = dictionariesService.findById(findOrganization);
+				Map resMap = ObjectExcelView.exportExcelToLocal(titles, headmanInfos, "C:\\Users\\Public\\user"+topParentOrganization.get("NAME")+".xls");
+				if(!"success".equals(resMap.get("result"))){
+					File file1=new File("C:\\Users\\Public\\user.xls");
+					file1.delete();
+				}
 			}
 		}
 		map.put("result", errInfo);				//返回结果

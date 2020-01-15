@@ -130,6 +130,7 @@ var vm = new Vue({
          				    SubMenuTrigger: 'click',
          				});
         		    }, 0);
+					vm.checkPassword();
         		 }else if ("exception" == data.result){
                  	showException('初始',data.exception);//显示异常
                  }else{
@@ -146,7 +147,22 @@ var vm = new Vue({
                 }, 2000);
             });
         },
-        
+		checkPassword:function(){
+			$.ajax({
+				xhrFields: {
+			        withCredentials: true
+			    },
+				type: "POST",
+				url: httpurl+'user/checkPS',
+				data: {tm:new Date().getTime()},
+				dataType:"json",
+				success: function(data){
+					if("error" == data.result){
+						alert("为了安全起见,建议您尽快到修改资料中修改密码!");
+					}
+				}
+		})
+		},
         getInfo: function(){
         	$.ajax({
         		xhrFields: {

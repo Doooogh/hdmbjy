@@ -14,7 +14,13 @@ public class UuidUtil {
 		return uuid;
 	}
 
+
+	public static String getUUID(int length){
+		String uuid=get32UUID();
+		return uuid.substring(0,5).replaceAll("1","k").replaceAll("o","u")
+				.replaceAll("l","k").replaceAll("0","u").replaceAll("O","u");
+	}
 	public static void main(String[] args) {
-		System.out.println(get32UUID());
+		System.out.println(getUUID(3));
 	}
 }

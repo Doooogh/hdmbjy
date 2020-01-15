@@ -244,6 +244,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="PASSWORD != null and PASSWORD != ''">
 				PASSWORD				= #{PASSWORD},
 			</if>
+			<if test="BZ != null and BZ != ''">
+				BZ				= #{BZ},
+			</if>
 		</set>
 		where
 				USER_ID = #{USER_ID}

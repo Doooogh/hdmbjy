@@ -36,7 +36,7 @@ public class Const {
 
 	public static final String PROCESSPATH = "D:/hdmbjy/file/process/";				//流程附件上传路径
 
-	public static final String ARTICLE_IMAGEPATH = "http://58.119.9.67:5112/";     //栏目、文章、富文本图片请求路径
+	public static final String ARTICLE_IMAGEPATH = "http://58.119.9.67:8088/";     //栏目、文章、富文本图片请求路径
 
 	public static final String ROTARYPATH = "D:/hdmbjy/file/rotaryImg/"; //轮播图片的存储路径
 
