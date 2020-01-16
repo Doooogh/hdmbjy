@@ -549,26 +549,20 @@ var vm = new Vue({
 				});
 				var allChecked=$(".list_bottom label input[type='checkbox']:checked");
 				var notChecked=$(".list_bottom label input[type='checkbox']:not(:checked)");
-				$.each(allArr,function(i,ele){
-					$.each(notChecked,function(j,nEle){
-						if(ele==$(nEle).val()){
-							allArr.splice($.inArray($(nEle).val(),allArr),1)
-						}
-					});
+				var temRemove=new Array();
+				$.each(notChecked,function(j,nele){
+					temRemove.push($(nele).val());
 				});
-			
+				_.pullAll(allArr, temRemove)
 				$.each(allChecked,function(j,cEle){
 					allArr.push($(cEle).val());
 				});
 				
-					var allSet=new Set(allArr);
-				
-					vm.INFORMANTS="";
-					for (var x of allSet) { // 遍历Set
-					 vm.INFORMANTS+=(x+",");
-					    console.log(123123);
-					    console.log(vm.INFORMANTS);
-					}
+				var allSet=new Set(allArr);
+				vm.INFORMANTS="";
+				for (var x of allSet) { // 遍历Set
+				 vm.INFORMANTS+=(x+",");
+				}
 			
 		},
 		setOrganizationIds:function(){

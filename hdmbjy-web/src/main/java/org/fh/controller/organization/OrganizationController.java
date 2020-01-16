@@ -17,15 +17,7 @@ import org.fh.entity.system.Dictionaries;
 import org.fh.service.organization.OrganizationService;
 import org.fh.service.scuser.ScuserService;
 import org.fh.service.system.DictionariesService;
-import org.fh.util.Const;
-import org.fh.util.DateUtil;
-import org.fh.util.FileDownload;
-import org.fh.util.FileUpload;
-import org.fh.util.Jurisdiction;
-import org.fh.util.ObjectExcelRead;
-import org.fh.util.ObjectExcelView;
-import org.fh.util.PathUtil;
-import org.fh.util.Tools;
+import org.fh.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -288,7 +280,14 @@ public class OrganizationController extends BaseController {
 		String errInfo = "success";
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		List<PageData> allList = organizationService.listAll(pd);  //获得到筛选后的集合
+		pd.getString("TYPE");
+		List<PageData> allList=new ArrayList<>();
+		if(null==DataCache.CACHEDATA.get(pd.getString("TYPE"))){
+			allList = organizationService.listAll(pd);  //获得到筛选后的集合
+			DataCache.CACHEDATA.put(pd.getString("TYPE"),allList);
+		}else{
+			allList= (List<PageData>) DataCache.CACHEDATA.get(pd.getString("TYPE"));
+		}
 		map.put("result",errInfo);
 		map.put("list",allList);
 		return map;
