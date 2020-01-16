@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>FH Admin</title>
+    <title>海淀区民办教育管理平台</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -18,8 +18,9 @@
     <link rel="stylesheet" href="../../../assets/fonts/material/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../../assets/fonts/fontawesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="../../../assets/plugins/animation/css/animate.min.css">
+    <!--  <link rel="stylesheet" href="../../../assets/windows/font-awesome/css/font-awesome.css" rel="stylesheet" /> -->
     <link rel="stylesheet" href="../../../assets/css/style.css">
-    <!-- layui 样式 -->
+    
     <link rel="stylesheet" href="../../../assets/css/layui/layui.css">
 
     <!-- vue -->
@@ -63,16 +64,15 @@
 											</td>
 											<td style="vertical-align:top;padding-left:5px;">
 												<a class="btn btn-light btn-sm" v-on:click="getList" style="width: 23px;height:30px;margin-top:1px;" title="检索"><i style="margin-top:-3px;margin-left: -6px;"  class="feather icon-search"></i></a>
-												<!-- <a v-show="toExcel" class="btn btn-light btn-sm" v-on:click="goExcel" style="width: 23px;height:30px;margin-top:1px;margin-left: -9px;" title="导出到excel表格">
-													<i style="margin-top:-3px;margin-left: -6px;" class="mdi mdi-cloud-download"></i>
-												</a> -->
-												<a v-show="fromExcel" class="btn btn-light btn-sm" v-on:click="goDownload" style="height: 30px">下载模版</a>
-												<a v-show="fromExcel" class="btn btn-light btn-sm" v-on:click="getExcel" style="width: 65px;height:30px;margin-top:1px;margin-left: -9px;" title="从EXCEL导入到系统">
-													导入<!-- <i style="margin-top:-3px;margin-left: -6px;" class="mdi mdi-cloud-upload"></i> -->
-												</a>
-												
-												
 											</td>
+											<td>
+												 <div class="input-group input-group-sm mb-3" style="margin-left: 30px;">
+													<span  class="form-control" style="border: 0;">档案存储类型:</span>
+													<select class="form-control" v-model="TYPE" id="TYPE" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+												 </div>
+											</td>
+											
+											
 											<td v-show="loading">
 												<!-- [加载状态 ] start -->
 										    	<div class="d-flex justify-content-center" style="margin-top:-10px;">
@@ -98,22 +98,19 @@
 	                                                        </div>
 														</th>
 														<th style="width:50px;">NO</th>
-														<th>用户名</th>
-														<th>机构</th>
-														<th>姓名</th>
-														<th>性别</th>
-														<th>年龄</th>
-														<th>手机号</th>
-														<th>email</th>
-														<!-- <th>状态</th> -->
-														<th>是否在编</th>
-														<th>学历</th>
-														<th>职称</th>
-														 <th>工龄</th>
-														<!--<th>合同</th>
-														<th>档案</th>
-														<th>简历</th> -->
-														<th>操作</th>
+														<th>标题</th>
+														<th>机构名称</th>
+														<th>文档上传人</th>
+														<th>文档类型</th>
+														<th>文档</th>
+														<th>备注</th>
+														<th>填表时间</th>
+														<th>创建时间</th>
+													<!-- 	<th>备用字段</th>
+														<th>备用字段2</th>
+														<th>备用字段3</th>
+														 -->
+														<th v-if="username != 'admin'">操作</th>
 													</tr>
 												</thead>
 																		
@@ -123,60 +120,33 @@
 														<tr>
 															<td>
 	                                                        	<div class="checkbox d-inline">
-	                                                            	<input type="checkbox" v-bind:id="'zcheckbox'+index" name='ids' v-bind:value="data.SCUSER_ID">
+	                                                            	<input type="checkbox"  :disabled="((adminname.indexOf(username) == -1)&&!(adminname.indexOf(data.UPLOAD_USERNAME) == -1))?true:false" v-bind:id="'zcheckbox'+index" name='ids' v-bind:value="data.ARCHIVE_ID">
 	                                                            	<label  style="max-height: 12px;" v-bind:for="'zcheckbox'+index" class="cr"></label>
 	                                                        	</div>
 															</td>
 															<td scope="row">{{page.showCount*(page.currentPage-1)+index+1}}</td>
-															<td>{{data.USERNAME}}</td>
-															<td>{{data.ORGANIZATION_NAME}}</td>
+															<td>{{data.TITLE}}</td>
+															<td>{{data.DEPNAME}}</td>
 															<td>{{data.NAME}}</td>
-															<td>{{data.SEXNAME}}</td>
-															<td>{{data.AGE}}</td>
-															<td>{{data.PHONE}}</td>
-															<td>{{data.EMAIL}}</td>
-															<!-- <td>{{data.STATUS}}</td> -->
-														<!-- 	<template>
-																<td>
-																	<template v-for="type in POSTS">
-																		<span v-show="data.POST==type.POST_ID">{{type.NAME}}</span>
-																	</template>
-																</td>
-															</template> -->
-															<!-- <td>{{data.ISACTIVE}}</td> -->
-															<template>
-																<td>
-																	<template >
-																		<span v-show="data.ISACTIVE==1">是</span>
-																		<span v-show="data.ISACTIVE==0">否</span>
-																	</template>
-																</td>
-															</template>
-															
-															<template>
-																<td>
-																	<template v-for="type in EDUCATION_TYPES">
-																		<span v-show="data.EDUCATION==type.BIANMA">{{type.NAME}}</span>
-																	</template>
-																</td>
-															</template>
-															<template>
-																<td>
-																	<template v-for="type in TITLE_TYPES">
-																		<span v-show="data.TITLE==type.BIANMA">{{type.NAME}}</span>
-																	</template>
-																</td>
-															</template>
-															 <td>{{data.SENIORITY}}</td>
-															<!--<td>{{data.RECORD}}</td>
-															<td>{{data.RESUME}}</td>
-															<td>{{data.CONTRACT}}</td> -->
+															<td>{{data.DNAME}}</td>
 															<td>
-																<a v-show="edit" title="修改" v-on:click="goEdit(data.SCUSER_ID)" style="cursor:pointer;"><button type="button" class="layui-btn layui-btn-xs layui-btn-warm">修改</button></a>
-							                 					<a v-show="del" title="删除" v-on:click="goDel(data.SCUSER_ID)" style="cursor:pointer;"><button type="button" class="layui-btn layui-btn-xs layui-btn-danger">删除</button></a>
-							                 					<a title="详细资料" v-on:click="goDetail(data.SCUSER_ID,data.ORGANIZATION_ID,data.TYPE)" style="cursor:pointer;"><button type="button" class="layui-btn layui-btn-xs layui-btn-normal	">详细资料</button></a>
-							                 					<a v-show="edit" title="完善资料" v-on:click="goPerfect(data.SCUSER_ID,data.ORGANIZATION_ID)" style="cursor:pointer;"><button type="button" class="layui-btn layui-btn-xs layui-btn">完善资料</button></a>
-																<a v-show="isAdmin" title="重置密码" v-on:click="resetPS(data.SCUSER_ID)" style="cursor:pointer;"><button type="button" class="layui-btn layui-btn-xs layui-btn-danger">重置密码</button></a>
+																<template v-if="data.PDF_PATH != '' && data.PDF_PATH != null">
+																	<!-- v-bind:href="nginxurl+data.PDF_PATH" -->
+																	<b><a href="javascript:void(0)" v-on:click="preview(data.PDF_PATH)" title="查看文档">&nbsp;查看文档</a>|</b>
+																</template>
+																<!-- v-bind:href="nginxurl+data.PATH" -->
+																<b><a  href="javascript:void(0)" v-on:click="download(data.PATH,data.FILE_NAME)" title="下载">&nbsp;下载</a></b>
+															</td>
+															
+															
+															<td>{{data.BZ}}</td>
+															<td>{{data.FULL_DATE}}</td>
+															<td>{{data.CREATOR_DATE}}</td>
+															
+															<!-- v-if="adminname.indexOf(username) == -1" -->
+															<td>
+																<a  v-if="adminname.indexOf(data.UPLOAD_USERNAME) == -1" v-show="edit" title="修改" v-on:click="goEdit(data.ARCHIVE_ID)" style="cursor:pointer;"><button type="button" class="layui-btn layui-btn-xs layui-btn-warm">修改</button></a>
+							                 					<a  v-if="adminname.indexOf(data.UPLOAD_USERNAME) == -1" v-show="del" title="删除" v-on:click="goDel(data.ARCHIVE_ID)" style="cursor:pointer;"><button type="button" class="layui-btn layui-btn-xs layui-btn-danger">删除</button></a>
 															</td>
 														</tr>
 													</template>
@@ -188,9 +158,11 @@
 											<table style="width:100%;margin-top:15px;">
 												<tr>
 													<td style="vertical-align:top;">
-														<a v-show="add&&ORGANIZATION_ID!=0&&!ISDIS" class="btn btn-light btn-sm" v-on:click="goAdd()">新增</a>
-														<a v-show="del" class="btn btn-light btn-sm" v-on:click="makeAll('确定要删除选中的数据吗?')">删除</a>
+														<a  v-show="add&&!isAdmin" class="btn btn-light btn-sm" v-on:click="goAdd">新增</a>
+														<a  v-show="del" class="btn btn-light btn-sm" v-on:click="makeAll('确定要删除选中的数据吗?')">删除</a>
+														<a class="btn btn-light btn-sm" v-on:click="downloadAll('确定要下载选中的附件吗?')">下载</a>
 													</td>
+													
 													<td style="vertical-align:top;"><div style="float: right;padding-top: 0px;margin-top: 0px;" v-html="page.pageStr"></div></td>
 												</tr>
 											</table>
@@ -216,7 +188,6 @@
 <!-- 表单验证提示 -->
 <script src="../../../assets/js/jquery.tips.js"></script>
 
-<script type="text/javascript" src="../../../assets/js-v/scuser/scuser_list.js"></script>
-
+<script type="text/javascript" src="../../../assets/js-v/archive/archive_or_list.js"></script>
 </body>
 </html>

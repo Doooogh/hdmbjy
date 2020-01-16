@@ -1,13 +1,12 @@
 package org.fh.controller.inform;
 
-import java.io.*;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.fh.controller.base.BaseController;
+import org.fh.entity.Page;
+import org.fh.entity.PageData;
 import org.fh.entity.system.User;
 import org.fh.service.attachment.AttachmentService;
+import org.fh.service.inform.InformService;
 import org.fh.service.informdetail.InformDetailService;
 import org.fh.service.option.OptionService;
 import org.fh.service.system.UsersService;
@@ -21,15 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-
-import org.fh.controller.base.BaseController;
-import org.fh.entity.Page;
-import org.fh.entity.PageData;
-import org.fh.service.inform.InformService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 说明：系统通知

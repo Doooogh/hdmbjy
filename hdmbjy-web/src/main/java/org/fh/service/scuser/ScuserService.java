@@ -1,8 +1,10 @@
 package org.fh.service.scuser;
 
-import java.util.List;
 import org.fh.entity.Page;
 import org.fh.entity.PageData;
+
+import java.util.List;
+import java.util.Map;
 
 /** 
  * 说明： 民办机构用户接口
@@ -81,6 +83,8 @@ public interface ScuserService{
 	int countScuserNum(PageData pd);
 
 	PageData findOrganizationTypeName(PageData pageData);
+
+	Map resetPS(PageData pd);
 
 
 }

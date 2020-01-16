@@ -20,6 +20,7 @@ var vm = new Vue({
 		ORGANIZATION_ID:'',  //机构id
 		TYPE:'',    //教师类型
 		ISDIS:false,  //是否是学区
+		isAdmin:false,  //是否是管理员
     },
     
 	methods: {
@@ -71,6 +72,7 @@ var vm = new Vue({
 					 vm.getPost();
         			 vm.varList = data.varList;
         			 vm.page = data.page;
+					 vm.isAdmin=data.isAdmin;
         			 vm.hasButton();
         			 vm.loading = false;
         			 $("input[name='ids']").attr("checked", false);
@@ -85,7 +87,33 @@ var vm = new Vue({
                 }, 2000);
             });
         },
-        
+        //重置密码
+		resetPS:function(SCUSER_ID){
+			$.ajax({
+				xhrFields: {
+			        withCredentials: true
+			    },
+				type: "POST",
+				url: httpurl+'scuser/resetPS',
+				data: {
+					SCUSER_ID:SCUSER_ID,
+					tm:new Date().getTime()
+					},
+				dataType:"json",
+				success: function(data){
+				 if("success" == data.result){
+					 swal("重置密码", "重置密码成功!重置密码为用户名后4位+负责人姓氏全拼", "success");
+				 }else if ("exception" == data.result){
+			     	showException("民办机构用户重置密码失败",data.exception);//显示异常
+			     }
+				}
+			}).done().fail(function(){
+			    swal("登录失效!", "请求服务器无响应，稍后再试", "warning");
+			    setTimeout(function () {
+			    	window.location.href = "../../login.html";
+			    }, 2000);
+			});
+		},
     	//新增
     	goAdd: function (){
 			

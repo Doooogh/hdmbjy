@@ -1,8 +1,9 @@
 package org.fh.mapper.dsno1.scuser;
 
-import java.util.List;
 import org.fh.entity.Page;
 import org.fh.entity.PageData;
+
+import java.util.List;
 
 /** 
  * 说明： 民办机构用户Mapper
@@ -69,5 +70,6 @@ public interface ScuserMapper{
 	long findByEducation(PageData pd);
 
 	int countScuserNum(PageData pd);
+
 }
 

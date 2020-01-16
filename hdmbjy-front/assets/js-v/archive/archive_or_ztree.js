@@ -22,7 +22,7 @@ var vm = new Vue({
                 type: "POST",
                 url: httpurl+'archive/archiveTree',
                 data: {
-					FIND_TYPE:1,
+					FIND_TYPE:2,
 					tm:new Date().getTime()
 					},
                 dataType:"json",

@@ -272,6 +272,9 @@ public class ScuserController extends BaseController {
 		for (PageData pageData : varList) {
 			pageData.put("SENIORITY",DateUtil.getTimeBeforeNowStringDate(pageData.get("ENTRY_TIME").toString().substring(0,pageData.get("ENTRY_TIME").toString().length()-2),new Date()));
 		}
+		if(Const.ADMIN_USERNAME.contains(Jurisdiction.getUsername())){
+			map.put("isAdmin",true);
+		}
 		map.put("varList", varList);
 		map.put("page", page);
 		map.put("pdOid", pdOid);
@@ -280,6 +283,30 @@ public class ScuserController extends BaseController {
 		return map;
 	}
 
+
+
+
+	@RequestMapping("/resetPS")
+	@ResponseBody
+	public Object resetPS() throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String errInfo = "success";
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		if(null==pd.get("SCUSER_ID")){
+			errInfo="error";
+			map.put("result",errInfo);
+			return map;
+		}
+		Map map1 = scuserService.resetPS(pd);
+		if(!"success".equals(map1.get("res"))){
+			errInfo="error";
+			map.put("result",errInfo);
+			return map;
+		}
+		map.put("result",errInfo);
+		return map;
+	}
 	/**获取用户详细信息
 	 * @param
 	 * @throws Exception

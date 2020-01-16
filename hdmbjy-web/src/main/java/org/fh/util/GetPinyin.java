@@ -46,6 +46,8 @@ public class GetPinyin {
 		return t4;
 	}
 
+
+
 	/**
 	 * 得到中文首字母
 	 * @param str
@@ -83,9 +85,11 @@ public class GetPinyin {
 
 	public static void main(String[] args) {
 
-		String cnStr = "中国";
+		/*String cnStr = "国";
 		System.out.println(getPingYin(cnStr));
-		System.out.println(getPinYinHeadChar(cnStr));
+		System.out.println(getPinYinHeadChar(cnStr));*/
+		String str="123456";
+		System.out.println(str.substring(str.length()-3,str.length()));
 	}
 
 }

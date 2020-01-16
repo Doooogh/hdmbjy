@@ -62,15 +62,16 @@
                                                 	<input class="form-control" type="text" v-model="KEYWORDS" placeholder="这里输入关键词" />
                                             	</div>
 											</td>
+											<td style="vertical-align:top;padding-left:5px;">
+												<a class="btn btn-light btn-sm" v-on:click="getList" style="width: 23px;height:30px;margin-top:1px;" title="检索"><i style="margin-top:-3px;margin-left: -6px;"  class="feather icon-search"></i></a>
+											</td>
 											<td>
 												 <div class="input-group input-group-sm mb-3" style="margin-left: 30px;">
 													<span  class="form-control" style="border: 0;">档案存储类型:</span>
 													<select class="form-control" v-model="TYPE" id="TYPE" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
 												 </div>
 											</td>
-											<td style="vertical-align:top;padding-left:5px;">
-												<a class="btn btn-light btn-sm" v-on:click="getList" style="width: 23px;height:30px;margin-top:1px;" title="检索"><i style="margin-top:-3px;margin-left: -6px;"  class="feather icon-search"></i></a>
-											</td>
+											
 											
 											<td v-show="loading">
 												<!-- [加载状态 ] start -->

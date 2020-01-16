@@ -18,6 +18,7 @@ var vm = new Vue({
 		loading:false,	//加载状态
 		RECORD_TYPES:[] ,   //档案类型集合
 		TYPE:'',   //档案类型
+		isAdmin:false,  //是否是管理员
     },
     
 	methods: {
@@ -183,8 +184,9 @@ var vm = new Vue({
         		data: {KEYWORDS:this.KEYWORDS,
         			DEPARTMENT_ID:this.DEPARTMENT_ID,
 					TYPE:this.TYPE,
-					FIND_TYPE:1,
-        			tm:new Date().getTime()},
+					FIND_TYPE:2,
+        			tm:new Date().getTime()
+					},
         		dataType:"json",
         		success: function(data){
         		 if("success" == data.result){
@@ -194,6 +196,7 @@ var vm = new Vue({
         			 vm.username = data.username;
         			 vm.hasButton();
 					 vm.getDict();
+					 vm.isAdmin=data.isAdmin;
         			 vm.loading = false;
         			 $("input[name='ids']").attr("checked", false);
         		 }else if ("exception" == data.result){

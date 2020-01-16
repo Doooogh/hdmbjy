@@ -1,8 +1,5 @@
 package org.fh.service.organization.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.fh.entity.Page;
 import org.fh.entity.PageData;
@@ -13,6 +10,9 @@ import org.fh.service.system.DictionariesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * 说明： 民办学校机构接口实现类
@@ -203,8 +203,12 @@ public class OrganizationServiceImpl implements OrganizationService{
 		List<PageData> organizationList = organizationMapper.listAllOrganization(pageData);
 		//String type= (String) pageData.get("type");
 		String tPage=pageData.getString("tPage");
+		String findType=(null==pageData.get("FIND_TYPE")?"1":pageData.getString("FIND_TYPE"));
 		String tP="&tPage="+tPage;
 		String url="archive_list.html?oId=";
+		if("2".equals(findType)){
+			url="archive_or_list.html?oId=";
+		}
 		String param="&IDIS=1";   //是否是学区
 		List<Dictionaries> organization_types = dictionariesService.listSubDictByParentNameEn("ORGANIZATION_TYPE");
 		List<PageData> all=new ArrayList<>();

@@ -9,7 +9,7 @@ var vm=new Vue({
         varList:[],
 		userList:[],
 		isUser:true,
-		hasInformTable:true,  //是否有回执单  默认没有
+		hasInformTable:false,  //是否有回执单  默认没有
 		informTable:[],  //回执单信息
 		hasTableDataInfo:false,  //是否已经填写过回执单信息
 		tableDataInfo:[],  //用户填报的回执单信息数据
@@ -99,6 +99,7 @@ var vm=new Vue({
 			    success: function(data){
 			        if("success" == data.result){
 						if(data.hasInformTable){
+							debugger;
 							vm.hasInformTable=true;
 							vm.informTable=data.informTable;
 							vm.options=data.options;

@@ -188,6 +188,20 @@
 		<if test="pd.TYPE != null and pd.TYPE != ''">
 			AND f.TYPE = #{pd.TYPE}
 		</if>
+		<if test="pd.AR_TYPE==1">
+			AND (
+			f.UPLOAD_USERNAME like CONCAT('%',#{pd.UPLOAD_USERNAME},'%')
+			or
+			#{pd.UPLOAD_USERNAME} like CONCAT('%',f.UPLOAD_USERNAME,'%')
+			)
+		</if>
+		<if test="pd.AR_TYPE==2">
+				AND !(
+				f.UPLOAD_USERNAME like CONCAT('%',#{pd.UPLOAD_USERNAME},'%')
+				or
+				#{pd.UPLOAD_USERNAME} like CONCAT('%',f.UPLOAD_USERNAME,'%')
+				)
+		</if>
 		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''">
 			and
 				(

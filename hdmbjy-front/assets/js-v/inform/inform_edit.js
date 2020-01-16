@@ -31,6 +31,7 @@ var vm = new Vue({
         init() {
             var FID = this.getUrlKey('FID');	//当接收过来的FID不为null时,表示此页面是修改进来的
             if(null != FID){
+				debugger;
                 this.msg = 'edit';
                 this.ID = FID;
                 this.getData();
@@ -87,9 +88,9 @@ var vm = new Vue({
 
            /* var treeObj = $.fn.zTree.getZTreeObj("leftTree");
             var nodes = treeObj.getCheckedNodes(true);
-            vm.getDepartmentIds(nodes); 
+            vm.getDepartmentIds(nodes); */
 			 vm.getOrganizationIds();
-			 */
+			 
 			if(vm.INFORMANTS!=null&&vm.INFORMANTS!=''){
 			    vm.INFORMANTS=vm.INFORMANTS.substring(0,vm.INFORMANTS.length-1);
 				}
@@ -125,7 +126,7 @@ var vm = new Vue({
                             type: "POST",
                             url: httpurl+'inform/'+vm.msg,
                             data: {
-                                ID:vm.pd.ID,
+                                ID:vm.ID,
                                 TITLE:vm.pd.TITLE,
                                 ATTACHMENT:vm.attachment,
                                 INITIATOR:vm.pd.INITIATOR,
@@ -535,7 +536,6 @@ var vm = new Vue({
 
 
         },
-		
 		getOrganizationIds:function(){
 			var allArr=new Array();
 			if(undefined==vm.INFORMANTS||null==vm.INFORMANTS){
@@ -548,30 +548,28 @@ var vm = new Vue({
 					}
 				});
 				var allChecked=$(".list_bottom label input[type='checkbox']:checked");
-				/* if(allChecked.length==0){
-					vm.INFORMANTS="";
-				}else{ */
-					$.each(allChecked,function(i,ele){
-						allArr.push($(ele).val());
+				var notChecked=$(".list_bottom label input[type='checkbox']:not(:checked)");
+				$.each(allArr,function(i,ele){
+					$.each(notChecked,function(j,nEle){
+						if(ele==$(nEle).val()){
+							allArr.splice($.inArray($(nEle).val(),allArr),1)
+						}
 					});
+				});
+			
+				$.each(allChecked,function(j,cEle){
+					allArr.push($(cEle).val());
+				});
+				
 					var allSet=new Set(allArr);
-					/* $.each(allSet,function(i,ele){
-						 vm.INFORMANTS+=(ele+",");
-						console.log(123123);
-						console.log(vm.INFORMANTS);
-					}); */
+				
+					vm.INFORMANTS="";
 					for (var x of allSet) { // 遍历Set
 					 vm.INFORMANTS+=(x+",");
 					    console.log(123123);
 					    console.log(vm.INFORMANTS);
 					}
-				// }
-				
 			
-		
-			/* if(vm.INFORMANTS!=null&&vm.INFORMANTS!=''){
-			    vm.INFORMANTS=vm.INFORMANTS.substring(0,vm.INFORMANTS.length-1);
-			} */
 		},
 		setOrganizationIds:function(){
 			$(".list_bottom label input[type='checkbox']").prop("checked", false);
@@ -628,12 +626,12 @@ var vm = new Vue({
                 success: function(data){
                     if("success" == data.result){
                         vm.pd = data.pd;							//参数map
-						
 						vm.INFORMANTS=data.pd.INFORMANTS;
 						vm.getOrganization();
                         vm.attachment=data.pd.ATTACHMENT;
                         vm.TYPE=data.pd.TYPE;
-						
+						console.log("pd___________");
+						console.log(vm.pd);
 						vm.INFORMTABLE_ID=data.pd.TABLE_ID;
 						vm.selectedTableTitle="已选择"+$("#"+vm.INFORMTABLE_ID).text();
 						$(".table_title").css("color","black").css("font-weight","normal");

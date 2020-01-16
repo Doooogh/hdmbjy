@@ -1,21 +1,23 @@
 package org.fh.service.scuser.impl;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.fh.entity.Page;
+import org.fh.entity.PageData;
 import org.fh.mapper.dsno1.inform.InformMapper;
 import org.fh.mapper.dsno1.informdetail.InformDetailMapper;
-import org.fh.service.inform.InformService;
-import org.fh.service.informdetail.InformDetailService;
+import org.fh.mapper.dsno1.scuser.ScuserMapper;
+import org.fh.mapper.dsno1.system.UsersMapper;
+import org.fh.service.scuser.ScuserService;
+import org.fh.util.GetPinyin;
 import org.fh.util.UuidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.fh.entity.Page;
-import org.fh.entity.PageData;
-import org.fh.mapper.dsno1.scuser.ScuserMapper;
-import org.fh.service.scuser.ScuserService;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /** 
  * 说明： 民办机构用户接口实现类
@@ -36,6 +38,9 @@ public class ScuserServiceImpl implements ScuserService{
 
 	@Autowired
 	private InformDetailMapper informDetailMapper;
+
+	@Autowired
+	private UsersMapper usersMapper;
 	
 	/**新增
 	 * @param pd
@@ -176,6 +181,37 @@ public class ScuserServiceImpl implements ScuserService{
 	public PageData findOrganizationTypeName(PageData pageData) {
 
 		return null;
+	}
+
+	@Override
+	public Map resetPS(PageData pd) {
+		Map<String,Object> map=new HashMap<>();
+		String res="success";
+		pd.put("USER_ID",pd.get("SCUSER_ID"));
+		PageData user=usersMapper.findById(pd);
+		if(null==user){
+			res="error";
+			map.put("res",res);
+			return map;
+		}
+		try{
+			PageData editUser=new PageData();
+			editUser.put("USER_ID",pd.get("SCUSER_ID"));
+			String NAME=user.getString("NAME");
+			NAME=GetPinyin.getPingYin(NAME.substring(0,1));
+			String USERNAME=user.getString("USERNAME");
+			//重置的密码为 用户名后三位 +姓氏全拼
+			editUser.put("PASSWORD", new SimpleHash("SHA-1", user.getString("USERNAME"), USERNAME.substring(USERNAME.length()-4,USERNAME.length())+NAME).toString());
+			editUser.put("BZ","");
+			usersMapper.editUser(editUser);
+		}catch (Exception e){
+			e.printStackTrace();
+			res="error";
+			map.put("res",res);
+			return map;
+		}
+		map.put("res",res);
+		return map;
 	}
 
 

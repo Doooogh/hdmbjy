@@ -34,14 +34,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<!-- 移除嵌入式tomcat插件  war包方式部署时，解开注释  -->
-		    <!--
 		    <exclusions>
 		        <exclusion>
 		            <groupId>org.springframework.boot</groupId>
 		            <artifactId>spring-boot-starter-tomcat</artifactId>
 		        </exclusion>
 		    </exclusions>
-		    -->
+
 		</dependency>
 
 		<dependency>
@@ -540,7 +539,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>hdmbjy</finalName>
+		<finalName>hdmbjy-web</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

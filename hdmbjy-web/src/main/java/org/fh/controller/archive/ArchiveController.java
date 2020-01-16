@@ -260,8 +260,34 @@ public class ArchiveController extends BaseController {
 		pd = this.getPageData();
 		String KEYWORDS = pd.getString("KEYWORDS");	//关键词检索条件
 		if(Tools.notEmpty(KEYWORDS))pd.put("KEYWORDS", KEYWORDS.trim());
-		
-		if (Const.ADMIN_USERNAME.contains(Jurisdiction.getUsername())) {
+		String FIND_TYPE=(null==pd.get("FIND_TYPE")?"1":pd.getString("FIND_TYPE"));
+		if("1".equals(FIND_TYPE)){  //管理员查询自己上传的档案
+			pd.put("AR_TYPE","1");  //表示只查看管理员上传的档案
+			String DEPARTMENT_ID = pd.getString("DEPARTMENT_ID");
+			if (Tools.notEmpty(DEPARTMENT_ID)) {
+					pd.put("DEPARTMENT_ID", DEPARTMENT_ID.trim());
+				}else {
+					pd.put("DEPARTMENT_ID", null);
+				}
+
+		}else if("2".equals(FIND_TYPE)){  //管理员和机构负责人查看机构上传的档案
+			PageData pdscu = new PageData();
+			pd.put("AR_TYPE","2");
+			pdscu.put("SCUSER_ID", Jurisdiction.getUser().getUSER_ID());
+			PageData ps = scuserService.findById(pdscu);
+			if(Const.ADMIN_USERNAME.contains(Jurisdiction.getUsername())){  //管理员查看机构上传的档案
+				String DEPARTMENT_ID = pd.getString("DEPARTMENT_ID");
+				if (Tools.notEmpty(DEPARTMENT_ID)) {
+					pd.put("DEPARTMENT_ID", DEPARTMENT_ID.trim());
+				}else {
+					pd.put("DEPARTMENT_ID", null);
+				}
+			}else{
+				pd.put("DEPARTMENT_ID", ps.getString("ORGANIZATION_ID"));
+			}
+		}
+		pd.put("UPLOAD_USERNAME", Const.ADMIN_USERNAME);
+	/*	if (Const.ADMIN_USERNAME.contains(Jurisdiction.getUsername())) {
 			String DEPARTMENT_ID = pd.getString("DEPARTMENT_ID");
 			if (Tools.notEmpty(DEPARTMENT_ID)) {
 				pd.put("DEPARTMENT_ID", DEPARTMENT_ID.trim());
@@ -275,8 +301,9 @@ public class ArchiveController extends BaseController {
 			PageData pdscu = new PageData();
 			pdscu.put("SCUSER_ID", Jurisdiction.getUser().getUSER_ID());
 			PageData ps = scuserService.findById(pdscu);
+			pd.put("USER_ID", Jurisdiction.getUser().getUSER_ID());
 			pd.put("DEPARTMENT_ID", ps.getString("ORGANIZATION_ID"));
-		}
+		}*/
 		
 		page.setPd(pd);
 		List<PageData>	varList = archiveService.list(page);	//列出Archive列表
@@ -287,7 +314,9 @@ public class ArchiveController extends BaseController {
 		map.put("username", Jurisdiction.getUsername());
 		//管理员用户
 		map.put("adminname", Const.ADMIN_USERNAME);
-		
+		if(Const.ADMIN_USERNAME.contains(Jurisdiction.getUsername())){
+			map.put("isAdmin",true);
+		}
 		return map;
 	}
 	/**
