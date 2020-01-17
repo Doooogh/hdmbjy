@@ -1,20 +1,19 @@
 package org.fh.service.inform.impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
+import org.fh.entity.Page;
+import org.fh.entity.PageData;
 import org.fh.mapper.dsno1.attachment.AttachmentMapper;
+import org.fh.mapper.dsno1.inform.InformMapper;
+import org.fh.mapper.dsno1.informdetail.InformDetailMapper;
 import org.fh.mapper.dsno1.system.UsersMapper;
-import org.fh.service.attachment.AttachmentService;
+import org.fh.service.inform.InformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.fh.entity.Page;
-import org.fh.entity.PageData;
-import org.fh.mapper.dsno1.inform.InformMapper;
-import org.fh.service.inform.InformService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * 说明： 系统通知接口实现类
@@ -35,6 +34,9 @@ public class InformServiceImpl implements InformService{
 
 	@Autowired
 	private UsersMapper usersMapper;
+
+	@Autowired
+	private InformDetailMapper informDetailMapper;
 	
 	/**新增
 	 * @param pd
@@ -49,9 +51,27 @@ public class InformServiceImpl implements InformService{
 	 * @throws Exception
 	 */
 	public void delete(PageData pd)throws Exception{
-		informMapper.delete(pd);
+		PageData inform= informMapper.findById(pd);
+		if(null!=inform){
+			informMapper.delete(pd);
+			//删除与通知关联的通知详细
+			pd.put("INFORM_ID",pd.get("ID"));
+			informDetailMapper.deleteByInformId(pd);
+			//删除与之关联的 附件"
+			String ATTACHMENT=inform.getString("ATTACHMENT");
+			if(StringUtils.isNotBlank(ATTACHMENT)){
+				String[] split = ATTACHMENT.split(",");
+				attachmentMapper.deleteAll(split);
+			}
+		}
 	}
-	
+
+	public static void main(String[] args) {
+		PageData pageData=new PageData();
+		String s=pageData.getString("test");
+		System.out.println(s);
+	}
+
 	/**修改
 	 * @param pd
 	 * @throws Exception

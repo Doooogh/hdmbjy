@@ -1,10 +1,10 @@
 package org.fh.mapper.dsno1.informdetail;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.fh.entity.Page;
 import org.fh.entity.PageData;
+
+import java.util.List;
 
 /** 
  * 说明： 通知详细Mapper
@@ -76,6 +76,7 @@ public interface InformDetailMapper {
 	int batchSave(@Param("list")List<PageData> list);
 
 	List<PageData> findPersonByInformId(PageData pd);
+
 
 	PageData findByinformantId(PageData pd);
 
