@@ -10,7 +10,7 @@
 	<packaging>war</packaging><!-- 以war运行是改成war -->
 
 	<name>hdmbjy-web</name>
-	<description>fhadmin for Spring Boot</description>
+	<description>hdmbjy-web</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -42,6 +42,7 @@
 		    </exclusions>
 
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -534,8 +535,15 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.10</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
 
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -546,9 +554,8 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>1.4.2.RELEASE</version><!-- springboot项目打jar包运行 插件版本只能是1.4.2.RELEASE -->
 				<configuration>
-                <mainClass>org.fh.FHmainApplication</mainClass><!--入口类-->
-            	</configuration>
-
+					<mainClass>org.fh.FHmainApplication</mainClass><!--入口类-->
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

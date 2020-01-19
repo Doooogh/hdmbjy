@@ -119,30 +119,69 @@
 	<update id="edit" parameterType="pd">
 		update
 		<include refid="tableName"></include>
-		set 
-			ORGANIZATION_ID = #{ORGANIZATION_ID},
-			`NAME` = #{NAME},
-			NAME_EN = #{NAME_EN},
-			LICENCE = #{LICENCE},
-			PARENT_ID = #{PARENT_ID},
-			PARENT_IDS = #{PARENT_IDS},
-			HEADMAN = #{HEADMAN},
-			HEADMAN_ID = #{HEADMAN_ID},
-			HIS_HEADMANS = #{HIS_HEADMANS},
-			TEL = #{TEL},
-			INTRO = #{INTRO},
-			MAJOR = #{MAJOR},
-			BIANZHI = #{BIANZHI},
-			ADDRESS = #{ADDRESS},
-			POSTS = #{POSTS},
-			CREATE_TIME = #{CREATE_TIME},
-			`TYPE` = #{TYPE},
-			HEADMAN_PHONE = #{HEADMAN_PHONE},
-			DISTRICT = #{DISTRICT},
-			FIELD4 = #{FIELD4},
-			FIELD5 = #{FIELD5},
-			FIELD6 = #{FIELD6}
-		where 
+		<set>
+			<if test="NAME!=null and NAME!=''">
+				`NAME` = #{NAME},
+			</if>
+			<if test="NAME_EN!=null and NAME_EN!=''">
+				`NAME_EN` = #{NAME_EN},
+			</if>
+			<if test="LICENCE!=null and LICENCE!=''">
+				`LICENCE` = #{LICENCE},
+			</if>
+			<if test="PARENT_ID!=null and PARENT_ID!=''">
+				`PARENT_ID` = #{PARENT_ID},
+			</if>
+			<if test="PARENT_IDS!=null and PARENT_IDS!=''">
+				`PARENT_IDS` = #{PARENT_IDS},
+			</if>
+			<if test="HEADMAN!=null and HEADMAN!=''">
+				`HEADMAN` = #{HEADMAN},
+			</if>
+			<if test="HEADMAN_ID!=null and HEADMAN_ID!=''">
+				`HEADMAN_ID` = #{HEADMAN_ID},
+			</if>
+			<if test="HIS_HEADMANS!=null and HEADMAN_ID!=''">
+				`HIS_HEADMANS` = #{HIS_HEADMANS},
+			</if>
+			<if test="TEL!=null and TEL!=''">
+				`TEL` = #{TEL},
+			</if>
+			<if test="INTRO!=null and INTRO!=''">
+				`INTRO` = #{INTRO},
+			</if>
+			<if test="MAJOR!=null and MAJOR!=''">
+				`MAJOR` = #{MAJOR},
+			</if>
+			<if test="BIANZHI!=null and BIANZHI!=''">
+				`BIANZHI` = #{BIANZHI},
+			</if>
+			<if test="ADDRESS!=null and ADDRESS!=''">
+				`ADDRESS` = #{ADDRESS},
+			</if>
+			<if test="POSTS!=null and POSTS!=''">
+				`POSTS` = #{POSTS},
+			</if>
+			<if test="TYPE!=null and TYPE!=''">
+				`TYPE` = #{TYPE},
+			</if>
+			<if test="HEADMAN_PHONE!=null and HEADMAN_PHONE!=''">
+				`HEADMAN_PHONE` = #{HEADMAN_PHONE},
+			</if>
+			<if test="DISTRICT!=null and DISTRICT!=''">
+				`DISTRICT` = #{DISTRICT},
+			</if>
+			<if test="FIELD4!=null and FIELD4!=''">
+				`FIELD4` = #{FIELD4},
+			</if>
+			<if test="FIELD5!=null and FIELD5!=''">
+				`FIELD5` = #{FIELD5},
+			</if>
+			<if test="FIELD6!=null and FIELD6!=''">
+				`FIELD6` = #{FIELD6},
+			</if>
+		</set>
+		where
 			ORGANIZATION_ID = #{ORGANIZATION_ID}
 	</update>
 	

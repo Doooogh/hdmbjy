@@ -63,6 +63,7 @@ public class ShiroConfiguration {
 		filterChainMap.put("/admin/check", "anon");
 		filterChainMap.put("/admin/islogin", "anon");
 		filterChainMap.put("/admin/register", "anon");
+		filterChainMap.put("/indexDownload/*", "anon");
 		filterChainMap.put("/ueditor/Allconfig", "anon");
 		filterChainMap.put("/**/attachmentLoad", "anon");
 		filterChainMap.put("/attachment/**", "anon");

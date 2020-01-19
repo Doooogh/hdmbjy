@@ -98,7 +98,8 @@
 	                                                        </div>
 														</th>
 														<th style="width:50px;">NO</th>
-														<th>用户名</th>
+														
+														<th v-show="TYPE==3">用户名</th>
 														<th>机构</th>
 														<th>姓名</th>
 														<th>性别</th>
@@ -128,7 +129,7 @@
 	                                                        	</div>
 															</td>
 															<td scope="row">{{page.showCount*(page.currentPage-1)+index+1}}</td>
-															<td>{{data.USERNAME}}</td>
+															<td v-show="TYPE==3">{{data.USERNAME}}</td>
 															<td>{{data.ORGANIZATION_NAME}}</td>
 															<td>{{data.NAME}}</td>
 															<td>{{data.SEXNAME}}</td>

@@ -161,6 +161,8 @@ public class ScuserController extends BaseController {
 			PageData originzation = organizationService.findByHeadmanId(findOrganization);
 			originzation.remove("HEADMAN");
 			originzation.remove("HEADMAN_ID");
+			originzation.remove("HEADMAN_PHONE");
+			originzation.put("tm",pd.get("tm"));
 			organizationService.edit(originzation);
 			pd.put("USER_ID",pd.getString("SCUSER_ID"));
 			usersService.deleteUser(pd);
@@ -188,6 +190,13 @@ public class ScuserController extends BaseController {
 			editUser.putAll(pd);
 			editUser.put("USER_ID",pd.get("SCUSER_ID"));
 			usersService.editUser(editUser);  //同时修改系统用户
+			//修改与之绑定得机构中负责人的信息
+			PageData editHeadman=new PageData();
+			editHeadman.put("HEADMAN",pd.get("NAME"));
+			editHeadman.put("HEADMAN_ID",pd.get("SCUSER_ID"));
+			editHeadman.put("HEADMAN_PHONE",pd.get("PHONE"));
+			organizationService.edit(new PageData());
+
 		}
 		map.put("result", errInfo);
 		return map;
