@@ -49,6 +49,10 @@ public interface ScuserMapper{
 	 * @throws Exception
 	 */
 	PageData findById(PageData pd);
+
+	//查询已经删除了的机构用户
+	List<PageData> findDelete(PageData pd);
+
 	
 	/**批量删除
 	 * @param ArrayDATA_IDS

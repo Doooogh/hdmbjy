@@ -67,7 +67,6 @@ public class ShiroConfiguration {
 		filterChainMap.put("/ueditor/Allconfig", "anon");
 		filterChainMap.put("/**/attachmentLoad", "anon");
 		filterChainMap.put("/attachment/**", "anon");
-		filterChainMap.put("/test/**", "anon");
 		filterChainMap.put("/**", "authc");
 		factoryBean.setFilterChainDefinitionMap(filterChainMap);
 	}

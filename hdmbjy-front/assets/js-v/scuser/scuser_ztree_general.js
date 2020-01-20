@@ -35,19 +35,27 @@ var zTree;
                     if("success" == data.result){
                     	console.info(data.userName);
                     	var setting = {
-                           
-							data: {
-								simpleData: {
-									enable: true
-								}
-							},
-                			    showLine: true,
-                			    checkable: false
-                			};
-                    	
-               			var zTreeNodes = eval(data.zTreeNodes);
-               			// zTree = $("#leftTree").zTree(setting, zTreeNodes);
-                        zTree = $.fn.zTree.init($("#leftTree"), setting, zTreeNodes);
+                    		   
+                    			data: {
+                    				simpleData: {
+                    					enable: true
+                    				}
+                    			},
+                    			showLine: true,
+                    			checkable: false,
+                    			view: {
+                    				nameIsHTML: true, //允许name支持html				
+                    				selectedMulti: false
+                    			},
+                    			edit: {
+                    				enable: false,
+                    				editNameSelectAll: false
+                    			}
+                    		};
+                    	var zTreeNodes = eval(data.zTreeNodes);
+                    	// zTree = $("#leftTree").zTree(setting, zTreeNodes);
+                    	zTree = $.fn.zTree.init($("#leftTree"), setting, zTreeNodes);
+                    	fuzzySearch('leftTree','#key',null,false); //初始化模糊搜索方法
                     }else if ("exception" == data.result){
                 		alert("机构管理模块"+data.exception);//显示异常
                     }

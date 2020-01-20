@@ -32,8 +32,8 @@
 		f.SENIORITY,	
 		f.ENTRY_TIME,	
 		f.TYPE,	
-		f.FIELD1,	
-		f.FIELD2,	
+		f.IS_DEL,	
+		f.DEL_DATE,	
 		f.FIELD3,	
 		f.FIELD4,	
 		f.FIELD5
@@ -46,7 +46,7 @@
 		SEX,	
 		AGE,	
 		PHONE,	
-		EMAIL,	
+		EMAIL,
 		ORGANIZATION_ID,	
 		STATUS,	
 		POST,	
@@ -59,8 +59,8 @@
 		SENIORITY,	
 		ENTRY_TIME,	
 		`TYPE`,
-		FIELD1,
-		FIELD2,	
+		IS_DEL,
+		DEL_DATE,	
 		FIELD3,	
 		FIELD4,	
 		FIELD5
@@ -86,8 +86,8 @@
 		#{SENIORITY},	
 		#{ENTRY_TIME},	
 		#{TYPE},	
-		#{FIELD1},	
-		#{FIELD2},	
+		#{IS_DEL},	
+		#{DEL_DATE},	
 		#{FIELD3},	
 		#{FIELD4},	
 		#{FIELD5}
@@ -105,12 +105,19 @@
 	</insert>
 	
 	<!-- 删除-->
-	<delete id="delete" parameterType="pd">
+	<!--<delete id="delete" parameterType="pd">
 		delete from
 		<include refid="tableName"></include>
 		where 
 			SCUSER_ID = #{SCUSER_ID}
-	</delete>
+	</delete>-->
+	<update id="delete" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set IS_DEL='1',DEL_DATE=date_format(NOW(),'%Y-%m-%d %H:%I:%S')
+		where
+		SCUSER_ID=#{SCUSER_ID}
+	</update>
 	
 	<!-- 修改 -->
 	<update id="edit" parameterType="pd">
@@ -135,8 +142,8 @@
 			SENIORITY = #{SENIORITY},
 			ENTRY_TIME = #{ENTRY_TIME},
 			`TYPE` = #{TYPE},
-			FIELD1 = #{FIELD1},
-			FIELD2 = #{FIELD2},
+			IS_DEL = #{IS_DEL},
+			DEL_DATE = #{DEL_DATE},
 			FIELD3 = #{FIELD3},
 			FIELD4 = #{FIELD4},
 			FIELD5 = #{FIELD5}
@@ -152,8 +159,26 @@
 		<include refid="tableName"></include> f
 		where 
 			f.SCUSER_ID = #{SCUSER_ID}
+		and (f.is_del is  NULL or f.is_del!='1')
 	</select>
-	
+
+	<select id="findDelete" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include> f
+		where  (f.is_del is  NULL or f.is_del!='1')
+		<if test="FTYPE!=null and FTYPE!=''and FTYPE==1">
+			AND f.SCUSER_ID=#{SCUSER_ID}
+		</if>
+		<if test="FTYPE!=null and FTYPE!=''and FTYPE==2">
+			and f.SCUSER_ID in
+			<foreach item="item" index="index" collection="pd.SCUSER_IDS" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+
+	</select>
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select
@@ -168,7 +193,7 @@
 		on (f.ORGANIZATION_ID=s.DEPARTMENT_ID and f.PHONE=s.PHONE and f.NAME=s.NAME)
 		LEFT JOIN oa_organization org
 		on org.ORGANIZATION_ID= f.ORGANIZATION_ID
-		where 1=1
+		where 1=1 and (f.is_del is  NULL or f.is_del!='1')
 		<if test="pd.KEYWORDS != null and pd.KEYWORDS != ''"><!-- 关键词检索 -->
 			and
 				(
@@ -195,14 +220,14 @@
 		<include refid="Field"></include>
 		from 
 		<include refid="tableName"></include> f
-		where 1=1
+		where 1=1 and is_del!='1'
 		<if test="ORGANIZATION_ID !=null and ORGANIZATION_ID!=''">
 			and f.ORGANIZATION_ID=#{ORGANIZATION_ID}
 		</if>
 	</select>
 	
 	<!-- 批量删除 -->
-	<delete id="deleteAll" parameterType="String">
+<!--	<delete id="deleteAll" parameterType="String">
 		delete from
 		<include refid="tableName"></include>
 		where 
@@ -210,7 +235,18 @@
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>
-	</delete>
+	</delete>-->
+	<update id="deleteAll" parameterType="String">
+		update
+		<include refid="dicTableName"></include>
+		set
+		is_del='1',DEL_DATE=date_format(now(),'%Y-%m-%d %H:%I:%S')
+		where
+		SCUSER_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
 
 	<select id="getData" parameterType="pd" resultType="pd">
 		select
@@ -228,7 +264,7 @@
 		<include refid="Field"></include>
 		from
 		<include refid="tableName"></include> f
-		where 1=1
+		where 1=1 and (f.is_del is  NULL or f.is_del!='1')
 		<if test="NAME!=null and NAME!=''">
 			and f.NAME=#{NAME}
 		</if>
@@ -244,7 +280,7 @@
 		o.TYPE AS TYPE,o.NAME AS ORGANIZATION_NAME,o.ORGANIZATION_ID
 		from
 		<include refid="tableName"></include>f
-		,oa_organization o where f.ORGANIZATION_ID=o.ORGANIZATION_ID and f.SCUSER_ID=#{SCUSER_ID}
+		,oa_organization o where f.ORGANIZATION_ID=o.ORGANIZATION_ID and f.SCUSER_ID=#{SCUSER_ID} and (f.is_del is  NULL or f.is_del!='1')
 		) c
 		LEFT JOIN
 		sys_dictionaries d
@@ -262,6 +298,7 @@
 		<include refid="tableName"></include> f
 		where 
 			f.NAME LIKE CONCAT(CONCAT('%', #{NAME}),'%')
+		and (f.is_del is  NULL or f.is_del!='1')
 
 	</select>
 
@@ -274,7 +311,7 @@
 		<include refid="tableName"></include>f
 		left join
 		oa_contract c on f.CONTRACT=c.CONTRACT_ID
-		where  f.type!=3 and (3>(SELECT
+		where  f.type!=3 and (f.is_del is  NULL or f.is_del!='1') and (3>(SELECT
 		TIMESTAMPDIFF(
 		DAY,
 		c.END_TIME,
@@ -290,7 +327,7 @@
 		count(*)
 		from 
 		<include refid="tableName"></include> f
-		where 1=1
+		where 1=1 and (f.is_del is  NULL or f.is_del!='1')
 		<if test="TYPE!=null and TYPE!=''">
 		and TYPE = #{TYPE}
 		</if>

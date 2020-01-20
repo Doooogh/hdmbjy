@@ -87,5 +87,13 @@ public interface ScuserService{
 	Map resetPS(PageData pd);
 
 
+	/**查询已经删除了的机构用户
+	 *
+	 * @param pd   pd 中FTYPE:1  查询单个  FTYPE:list(SCUSER_IDS) 查询多个
+	 * @return
+	 */
+	List<PageData> findDelete(PageData pd);
+
+
 }
 

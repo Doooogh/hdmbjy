@@ -1,30 +1,28 @@
 package org.fh.controller.approve;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import net.sf.json.JSONArray;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.fh.controller.base.BaseController;
+import org.fh.entity.Page;
+import org.fh.entity.PageData;
 import org.fh.entity.system.User;
+import org.fh.service.approve.ApproveService;
 import org.fh.service.scuser.ScuserService;
+import org.fh.util.Const;
 import org.fh.util.Jurisdiction;
+import org.fh.util.ObjectExcelView;
+import org.fh.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 
-import org.fh.controller.base.BaseController;
-import org.fh.entity.Page;
-import org.fh.util.DateUtil;
-import org.fh.util.ObjectExcelView;
-import org.fh.util.Tools;
-import org.fh.entity.PageData;
-import org.fh.service.approve.ApproveService;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /** 
  * 说明：审批类型
@@ -331,15 +329,15 @@ public class ApproveController extends BaseController {
 		String allPath = approveService.getAllPathByApproveId(pageData);
 		String organizationType=findOrganzationRes.getString("BIANMA");
 		//TODO 根据机构类型 获取不同的文件夹
-		if(organizationType.equals("MINBAN_CULTIVATE_SCHOOL")){  //民办培训学校
+		if(organizationType.equals(Const.MINBAN_CULTIVATE_SCHOOL)){  //民办培训学校
 			allPath="../../approvefulldata/government/mbpeixun/"+allPath;
-		}else if(organizationType.equals("MINBAN_KINDERGARTEN_SCHOOL")){  //民办幼儿园
+		}else if(organizationType.equals(Const.MINBAN_KINDERGARTEN_SCHOOL)){  //民办幼儿园
 			allPath="../../approvefulldata/government/mbyoueryuan/"+allPath;
-		}else if(organizationType.equals("NO_EDUCATIONAL_ADMINISTRATION")){  //公办幼儿园
+		}else if(organizationType.equals(Const.NO_EDUCATIONAL_ADMINISTRATION)){  //公办幼儿园
 			allPath="../../approvefulldata/government/gbyoueryuan/"+allPath;
-		}else if(organizationType.equals("BOARDING_DEPARTMENT_APPROVAL")){  //寄宿部审批
+		}else if(organizationType.equals(Const.BOARDING_DEPARTMENT_APPROVAL)){  //寄宿部审批
 			allPath="../../approvefulldata/government/jsbshenpi/"+allPath;
-		}else if(organizationType.equals("MINBAN_MIDDLE_AND_PRIMARY_SCHOOL\t")){  //民办中小学
+		}else if(organizationType.equals(Const.MINBAN_MIDDLE_AND_PRIMARY_SCHOOL)){  //民办中小学
 			allPath="../../approvefulldata/government/mbzhongxiaoxue/"+allPath;
 		}
 		String errInfo = "success";

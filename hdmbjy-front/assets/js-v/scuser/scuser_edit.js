@@ -72,7 +72,7 @@ var vm = new Vue({
 					this.$refs.PASSWORD.focus();
 					return false;
 				}
-				if(this.pd.NUMBER == '' || this.pd.NUMBER == undefined){
+			/* 	if(this.pd.NUMBER == '' || this.pd.NUMBER == undefined){
 					$("#NUMBER").tips({
 						side:3,
 				        msg:'输入编号',
@@ -82,7 +82,7 @@ var vm = new Vue({
 					this.pd.NUMBER = '';
 					this.$refs.NUMBER.focus();
 					return false;
-				}
+				} */
 			}
 			
 	

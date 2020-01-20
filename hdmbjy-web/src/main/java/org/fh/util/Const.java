@@ -128,16 +128,5 @@ public class Const {
 	public static final String MINBAN_CULTIVATE_SCHOOL="MINBAN_CULTIVATE_SCHOOL";
 	public static final String ALL_ORGANIZATION="ALL_ORGANIZATION";
 
-
-	
-	
-
-
-
-
-
-
-	
-	
-	
+	public static final String INDEX_DOWNLOAD_ID="3892e047b0c04d6397efa7c3a5a26395";  //首页下载使用手册附件的id
 }

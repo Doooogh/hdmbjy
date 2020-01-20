@@ -214,6 +214,11 @@ public class ScuserServiceImpl implements ScuserService{
 		return map;
 	}
 
+	@Override
+	public List<PageData> findDelete(PageData pd) {
+		return scuserMapper.findDelete(pd);
+	}
+
 
 }
 

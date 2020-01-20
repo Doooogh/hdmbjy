@@ -1,4 +1,4 @@
-package org.fh.controller;
+package org.fh.controller.index;
 
 import org.fh.entity.PageData;
 import org.fh.service.archive.ArchiveService;
@@ -23,7 +23,7 @@ public class IndexDownloadController {
     @ResponseBody
     public void download(HttpServletResponse response) throws Exception {
         PageData find=new PageData();
-        find.put("ARCHIVE_ID","3892e047b0c04d6397efa7c3a5a26395");
+        find.put("ARCHIVE_ID",Const.INDEX_DOWNLOAD_ID);
         PageData findRes = archiveService.findById(find);
 //        String extName = findRes.getString("PATH").substring(findRes.getString("PATH").lastIndexOf("."));
         FileDownload.fileDownload(response, Const.NGINX_PATH + findRes.getString("PATH"),findRes.getString("FILE_NAME"));

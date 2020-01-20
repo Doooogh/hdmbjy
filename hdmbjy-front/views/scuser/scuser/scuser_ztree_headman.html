@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../../../plugins/zTree/3.5/css/zTreeStyle/zTreeStyle.css" />
   <script type="text/javascript"  src="../../../plugins/zTree/3.5/js/jquery.ztree.core.js"></script>
   <script type="text/javascript" src="../../../plugins/zTree/3.5/js/jquery.ztree.excheck.js"></script>
+  <script type="text/javascript" src="../../../plugins/zTree/3.5/js/jquery.ztree.exhide.js"></script>
+  <script type="text/javascript" src="../../../plugins/zTree/3.5/js/fuzzysearch.js"></script>
     <!-- vue -->
     <script src="../../../assets/js-vue/vue.js"></script>
     <!--全局配置-->
@@ -19,7 +21,11 @@
     <table style="width:100%;">
         <tr>
             <td style="width:15%;" valign="top">
-                <div style="width:15%;">
+                <div >
+					<div id="" style="margin: 15px 0;">
+						<span>查找：</span>
+						<input type="text" id="key" value="" class="empty" placeholder="请输入关键字"/><br/>
+					</div>
                     <ul id="leftTree" class="ztree">
                         <li><img src="../../../assets/images/loading.gif" /></li>
                     </ul>
