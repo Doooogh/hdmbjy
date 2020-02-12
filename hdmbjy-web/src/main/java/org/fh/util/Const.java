@@ -83,7 +83,7 @@ public class Const {
 
 	public static final  String DEFAULT_HEADMAN_ROLE_ID="caccde40866144f59054d9d5f1f5bcb9";		 //机构负责人默认角色  在添加时使用
 
-	public static final  String ADMIN_USERNAME="admin,gadmin,sheguanke,mbadmin,iadmin,jwlingdao,cjadmin,kz,sgk,jw";		 //系统管理员和普通管理员
+	public static final  String ADMIN_USERNAME="admin,gadmin,sheguanke,mbadmin,iadmin,jwlingdao,cjadmin,kz,sgk,jw,sjs,sjxh";		 //系统管理员和普通管理员
 
 
 	public static final  String TEM_PDF_PATH="D:/hdmbjy/file/tempdfpath/";
