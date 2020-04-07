@@ -245,8 +245,8 @@ var vm = new Vue({
 		    diag.Drag=true;
 		    diag.Title ="附件预览";
 		    diag.URL = '../../inform/inform/preview.html?INFORM_ID='+ID+"&TABLE_ID="+TABLE_ID;
-		    diag.Width = 1000;
-		    diag.Height = 600;
+		    diag.Width = 1200;
+		    diag.Height = 800;
 		    diag.Modal = true;				//有无遮罩窗口
 		    diag. ShowMaxButton = true;	//最大化按钮
 		    diag.ShowMinButton = true;		//最小化按钮

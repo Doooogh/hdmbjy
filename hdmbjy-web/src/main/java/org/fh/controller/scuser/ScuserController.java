@@ -72,7 +72,7 @@ public class ScuserController extends BaseController {
 	@RequestMapping(value="/add")
 	@RequiresPermissions("scuser:add")
 	@ResponseBody
-	public Object add() throws Exception{
+	public Object add(@RequestParam(required = false) MultipartFile file) throws Exception{
 		Map<String,Object> map = new HashMap<String,Object>();
 		String errInfo = "success";
 		PageData pd = new PageData();
@@ -115,6 +115,15 @@ public class ScuserController extends BaseController {
 
 			}
 		}
+		//上传头像
+		if(null!=file){
+            String filePath = Const.FILEPATH;	//文件上传路径
+            String fileName = this.get32UUID();
+            fileName=FileUpload.fileUp(file,filePath,fileName); //执行上传
+            pd.put("FIELD4",Const.PRE_IMG+fileName);  //备用字段4用作头像图片路径
+        }
+		
+		
 		pd.put("SCUSER_ID", SCUSER_ID);	//主键
 		scuserService.save(pd);
 		map.put("result", errInfo);
@@ -179,11 +188,20 @@ public class ScuserController extends BaseController {
 	@RequestMapping(value="/edit")
 	@RequiresPermissions("scuser:edit")
 	@ResponseBody
-	public Object edit() throws Exception{
+	public Object edit(@RequestParam(required = false) MultipartFile file) throws Exception{
 		Map<String,Object> map = new HashMap<String,Object>();
 		String errInfo = "success";
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd = scuserService.findById(pd);
+		if(null!=file){
+			String fileName = this.get32UUID();
+			String filePath = Const.FILEPATH;	//文件上传路径
+			fileName=FileUpload.fileUp(file,filePath,fileName); //执行上传
+			pd.put("FIELD4",Const.PRE_IMG+fileName);
+		}
+		
+		
 		scuserService.edit(pd);
 		if(pd.getString("TYPE").equals(Const.HEADMAN_TEACHER)){
 			PageData editUser=new PageData();
@@ -281,7 +299,7 @@ public class ScuserController extends BaseController {
 		for (PageData pageData : varList) {
 			pageData.put("SENIORITY",DateUtil.getTimeBeforeNowStringDate(pageData.get("ENTRY_TIME").toString().substring(0,pageData.get("ENTRY_TIME").toString().length()-2),new Date()));
 		}
-		if(Const.ADMIN_USERNAME.contains(Jurisdiction.getUsername())){
+		if(Const.ADMIN_USERNAME.contains(Jurisdiction.getUsername()) && !Jurisdiction.getUsername().equals("sjs")){
 			map.put("isAdmin",true);
 		}
 		map.put("varList", varList);

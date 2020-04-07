@@ -84,8 +84,8 @@ var vm = new Vue({
     		 diag.Drag=true;
     		 diag.Title ="新增";
     		 diag.URL = '../../scuser/scuser/scuser_edit.html?oId='+vm.ORGANIZATION_ID+"&type="+vm.TYPE;
-    		 diag.Width = 1000;
-    		 diag.Height = 800;
+    		 diag.Width = 800;
+    		 diag.Height = 600;
     		 diag.Modal = true;				//有无遮罩窗口
     		 diag. ShowMaxButton = true;	//最大化按钮
     	     diag.ShowMinButton = true;		//最小化按钮 

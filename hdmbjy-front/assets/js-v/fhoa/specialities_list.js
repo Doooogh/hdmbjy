@@ -5,6 +5,9 @@ var vm = new Vue({
 		varList: [],	//list
 		page: [],		//分页类
 		KEYWORDS:'',	//检索条件,关键词
+		ORGANIZATION_NAME:'',//机构名称用作检索
+		TYPE:'',
+		ZYLIST:[],		//专业类型集合
 		showCount: -1,	//每页显示条数(这个是系统设置里面配置的，初始为-1即可，固定此写法)
 		currentPage: 1,	//当前页码
 		add:false,		//增
@@ -32,19 +35,22 @@ var vm = new Vue({
         //获取列表
         getList: function(){
         	this.loading = true;
+			this.TYPE = null == $("#TYPE").val()?'':$("#TYPE").val().trim();
         	$.ajax({
         		xhrFields: {
                     withCredentials: true
                 },
         		type: "POST",
         		url: httpurl+'specialities/list?showCount='+this.showCount+'&currentPage='+this.currentPage,
-        		data: {KEYWORDS:this.KEYWORDS,tm:new Date().getTime()},
+        		data: {KEYWORDS:this.KEYWORDS,ORGANIZATION_NAME:this.ORGANIZATION_NAME,TYPE:this.TYPE,tm:new Date().getTime()},
         		dataType:"json",
         		success: function(data){
         		 if("success" == data.result){
         			 vm.varList = data.varList;
         			 vm.page = data.page;
+					 vm.TYPE = data.TYPE;
         			 vm.hasButton();
+					 vm.getDict();
         			 vm.loading = false;
         			 $("input[name='ids']").attr("checked", false);
         		 }else if ("exception" == data.result){
@@ -180,6 +186,29 @@ var vm = new Vue({
                 }
             });
     	},
+		
+		getDict: function (){
+			$.ajax({
+				xhrFields: {
+		            withCredentials: true
+		        },
+				type: "POST",
+				url: httpurl+'dictionaries/getLevelsByNameEn',
+				data: {NAME_EN:'specialities',tm:new Date().getTime()},//类型
+				dataType:'json',
+				success: function(data){
+					vm.ZYLIST=data.list;
+					
+					$("#TYPE").html('<option value="">请选择专业类型</option>');
+					 $.each(data.list, function(i, dvar){
+						 $("#TYPE").append("<option value="+dvar.BIANMA+">"+dvar.NAME+"</option>");
+					 });
+				},
+				error:function(){
+				alert("错误");	
+				}
+			});
+		},
         
       	//判断按钮权限，用于是否显示按钮
         hasButton: function(){

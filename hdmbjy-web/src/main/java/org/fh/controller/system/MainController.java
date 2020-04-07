@@ -120,7 +120,11 @@ public class MainController extends BaseController {
 			map.put("isUser",false);
 		}else {
 			List<PageData> list =organizationService.findByUserId(Jurisdiction.getUser().getUSER_ID());
-			map.put("orgName", list.get(0).getString("NAME"));
+			if(list != null && list.size() > 0) {
+				map.put("orgName", list.get(0).getString("NAME"));
+			}else {
+				map.put("orgName", Jurisdiction.getUser().getUSERNAME());
+			}
 			map.put("isUser",true);
 		}
 		map.put("result", errInfo);

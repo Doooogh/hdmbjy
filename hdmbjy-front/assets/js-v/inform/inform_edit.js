@@ -8,7 +8,10 @@ var vm = new Vue({
         hasFile:false,
         TYPE:'',
         apd:[],
+		zNodes:[],
         draft:0,
+		CHECKEDNUM:'',
+		CHECKEDNODENAME:'',
 		orList:[],   //机构集合
 		districtList:[],  //学区集合
 		OR_TYPE:'', //  筛选机构类型
@@ -22,6 +25,20 @@ var vm = new Vue({
 			display:'none',
 			marginRight:'10px'
 		},
+		setting : {
+						check: {
+							enable: true,
+							chkboxType: { "Y": "ps", "N": "ps" }, //Y被勾选,N没有勾选情况,p操作影响父节点,s影响子节点
+						},
+						data: {
+							simpleData: {
+								enable: true
+							}
+						},
+						callback: {
+							onCheck: zTreeOnCheck
+						}
+					},
 		selectedTableTitle:''
     },
 
@@ -29,16 +46,20 @@ var vm = new Vue({
 
         //初始执行
         init() {
+            //实例化编辑器
+            //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+            var ue = UE.getEditor('editor');
             var FID = this.getUrlKey('FID');	//当接收过来的FID不为null时,表示此页面是修改进来的
             if(null != FID){
-				debugger;
                 this.msg = 'edit';
                 this.ID = FID;
                 this.getData();
                 this.getUser();
+				
             }else{
-				this.getOrganization();
+				// this.getOrganization();
                 this.getUser();
+				this.getListTreeReceiver();
                 // this.getTree();
             }
 
@@ -47,10 +68,46 @@ var vm = new Vue({
                 vm.getDict();
             },200);
         },
+		
+		//接收人tree,根据主键ID获取数据
+		getListTreeReceiver: function(){
+			var _self=this;
+			//发送 post 请求
+			$.ajax({
+				xhrFields: {
+					withCredentials: true
+				},
+				type: "POST",
+				url: httpurl+'organization//listAllOrganizationForInform',
+				data: {tm:new Date().getTime(),type:"organization"},
+				dataType:"json",
+				success: function(data){
+					if("success" == data.result){
+						var setting = {
+								showLine: true,
+								checkable: false
+							};
+						var zTreeNodes = eval(data.zTreeNodes);
+						_self.zNodes = zTreeNodes;
+						_self.$options.methods.freshArea(_self);//zTree初始化
+					}else if ("exception" == data.result){
+						alert("数据字典模块"+data.exception);//显示异常
+					}
+				}
+			})
+		},
+		
+		//zTree初始化
+		freshArea: function(_self){
+			var zTreeObj=$.fn.zTree.init($("#treeDemo"), _self.setting, _self.zNodes);
+			zTreeObj.expandAll(false);//默认ztree全部关闭
+		},
 
         //去保存
         save: function (){
-			
+            //富文本编辑器:
+            vm.pd.CONTENT=UE.getEditor('editor').getContent();
+
             if(this.pd.TITLE == '' || this.pd.TITLE == undefined){
                 $("#TITLE").tips({
                     side:3,
@@ -85,28 +142,41 @@ var vm = new Vue({
                 this.$refs.TYPE.focus();
                 return false;
             }
-
+			debugger;
            /* var treeObj = $.fn.zTree.getZTreeObj("leftTree");
             var nodes = treeObj.getCheckedNodes(true);
             vm.getDepartmentIds(nodes); */
-			 vm.getOrganizationIds();
+			//1.获取接收人的checked数据的ids-----------------------------开始 :
+			var chkNodeArr;//被勾选的id数组
+			var nodeIdsStr = "";//ids字符串
+			var treenode = $.fn.zTree.getZTreeObj("treeDemo");//获取ztree对象
+			chkNodeArr = treenode.getCheckedNodes(true);//true获取选中节点,false未选中节点,默认为true
+			// 得到勾选节点的id集合,并用逗号隔开
+			for (var i = 0; i < chkNodeArr.length; i++) {
+				nodeIdsStr = nodeIdsStr + chkNodeArr[i].id + ",";
+			}
+			//赋值给变量,传递后台 ;
+			this.INFORMANTS = nodeIdsStr;
+			
+			
+			//  vm.getOrganizationIds();
 			 
-			if(vm.INFORMANTS!=null&&vm.INFORMANTS!=''){
-			    vm.INFORMANTS=vm.INFORMANTS.substring(0,vm.INFORMANTS.length-1);
-				}
+			// if(vm.INFORMANTS!=null&&vm.INFORMANTS!=''){
+			//     vm.INFORMANTS=vm.INFORMANTS.substring(0,vm.INFORMANTS.length-1);
+			// 	}
 				
-            if(this.INFORMANTS == '' || this.INFORMANTS == undefined){
-                $("#INFORMANT").tips({
-                    side:3,
-                    msg:'请选择接收人',
-                    bg:'#AE81FF',
-                    time:2
-                });
-                this.INFORMANTS = '';
-                return false;
-            }
-			var reg=new RegExp("\r\n","g");
-			vm.pd.CONTENT= vm.pd.CONTENT.replace(reg,"\r\n");
+   //          if(this.INFORMANTS == '' || this.INFORMANTS == undefined){
+   //              $("#INFORMANT").tips({
+   //                  side:3,
+   //                  msg:'请选择接收人',
+   //                  bg:'#AE81FF',
+   //                  time:2
+   //              });
+   //              this.INFORMANTS = '';
+   //              return false;
+   //          }
+			/*var reg=new RegExp("\r\n","g");
+			vm.pd.CONTENT= vm.pd.CONTENT.replace(reg,"\r\n");*/
 			
 			
             if(!this.hasFile){
@@ -212,7 +282,8 @@ var vm = new Vue({
 
         },
         saveDraft:function(){
-        
+        //富文本编辑器:
+        vm.pd.CONTENT=UE.getEditor('editor').getContent();
          if(this.pd.TITLE == '' || this.pd.TITLE == undefined){
              $("#TITLE").tips({
                  side:3,
@@ -251,7 +322,18 @@ var vm = new Vue({
         /* var treeObj = $.fn.zTree.getZTreeObj("leftTree");
          var nodes = treeObj.getCheckedNodes(true);
          vm.getDepartmentIds(nodes); */
-        			vm.getOrganizationIds();
+        			// vm.getOrganizationIds();
+		var chkNodeArr;//被勾选的id数组
+		var nodeIdsStr = "";//ids字符串
+		var treenode = $.fn.zTree.getZTreeObj("treeDemo");//获取ztree对象
+		chkNodeArr = treenode.getCheckedNodes(true);//true获取选中节点,false未选中节点,默认为true
+		// 得到勾选节点的id集合,并用逗号隔开
+		for (var i = 0; i < chkNodeArr.length; i++) {
+			nodeIdsStr = nodeIdsStr + chkNodeArr[i].id + ",";
+		}
+		//赋值给变量,传递后台 ;
+		this.INFORMANTS = nodeIdsStr;			
+					
 		if(vm.INFORMANTS!=null&&vm.INFORMANTS!=''){
 			vm.INFORMANTS=vm.INFORMANTS.substring(0,vm.INFORMANTS.length-1);
 			}
@@ -608,6 +690,7 @@ var vm = new Vue({
         },
         //根据主键ID获取数据
         getData: function(){
+			var _self=this;
             //发送 post 请求
             $.ajax({
                 xhrFields: {
@@ -620,19 +703,30 @@ var vm = new Vue({
                 success: function(data){
                     if("success" == data.result){
                         vm.pd = data.pd;							//参数map
+                        //富文本编辑器:
+                        var ue = UE.getEditor('editor');//初始化对象
+                        var proinfo=data.pd.CONTENT;
+                        ue.ready(function() {//编辑器初始化完成再赋值
+                            ue.setContent(proinfo);  //赋值给UEditor
+                        });
 						vm.INFORMANTS=data.pd.INFORMANTS;
-						vm.getOrganization();
+						vm.CHECKEDNUM = data.pd.CHECKEDNUM;
+						// vm.getListTreeReceiver();
                         vm.attachment=data.pd.ATTACHMENT;
                         vm.TYPE=data.pd.TYPE;
-						console.log("pd___________");
-						console.log(vm.pd);
-						vm.INFORMTABLE_ID=data.pd.TABLE_ID;
-						vm.selectedTableTitle="已选择"+$("#"+vm.INFORMTABLE_ID).text();
-						$(".table_title").css("color","black").css("font-weight","normal");
-						$("#"+vm.INFROMTABLE_ID).css("color","#097373").css("weight","bold ");
-						setTimeout(function(){
-						    vm.setOrganizationIds();
-						},200);
+						// console.log("pd___________");
+						// console.log(vm.pd);
+						// vm.INFORMTABLE_ID=data.pd.TABLE_ID;
+						// vm.selectedTableTitle="已选择"+$("#"+vm.INFORMTABLE_ID).text();
+						// $(".table_title").css("color","black").css("font-weight","normal");
+						// $("#"+vm.INFROMTABLE_ID).css("color","#097373").css("weight","bold ");
+						// setTimeout(function(){
+						//     vm.setOrganizationIds();
+						// },200);
+						debugger;
+						var allnodes_json = eval(data.allnodes_json);
+						_self.zNodes = allnodes_json;
+						_self.$options.methods.freshArea(_self);//zTree初始化
 						
                         $("#TYPE").val(vm.TYPE);
                         if(vm.attachment!=""){
@@ -742,6 +836,58 @@ var vm = new Vue({
     }
 })
 
+layui.use(['transfer', 'layer', 'util'], function(){
+  var $ = layui.$
+  ,transfer = layui.transfer
+  ,layer = layui.layer
+  ,util = layui.util;
+  
+  //模拟数据
+  var data1 = [
+    {"value": "1", "title": "李白"}
+    ,{"value": "2", "title": "杜甫"}
+    ,{"value": "3", "title": "苏轼"}
+    ,{"value": "4", "title": "李清照"}
+    ,{"value": "5", "title": "鲁迅", "disabled": true}
+    ,{"value": "6", "title": "巴金"}
+    ,{"value": "7", "title": "冰心"}
+    ,{"value": "8", "title": "矛盾"}
+    ,{"value": "9", "title": "贤心"}
+  ]
+  
+  ,data2 = [
+    {"value": "1", "title": "瓦罐汤"}
+    ,{"value": "2", "title": "油酥饼"}
+    ,{"value": "3", "title": "炸酱面"}
+    ,{"value": "4", "title": "串串香", "disabled": true}
+    ,{"value": "5", "title": "豆腐脑"}
+    ,{"value": "6", "title": "驴打滚"}
+    ,{"value": "7", "title": "北京烤鸭"}
+    ,{"value": "8", "title": "烤冷面"}
+    ,{"value": "9", "title": "毛血旺", "disabled": true}
+    ,{"value": "10", "title": "肉夹馍"}
+    ,{"value": "11", "title": "臊子面"}
+    ,{"value": "12", "title": "凉皮"}
+    ,{"value": "13", "title": "羊肉泡馍"}
+    ,{"value": "14", "title": "冰糖葫芦", "disabled": true}
+    ,{"value": "15", "title": "狼牙土豆"}
+  ]
+ 
+ 
+  //显示搜索框
+  transfer.render({
+    elem: '#test4'
+    ,data: data1
+    ,title: ['文本墨客', '获奖文人']
+    ,showSearch: true
+  });
+ 
+ 
+ 
+  
+});
+
+
 layui.use('form', function(){
   var form = layui.form
    ,layer = layui.layer
@@ -840,6 +986,51 @@ layui.use('upload', function() {
 
 });
 
+function zTreeOnCheck(event, treeId, treeNode) {
+			//var checked = treeNode.checked;
+			//console.log((treeNode?treeNode.name:"root") + "checked " +(checked?"true":"false"));
+			refreshLayers();
+			clearCheckedOldNodes();
+		};
+		//刷新图层的显示情况
+		var layers;
+		var checkedNum;
+		var checkedNodeName;
+		function refreshLayers() {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			var changedNodes = zTree.getChangeCheckedNodes();
+			var nodeNum = zTree.getCheckedNodes();
+			checkedNum = nodeNum.length;
+			debugger;
+			for ( var i=0 ; i < nodeNum.length ; i++ ){
+				var treeNode = nodeNum[i];
+				if(treeNode.pId != null && treeNode.pId != ''){
+					// layers = map.getLayersByName(treeNode.name);
+					// if(layers!=null && layers[0]!=null){
+					// 	layers[0].setVisibility(treeNode.checked);
+					// }
+					checkedNodeName += treeNode.name + ',';
+					checkedNodeName += "<br>";
+					console.log((treeNode?treeNode.name:"root")  + (treeNode.checked?"选中":"false"));
+				}else{
+					checkedNum--; 
+				}
+					
+				// console.log((treeNode?treeNode.name:"root") + "checked " +(treeNode.checked?"选中":"false"));				
+			}
+					console.log(checkedNum);
+					vm.CHECKEDNUM = checkedNum;
+					vm.CHECKEDNODENAME = checkedNodeName;
+		}
+		//清理善后工作
+		function clearCheckedOldNodes() {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			nodes = zTree.getChangeCheckedNodes();
+			for (var i=0, l=nodes.length; i<l; i++) {
+				nodes[i].checkedOld = nodes[i].checked;
+			}
+		};
+		
 function deleteFile(id) {
     $("#demoList").on('click', '.demo-delete', function () {
         var tr=$(this);

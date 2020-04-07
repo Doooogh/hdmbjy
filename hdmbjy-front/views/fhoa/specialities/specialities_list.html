@@ -57,8 +57,13 @@
 									<table style="margin-top:5px;">
 										<tr>
 											<td>
+											    <div class="input-group input-group-sm mb-3">
+											    	<input class="form-control" type="text" v-model="ORGANIZATION_NAME" placeholder="这里输入机构名称" />
+												</div>
+											</td>
+											<td>
 						                        <div class="input-group input-group-sm mb-3">
-                                                	<input class="form-control" type="text" v-model="KEYWORDS" placeholder="这里输入关键词" />
+                                                	<input class="form-control" type="text" v-model="KEYWORDS" placeholder="这里输入专业名称" />
                                             	</div>
 											</td>
 											<td style="vertical-align:top;padding-left:5px;">
@@ -67,6 +72,14 @@
 													<i style="margin-top:-3px;margin-left: -6px;" class="mdi mdi-cloud-download"></i>
 												</a> -->
 											</td>
+											<!-- <td style="vertical-align:top;padding-left:2px;width: 150px;"> -->
+											<td>
+											    <div class="input-group input-group-sm mb-3" style="margin-left: 30px;">
+													<span  class="form-control" style="border: 0;">专业类型:</span>
+													<select class="form-control" v-model="TYPE" id="TYPE" style="height: 33px;padding-left:10px;border: 1px solid #CED4DA;transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;">
+											    </div>
+											</td>
+											
 											<td v-show="loading">
 												<!-- [加载状态 ] start -->
 										    	<div class="d-flex justify-content-center" style="margin-top:-10px;">
@@ -92,6 +105,7 @@
 	                                                        </div>
 														</th>
 														<th style="width:50px;">NO</th>
+														<th>机构名称</th>
 														<th>专业名称</th>
 														<th>专业类型</th>
 														<th>备注</th>
@@ -114,6 +128,7 @@
 	                                                        	</div>
 															</td>
 															<td scope="row">{{page.showCount*(page.currentPage-1)+index+1}}</td>
+															<td>{{data.BY_B}}</td>
 															<td>{{data.NAME}}</td>
 															<td>{{data.DNAME3}}</td>
 															<td>{{data.BZ}}</td>

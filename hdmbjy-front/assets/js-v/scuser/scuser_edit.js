@@ -1,3 +1,16 @@
+var imageFile;
+var interval;
+var remarks;
+var attachment;
+var demoListView1;
+document.addEventListener("DOMContentLoaded",via, false);
+
+function via(){
+    $('#save').click(function(){
+        vm.save();
+    })
+}
+
 
 var vm = new Vue({
 	el: '#app',
@@ -11,6 +24,9 @@ var vm = new Vue({
 		ISACTIVE:'',
 		POST:'',			//岗位
 		SEX:'',			//性别
+		hasImage:false,
+		FIELD3:'',
+		nginxurl:nginxurl,
 		ORGANIZATION_ID:'',    //机构id
 		TYPE:'',
 		HEADMAN_TEACHER:'',   //机构负责人类型
@@ -47,7 +63,7 @@ var vm = new Vue({
         
         //去保存
     	save: function (){
-			
+			this.FIELD3 = $("#FIELD3").val();
 			if(this.TYPE==this.HEADMAN_TEACHER&&this.msg=='add'){
 				
 				if(this.pd.USERNAME == '' || this.pd.USERNAME == undefined || this.pd.USERNAME == '此用户名已存在!'){
@@ -221,10 +237,39 @@ var vm = new Vue({
 				this.$refs.TITLE_TYPE.focus();
 			return false;
 			}
-		
-		
 			
-    		
+			var form = new FormData();
+			if(imageFile!=null||imageFile!=undefined){
+			    form.append("file",imageFile);
+			}
+			if(vm.hasImage&&vm.msg=="edit"){
+			    if(imageFile==null||imageFile==undefined){
+			        form.append("file",null);
+			    }else{
+			        form.append("file",imageFile);
+			    }
+			
+			}
+			if(!vm.hasImage){
+			    form.append("file",null);
+			}
+			form.append("USERNAME",this.pd.USERNAME);
+			form.append("PASSWORD",this.pd.PASSWORD);
+			form.append("NAME",this.pd.NAME);
+			form.append("SEX",this.SEX);
+			form.append("AGE",this.pd.AGE);
+			form.append("PHONE",this.pd.PHONE);
+			form.append("EMAIL",this.pd.EMAIL);
+			form.append("ENTRY_TIME",this.ENTRY_TIME);
+			form.append("POST",this.POST);
+			form.append("FIELD3",this.FIELD3);
+			form.append("ISACTIVE",this.ISACTIVE);
+			form.append("EDUCATION",this.EDUCATION_TYPE);
+			form.append("TITLE",this.TITLE_TYPE);
+			form.append("ORGANIZATION_ID",this.ORGANIZATION_ID);
+			form.append("TYPE",this.TYPE);
+			form.append("SCUSER_ID",this.SCUSER_ID);
+			form.append("SCUSER_ID",this.pd.SCUSER_ID);
     		$("#showform").hide();
     		$("#jiazai").show();
     		
@@ -235,27 +280,33 @@ var vm = new Vue({
 	                },
 					type: "POST",
 					url: httpurl+'scuser/'+this.msg,
-			    	data: {
-					SCUSER_ID:this.SCUSER_ID,
-				    SCUSER_ID:this.pd.SCUSER_ID,
-					USERNAME:this.pd.USERNAME,
-					PASSWORD:this.pd.PASSWORD,
-					NUMBER:this.pd.NUMBER,
-				    NAME:this.pd.NAME,
-				    SEX:this.SEX,
-				    AGE:this.pd.AGE,
-					TITLE:this.pd.TITLE,
-				    PHONE:this.pd.PHONE,
-				    EMAIL:this.pd.EMAIL,
-				    ORGANIZATION_ID:this.ORGANIZATION_ID,
-				    POST:this.POST,
-					TYPE:this.TYPE,
-					ENTRY_TIME:this.ENTRY_TIME,
-				    ISACTIVE:this.ISACTIVE,
-				    EDUCATION:this.EDUCATION_TYPE,
-				    TITLE:this.TITLE_TYPE,
-			    	tm:new Date().getTime()},
-					dataType:"json",
+					async: false,
+					cache: false,
+					contentType: false,
+					processData: false,
+					data: form,
+			  //   	data: {
+					// SCUSER_ID:this.SCUSER_ID,
+				 //    SCUSER_ID:this.pd.SCUSER_ID,
+					// USERNAME:this.pd.USERNAME,
+					// PASSWORD:this.pd.PASSWORD,
+					// NUMBER:this.pd.NUMBER,
+				 //    NAME:this.pd.NAME,
+				 //    SEX:this.SEX,
+				 //    AGE:this.pd.AGE,
+					// TITLE:this.pd.TITLE,
+				 //    PHONE:this.pd.PHONE,
+				 //    EMAIL:this.pd.EMAIL,
+				 //    ORGANIZATION_ID:this.ORGANIZATION_ID,
+				 //    POST:this.POST,
+					// TYPE:this.TYPE,
+					// ENTRY_TIME:this.ENTRY_TIME,
+				 //    ISACTIVE:this.ISACTIVE,
+				 //    EDUCATION:this.EDUCATION_TYPE,
+				 //    TITLE:this.TITLE_TYPE,
+					// FIELD3:this.FIELD3,
+			  //   	tm:new Date().getTime()},
+					// dataType:"json",
 					success: function(data){
                         if("success" == data.result){
                         	swal("", "保存成功", "success");
@@ -322,11 +373,18 @@ var vm = new Vue({
 						if(vm.ORGANIZATION_ID==0){
 							vm.ORGANIZATION_ID=data.pd.ORGANIZATION_ID;
 						}
+						vm.pd.FIELD4=data.pd.FIELD4;
+						if(vm.pd.FIELD4!==""){
+						  vm.hasImage=true;
+						}
+						
+						
 						vm.ISACTIVE=data.pd.ISACTIVE;
 						vm.TITLE_TYPE=data.pd.TITLE;
 						vm.EDUCATION_TYPE=data.pd.EDUCATION;
 						vm.POST=data.pd.POST;
 						vm.SEX=data.pd.SEX;
+						vm.FIELD3 = data.pd.FIELD3;
 						$("#ENTRY_TIME").val(data.pd.ENTRY_TIME);
                      }else if ("exception" == data.result){
                      	showException("民办机构用户",data.exception);	//显示异常
@@ -354,6 +412,7 @@ var vm = new Vue({
 				dataType:'json',
 				success: function(data){
 					 $("#POST").html('<option value="">请选择岗位</option>');
+					 debugger;
 					 if(data.result=='success'){
 					// 
 						 $.each(data.varList, function(i, dvar){

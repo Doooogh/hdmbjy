@@ -1,7 +1,5 @@
 package org.fh.util;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;

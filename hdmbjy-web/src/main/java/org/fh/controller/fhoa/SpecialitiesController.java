@@ -55,7 +55,8 @@ public class SpecialitiesController extends BaseController {
 		pd.put("CREATION_DATE", DateUtil.date2Str(new Date()));	//创建时间
 		List<PageData> listPd = organizationService.findByUserId(Jurisdiction.getUser().getUSER_ID());
 		if (listPd.size()>0) {
-			pd.put("ORGANIZATION_ID", listPd.get(0).getString("ORGANIZATION_ID"));	//备用知道
+			pd.put("ORGANIZATION_ID", listPd.get(0).getString("ORGANIZATION_ID"));	//机构ID
+			pd.put("ORGANIZATION_NAME", listPd.get(0).getString("NAME"));	//机构名称
 		}
 		pd.put("BY_B", "");	//备用字段
 		pd.put("BY_C", "");	//备用字段
@@ -113,13 +114,45 @@ public class SpecialitiesController extends BaseController {
 		pd = this.getPageData();
 		String KEYWORDS = pd.getString("KEYWORDS");						//关键词检索条件
 		if(Tools.notEmpty(KEYWORDS))pd.put("KEYWORDS", KEYWORDS.trim());
+		String ORGANIZATION_NAME = pd.getString("ORGANIZATION_NAME");						//机构名称检索条件
+		if(Tools.notEmpty(ORGANIZATION_NAME))pd.put("ORGANIZATION_NAME", ORGANIZATION_NAME.trim());
+		
+		String TYPE = pd.getString("TYPE");
+		if(Tools.notEmpty(TYPE))pd.put("TYPE", TYPE.trim());		//专业类型检索
 		List<PageData> listPd = organizationService.findByUserId(Jurisdiction.getUser().getUSER_ID());
 		if (listPd.size()>0) {
 			pd.put("ORGANIZATION_ID", listPd.get(0).getString("ORGANIZATION_ID"));	//备用知道
+			pd.put("ORGANIZATION_NAME", listPd.get(0).getString("NAME"));
 		}
 		
 		page.setPd(pd);
 		List<PageData>	varList = specialitiesService.list(page);	//列出Specialities列表
+		
+		if(varList != null && varList.size() > 0) {
+			//同步数据
+//			PageData opd = new PageData();
+//			for (int i = 0; i < varList.size(); i++) {
+//				opd.put("ORGANIZATION_ID", varList.get(i).getString("ORGANIZATION_ID"));
+//				PageData org = organizationService.findById(opd);
+//				varList.get(i).put("ORGANIZATION_NAME", org.getString("NAME"));
+//				specialitiesService.edit(varList.get(i));
+//			}
+			
+			PageData spd = new PageData();
+			if(varList != null && varList.size() > 0) {
+				for (int i = 0; i < varList.size(); i++) {
+					spd.put("ORGANIZATION_ID", varList.get(i).getString("ORGANIZATION_ID"));
+					PageData org = organizationService.findById(spd); //当前开办专业机构
+					if(org != null) {
+						varList.get(i).put("BY_B", org.getString("NAME"));
+					}else {
+						varList.get(i).put("BY_B", "找不到学校");
+					}
+				}
+			}
+		}
+		
+		map.put("TYPE", TYPE);
 		map.put("varList", varList);
 		map.put("page", page);
 		map.put("result", errInfo);

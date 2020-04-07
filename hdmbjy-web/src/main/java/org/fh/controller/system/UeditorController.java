@@ -68,4 +68,13 @@ public class UeditorController extends BaseController {
 		return map;
 	}	
 	
+	@RequestMapping(value = "/uploadimage")
+	@ResponseBody
+	public Object uploadimage() {
+		Map<String,Object> map = new HashMap<String,Object>();
+		String errInfo = "success";
+		PageData pd = new PageData();
+		return map;
+	}
+	
 }

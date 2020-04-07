@@ -18,7 +18,8 @@
 		f.TYPE,	
 		f.BZ,	
 		f.CREATION_DATE,	
-		f.ORGANIZATION_ID,	
+		f.ORGANIZATION_ID,
+		f.ORGANIZATION_NAME,
 		f.BY_B,	
 		f.BY_C,	
 		f.SPECIALITIES_ID
@@ -30,7 +31,8 @@
 		TYPE,	
 		BZ,	
 		CREATION_DATE,	
-		ORGANIZATION_ID,	
+		ORGANIZATION_ID,
+		ORGANIZATION_NAME,	
 		BY_B,	
 		BY_C,	
 		SPECIALITIES_ID
@@ -43,6 +45,7 @@
 		#{BZ},	
 		#{CREATION_DATE},	
 		#{ORGANIZATION_ID},	
+		#{ORGANIZATION_NAME},	
 		#{BY_B},	
 		#{BY_C},	
 		#{SPECIALITIES_ID}
@@ -107,14 +110,25 @@
 			and
 				(
 				<!--	根据需求自己加检索条件-->
-					NAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
+					f.NAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%')
 					 or 
-					BZ LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
+					f.BZ LIKE CONCAT(CONCAT('%', #{pd.KEYWORDS}),'%') 
 				
+				)
+		</if>
+		<if test="pd.ORGANIZATION_NAME != null and pd.ORGANIZATION_NAME != ''"><!-- 机构名称检索 -->
+			and
+				(
+				<!--	根据需求自己加检索条件-->
+					f.ORGANIZATION_NAME LIKE CONCAT(CONCAT('%', #{pd.ORGANIZATION_NAME}),'%')
 				)
 		</if>
 		<if test="pd.ORGANIZATION_ID != null and pd.ORGANIZATION_ID != ''"><!-- 关键词检索 -->
 			and f.ORGANIZATION_ID = #{pd.ORGANIZATION_ID}
+		</if>
+		
+		<if test="pd.TYPE != null and pd.TYPE != ''">
+			AND f.TYPE = #{pd.TYPE}
 		</if>
 		ORDER BY f.CREATION_DATE DESC
 	</select>

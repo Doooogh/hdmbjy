@@ -69,6 +69,35 @@ public class OrganizationController extends BaseController {
 		map.put("result", errInfo);
 		return map;
 	}
+	
+	/**
+	 * 机构列表ztree 用于通知
+	 * @return
+	 */
+	@RequestMapping(value="/listAllOrganizationForInform")
+	@RequiresPermissions("organization:list")
+	@ResponseBody
+	public Object listAllOrganizationForInform()throws Exception{
+		Map<String,String> map = new HashMap<String,String>();
+		String errInfo = "success";
+		List<PageData> parentList = new ArrayList<>();
+		PageData pageData = new PageData();
+		pageData = this.getPageData();
+		parentList = organizationService.listAllOrganization(pageData);
+		if(parentList != null && parentList .size() > 0) {
+			for (int i = 0; i < parentList.size(); i++) {
+				parentList.get(i).remove("url");
+				parentList.get(i).remove("target");
+			}
+		}
+		JSONArray arr = JSONArray.fromObject(parentList);
+		String json = arr.toString();
+		
+		map.put("zTreeNodes", json);
+		map.put("userName", Jurisdiction.getUsername());
+		map.put("result", errInfo);
+		return map;
+	}
 	/**
 	 * 
 	 * @return

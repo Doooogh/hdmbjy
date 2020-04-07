@@ -95,6 +95,8 @@ public class ToPdf {
 		//生产pdf路径
 		if (extName.equals(".rar") || extName.equals(".zip")||extName.equals(".xls")||extName.equals(".xlsx")) {
 			map.put("pdf", null);
+		}else if(extName.equals(".pdf")){
+			map.put("pdf","wordpath/"+fileName+".pdf");
 		}else {
 			map.put("pdf", "pdfpath/"+fileName+".pdf");
 		}

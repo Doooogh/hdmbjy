@@ -14,6 +14,7 @@ var vm=new Vue({
 		hasTableDataInfo:false,  //是否已经填写过回执单信息
 		tableDataInfo:[],  //用户填报的回执单信息数据
 		options:[], 	//回执单选项信息
+		content:''
     },
     methods:{
         init(){
@@ -48,10 +49,18 @@ var vm=new Vue({
                 success: function(data){
                     if("success" == data.result){
                       vm.pd=data.pd;
+					  vm.content = data.pd.CONTENT;
+                        //富文本编辑器:
+                        // var ue = UE.getEditor('editor').getContent();//初始化对象
+                        // var proinfo=data.pd.CONTENT;
+                        // ue.ready(function() {//编辑器初始化完成再赋值
+                        //     ue.setContent(proinfo);  //赋值给UEditor
+                        // });
+						
 					  var reg=new RegExp("<br>","g");
 					  var regSpace=new RegExp("&nbsp;","g");
-					  vm.pd.CONTENT = vm.pd.CONTENT.replace(reg,"\n");
-					  vm.pd.CONTENT = vm.pd.CONTENT.replace(regSpace," ");
+					  /*vm.pd.CONTENT = vm.pd.CONTENT.replace(reg,"\n");
+					  vm.pd.CONTENT = vm.pd.CONTENT.replace(regSpace," ");*/
 					  
                       vm.varList=data.varList;
 					  vm.isUser=data.isUser;

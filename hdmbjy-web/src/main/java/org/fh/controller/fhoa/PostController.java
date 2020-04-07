@@ -209,17 +209,17 @@ public class PostController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/listAll")
-	@RequiresPermissions("post:list")
+//	@RequiresPermissions("post:list")
 	@ResponseBody
 	public Object listAll() throws Exception{
 		Map<String,Object> map = new HashMap<String,Object>();
 		String errInfo = "success";
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		List<PageData> listPd = organizationService.findByUserId(Jurisdiction.getUser().getUSER_ID());
-		if (listPd.size()>0) {
-			pd.put("ORGANIZATION_ID", listPd.get(0).getString("ORGANIZATION_ID"));	//备用知道
-		}
+//		List<PageData> listPd = organizationService.findByUserId(Jurisdiction.getUser().getUSER_ID());
+//		if (listPd.size()>0) {
+//			pd.put("ORGANIZATION_ID", listPd.get(0).getString("ORGANIZATION_ID"));	//备用知道
+//		}
 		List<PageData>	varList = postService.listAll(pd);	//列出Post列表
 		map.put("varList", varList);
 		map.put("result", errInfo);

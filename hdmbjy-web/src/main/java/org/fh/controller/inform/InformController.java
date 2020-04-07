@@ -1,5 +1,26 @@
 package org.fh.controller.inform;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.fh.controller.base.BaseController;
 import org.fh.entity.Page;
@@ -9,10 +30,16 @@ import org.fh.service.attachment.AttachmentService;
 import org.fh.service.inform.InformService;
 import org.fh.service.informdetail.InformDetailService;
 import org.fh.service.option.OptionService;
+import org.fh.service.organization.OrganizationService;
 import org.fh.service.system.UsersService;
 import org.fh.service.table.TableService;
 import org.fh.service.tabledata.TableDataService;
-import org.fh.util.*;
+import org.fh.util.Const;
+import org.fh.util.FileUpload;
+import org.fh.util.FileUtil;
+import org.fh.util.Jurisdiction;
+import org.fh.util.ObjectExcelView;
+import org.fh.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +48,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import net.sf.json.JSONArray;
 
 /**
  * 说明：系统通知
@@ -58,6 +80,9 @@ public class InformController extends BaseController {
 
 	@Autowired
 	private TableDataService tableDataService;
+	
+	@Autowired
+	private OrganizationService organizationService;
 
 
 
@@ -75,24 +100,32 @@ public class InformController extends BaseController {
 		pd = this.getPageData();
 		pd.put("ID", this.get32UUID());	//主键
 		String ps=pd.getString("INFORMANTS");
-		String person[]=ps.split(",");
+		String org[]=ps.split(",");
 		List<PageData> informDetails=new ArrayList<>();   //通知详细集合  需要批量添加
-		String DRAFT=pd.getString("DRAFT");  //判断是否为草稿    1 是  0 否
-		for (String per : person) {
-			PageData pageData=new PageData();
-			PageData sendSMS=new PageData();
-			sendSMS.put("USER_ID",per);
-			PageData userRes = usersService.findById(sendSMS);
+		String DRAFT = pd.getString("DRAFT");  //判断是否为草稿    1 是  0 否
+		for (String o : org) {
+			PageData pageData = new PageData();
+			PageData sendSMS = new PageData();
+//			sendSMS.put("USER_ID",o);
+//			PageData userRes = usersService.findById(sendSMS);
+			pageData.put("ORGANIZATION_ID",o);
+			
+			PageData orgnzation = organizationService.findById(pageData);
+			
 		/*	if(null!=userRes&&DRAFT.equals("1")){
 			SmsServiceUtil.sendSms(pd.getString("TYPE"),pd.getString("CONTENT"),userRes.getString("PHONE")); }else{ throw new Exception("通知用户不存在");
 			}*/
-			pageData.put("INFORMDETAIL_ID",this.get32UUID());
-			pageData.put("INFORM_ID",pd.get("ID"));
-			pageData.put("INFORMANT",per);
-			pageData.put("READ","0");
-			pageData.put("CREATE_DATE",new Date());
-			pageData.put("ISDEL","0");
-			informDetails.add(pageData);
+			if(orgnzation != null) {
+				pageData.put("INFORMDETAIL_ID",this.get32UUID());
+				pageData.put("INFORM_ID",pd.get("ID"));
+				pageData.put("INFORMANT",orgnzation.getString("HEADMAN_ID"));
+				pageData.put("READ","0");
+				pageData.put("CREATE_DATE",new Date());
+				pageData.put("ISDEL","0");
+				pageData.put("FIELD2", orgnzation.getString("NAME"));//保存接收人机构名称，用作回执显示
+				pageData.put("FIELD3", o);//保存接收人机构id，用作回执显示
+				informDetails.add(pageData);
+			}
 		}
 		try{
 			informDetailService.batchSave(informDetails);
@@ -263,12 +296,28 @@ public class InformController extends BaseController {
 		List<PageData> informDetailList = informDetailService.findListByInformId(findInformDeatail);
 		String  INFORMANTS="";
 		for (PageData pageData : informDetailList) {
-			INFORMANTS+=(pageData.get("INFORMANT")+",");
+			INFORMANTS+=(pageData.get("FIELD3")+",");
 		}
 		if(!("".equals(INFORMANTS))){
 			INFORMANTS=INFORMANTS.substring(0,INFORMANTS.length()-1);
-		}
+		
 		pd.put("INFORMANTS",INFORMANTS);
+		pd.put("CHECKEDNUM", INFORMANTS.split(",").length);
+		String ztreeCheckedIds = INFORMANTS;
+		PageData pp = new PageData();
+		pp.put("type", "organization");
+		//重新获取完整的ztree,遍历当前通知的接收人id,一致就添加checked:true
+		JSONArray arr = JSONArray.fromObject(organizationService.listAllOrganization(pp));
+		for(int i=0;i<arr.size();i++) {
+            if (ztreeCheckedIds.contains((String)(arr.getJSONObject(i).get("id")))) {
+            	arr.getJSONObject(i).put("checked", "true");
+			}
+        }
+		String json = arr.toString();
+//		json = json.replaceAll("ORGANIZATION_ID", "id").replaceAll("PARENT_ID", "pId").replaceAll("NAME", "name").replaceAll("RECEIVER_CHECK", "open");
+		
+		map.put("allnodes_json", json);
+		}
 		if(!pd.get("ATTACHMENT").toString().equals("")){
 			List<PageData> apd=informService.findAttachmentByIds(pd);
 			map.put("apd", apd);  //查询出来的附件名字集合
@@ -479,12 +528,52 @@ public class InformController extends BaseController {
 			varList=informService.findAttachmentByIds(pd);
 
 		}
+		
+		if(StringUtils.isNotBlank(pd.getString("TABLE_ID"))) {
+			map.put("hasInformTable",true);   //该通知有回执
+			
+			
+			
+		}else {
+			map.put("hasInformTable",false);   //该通知没有回执
+		}
+		
+		//获取回执信息
+		PageData fpd = new PageData();
+		fpd.put("INFORM_ID",pd.getString("ID"));
+		PageData informTable = tableService.findInformTableByInformId(fpd);
+		if(null!=informTable){
+			PageData findOptionTree=new PageData();
+			map.put("hasInformTable",true);   //该通知是否有回执
+			findOptionTree.put("TABLE_ID",informTable.get("TABLE_ID"));
+			List<PageData> options = optionService.findTreeByTableId(findOptionTree);  //详细项目列表
+
+			//查询用户是否已经填过回执  如果填过 回显
+			PageData findTableData=new PageData();
+			findTableData.put("INFORM_ID",pd.get("ID"));
+			findTableData.put("HEADMAN_ID",null==Jurisdiction.getUser()?"":Jurisdiction.getUser().getUSER_ID());
+			PageData tableDataInfo = tableDataService.findByInformIdAndUserId(findTableData);//获取该用户的填报的回执单
+			if(null!=tableDataInfo){
+				map.put("tableDataInfo",tableDataInfo.get("VALUE"));
+				map.put("hasTableDataInfo",true);
+			}else{
+				map.put("hasTableDataInfo",false);
+			}
+			map.put("informTable",informTable);
+			map.put("options",options);
+		}else{
+			map.put("hasInformTable",false);
+		}
+		
+		
+		
 		map.put("isUser",!Const.ADMIN_USERNAME.contains(Jurisdiction.getUsername()));
 		map.put("varList", varList);
 		map.put("pd", pd);
 		map.put("result", errInfo);
 		return map;
 	}
+	
 
 	@RequestMapping(value = "/download")
 	@ResponseBody
