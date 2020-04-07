@@ -186,7 +186,36 @@
 		t.TABLE_ID,
 		t.VALUE,
 		t.ORGANIZATION_ID,
-		t.HEADMAN_ID
+		t.HEADMAN_ID,
+		d.ONAME
+		from
+		(
+		select
+		<include refid="Field"></include>,
+		u.NAME,
+		oa.NAME AS ONAME
+		from
+		<include refid="tableName"></include> f
+		left join
+		sys_user u
+		on f.INFORMANT=u.USER_ID
+		left JOIN oa_organization oa on f.informant=oa.headman_id
+		where f.INFORM_ID=#{ID}
+		) d left join table_tabledata t
+		on d.INFORMANT=t.HEADMAN_ID and t.INFORM_ID=#{ID}
+
+		WHERE 1=1
+		<if  test="HASHZ != null and HASHZ != ''">
+			and t.TABLEDATA_ID is  null
+		</if>
+		  <if  test="HASHZ == null or HASHZ == ''">
+			  and t.TABLEDATA_ID is NOT null
+		  </if>
+	</select>
+
+	<select id="findPersonByInformIdCount" parameterType="pd" resultType="int">
+		select
+		count(*) as ALLNUM
 		from
 		(
 		select
@@ -200,7 +229,16 @@
 		where f.INFORM_ID=#{ID}
 		) d left join table_tabledata t
 		on d.INFORMANT=t.HEADMAN_ID and t.INFORM_ID=#{ID}
+
+		WHERE 1=1
+		<if  test="HASHZ != null and HASHZ != ''">
+			and t.TABLEDATA_ID is  null
+		</if>
+		<if  test="HASHZ == null or HASHZ == ''">
+			and t.TABLEDATA_ID is NOT null
+		</if>
 	</select>
+
 
 	<select id="findByinformantId" parameterType="pd" resultType="pd">
 		select

@@ -1,25 +1,6 @@
 package org.fh.controller.inform;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import net.sf.json.JSONArray;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.fh.controller.base.BaseController;
@@ -34,12 +15,7 @@ import org.fh.service.organization.OrganizationService;
 import org.fh.service.system.UsersService;
 import org.fh.service.table.TableService;
 import org.fh.service.tabledata.TableDataService;
-import org.fh.util.Const;
-import org.fh.util.FileUpload;
-import org.fh.util.FileUtil;
-import org.fh.util.Jurisdiction;
-import org.fh.util.ObjectExcelView;
-import org.fh.util.Tools;
+import org.fh.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,7 +24,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import net.sf.json.JSONArray;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 说明：系统通知
@@ -496,8 +477,11 @@ public class InformController extends BaseController {
 		String errInfo = "success";
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		PageData fin=new PageData();
+		fin.put("HASHZ",pd.get("HASHZ"));
 		pd = informService.findById(pd);	//根据ID读取
 		List<PageData> users=new ArrayList<>();
+		pd.put("HASHZ",fin.get("HASHZ"));
 		users=informDetailService.findPersonByInformId(pd);
 //		users=informService.findInformUser(pd);
 		Collections.sort(users, new Comparator<PageData>() {
@@ -509,6 +493,7 @@ public class InformController extends BaseController {
 		});
 		map.put("result",errInfo);
 		map.put("users",users);
+		map.put("count",users.size());
 		return map;
 	}
 

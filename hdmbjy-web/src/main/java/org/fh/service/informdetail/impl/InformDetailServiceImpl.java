@@ -1,13 +1,14 @@
 package org.fh.service.informdetail.impl;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.fh.entity.Page;
 import org.fh.entity.PageData;
 import org.fh.mapper.dsno1.informdetail.InformDetailMapper;
 import org.fh.service.informdetail.InformDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /** 
  * 说明： 通知详细接口实现类
@@ -92,6 +93,11 @@ public class InformDetailServiceImpl implements InformDetailService {
 	@Override
 	public List<PageData> findPersonByInformId(PageData pd) {
 		return informdetailMapper.findPersonByInformId(pd);
+	}
+
+	@Override
+	public int findPersonByInformIdCount(PageData pd) {
+		return informdetailMapper.findPersonByInformIdCount(pd);
 	}
 
 	@Override

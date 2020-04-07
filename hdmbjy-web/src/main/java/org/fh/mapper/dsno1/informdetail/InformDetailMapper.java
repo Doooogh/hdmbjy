@@ -77,6 +77,7 @@ public interface InformDetailMapper {
 
 	List<PageData> findPersonByInformId(PageData pd);
 
+	int findPersonByInformIdCount(PageData pd);
 
 	PageData findByinformantId(PageData pd);
 

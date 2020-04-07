@@ -1,8 +1,9 @@
 package org.fh.service.informdetail;
 
-import java.util.List;
 import org.fh.entity.Page;
 import org.fh.entity.PageData;
+
+import java.util.List;
 
 /** 
  * 说明： 通知详细接口
@@ -78,6 +79,8 @@ public interface InformDetailService {
 	 * @return
 	 */
 	List<PageData> findPersonByInformId(PageData pd);
+
+	int findPersonByInformIdCount(PageData pd);
 
 	PageData findByinformantId(PageData pd);
 

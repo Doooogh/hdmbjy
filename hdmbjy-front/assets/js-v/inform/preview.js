@@ -14,7 +14,12 @@ var vm=new Vue({
 		hasTableDataInfo:false,  //是否已经填写过回执单信息
 		tableDataInfo:[],  //用户填报的回执单信息数据
 		options:[], 	//回执单选项信息
-		content:''
+		content:'',
+		hasHZList:[],
+		noHasHZList:[],
+		hasCount:0,
+		noHasCount:0,
+		
     },
     methods:{
         init(){
@@ -24,8 +29,10 @@ var vm=new Vue({
                 this.ID=aId;
                 this.OPTABLE_ID = tid;
                 this.getData();
-				this.initTable();
 				this.getInformTable();
+				this.getTableData1();
+				this.getTableData1('F');
+			
 				
             }
 			
@@ -71,7 +78,7 @@ var vm=new Vue({
             })
         },
        //导出excel
-		goExcel: function (){
+		goExcel: function (hasType){
 			
 			swal({
                	title: '',
@@ -255,7 +262,133 @@ var vm=new Vue({
 			
 		},
 	
-		initTable:function(){
+		initTable:function(tableType){
+			if(undefined==tableType||''==tableType){
+				tableType='has';
+			}
+			
+			var temList=[];
+			if(tableType=='has'){
+				temList=vm.hasHZList;
+			}else if(tableType=='noHas'){
+				temList=vm.noHasHZList;
+			}
+			
+			
+			
+			$("#exampleTable").empty("");
+			// $('#exampleTable').bootstrapTable('destroy');
+			$('#exampleTable')
+			       .bootstrapTable(
+			           {
+												method: 'get', // 服务器数据的请求方式 get or post
+												iconSize: 'outline',
+												striped: true, // 设置为true会有隔行变色效果
+												dataType: "json", // 服务器返回的数据类型
+												singleSelect: false, // 设置为true将禁止多选
+												pageSize: 10, // 如果设置了分页，每页数据条数
+												pageNumber: 1, // 如果设置了分布，首页页码
+												sortable: true,
+												pagination: true,
+												fixedColumns: true,
+												fixedNumber: 2,
+												showLoading:false,
+												sidePagination: "client", // 设置在哪里进行分页，可选值为"client" 或者 "server",
+												data:temList,
+												responseHandler: function (data) {
+													return data;
+												},
+												columns: 
+												[
+													{
+														field: 'USER_ID',
+														title: '序号',
+														formatter: function (value, row, index) {
+															return index+1;
+														}
+													},
+													{
+														field: 'ONAME',
+														title: '机构名',
+														formatter: function (value, row, index) {
+															return "<span style='color:black'>"+value+"</span>";
+														}
+													},
+													{
+														field: 'NAME',
+														title: '负责人',
+														formatter: function (value, row, index) {
+															return "<span style='color:black'>"+value+"</span>";
+														}
+													},
+													{
+														field: 'READ_DATE',
+														title: '查看时间',
+														formatter: function (value, row, index) {
+															if(null==value||undefined==value){
+																return "暂未查看";
+															}
+															return "<span style='color:black'>"+value+"</span>";
+														}
+													},
+													{
+														field: 'TABLE_ID',
+														title: '回执单id',
+														hidden:true
+													},
+													{
+														field: 'TABLEDATA_ID',
+														title: '回执单存储id',
+														hidden:true
+													},
+													{
+														field: 'USER_ID',
+														title: '查看回执',
+														formatter: function (value, row, index) {
+															if(null==row.TABLEDATA_ID||undefined==row.TABLEDATA_ID){
+																// return "<button  type='button'  class='layui-btn layui-btn-disabled layui-btn-sm' onclick='seeInformTable("+row.TABLEDATA_ID+","+row.TABLE_ID+")'>查看回执</button>";
+																return '<button class="layui-btn layui-btn-disabled layui-btn-sm" href="###"  disabled="disabled" onclick="seeInformTable(\''
+																                                + row.TABLEDATA_ID+ '\',\''+row.TABLE_ID
+																                                + '\')">查看回执</button> '
+															}
+															// return "<button  type='button'  class='layui-btn layui-btn-sm' onclick='seeInformTable("+row.TABLEDATA_ID+","+row.TABLE_ID+")'>查看回执</button>";
+															return '<button class="layui-btn layui-btn-sm" href="###"   onclick="seeInformTable(\''
+																                                + row.TABLEDATA_ID+ '\',\''+row.TABLE_ID
+																                                + '\')">查看回执</button> '
+														}
+													},
+													{
+														field: 'READ',
+														title: '状态',
+														formatter: function (value, row, index) {
+															if(value=='0'){
+																return "<span style='font-weight:bold'>未查看</span>";
+															}else{
+																return "<span >已查看</span>";
+															}
+														}
+													},
+												],
+												data:temList
+											
+			           });
+											 $('#exampleTable').bootstrapTable('hideColumn', 'TABLE_ID');
+											 $('#exampleTable').bootstrapTable('hideColumn', 'TABLEDATA_ID');
+											 $("#exampleTable").bootstrapTable('hideLoading');
+		layer.open({
+		  type: 1, 
+		  title:'回执详情',
+		  area: ['800px', '600px'],
+		  content: $('#init_table'), //这里content是一个普通的String
+		  cancel: function(index, layero){ 
+		   	$('#exampleTable').bootstrapTable('destroy');
+			$("#init_table").hide();
+		   layer.closeAll(); 
+		  } 
+		});
+		},
+	
+		getTableData1:function(hasHZ){
 			$.ajax({
 			    xhrFields: {
 			        withCredentials: true
@@ -264,102 +397,20 @@ var vm=new Vue({
 			    url: httpurl+'inform/findInformUser',
 			    data: {
 			        ID:this.ID,
+					HASHZ:hasHZ,
 			        tm:new Date().getTime()
 					},
 			    dataType:"json",
 			    success: function(data){
 			        if("success" == data.result){
 			          vm.userList=data.users;
-					  $('#exampleTable')
-					         .bootstrapTable(
-					             {
-									method: 'get', // 服务器数据的请求方式 get or post
-									iconSize: 'outline',
-									striped: true, // 设置为true会有隔行变色效果
-									dataType: "json", // 服务器返回的数据类型
-									singleSelect: false, // 设置为true将禁止多选
-									pageSize: 10, // 如果设置了分页，每页数据条数
-									pageNumber: 1, // 如果设置了分布，首页页码
-									sortable: true,
-									pagination: true,
-									fixedColumns: true,
-									fixedNumber: 2,
-									showLoading:false,
-									sidePagination: "client", // 设置在哪里进行分页，可选值为"client" 或者 "server",
-									data:vm.userList,
-									responseHandler: function (data) {
-										return data;
-									},
-									columns: 
-									[
-										{
-											field: 'USER_ID',
-											title: '序号',
-											formatter: function (value, row, index) {
-												return index+1;
-											}
-										},
-										{
-											field: 'NAME',
-											title: '用户名',
-											formatter: function (value, row, index) {
-												return "<span style='color:black'>"+value+"</span>";
-											}
-										},
-										{
-											field: 'READ_DATE',
-											title: '查看时间',
-											formatter: function (value, row, index) {
-												if(null==value||undefined==value){
-													return "暂未查看";
-												}
-												return "<span style='color:black'>"+value+"</span>";
-											}
-										},
-										{
-											field: 'TABLE_ID',
-											title: '回执单id',
-											hidden:true
-										},
-										{
-											field: 'TABLEDATA_ID',
-											title: '回执单存储id',
-											hidden:true
-										},
-										{
-											field: 'USER_ID',
-											title: '查看回执',
-											formatter: function (value, row, index) {
-												if(null==row.TABLEDATA_ID||undefined==row.TABLEDATA_ID){
-													// return "<button  type='button'  class='layui-btn layui-btn-disabled layui-btn-sm' onclick='seeInformTable("+row.TABLEDATA_ID+","+row.TABLE_ID+")'>查看回执</button>";
-													return '<button class="layui-btn layui-btn-disabled layui-btn-sm" href="###"  disabled="disabled" onclick="seeInformTable(\''
-													                                + row.TABLEDATA_ID+ '\',\''+row.TABLE_ID
-													                                + '\')">查看回执</button> '
-												}
-												// return "<button  type='button'  class='layui-btn layui-btn-sm' onclick='seeInformTable("+row.TABLEDATA_ID+","+row.TABLE_ID+")'>查看回执</button>";
-												return '<button class="layui-btn layui-btn-sm" href="###"   onclick="seeInformTable(\''
-													                                + row.TABLEDATA_ID+ '\',\''+row.TABLE_ID
-													                                + '\')">查看回执</button> '
-											}
-										},
-										{
-											field: 'READ',
-											title: '状态',
-											formatter: function (value, row, index) {
-												if(value=='0'){
-													return "<span style='font-weight:bold'>未查看</span>";
-												}else{
-													return "<span >已查看</span>";
-												}
-											}
-										},
-									],
-									data:vm.userList
-					  								
-					             });
-								 $('#exampleTable').bootstrapTable('hideColumn', 'TABLE_ID');
-								 $('#exampleTable').bootstrapTable('hideColumn', 'TABLEDATA_ID');
-								 $("#exampleTable").bootstrapTable('hideLoading');
+					  if(undefined!=hasHZ&&null!=hasHZ){
+						  vm.noHasHZList=data.users;
+						  vm.noHasCount=data.count;
+					  }else{
+						  vm.hasHZList=data.users;
+						   vm.hasCount=data.count;
+					  }
 			        }else if ("exception" == data.result){
 			            showException("按钮权限",data.exception);		//显示异常
 			        }
@@ -389,3 +440,7 @@ function seeInformTable(TABLEDATA_ID,TABLE_ID){
 	};
 	diag.show();
 }
+
+$(function(){
+	
+});

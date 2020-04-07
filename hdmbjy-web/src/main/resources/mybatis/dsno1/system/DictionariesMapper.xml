@@ -97,20 +97,20 @@
 			PARENT_ID = #{parentId} order by ORDER_BY 
 	</select>
 
-	<!-- 通过ID获取其子级列表 -->
-	<select id="listSubDictByParentNameEn" parameterType="String" resultMap="dictResultMap">
-		select
-		<include refid="Field"></include>
-		from
-		<include refid="tableName"></include>
-		where
-		PARENT_ID =(
-		select DICTIONARIES_ID from
-		<include refid="tableName"></include>
-		where NAME_EN =#{NAME_EN}
-		) order by ORDER_BY
-	</select>
-	
+
+    <!-- 通过ID获取其子级列表 -->
+    <select id="listSubDictByParentNameEn" parameterType="String" resultMap="dictResultMap">
+        select
+        <include refid="Field"></include>
+        from
+        <include refid="tableName"></include>
+        where
+        PARENT_ID =(
+        select DICTIONARIES_ID from
+        <include refid="tableName"></include>
+        where NAME_EN =#{NAME_EN}
+        ) order by ORDER_BY
+    </select>
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select

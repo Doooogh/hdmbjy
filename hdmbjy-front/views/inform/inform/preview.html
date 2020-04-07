@@ -80,18 +80,24 @@
 				<div class="page-header" style="margin:0;">
 				    <h3 style="margin:0;line-height:50px;font-family:SimHei">通知详细</h3>	
 				</div>
-				<div  class="table-responsive" style="clear:both;width: 100%;height: 200px;">
-					<table  class="table table-striped text-nowrap" id="exampleTable" >
-					</table>
-				</div>
-				<div align="right" style="margin-top: -20px"><button type="button" class="layui-btn layui-btn-xs" v-on:click="goExcel"> 导出回执</button></div>
+				
+				<div align="right" style="margin-top: 0px">
+					<button type="button" class="layui-btn layui-btn-sm layui-btn-normal "  style="float: left;"  v-on:click="initTable('has')">查看已回执名单({{hasCount}}) </button>
+					<button type="button" class="layui-btn layui-btn-sm layui-btn-danger " style="float: left;" v-on:click="initTable('noHas')"> 查看未回执名单({{noHasCount}})</button>
+					<button type="button" class="layui-btn layui-btn-sm" @click="goExcel"> 导出回执</button>
+				
+					</div>
 				
 			</div>
 		<div>
 </div>
 </div>
 </div>
-
+<div  class="table-responsive" style="clear:both;width: 100%;height: 500px;display: none;" id="init_table">
+					<table  class="table table-striped text-nowrap" id="exampleTable" >
+					</table>
+						
+</div>
 
 
 <script type="text/javascript" src="../../../assets/js/jquery-1.7.2.js"></script>
@@ -113,5 +119,8 @@
 	<script src="../../../assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 
 <script type="text/javascript" src="../../../assets/js-v/inform/preview.js"></script>
+
+
 </body>
+
 </html>
