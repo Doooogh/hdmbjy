@@ -333,7 +333,7 @@
 		<dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
-		    <version>1.2.44</version>
+		    <version>1.2.83</version>
 		</dependency>
 		
 		<!-- 百度富文本编辑器 ueditor -->
